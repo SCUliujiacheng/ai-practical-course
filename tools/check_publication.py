@@ -351,6 +351,11 @@ def main() -> int:
                 binary_count += 1
                 continue
             texts[relative] = text
+            if relative.endswith(".py"):
+                try:
+                    ast.parse(text, filename=relative)
+                except (SyntaxError, ValueError) as error:
+                    findings.append(Finding(relative, "python_tool_or_case_syntax", getattr(error, "lineno", None)))
             findings.extend(sensitive_findings(relative, text))
         except (OSError, ValueError):
             findings.append(Finding(relative, "unreadable_or_invalid_text"))
@@ -376,4 +381,6 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    if ha
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    raise SystemExit(main())
