@@ -1,0 +1,94 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Python知识索引</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>从案例反查Python知识</h1>
+<table>
+<thead>
+<tr>
+  <th>想学或遇到的问题</th>
+  <th>先看案例</th>
+  <th>观察什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>字符串、数字、列表、字典</td>
+  <td>B01、B04</td>
+  <td>CSV读出的数字是字符串；字典用字段名，列表用位置</td>
+</tr>
+<tr>
+  <td>for循环、if条件、函数</td>
+  <td>B01、B02</td>
+  <td>变量每轮如何改变；函数输入与返回值是否明确</td>
+</tr>
+<tr>
+  <td>with、文件路径、编码</td>
+  <td>B01、B05</td>
+  <td>Path相对谁；UTF-8读取；不要依赖编辑器碰巧所在目录</td>
+</tr>
+<tr>
+  <td>pandas筛选、分组、合并</td>
+  <td>B02、B03</td>
+  <td>行数变化、键是否重复、缺失值处理是否留下记录</td>
+</tr>
+<tr>
+  <td>数组shape、axis、广播</td>
+  <td>B13、B16—B18</td>
+  <td>行是样本还是时间；矩阵乘法的维度；标签和预测是否对齐</td>
+</tr>
+<tr>
+  <td>类、对象、方法</td>
+  <td>B17、B18、A27拓展</td>
+  <td>Dataset/模型/环境的输入输出接口，不急着背所有魔法方法</td>
+</tr>
+<tr>
+  <td>生成器、yield、事件</td>
+  <td>A16</td>
+  <td>模拟等待与真实等待不同；资源申请和释放如何发生</td>
+</tr>
+<tr>
+  <td>集合、递归、图、队列</td>
+  <td>B25、A04—A09</td>
+  <td>状态能否哈希；搜索边界；重复状态；优先级排序</td>
+</tr>
+<tr>
+  <td>随机数与可复现</td>
+  <td>B05、B27、A16—A20</td>
+  <td>固定种子用于复现，独立种子用于评价变异，两者不能混用</td>
+</tr>
+<tr>
+  <td>保存模型与输入检查</td>
+  <td>B28、B30</td>
+  <td>字段名、类型、合法范围与训练时预处理必须一致</td>
+</tr>
+<tr>
+  <td>断言与独立检查</td>
+  <td>所有例，重点A07/A10/A30</td>
+  <td>先知道正确答案的小例子；检查约束而不只检查程序没报错</td>
+</tr>
+<tr>
+  <td>JSON、CSV、图表输出</td>
+  <td>B01、B04、B30</td>
+  <td>结果是实际运行写出的文件；重跑覆盖参考输出要有意识</td>
+</tr>
+</tbody>
+</table>
+<h2>最常用的调试步骤</h2>
+<ol>
+<li>先读错误最后一行：它说明错误类型；再找你自己文件中的行号。</li>
+<li>在出错前打印 <code>type(x)</code>、<code>x.shape</code>（数组）、<code>len(x)</code>（序列）以及一小段内容。</li>
+<li>把数据缩小到3—5行，用手算结果检查函数。</li>
+<li>每次只改一个原因。修改后重启内核、从第一格顺序运行。</li>
+<li>对照参考答案解释为什么修复有效，把原因记录下来。</li>
+</ol>
+<h2>常见报错怎样理解</h2>
+<ul>
+<li><code>NameError</code>：变量没有定义，可能漏跑前一个单元格或拼错名字。</li>
+<li><code>TypeError</code>：传入类型不合适，例如把字符串和数字相加；先检查类型，别盲目转换所有列。</li>
+<li><code>ValueError</code>：类型可能对，但值、形状或范围不符合要求。</li>
+<li><code>KeyError</code>：字典键或表格列不存在，打印可用键/列名检查空格和拼写。</li>
+<li><code>IndexError</code>：列表/数组位置越界，检查长度和从0开始的索引。</li>
+<li><code>FileNotFoundError</code>：路径错或素材不在本地。先查看当前工作目录和完整路径。</li>
+<li><code>AssertionError</code>：检查发现实际行为不符合预期；应找原因，不应直接删掉断言。</li>
+<li><code>ModuleNotFoundError</code>：先确认使用课程内核；配置问题见“故障排查.md”。</li>
+</ul>
+<h2>怎样借助AI而不丢掉独立能力</h2>
+<p>山林中不需要云端AI才能完成课程。参考答案和讲解已经在本地。以后联网求助时，先整理最小可复现代码、完整错误、预期结果和已检查内容；得到建议后用自己写的小例子验证，而不是把一大段陌生代码直接替换进去。</p>
+</body></html>

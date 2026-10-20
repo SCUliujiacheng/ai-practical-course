@@ -1,0 +1,84 @@
+{
+  "reference_accuracy": 0.9066666666666666,
+  "before_labels": {
+    "正常": {
+      "valid_rows": 400,
+      "invalid_rows": 0,
+      "ks_statistics": [
+        0.035,
+        0.0465
+      ],
+      "input_drift": false,
+      "accuracy": null,
+      "performance_alarm": false
+    },
+    "输入偏移": {
+      "valid_rows": 400,
+      "invalid_rows": 0,
+      "ks_statistics": [
+        0.572,
+        0.05
+      ],
+      "input_drift": true,
+      "accuracy": null,
+      "performance_alarm": false
+    },
+    "概念改变": {
+      "valid_rows": 400,
+      "invalid_rows": 0,
+      "ks_statistics": [
+        0.0565,
+        0.0455
+      ],
+      "input_drift": false,
+      "accuracy": null,
+      "performance_alarm": false
+    }
+  },
+  "after_labels": {
+    "正常": {
+      "valid_rows": 400,
+      "invalid_rows": 0,
+      "ks_statistics": [
+        0.035,
+        0.0465
+      ],
+      "input_drift": false,
+      "accuracy": 0.9175,
+      "performance_alarm": false
+    },
+    "输入偏移": {
+      "valid_rows": 400,
+      "invalid_rows": 0,
+      "ks_statistics": [
+        0.572,
+        0.05
+      ],
+      "input_drift": true,
+      "accuracy": 0.9375,
+      "performance_alarm": false
+    },
+    "概念改变": {
+      "valid_rows": 400,
+      "invalid_rows": 0,
+      "ks_statistics": [
+        0.0565,
+        0.0455
+      ],
+      "input_drift": false,
+      "accuracy": 0.13,
+      "performance_alarm": true
+    }
+  },
+  "quality_example": {
+    "valid_rows": 398,
+    "invalid_rows": 2,
+    "ks_statistics": [
+      0.03557788944723618,
+      0.0475678391959799
+    ],
+    "input_drift": false,
+    "accuracy": null,
+    "performance_alarm": false
+  }
+}

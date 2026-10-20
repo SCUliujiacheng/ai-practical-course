@@ -1,0 +1,17 @@
+{
+  "id": "A23",
+  "title": "大家各选最快路，为什么总耗时还偏高？",
+  "track": "A",
+  "number": 23,
+  "sources": [
+    [
+      "Rosenthal：A class of games possessing pure-strategy Nash equilibria",
+      "https://doi.org/10.1007/BF01737559"
+    ],
+    [
+      "原论文公开PDF",
+      "https://ranger.uta.edu/~weems/NOTES6319/PAPERSONE/rosenthal1973.pdf"
+    ]
+  ],
+  "prereqs": "已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。"
+}

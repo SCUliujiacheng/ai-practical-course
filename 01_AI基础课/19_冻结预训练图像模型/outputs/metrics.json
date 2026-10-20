@@ -1,0 +1,10 @@
+{
+  "raw_pixel_accuracy": 0.92,
+  "frozen_resnet_accuracy": 0.87,
+  "train_samples": 150,
+  "test_samples": 100,
+  "backbone_trainable_parameters": 0,
+  "input_size": 112,
+  "domain_warning": "ImageNet to digits; teaching workflow only",
+  "elapsed_seconds": 6.505
+}

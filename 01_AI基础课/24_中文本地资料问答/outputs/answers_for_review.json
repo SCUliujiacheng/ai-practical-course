@@ -1,0 +1,50 @@
+[
+  {
+    "question": "签到地点在哪里",
+    "gold_doc": "D1",
+    "retrieved_doc": "D1",
+    "retrieval_score": 0.4735518353638218,
+    "abstained": false,
+    "raw_generation": "一号楼大厅",
+    "answer_with_source": "一号楼大厅 [来源:D1]",
+    "expected_phrase": "一号楼",
+    "phrase_support_proxy": true,
+    "seconds": 3.008
+  },
+  {
+    "question": "下大雨活动转到哪里",
+    "gold_doc": "D3",
+    "retrieved_doc": "D3",
+    "retrieval_score": 0.5174920971005174,
+    "abstained": false,
+    "raw_generation": "体育馆",
+    "answer_with_source": "体育馆 [来源:D3]",
+    "expected_phrase": "体育馆",
+    "phrase_support_proxy": true,
+    "seconds": 0.508
+  },
+  {
+    "question": "明天股票价格是多少",
+    "gold_doc": null,
+    "retrieved_doc": "D4",
+    "retrieval_score": 0.11802200281180128,
+    "abstained": true,
+    "raw_generation": "资料不足，无法回答。",
+    "answer_with_source": "资料不足，无法回答。",
+    "expected_phrase": null,
+    "phrase_support_proxy": false,
+    "seconds": 0.0
+  },
+  {
+    "question": "校长的生日是什么时候",
+    "gold_doc": null,
+    "retrieved_doc": "D2",
+    "retrieval_score": 0.17047160766466185,
+    "abstained": true,
+    "raw_generation": "资料不足，无法回答。",
+    "answer_with_source": "资料不足，无法回答。",
+    "expected_phrase": null,
+    "phrase_support_proxy": false,
+    "seconds": 0.0
+  }
+]

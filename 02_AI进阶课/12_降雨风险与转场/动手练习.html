@@ -1,0 +1,37 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>12_降雨风险与转场 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>有降雨风险时，应该提前转场还是等待？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">            no_rain   rain
+outdoor           0  12000
+indoor_now     3000   3000
+{&#x27;assumed_rain_probability&#x27;: 0.35, &#x27;expected_losses&#x27;: {&#x27;outdoor&#x27;: 4200.0, &#x27;indoor_now&#x27;: 3000, &#x27;wait&#x27;: 2898.0}, &#x27;selected&#x27;: &#x27;wait&#x27;, &#x27;immediate_indoor_threshold&#x27;: 0.25, &#x27;signal_sensitivity&#x27;: 0.8, &#x27;signal_false_positive&#x27;: 0.2}
+</pre><h2>1. 补全：检验边界概率</h2>
+<p>p=0 时户外期望损失为 0；p=1 时为 rain_loss。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    assert expected_losses(0)[0][&#x27;outdoor&#x27;]==0
+    assert expected_losses(1)[0][&#x27;outdoor&#x27;]==rain_loss
+    assert False
+    print(&#x27;边界检查通过&#x27;)</pre><h2>2. 修改：等待成本上涨</h2>
+<p>将等待成本提高到 2000，确认最优选择不再是等待。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    expensive,_=expected_losses(prior,waiting_fee=2000)
+    choice=...
+    assert choice!=&#x27;wait&#x27;
+    print(expensive,choice)</pre><h2>3. 迁移：不同可靠性的信号</h2>
+<p>若一个设备检测的灵敏度为 0.9、误报率为 0.1、故障先验为 0.05，计算阳性后的故障概率。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    diagnostic=signal_branches(0.05,sensitivity=0.9,false_positive=0.1)
+    posterior=...
+    assert np.isclose(posterior,0.045/(0.045+0.095))
+    print(&#x27;阳性后的故障概率&#x27;,posterior,&#x27;不是0.9&#x27;)</pre></body></html>

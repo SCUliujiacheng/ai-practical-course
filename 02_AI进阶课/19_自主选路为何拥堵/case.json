@@ -1,0 +1,13 @@
+{
+  "id": "A19",
+  "title": "每个人选择最快通道，为什么整体变慢？",
+  "track": "A",
+  "number": 19,
+  "sources": [
+    [
+      "Mesa traffic agent model inspiration",
+      "https://mesa.readthedocs.io/latest/overview.html"
+    ]
+  ],
+  "prereqs": "基础课 Python、NumPy、实验评价"
+}

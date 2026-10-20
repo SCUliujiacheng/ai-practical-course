@@ -1,0 +1,7 @@
+{
+  "test_mse": 0.014536291360855103,
+  "mean_baseline_mse": 0.9138361745687907,
+  "train_first_loss": 2.533810615539551,
+  "train_last_loss": 0.012649884447455406,
+  "elapsed_seconds": 5.773
+}

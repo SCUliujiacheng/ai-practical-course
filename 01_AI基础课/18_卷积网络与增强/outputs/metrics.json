@@ -1,0 +1,8 @@
+{
+  "mlp_accuracy": 0.9583333333333334,
+  "cnn_accuracy": 0.9555555555555556,
+  "mlp_parameters": 4810,
+  "cnn_parameters": 3818,
+  "selected_by": "validation loss",
+  "elapsed_seconds": 13.431
+}

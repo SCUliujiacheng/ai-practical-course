@@ -1,0 +1,7 @@
+{
+  "coordinated_route_a": 10,
+  "coordinated_mean": 10.166666666666666,
+  "synchronous_last10": 14.75,
+  "partial_last10_mean_across_runs": 10.591725,
+  "partial_run_std": 0.10670082066965998
+}

@@ -1,0 +1,35 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>07_混合特征房价预测 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>数字与类别混在一起，怎样预测房价？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{&#x27;selected_by_validation&#x27;: &#x27;boosting&#x27;, &#x27;validation_mae&#x27;: {&#x27;ridge&#x27;: 29.377516458812316, &#x27;boosting&#x27;: 18.43812590797727}, &#x27;test_mae&#x27;: {&#x27;ridge&#x27;: 28.349006127844724, &#x27;boosting&#x27;: 17.31136141207576}}
+</pre><h2>1. 补全：独立复算误差</h2>
+<p>对验证选中的模型重算测试 MAE，确认与 metrics 一致。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    manual = ...
+    assert np.isclose(manual, metrics[&#x27;test_mae&#x27;][selected])
+    print(manual)</pre><h2>2. 修改：预测未见区域</h2>
+<p>创建一套 area 缺失、district=east 的房屋，验证流水线能返回有限值，并解释未知区域的不确定性。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    new_house = pd.DataFrame({&#x27;area&#x27;:[np.nan], &#x27;age&#x27;:[10], &#x27;district&#x27;:[&#x27;east&#x27;]})
+    value = ...
+    assert value.shape == (1,) and np.isfinite(value).all()
+    print(&#x27;未见区域预测，仅作机制演示&#x27;, value)</pre><h2>3. 迁移：房租预测</h2>
+<p>构造房租为价格的 0.004 倍加小噪声，在同一训练/验证索引上训练；不要混用房价指标单位。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    rent = prices * 0.004 + np.random.default_rng(71).normal(0,0.05,n)
+    rent_model = make_models()[&#x27;ridge&#x27;]
+    rent_model.fit(houses.loc[X_train.index], rent.loc[X_train.index])
+    rent_mae = ...
+    assert np.isfinite(rent_mae) and rent_mae &gt;= 0
+    print(&#x27;房租验证 MAE / 教学单位&#x27;, rent_mae)</pre></body></html>

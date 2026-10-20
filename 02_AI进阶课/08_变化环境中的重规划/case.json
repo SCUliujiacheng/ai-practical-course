@@ -1,0 +1,17 @@
+{
+  "id": "A08",
+  "title": "道路封闭或拥堵后，怎样修订剩余计划？",
+  "track": "A",
+  "number": 8,
+  "sources": [
+    [
+      "NetworkX shortest_path 官方接口",
+      "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.shortest_paths.generic.shortest_path.html"
+    ],
+    [
+      "do-mpc 模型预测控制与反馈说明",
+      "https://www.do-mpc.com/en/latest/theory_mpc.html"
+    ]
+  ],
+  "prereqs": "已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。"
+}

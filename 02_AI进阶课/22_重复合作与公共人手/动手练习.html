@@ -1,0 +1,78 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>22_重复合作与公共人手 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>共享人手怎样避免总有人等待别人贡献？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{
+  &quot;rules&quot;: [
+    {
+      &quot;rule&quot;: &quot;固定贡献&quot;,
+      &quot;mean_total_reward&quot;: 125.465,
+      &quot;reward_sd&quot;: 1.1883084292711725,
+      &quot;shortage_rate&quot;: 0.0
+    },
+    {
+      &quot;rule&quot;: &quot;各自不贡献&quot;,
+      &quot;mean_total_reward&quot;: 80.0,
+      &quot;reward_sd&quot;: 0.0,
+      &quot;shortage_rate&quot;: 1.0
+    },
+    {
+      &quot;rule&quot;: &quot;条件合作&quot;,
+      &quot;mean_total_reward&quot;: 122.345,
+      &quot;reward_sd&quot;: 7.699215744277016,
+      &quot;shortage_rate&quot;: 0.06875
+    },
+    {
+      &quot;rule&quot;: &quot;混入搭便车&quot;,
+      &quot;mean_total_reward&quot;: 91.22,
+      &quot;reward_sd&quot;: 8.571006583018933,
+      &quot;shortage_rate&quot;: 0.6725
+    },
+    {
+      &quot;rule&quot;: &quot;约定轮值&quot;,
+      &quot;mean_total_reward&quot;: 102.83000000000001,
+      &quot;reward_sd&quot;: 0.8800349643403611,
+      &quot;shortage_rate&quot;: 0.0975
+    }
+  ],
+  &quot;replications&quot;: 40
+}
+约定轮值在本情景组中的缺岗比例9.8%，固定全员贡献为0.0%。轮值节省投入但冗余较少，可研究设置备用人员；条件合作遇到缺席可能连锁退化。这些是指定策略规则的模拟结果，未声称已经证明重复博弈均衡。
+</pre><h2>1. 补全：公共收益会计</h2>
+<p>贡献向量[1,0,1,0]，手算四队收益并检查总量。</p>
+<pre class="code">trial_contributions=[1,0,1,0]
+# TODO：调用 payoffs 返回每人收益数组
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert np.allclose(attempt,[.8,1.8,.8,1.8]) and np.isclose(sum(attempt),5.2)
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>2. 修改：不发生缺席</h2>
+<p>在全员可用情景下比较轮值与固定全员贡献，统计实际投入总人数。</p>
+<pre class="code">trial_attendance=np.ones((20,4),bool)
+# TODO：分别模拟全员 rotation、全员 cooperate，返回 (轮值记录, 全员合作记录)
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    trial_rotation,trial_fixed=attempt
+    assert all(r[&quot;shortage&quot;] == 0 for r in trial_rotation)
+    assert sum(r[&quot;contributed&quot;] for r in trial_rotation) == 40
+    assert sum(r[&quot;contributed&quot;] for r in trial_fixed) == 80
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>3. 迁移：开源项目维护</h2>
+<p>把贡献解释为代码审查，每轮需要2人。构造全部搭便车与全员条件合作的无故障对照。</p>
+<pre class="code">trial_attendance=np.ones((6,4),bool)
+# TODO：比较全员 defect 和全员 conditional；返回两个实验的总缺岗数
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert attempt == (12,0)
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre></body></html>

@@ -1,0 +1,6 @@
+﻿step,action,valid,location,key,door,carrying,delivered
+0,take-key,True,hall,True,False,False,False
+1,open-door,True,hall,True,True,False,False
+2,take-package,True,hall,True,True,True,False
+3,enter-room,True,room,True,True,True,False
+4,deliver,True,room,True,True,False,True

@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>A25 三个团队合作节省的成本怎样分配？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>输入每个团队联盟可创造的节省额。比较平均分、按投入分和Shapley值，另行检查任何联盟是否愿意退出；公平原则与稳定性要分别讨论。</p>
+<h2>先修与运行</h2>
+<p>已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 联盟价值不是个人成本</h2>
+<p>用frozenset表示联盟，字典值是该联盟相对独立行动创造的可分配节省额。所有7个非空联盟都要给出数值，不能只知道大联盟收益就计算Shapley值。</p>
+<h2>2. Shapley：平均边际贡献</h2>
+<p>遍历6种加入顺序，每次计算新成员使联盟价值增加多少。平均后得到每人分配。它依据一组公平公理，不代表每个人都一定接受。</p>
+<h2>3. 单独检查个体和联盟接受条件</h2>
+<p>如果某联盟成员分到的总额小于它独立合作能得到的价值，这个联盟有离开的利益。满足所有联盟条件且总额守恒称为核心中的分配；Shapley值不保证总在核心中。</p>
+<h2>4. 输出公平原则与稳定性对照</h2>
+<p>表中列出不同规则分配及被哪些联盟反对。投入比例依赖投入测量，Shapley依赖所有联盟价值；真实价值估计有误时，应做敏感性检查再谈谈判建议。</p>
+<h2>常见错误与边界</h2>
+<p>采用可转移效用合作博弈，所有联盟价值为教学假设。Shapley值满足其公平公理但不保证联盟稳定；真实谈判还涉及非金钱偏好和退出成本。</p>
+<h2>数据</h2>
+<p>原创教学模拟场景，规模与全部参数直接列在 solution.py；运行同时保存输入或结果 CSV。无真实个人记录，不需要下载数据。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

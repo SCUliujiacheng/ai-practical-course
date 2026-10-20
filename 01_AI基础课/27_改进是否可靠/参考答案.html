@@ -1,0 +1,51 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>27_改进是否可靠 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>修改模型后，怎样判断改进是否可靠？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{
+  &quot;baseline_accuracy&quot;: 0.8684027777777777,
+  &quot;improved_accuracy&quot;: 0.8909722222222223,
+  &quot;mean_accuracy_gain&quot;: 0.022569444444444444,
+  &quot;paired_95_percent_interval&quot;: [
+    -0.0006944444444444445,
+    0.04618055555555556
+  ],
+  &quot;per_seed_gain&quot;: [
+    0.030555555555555544,
+    0.022222222222222227,
+    0.02500000000000001,
+    0.024999999999999994,
+    0.016666666666666663,
+    0.01944444444444446,
+    0.02777777777777779,
+    0.013888888888888881
+  ],
+  &quot;mean_training_seconds&quot;: [
+    0.0017870999945444055,
+    0.0030810749958618544
+  ],
+  &quot;interval_scope&quot;: &quot;fixed trained models; iid test examples; not full training uncertainty&quot;,
+  &quot;elapsed_seconds&quot;: 1.213
+}
+</pre><h2>1. 补全：配对方向</h2>
+<p>核对基线错误减新方案错误是改善方向；所有样本改善0.2时区间必须也是0.2。</p>
+<pre class="code">ci, draws = paired_bootstrap(np.full(30, 0.2), repeats=100)
+assert np.allclose(ci, [0.2, 0.2]) and np.allclose(draws, 0.2)
+print(ci)</pre><pre class="output">[0.2 0.2]
+</pre><h2>2. 修改：报告最差种子</h2>
+<p>计算提升最小的种子与训练成本比，不丢掉差结果。</p>
+<pre class="code">worst = int(np.argmin(per_seed_gain))
+ratio = float(np.mean(timings, axis=0)[1] / np.mean(timings, axis=0)[0])
+assert per_seed_gain[worst] == per_seed_gain.min() and ratio &gt; 0
+print(&#x27;最弱种子&#x27;, seeds[worst], &#x27;改善&#x27;, per_seed_gain[worst], &#x27;训练耗时比&#x27;, ratio)</pre><pre class="output">最弱种子 7 改善 0.013888888888888881 训练耗时比 1.7240641291856356
+</pre><h2>3. 迁移：有时间相关性时按区块抽样</h2>
+<p>把连续24个损失作为一个区块，先计算每块均值再 bootstrap；不把相邻时刻当完全独立。</p>
+<pre class="code">rng = np.random.default_rng(3)
+daily = rng.normal(0.1, 0.2, 20)
+hourly = np.repeat(daily, 24) + rng.normal(0, 0.02, 480)
+blocks = hourly.reshape(20, 24).mean(1)
+ci, draws = paired_bootstrap(blocks, repeats=500)
+assert len(blocks) == 20 and ci[0] &lt;= ci[1]
+print(&#x27;以天为独立单位的区间&#x27;, ci)</pre><pre class="output">以天为独立单位的区间 [-0.02455592  0.18647717]
+</pre></body></html>

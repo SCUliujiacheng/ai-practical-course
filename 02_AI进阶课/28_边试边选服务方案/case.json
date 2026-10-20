@@ -1,0 +1,13 @@
+{
+  "id": "A28",
+  "title": "不知道哪种服务引导有效，怎样边试边选择？",
+  "track": "A",
+  "number": 28,
+  "sources": [
+    [
+      "Sutton and Barto Reinforcement Learning book",
+      "http://incompleteideas.net/book/the-book-2nd.html"
+    ]
+  ],
+  "prereqs": "基础课 Python、NumPy、实验评价"
+}

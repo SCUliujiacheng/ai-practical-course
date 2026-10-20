@@ -1,0 +1,17 @@
+{
+  "id": "B14",
+  "title": "用户只评价过少量电影，怎样推荐？",
+  "track": "B",
+  "number": 14,
+  "sources": [
+    [
+      "Amazon 原始 item-to-item 协同过滤论文：本例仅借鉴物品相似思路，不复刻其生产系统",
+      "https://www.cs.umd.edu/~samir/498/Amazon-Recommendations.pdf"
+    ],
+    [
+      "scikit-learn 余弦相似度",
+      "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html"
+    ]
+  ],
+  "prereqs": "B11—B13；矩阵、余弦相似度、缺失占位、排序与离线评测。"
+}

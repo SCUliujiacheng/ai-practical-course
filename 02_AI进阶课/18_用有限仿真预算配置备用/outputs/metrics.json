@@ -1,0 +1,28 @@
+{
+  "calls_per_method": 10,
+  "initial_sobol_trials": 4,
+  "bayesian_trials": 6,
+  "independent_results": [
+    {
+      "method": "random",
+      "reserve": 2,
+      "threshold": 2,
+      "test_cost": 16.656000000000002,
+      "late_rate": 0.008869021362450746
+    },
+    {
+      "method": "ax",
+      "reserve": 3,
+      "threshold": 0,
+      "test_cost": 16.61733333333333,
+      "late_rate": 0.0017981809753917343
+    },
+    {
+      "method": "no_reserve",
+      "reserve": 0,
+      "threshold": 0,
+      "test_cost": 51.845333333333336,
+      "late_rate": 0.06845635996695291
+    }
+  ]
+}

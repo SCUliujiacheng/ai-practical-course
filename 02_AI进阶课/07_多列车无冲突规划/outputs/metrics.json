@@ -1,0 +1,8 @@
+{
+  "cbs_status": "OPTIMAL_WITHIN_TIME_MODEL",
+  "cbs_sum_cost": 17,
+  "priority_sum_cost": 20,
+  "cbs_makespan": 7,
+  "cbs_high_level_nodes": 28,
+  "collision_free": true
+}

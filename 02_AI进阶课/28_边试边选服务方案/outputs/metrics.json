@@ -1,0 +1,35 @@
+{
+  "true_rates": [
+    0.4,
+    0.48,
+    0.58
+  ],
+  "horizon": 600,
+  "runs_per_method": 100,
+  "summary": [
+    {
+      "method": "epsilon",
+      "successes": 325.61,
+      "regret": 22.605800000000098,
+      "regret_std": 23.887590674708807
+    },
+    {
+      "method": "greedy",
+      "successes": 297.47,
+      "regret": 50.89080000000064,
+      "regret_std": 44.79942193169682
+    },
+    {
+      "method": "random",
+      "successes": 293.72,
+      "regret": 55.91900000000013,
+      "regret_std": 1.8138666216709887
+    },
+    {
+      "method": "ucb",
+      "successes": 316.07,
+      "regret": 32.48180000000008,
+      "regret_std": 6.310476839304173
+    }
+  ]
+}

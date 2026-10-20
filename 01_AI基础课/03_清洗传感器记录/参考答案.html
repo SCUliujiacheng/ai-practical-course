@@ -1,0 +1,40 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>03_清洗传感器记录 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>缺失、重复和异常数据应该怎样处理？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">                 time  temperature
+0 2024-07-01 00:00:00         20.0
+1 2024-07-01 01:00:00         21.0
+2 2024-07-01 01:00:00         22.0
+3 2024-07-01 02:00:00          NaN
+4 2024-07-01 03:00:00         24.0
+5 2024-07-01 04:00:00        999.0
+6 2024-07-01 05:00:00          NaN
+7 2024-07-01 06:00:00         26.0
+{&#x27;input_rows&#x27;: 8, &#x27;invalid_time&#x27;: 0, &#x27;unparseable_or_missing&#x27;: 2, &#x27;duplicate_rows&#x27;: 1, &#x27;range_violations&#x27;: 1, &#x27;remaining_missing&#x27;: 1, &#x27;output_rows&#x27;: 6}
+</pre><h2>1. 补全：数出被填充的点</h2>
+<p>仅统计原先缺失且现在非空的记录，并核对本例为 2 个。</p>
+<pre class="code">filled = work[&#x27;was_missing&#x27;] &amp; work[&#x27;temperature_clean&#x27;].notna()
+assert int(filled.sum()) == 2
+print(work.loc[filled, [&#x27;time&#x27;, &#x27;temperature_clean&#x27;]])</pre><pre class="output">                 time  temperature_clean
+3 2024-07-01 02:00:00               22.0
+5 2024-07-01 04:00:00               24.0
+</pre><h2>2. 修改：允许连续填两点</h2>
+<p>比较 limit=1 与 limit=2，确认缺失数量不增加，并解释为什么更多填充不一定更好。</p>
+<pre class="code">longer = work[&#x27;temperature&#x27;].ffill(limit=2)
+assert longer.isna().sum() &lt;= work[&#x27;temperature_clean&#x27;].isna().sum()
+print(&#x27;多填充点数&#x27;, int(longer.notna().sum() - work[&#x27;temperature_clean&#x27;].notna().sum()))</pre><pre class="output">多填充点数 1
+</pre><h2>3. 迁移：湿度的物理范围</h2>
+<p>为湿度 [45, -2, 110, 60, None] 设置 0—100 的有效范围；不要沿用温度规则。</p>
+<pre class="code">humidity = pd.Series([45, -2, 110, 60, None], dtype=float)
+valid = humidity.where(humidity.between(0, 100))
+assert valid.notna().sum() == 2
+assert valid.dropna().tolist() == [45, 60]
+print(valid)</pre><pre class="output">0    45.0
+1     NaN
+2     NaN
+3    60.0
+4     NaN
+dtype: float64
+</pre></body></html>

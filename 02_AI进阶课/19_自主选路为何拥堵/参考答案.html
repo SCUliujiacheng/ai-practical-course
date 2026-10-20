@@ -1,0 +1,28 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>19_自主选路为何拥堵 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>每个人选择最快通道，为什么整体变慢？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{&#x27;coordinated_route_a&#x27;: 10, &#x27;coordinated_mean&#x27;: 10.166666666666666, &#x27;synchronous_last10&#x27;: 14.75, &#x27;partial_last10_mean_across_runs&#x27;: 10.591725, &#x27;partial_run_std&#x27;: 0.10670082066965998}
+</pre><h2>1. 补全：人数守恒</h2>
+<p>逐轮检查两条通道人数非负且总和恒为30。</p>
+<pre class="code">assert ((all_switch[[&quot;route_a&quot;,&quot;route_b&quot;]]&gt;=0).all().all())
+assert (all_switch.route_a+all_switch.route_b==30).all()</pre><h2>2. 修改：所有人不改路</h2>
+<p>把更新概率设为0，检查每轮人数相同。</p>
+<pre class="code">fixed=simulate_routes(5,switch_probability=0)
+assert fixed.route_a.nunique()==1
+print(fixed.head())</pre><pre class="output">   round  route_a  route_b  mean_minutes
+0      0       18       12         11.34
+1      1       18       12         11.34
+2      2       18       12         11.34
+3      3       18       12         11.34
+4      4       18       12         11.34
+</pre><h2>3. 迁移：随机分流</h2>
+<p>每位参与者独立以0.5概率去A，模拟1000次；和确定分配15/15比较平均总耗时。</p>
+<pre class="code">rng2=np.random.default_rng(21)
+a=rng2.binomial(30,.5,1000)
+random_cost=np.mean([np.dot([x,30-x],travel_times([x,30-x])) for x in a])
+fixed_cost=np.dot([15,15],travel_times([15,15]))
+print(random_cost,fixed_cost)
+assert random_cost&gt;=fixed_cost-1</pre><pre class="output">322.8370499999999 318.75
+</pre></body></html>

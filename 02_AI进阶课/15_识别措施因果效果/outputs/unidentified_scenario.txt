@@ -1,0 +1,20 @@
+Estimand type: EstimandType.NONPARAMETRIC_ATE
+
+### Estimand : 1
+Estimand name: backdoor
+No such variable(s) found!
+
+### Estimand : 2
+Estimand name: iv
+No such variable(s) found!
+
+### Estimand : 3
+Estimand name: frontdoor
+No such variable(s) found!
+
+### Estimand : 4
+Estimand name: general_adjustment
+No such variable(s) found!
+
+
+U 未被测量，当前图下不能用已观测变量完成后门调整；不继续调用估计器，应收集共同原因或设计随机试验。

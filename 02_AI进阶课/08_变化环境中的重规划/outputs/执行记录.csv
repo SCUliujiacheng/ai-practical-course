@@ -1,0 +1,9 @@
+﻿policy,step,start,origin,target,duration,news
+fixed,0,0,S,A,1,
+repair_blocked,0,0,S,A,1,
+repair_blocked,1,1,A,B,1,close:A-G
+repair_blocked,2,2,B,C,9,cost:B-C
+repair_blocked,3,11,C,G,1,
+rolling,0,0,S,A,1,
+rolling,1,1,A,B,1,close:A-G
+rolling,2,2,B,G,3,cost:B-C

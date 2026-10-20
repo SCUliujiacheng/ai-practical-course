@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>19_冻结预训练图像模型 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>图片不多时，怎样利用已有模型完成分类？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{
+  &quot;raw_pixel_accuracy&quot;: 0.92,
+  &quot;frozen_resnet_accuracy&quot;: 0.87,
+  &quot;train_samples&quot;: 150,
+  &quot;test_samples&quot;: 100,
+  &quot;backbone_trainable_parameters&quot;: 0,
+  &quot;input_size&quot;: 112,
+  &quot;domain_warning&quot;: &quot;ImageNet to digits; teaching workflow only&quot;,
+  &quot;elapsed_seconds&quot;: 6.526
+}
+</pre><h2>1. 补全：冻结检查</h2>
+<p>确认骨干没有可训练参数，且 3 张图片得到 3×512 特征。</p>
+<pre class="code">assert sum((p.numel() for p in backbone.parameters() if p.requires_grad)) == 0
+assert extract_features(X[te[:3]]).shape == (3, 512)
+print(&#x27;骨干已冻结&#x27;)</pre><pre class="output">骨干已冻结
+</pre><h2>2. 修改：只训练一个神经分类头</h2>
+<p>冻结 train_features，训练 Linear(512,10) 15 步；检查骨干未获梯度而分类头获梯度。</p>
+<pre class="code">torch.manual_seed(19)
+new_head = nn.Linear(512, 10)
+opt = torch.optim.Adam(new_head.parameters(), lr=0.01)
+ft = torch.tensor(train_features)
+labels = torch.tensor(y[tr], dtype=torch.long)
+for _ in range(15):
+    opt.zero_grad()
+    loss = nn.CrossEntropyLoss()(new_head(ft), labels)
+    loss.backward()
+    opt.step()
+assert new_head.weight.grad is not None
+assert all((p.grad is None for p in backbone.parameters()))
+print(float(loss))</pre><pre class="output">0.27421659231185913
+</pre><pre class="output">[USER_HOME]\AppData\Local\Temp\ipykernel_31612\3460900847.py:13: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:836.)
+  print(float(loss))
+</pre><h2>3. 迁移：特征用于奇偶分类</h2>
+<p>不重新提取图像特征，只把新任务的标签改成奇偶。说明这样节省的是哪个环节。</p>
+<pre class="code">parity = LogisticRegression(max_iter=500).fit(train_features, y[tr] % 2)
+result = parity.predict(test_features)
+assert set(np.unique(result)) &lt;= {0, 1} and len(result) == len(te)
+print(&#x27;奇偶准确率&#x27;, accuracy_score(y[te] % 2, result))</pre><pre class="output">奇偶准确率 0.9
+</pre></body></html>

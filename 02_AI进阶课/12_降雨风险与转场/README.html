@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>A12 有降雨风险时，应该提前转场还是等待？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>把明确标注的降雨概率情景转成行动：户外、立即室内、等待一个有噪声信号再决定。使用贝叶斯更新与决策树计算预期损失，不把温度预测当降雨概率。</p>
+<h2>先修与运行</h2>
+<p>B09；概率、条件概率、期望损失；不要求外部天气服务。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 列出天气状态与损失表</h2>
+<p>仅两种状态：下雨与不下雨。户外遇雨损失 12000，立即转场成本 3000。概率 0.35 是假设，不是查询到的天气预报；每项成本也都是教学单位。</p>
+<h2>2. 等待带来信息也带来代价</h2>
+<p>湿信号在下雨时出现概率为 sensitivity，在晴天时误报概率为 false_positive。先算信号概率，再用贝叶斯公式算后验；后验必须落在 0—1，不应直接把 0.8 当作下雨概率。</p>
+<h2>3. 从决策树末端往前计算</h2>
+<p>观察信号后，在户外与延迟转场之间选损失较低者，再按信号概率加权，最后加等待成本。立即转场阈值为 3000/12000=0.25，但加入等待选项后还要比较第三条曲线。</p>
+<h2>4. 交付规则与改变建议的条件</h2>
+<p>输出当前推荐、每个信号后的动作和全概率范围的决策曲线。风险厌恶、场地容量和极端损失尚未建模；如果等待会失去室内场地，应修改树而非继续使用旧公式。</p>
+<h2>常见错误与边界</h2>
+<p>所有降雨概率与成本是标明的假设，不能转述为当前城市真实预报。贝叶斯更新依赖信号质量已知，现实中需要校准资料。</p>
+<h2>数据</h2>
+<p>教学模拟数据；生成机制、参数和随机种子见本案例代码。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

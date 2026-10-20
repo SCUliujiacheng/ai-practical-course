@@ -1,0 +1,29 @@
+{
+  "unlimited_resource_days": 16,
+  "two_worker_days": 17,
+  "status": "OPTIMAL",
+  "critical_tasks": [
+    "A",
+    "B",
+    "D",
+    "E",
+    "G",
+    "I",
+    "K",
+    "L"
+  ],
+  "unlimited_shorten_one_day_effect": {
+    "A": 0,
+    "B": 0,
+    "C": 0,
+    "D": 0,
+    "E": 0,
+    "F": 0,
+    "G": 1,
+    "H": 0,
+    "I": 1,
+    "J": 0,
+    "K": 0,
+    "L": 1
+  }
+}

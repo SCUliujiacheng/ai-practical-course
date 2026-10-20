@@ -1,0 +1,24 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>09_少数故障与阈值 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>故障很少时，怎样避免模型只预测正常？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{&#x27;selected_threshold&#x27;: 0.060000000000000005, &#x27;all_normal&#x27;: {&#x27;tn&#x27;: 330, &#x27;fp&#x27;: 0, &#x27;fn&#x27;: 30, &#x27;tp&#x27;: 0, &#x27;cost&#x27;: 600.0}, &#x27;threshold_0_5&#x27;: {&#x27;tn&#x27;: 328, &#x27;fp&#x27;: 2, &#x27;fn&#x27;: 14, &#x27;tp&#x27;: 16, &#x27;cost&#x27;: 282.0}, &#x27;selected&#x27;: {&#x27;tn&#x27;: 247, &#x27;fp&#x27;: 83, &#x27;fn&#x27;: 2, &#x27;tp&#x27;: 28, &#x27;cost&#x27;: 123.0}, &#x27;precision&#x27;: 0.25225225225225223, &#x27;recall&#x27;: 0.9333333333333333, &#x27;raw_brier&#x27;: 0.11510529881262979, &#x27;calibrated_brier&#x27;: 0.038271708162379084}
+</pre><h2>1. 补全：误报漏报成本</h2>
+<p>用 selected 中的 fp/fn 复算代价。</p>
+<pre class="code">computed = metrics[&#x27;selected&#x27;][&#x27;fp&#x27;] + 20*metrics[&#x27;selected&#x27;][&#x27;fn&#x27;]
+assert computed == metrics[&#x27;selected&#x27;][&#x27;cost&#x27;]
+print(computed)</pre><pre class="output">123
+</pre><h2>2. 修改：漏报成本减半</h2>
+<p>仅在验证集用漏报成本 10 重新选阈值，报告新阈值而不在测试集选。</p>
+<pre class="code">new_rows = [(t,error_cost(y_val,p_val&gt;=t,missed=10)[&#x27;cost&#x27;]) for t in np.linspace(0.01,0.8,80)]
+new_threshold, cost = min(new_rows,key=lambda row:row[1])
+assert 0 &lt; new_threshold &lt; 1
+print(&#x27;成本改变后的验证阈值&#x27;,new_threshold,&#x27;成本&#x27;,cost)</pre><pre class="output">成本改变后的验证阈值 0.060000000000000005 成本 78.0
+</pre><h2>3. 迁移：报警容量只有 15 台</h2>
+<p>在测试概率上按风险排序最多报警 15 台；用真实标签事后核算，不把标签用于排序。</p>
+<pre class="code">limited = np.zeros(len(p_test),dtype=bool)
+limited[np.argsort(-p_test)[:15]] = True
+assert limited.sum() == 15
+print(error_cost(y_test,limited))</pre><pre class="output">{&#x27;tn&#x27;: 329, &#x27;fp&#x27;: 1, &#x27;fn&#x27;: 16, &#x27;tp&#x27;: 14, &#x27;cost&#x27;: 321.0}
+</pre></body></html>

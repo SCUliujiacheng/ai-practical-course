@@ -1,0 +1,7 @@
+{
+  "mlp_accuracy": 0.9688888888888889,
+  "logistic_accuracy": 0.9711111111111111,
+  "test_samples": 450,
+  "errors": 14,
+  "elapsed_seconds": 7.127
+}

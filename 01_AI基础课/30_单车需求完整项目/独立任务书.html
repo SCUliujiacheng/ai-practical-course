@@ -1,0 +1,5 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>独立任务书</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>单车需求项目：先做再看答案</h1>
+<p>你的委托是提前一个小时估计租借需求，供调度团队配置能力。请提交：数据字段与可用时点表；按时间划分的训练、验证、测试；昨天同小时基线及一个可运行模型；全部测试逐时误差；可本地调用且校验输入的API；一页建议与更新触发条件。</p>
+<p>禁止把casual、registered、当小时真实天气作为已知未来输入。必须补齐小时索引后创建滞后特征。允许使用测试期内已经发生的历史需求，但须声明滚动单步预测协议。</p>
+<p>验收：无数据泄漏、API与批预测一致、非法请求拒绝、模型来源和数据哈希可追溯。模型没有胜过基线也要解释，不能改测试集隐藏失败。</p>
+</body></html>

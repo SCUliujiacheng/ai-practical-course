@@ -1,0 +1,10 @@
+{
+  "calibrated_interarrival_mean": 2.218925750531993,
+  "calibrated_service_mean": 3.7838939753849363,
+  "mean_wait_reduction_minutes": 4.085658418609135,
+  "extra_staff_cost": 160,
+  "heldout_wait_minutes": {
+    "2": 8.576067353315386,
+    "3": 0.6738596190558158
+  }
+}

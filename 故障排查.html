@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>故障排查</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>故障排查</h1>
+<h2>双击开始学习后提示找不到Python</h2>
+<p>仓库不含预装虚拟环境。先按 <a href="%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a> 使用Python3.12创建 <code>.venv</code>。不要把其他电脑的虚拟环境直接复制过来，也不要在未经验证的Python大版本上强行安装锁定依赖。</p>
+<h2>ModuleNotFoundError、DLL load failed</h2>
+<p>检查Notebook内核是否为 <strong>AI离线课程 Python 3.12</strong>。运行 <code>import sys; print(sys.executable)</code>，路径应位于当前课程 <code>.venv</code> 内。再运行课程自检；缺库时按安装指南修复，已经备好离线材料则按 <a href="%E7%A6%BB%E7%BA%BF%E5%87%86%E5%A4%87%E6%8C%87%E5%8D%97.md">离线准备指南</a> 恢复。不要为了消除警告升级整套依赖。</p>
+<h2>模型不存在或试图下载</h2>
+<p>Git仓库没有大型预训练权重。先联网运行 <code>tools/prepare_models.py</code> 获取固定版本，再学习相应模型课。工具使用来源清单及SHA256，不把任意同名文件当成正确模型。已经离线且尚未准备该模型时，可先看保存结果的教学HTML，再学其他课。</p>
+<h2>本机网页打不开</h2>
+<p>保留Jupyter命令窗口，把其中完整的 <code>http://127.0.0.1:…/?token=…</code> 地址复制到浏览器地址栏，不要输入搜索框。端口占用时启动器会尝试其他端口。只有本机服务通信，不要求登录云账号。</p>
+<h2>内核断开或电脑很卡</h2>
+<p>在Jupyter的Running面板关闭不用的内核，尤其是图像与语言模型。一次运行一个模型课。示例默认CPU，不需要调用 <code>.cuda()</code>。关闭服务窗口也会使Notebook断开；重新启动后重启内核、从第一格顺序运行。</p>
+<h2>黄色Warning很多</h2>
+<p>当前已验证环境可能出现Windows Notebook的Proactor/selector提示、DoWhy内部pandas索引的FutureWarning、因果课的未观测变量U提示。它们与异常中断不同。出现traceback、FAIL或没有预期结果时，请保留完整报错并查 <a href="Python%E7%A6%BB%E7%BA%BF%E6%95%91%E6%80%A5%E6%89%8B%E5%86%8C.md">Python救急手册</a>。</p>
+<h2>结果和网页里不同</h2>
+<p>网页展示制作时的一次实际结果。先重启内核并顺序执行，排除旧变量；检查数据、种子与参数是否变化。并行设置、硬件和库版本可能造成小数差异。验证范围、约束和统计结论，避免机械追求每位小数完全一样。</p>
+<h2>图没有弹窗</h2>
+<p>脚本把图保存到每课 <code>outputs</code>，教学Notebook末尾会显示图片。HTML也内嵌图像。中文字体在其他系统上可能需要自行安装；完整验收平台为Windows。</p>
+<h2>求解器无解或模型表现更差</h2>
+<p><code>INFEASIBLE</code>可能表示约束冲突，<code>UNKNOWN</code>可能是求解时间不足；不要拿旧方案冒充新结果。新模型输给简单基线也可能是正确结果，课程保留了这些反例。问答输出必须核对资料依据，能生成文字不等于事实正确。</p>
+<h2>准备报告Issue</h2>
+<p>写明案例编号、系统、Python版本、操作步骤、预期和实际结果。删除日志中的个人路径、账号与密钥，再提交最小复现。参考 <a href="CONTRIBUTING.html">贡献指南</a>。</p>
+</body></html>

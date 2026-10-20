@@ -1,0 +1,3 @@
+model,validation_mae,test_mae,validation_decision_cost,test_decision_cost
+ridge,14.07781932436093,16.11330750501616,173.04,177.608
+hist_gradient_boosting,8.144585994150196,8.086353009985572,152.36,152.128

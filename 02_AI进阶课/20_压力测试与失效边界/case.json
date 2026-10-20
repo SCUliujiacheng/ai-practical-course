@@ -1,0 +1,13 @@
+{
+  "id": "A20",
+  "title": "在常规模拟中最好的方案，遇到变化还可靠吗？",
+  "track": "A",
+  "number": 20,
+  "sources": [
+    [
+      "Simulation verification and validation",
+      "https://informs-sim.org/wsc11papers/016.pdf"
+    ]
+  ],
+  "prereqs": "基础课 Python、NumPy、实验评价"
+}

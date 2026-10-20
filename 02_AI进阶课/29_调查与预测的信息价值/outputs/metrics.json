@@ -1,0 +1,22 @@
+{
+  "baseline_action": 1,
+  "baseline_loss": 350.0,
+  "perfect_information_value": 227.5,
+  "noisy_information_value": 107.625,
+  "signal_policy": [
+    {
+      "signal": 0,
+      "signal_probability": 0.6075,
+      "posterior_rain": 0.14403292181069957,
+      "action": 0,
+      "conditional_loss": 172.8395061728395
+    },
+    {
+      "signal": 1,
+      "signal_probability": 0.39249999999999996,
+      "posterior_rain": 0.6687898089171974,
+      "action": 1,
+      "conditional_loss": 350.0
+    }
+  ]
+}

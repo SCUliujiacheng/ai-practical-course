@@ -1,0 +1,74 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>04_项目关键路径与资源 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>项目最早何时结束，优先改善哪个环节？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">资源充足下最短工期 16 关键任务 [&#x27;A&#x27;, &#x27;B&#x27;, &#x27;D&#x27;, &#x27;E&#x27;, &#x27;G&#x27;, &#x27;I&#x27;, &#x27;K&#x27;, &#x27;L&#x27;]
+{
+  &quot;unlimited_resource_days&quot;: 16,
+  &quot;two_worker_days&quot;: 17,
+  &quot;status&quot;: &quot;OPTIMAL&quot;,
+  &quot;critical_tasks&quot;: [
+    &quot;A&quot;,
+    &quot;B&quot;,
+    &quot;D&quot;,
+    &quot;E&quot;,
+    &quot;G&quot;,
+    &quot;I&quot;,
+    &quot;K&quot;,
+    &quot;L&quot;
+  ],
+  &quot;unlimited_shorten_one_day_effect&quot;: {
+    &quot;A&quot;: 0,
+    &quot;B&quot;: 0,
+    &quot;C&quot;: 0,
+    &quot;D&quot;: 0,
+    &quot;E&quot;: 0,
+    &quot;F&quot;: 0,
+    &quot;G&quot;: 1,
+    &quot;H&quot;: 0,
+    &quot;I&quot;: 1,
+    &quot;J&quot;: 0,
+    &quot;K&quot;: 0,
+    &quot;L&quot;: 1
+  }
+}
+资源充足下工期为16天；两名成员下得到17天计划，状态OPTIMAL。仅在资源充足模型下，逐项缩短1天（任务最短仍为1天）的工期影响为{&#x27;A&#x27;: 0, &#x27;B&#x27;: 0, &#x27;C&#x27;: 0, &#x27;D&#x27;: 0, &#x27;E&#x27;: 0, &#x27;F&#x27;: 0, &#x27;G&#x27;: 1, &#x27;H&#x27;: 0, &#x27;I&#x27;: 1, &#x27;J&#x27;: 0, &#x27;K&#x27;: 0, &#x27;L&#x27;: 1}。两人受限计划的缩短效果需要重新求解。
+</pre><h2>1. 补全：顺序任务的工期</h2>
+<p>X耗时2，Y耗时3，X是Y前置。检查最早时间和零松弛。</p>
+<pre class="code">trial_lengths = {&quot;X&quot;:2,&quot;Y&quot;:3}
+trial_edges = [(&quot;X&quot;,&quot;Y&quot;)]
+# TODO：返回 critical_times 的 (总工期, 最早开始字典, 最晚开始字典)
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    trial_span,trial_es,trial_ls=attempt
+    assert trial_span == 5 and trial_es == {&quot;X&quot;:0,&quot;Y&quot;:2} and trial_es == trial_ls
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>2. 修改：人员增为3名</h2>
+<p>重排并检查资源约束。比较求得的工期，只有状态OPTIMAL时才能作最优值比较。</p>
+<pre class="code">trial_workers = 3
+# TODO：返回 resource_schedule 的 (状态, 开始时间字典)
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    trial_state,trial_plan=attempt
+    assert check_schedule(trial_plan,lengths,edges,trial_workers)
+    assert max(trial_plan[j]+lengths[j] for j in lengths) &gt;= lower_bound
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>3. 迁移：检测循环依赖</h2>
+<p>构造数据获取依赖训练、训练又依赖数据获取的错误计划，要求明确报错。</p>
+<pre class="code">trial_edges = [(&quot;data&quot;,&quot;train&quot;),(&quot;train&quot;,&quot;data&quot;)]
+# TODO：用 try/except 调用 critical_times；若正确捕获 ValueError，将 attempt 设置为 True
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert attempt is True
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre></body></html>

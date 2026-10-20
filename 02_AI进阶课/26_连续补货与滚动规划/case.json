@@ -1,0 +1,13 @@
+{
+  "id": "A26",
+  "title": "连续三天活动，每晚应补多少货？",
+  "track": "A",
+  "number": 26,
+  "sources": [
+    [
+      "Model predictive control theory",
+      "https://www.do-mpc.com/en/latest/theory_mpc.html"
+    ]
+  ],
+  "prereqs": "基础课 Python、NumPy、实验评价"
+}

@@ -1,0 +1,40 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>07_多列车无冲突规划 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>三列小火车共用轨道，怎样全部到站？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{
+  &quot;cbs_status&quot;: &quot;OPTIMAL_WITHIN_TIME_MODEL&quot;,
+  &quot;cbs_sum_cost&quot;: 17,
+  &quot;priority_sum_cost&quot;: 20,
+  &quot;cbs_makespan&quot;: 7,
+  &quot;cbs_high_level_nodes&quot;: 28,
+  &quot;collision_free&quot;: true
+}
+CBS方案总到达时间17，优先方案20；CBS高层展开28个节点。逐步合法性、同点冲突、对向交换和终点占用均检查通过。最优结论限定在本离散动作、总到达时间目标和30步时间窗模型内；实际列车的速度、制动和安全间隔未建模。
+</pre><h2>1. 补全：交换碰撞</h2>
+<p>两辆车在一条边上对向交换位置，不能只检查同点碰撞。</p>
+<pre class="code">swap=[[(0,0),(0,1)],[(0,1),(0,0)]]
+issue=first_conflict(swap)
+assert issue[0]==&quot;e&quot; and issue[3]==1
+print(issue)
+</pre><pre class="output">(&#x27;e&#x27;, 0, 1, 1, (0, 0), (0, 1))
+</pre><h2>2. 修改：改变优先顺序</h2>
+<p>检查所有6种优先次序；失败应记录，不能删除失败次序再报告全成功。</p>
+<pre class="code">results=[]
+for order in itertools.permutations(range(3)):
+    paths=prioritized(order)
+    if paths is not None: assert validate_paths(paths)
+    results.append((order,None if paths is None else sum(len(p)-1 for p in paths)))
+assert len(results)==6
+print(results)
+</pre><pre class="output">[((0, 1, 2), 20), ((0, 2, 1), 17), ((1, 0, 2), 20), ((1, 2, 0), 17), ((2, 0, 1), 17), ((2, 1, 0), 17)]
+</pre><h2>3. 迁移：仓库机器人到站后停留</h2>
+<p>一车先到终点，另一车之后经过该点，应检测碰撞。再构造不冲突的等待方案。</p>
+<pre class="code">bad=[[(0,0),(0,1)],[(1,2),(0,2),(0,1)]]
+assert first_conflict(bad)[0]==&quot;v&quot;
+good=[[(0,0),(0,1)],[(1,2),(1,1),(1,0)]]
+assert first_conflict(good) is None
+print(&quot;抵达后的占用必须继续纳入预约表。&quot;)
+</pre><pre class="output">抵达后的占用必须继续纳入预约表。
+</pre></body></html>

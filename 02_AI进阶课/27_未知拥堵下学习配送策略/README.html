@@ -1,0 +1,35 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>A27 拥堵概率未知，怎样通过交互学习策略？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>用小型配送过程比较规则、已知模型最优规划和表格Q-learning。规划器知道真实转移概率，是信息更充分的参照，不是与学习者完全同条件。</p>
+<h2>先修与运行</h2>
+<p>基础课 Python、NumPy、实验评价</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h3>1. 环境与动作</h3>
+<p>状态为距离终点剩余段数0—5，0是终点。动作0走稳定慢路，每次耗时2且前进一段；动作1走快路，耗时1但可能堵住原地。这里真实概率仅在环境和oracle中可见。</p>
+<h3>2. 已知模型的对照</h3>
+<p>对于每段独立且相同的环境，慢路期望2分钟，快路的几何等待期望1/p分钟。只有当p大于0.5时快路更优。规则基线固定慢路。</p>
+<h3>3. 学习者只看交互样本</h3>
+<p>Q表的每个元素是某状态采取某动作的估计回报。探索率逐渐下降；评价时停止更新和探索。每次完整训练使用独立种子，而不是训练一次换测试种子。</p>
+<h3>4. 汇总独立训练的波动</h3>
+<p>区间基于独立训练所得均值，用于展示训练随机性；八次运行只提供有限证据。业务评价为耗时而非只看累计reward上升。</p>
+<h3>保存可核验的证据</h3>
+<p>把指标写入 JSON，并用本次输出形成有条件的建议。json.dumps 把字典变成文本；不会替你判断方案是否适合现实。</p>
+<h2>常见错误与边界</h2>
+<p>改变测试种子不等于独立训练。不要让oracle的信息泄漏给学习者；其优势须说明。连续不受限探索仅适用于可接受代价的模拟环境。</p>
+<h2>数据</h2>
+<p>教学模拟数据；生成机制、参数和随机种子见本案例代码。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+<h2>已附本地拓展</h2>
+<p>见 <a href="%E6%8B%93%E5%B1%95_DQN.md">DQN离线实验</a>，无需下载模型，验收状态见总报告。</p>
+</body></html>

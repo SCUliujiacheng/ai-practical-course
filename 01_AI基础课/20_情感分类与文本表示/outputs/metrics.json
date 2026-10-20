@@ -1,0 +1,8 @@
+{
+  "tfidf_accuracy": 0.75,
+  "embedding_accuracy": 0.625,
+  "test_samples": 8,
+  "vocabulary_size": 77,
+  "training_loss": 0.00035102423862554133,
+  "elapsed_seconds": 4.249
+}

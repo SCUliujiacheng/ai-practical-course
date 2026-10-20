@@ -1,0 +1,17 @@
+{
+  "id": "B10",
+  "title": "怎样在同一预算下比较分类模型？",
+  "track": "B",
+  "number": 10,
+  "sources": [
+    [
+      "GridSearchCV 官方说明",
+      "https://scikit-learn.org/stable/modules/grid_search.html"
+    ],
+    [
+      "scikit-learn 内置数据说明",
+      "https://scikit-learn.org/stable/datasets/toy_dataset.html"
+    ]
+  ],
+  "prereqs": "B07—B09；交叉验证、参数字典、折内拟合与计时。"
+}

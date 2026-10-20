@@ -1,0 +1,9 @@
+{
+  "input_rows": 8,
+  "invalid_time": 0,
+  "unparseable_or_missing": 2,
+  "duplicate_rows": 1,
+  "range_violations": 1,
+  "remaining_missing": 1,
+  "output_rows": 6
+}

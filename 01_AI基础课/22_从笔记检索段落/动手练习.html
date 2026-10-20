@@ -1,0 +1,35 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>22_从笔记检索段落 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>怎样从一批笔记中找到相关段落？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">[{&#x27;doc_id&#x27;: &#x27;D1&#x27;, &#x27;start&#x27;: 0, &#x27;end&#x27;: 40, &#x27;text&#x27;: &#x27;实验室预约需要提前一天提交申请。每次预约最长两小时。取消预约请在开始前四小时通知&#x27;, &#x27;score&#x27;: 0.37936034177912303}, {&#x27;doc_id&#x27;: &#x27;D6&#x27;, &#x27;start&#x27;: 30, &#x27;end&#x27;: 53, &#x27;text&#x27;: &#x27;本。GPU预约冲突时优先安排已批准的课程实验。&#x27;, &#x27;score&#x27;: 0.048452088425244025}, {&#x27;doc_id&#x27;: &#x27;D6&#x27;, &#x27;start&#x27;: 0, &#x27;end&#x27;: 40, &#x27;text&#x27;: &#x27;服务器训练任务最长运行六小时。提交前需要记录随机种子和依赖版本。GPU预约冲突时&#x27;, &#x27;score&#x27;: 0.03538279605858653}]
+{
+  &quot;recall_at_1&quot;: 1.0,
+  &quot;recall_at_3&quot;: 1.0,
+  &quot;mrr_at_3&quot;: 1.0,
+  &quot;chunks&quot;: 12,
+  &quot;evaluation_questions&quot;: 6,
+  &quot;elapsed_seconds&quot;: 0.766
+}
+</pre><h2>1. 补全：重叠切分</h2>
+<p>窗口 6、重叠 2，核对 ABCDEFGHIJ 的片段以及非法参数。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert [p[2] for p in parts] == [&#x27;ABCDEF&#x27;, &#x27;EFGHIJ&#x27;]</pre><h2>2. 修改：无匹配处理</h2>
+<p>检查空查询与完全不在语料里的查询。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert retrieve(&#x27;&#x27;) == []
+# assert retrieve(&#x27;zzzzzz&#x27;) == []
+# assert retrieve(&#x27;实验室预约&#x27;, 1)[0][&#x27;doc_id&#x27;] == &#x27;D1&#x27;</pre><h2>3. 迁移：加入新文档</h2>
+<p>新增会议室规则并重建独立索引，核对新来源可找到。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert ids[int(score.argmax())] == &#x27;D7&#x27;</pre></body></html>

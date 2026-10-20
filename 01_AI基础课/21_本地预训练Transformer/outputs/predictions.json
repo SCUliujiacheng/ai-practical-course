@@ -1,0 +1,44 @@
+[
+  {
+    "text": "I love this wonderful book.",
+    "expected": 1,
+    "raw": "positive",
+    "parsed": 1,
+    "baseline": 1
+  },
+  {
+    "text": "The service was terrible and slow.",
+    "expected": 0,
+    "raw": "negative",
+    "parsed": 0,
+    "baseline": 0
+  },
+  {
+    "text": "It is not good at all.",
+    "expected": 0,
+    "raw": "negative",
+    "parsed": 0,
+    "baseline": 1
+  },
+  {
+    "text": "A reliable and useful product.",
+    "expected": 1,
+    "raw": "positive",
+    "parsed": 1,
+    "baseline": 1
+  },
+  {
+    "text": "I regret buying this item.",
+    "expected": 0,
+    "raw": "negative",
+    "parsed": 0,
+    "baseline": 0
+  },
+  {
+    "text": "The staff were friendly and helpful.",
+    "expected": 1,
+    "raw": "positive",
+    "parsed": 1,
+    "baseline": 1
+  }
+]

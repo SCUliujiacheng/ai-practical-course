@@ -1,0 +1,43 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>23_关键词与向量检索 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>提问和原文用词不同，怎样找到相关内容？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{
+  &quot;lexical_recall_at_1&quot;: 0.0,
+  &quot;semantic_recall_at_1&quot;: 1.0,
+  &quot;model_load_seconds&quot;: 0.094,
+  &quot;index_seconds&quot;: 0.031,
+  &quot;semantic_query_seconds&quot;: 0.016,
+  &quot;lexical_query_seconds&quot;: 0.0,
+  &quot;language&quot;: &quot;English controlled comparison&quot;,
+  &quot;elapsed_seconds&quot;: 11.612
+}
+</pre><h2>1. 补全：余弦相似度</h2>
+<p>计算 [3,4] 与 [4,3] 的规范化点积，核对相同向量相似度。</p>
+<pre class="code">a = np.array([3.0, 4.0])
+b = np.array([4.0, 3.0])
+a /= np.linalg.norm(a)
+b /= np.linalg.norm(b)
+assert np.isclose(a @ a, 1) and np.isclose(a @ b, 0.96)
+print(a @ b)</pre><pre class="output">0.96
+</pre><h2>2. 修改：Recall@3</h2>
+<p>用原分数矩阵计算 Recall@3，不能重新选择问题。</p>
+<pre class="code">top3 = np.argsort(-semantic_scores, axis=1)[:, :3]
+recall3 = float(np.mean([g in row for g, row in zip(gold, top3)]))
+assert recall3 &gt;= float(np.mean(semantic_top == gold))
+print(recall3)</pre><pre class="output">1.0
+</pre><h2>3. 迁移：排名融合</h2>
+<p>实现 reciprocal rank fusion，每种方法按 1/(60+排名) 累加；零匹配不贡献票数，避免词典顺序制造证据。</p>
+<pre class="code">def rrf(a, b, k=60):
+    combined = np.zeros_like(a)
+    for scores in [a, b]:
+        for i, row in enumerate(np.argsort(-scores, axis=1)):
+            for rank, j in enumerate(row, 1):
+                if scores[i, j] &gt; 0:
+                    combined[i, j] += 1 / (k + rank)
+    return combined
+fused = rrf(lexical_scores, semantic_scores)
+assert fused.shape == semantic_scores.shape and np.all(fused &gt;= 0) and np.all(fused.sum(axis=1) &gt; 0)
+print(&#x27;融合 Recall@1&#x27;, np.mean(fused.argmax(1) == gold))</pre><pre class="output">融合 Recall@1 1.0
+</pre></body></html>

@@ -1,0 +1,17 @@
+{
+  "id": "A04",
+  "title": "项目最早何时结束，优先改善哪个环节？",
+  "track": "A",
+  "number": 4,
+  "sources": [
+    [
+      "NetworkX topological_sort",
+      "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.dag.topological_sort.html"
+    ],
+    [
+      "OR-Tools Job Shop 官方实例",
+      "https://developers.google.com/optimization/scheduling/job_shop"
+    ]
+  ],
+  "prereqs": "已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。"
+}

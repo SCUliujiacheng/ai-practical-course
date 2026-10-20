@@ -1,0 +1,53 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>06_预测明天最高温 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>怎样根据历史天气预测明天的最高温度？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">            temp_max  temp_min  temp_mean    pressure   humidity
+date                                                            
+2009-01-01     -4.17     -9.91  -6.810629  999.145594  91.086014
+2009-01-02     -2.12     -4.97  -3.728194  999.600625  92.086806
+2009-01-03     -0.82    -10.00  -5.271736  998.548611  76.458056
+2009-01-04     -0.63     -2.54  -1.375208  988.510694  89.417361
+2009-01-05     -1.44    -12.54  -4.867153  990.405694  86.260417 temp_max     5
+temp_min     5
+temp_mean    5
+pressure     5
+humidity     5
+dtype: int64
+{&#x27;rows&#x27;: 2893, &#x27;train&#x27;: 1735, &#x27;validation&#x27;: 579, &#x27;test&#x27;: 579, &#x27;best_alpha&#x27;: 10.0, &#x27;validation_mae&#x27;: {0.1: 2.3907229325734365, 1.0: 2.388545293821509, 10.0: 2.3844934701153493, 100.0: 2.435917364319479}, &#x27;persistence_mae&#x27;: 2.5210708117443867, &#x27;ridge_mae&#x27;: 2.4652161666724424}
+</pre><h2>1. 补全：手算基线 MAE</h2>
+<p>用 NumPy 计算持续性基线 MAE，与指标文件对应值核对。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    manual_mae = ...
+    assert np.isclose(manual_mae, metrics[&#x27;persistence_mae&#x27;])
+    print(manual_mae)</pre><h2>2. 修改：历史窗口改成 3 天</h2>
+<p>重建 3 天特征，只在原训练、验证日期比较；不要使用测试误差选窗口。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    short = make_weather_table(daily, window=3)
+    short_features = [c for c in short.columns if c not in [&#x27;target&#x27;,&#x27;forecast_date&#x27;]]
+    short_train, short_val = short.loc[train.index], short.loc[validation.index]
+    short_model = make_pipeline(StandardScaler(), Ridge(alpha=best_alpha))
+    short_model.fit(short_train[short_features], short_train[&#x27;target&#x27;])
+    score = ...
+    assert np.isfinite(score) and short_train.index.max() &lt; short_val.index.min()
+    print(&#x27;3 天窗口验证 MAE&#x27;, score)</pre><h2>3. 迁移：预测最低温</h2>
+<p>把标签改为明天最低温，基线也改为今天最低温；用相同日期验证。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    low = make_weather_table(daily, target=&#x27;temp_min&#x27;)
+    low_train, low_val = low.loc[train.index], low.loc[validation.index]
+    low_model = make_pipeline(StandardScaler(), Ridge(alpha=best_alpha))
+    low_model.fit(low_train[features], low_train[&#x27;target&#x27;])
+    low_mae = mean_absolute_error(low_val[&#x27;target&#x27;], low_model.predict(low_val[features]))
+    low_base = ...
+    assert np.isfinite(low_mae) and np.isfinite(low_base)
+    print({&#x27;最低温模型MAE&#x27;: low_mae, &#x27;最低温基线MAE&#x27;: low_base})</pre></body></html>

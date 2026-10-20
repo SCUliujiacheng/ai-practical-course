@@ -1,0 +1,55 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>验收报告</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>验收报告与适用范围</h1>
+<p>验证日期：2026-10-20。目标平台：Windows x64、Python 3.12.13、CPU。</p>
+<h2>原课程全量运行记录</h2>
+<p>60个完整脚本、180份Notebook共240项运行检查通过，原始记录去掉本机日志路径后保存在 <a href="validation/original_windows_validation.json">original_windows_validation.json</a>。练习模板可运行，不表示学生已解答练习。Chronos与DQN选修也在原环境运行过，具体结果保存在案例输出。</p>
+<p>公开副本中的240个目标可执行代码与原已通过版本一致；检查覆盖脚本全文和Notebook代码单元格。文档为公开使用作了调整，保存输出中的个人目录已匿名化。证据见 <a href="validation/code_equivalence.json">code_equivalence.json</a>。</p>
+<h2>公开副本本次检查</h2>
+<table>
+<thead>
+<tr>
+  <th>检查</th>
+  <th>实际结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>新建虚拟环境</td>
+  <td>从已有本地wheelhouse安装190项锁定依赖，约203秒；使用 no-index/no-cache-dir，不沿用原.venv</td>
+</tr>
+<tr>
+  <td>依赖与内核</td>
+  <td>190项版本一致，24个主要库导入成功，pip check无冲突，绑定新环境内核</td>
+</tr>
+<tr>
+  <td>模型与数据</td>
+  <td>全部37个模型相关文件及6个公开数据文件SHA256校验通过；复用已有正确模型，没有重新下载全部权重</td>
+</tr>
+<tr>
+  <td>离线恢复材料准备</td>
+  <td>从新.venv执行准备工具，复制并验证190个wheel与2367个运行时文件；工作环境保持不动</td>
+</tr>
+<tr>
+  <td>重建前检查</td>
+  <td>repair_environment.py --dry-run 校验恢复清单通过；本次没有再次移动并重建环境</td>
+</tr>
+<tr>
+  <td>代表脚本重跑</td>
+  <td>B01/B06/B18/B24/A07/A15/A18/A30共8个脚本通过</td>
+</tr>
+<tr>
+  <td>Notebook入口</td>
+  <td>B01教学、答案、练习3本在新内核执行通过</td>
+</tr>
+<tr>
+  <td>安装工具测试</td>
+  <td>7项标准库单元测试通过，包括固定revision、SHA错误保留原文件、原子替换、wheel元数据与运行时复制</td>
+</tr>
+</tbody>
+</table>
+<p>机器可读记录见 <a href="validation/publication_windows_validation.json">publication_windows_validation.json</a>，证据范围说明见 <a href="validation/README.html">validation/README.md</a>。本次未重新从互联网下载全部190项依赖或全部模型；新下载分支用小型测试数据验证，现有模型做完整哈希校验。</p>
+<p>案例运行采用Python socket防护、Hugging Face离线模式及空缓存目录；上述11项新运行未记录外部网络尝试。允许Jupyter本机通信。这不是物理断网测试，也不是对所有原生组件实施的操作系统级网络隔离。</p>
+<h2>公开仓库与学习边界</h2>
+<p>Git仅发布源码、讲解、Notebook、结果、小数据、版本清单和准备工具。环境、Python运行时、安装包和大型权重不随Git发布；先执行<a href="%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>，计划断网学习再完成<a href="%E7%A6%BB%E7%BA%BF%E5%87%86%E5%A4%87%E6%8C%87%E5%8D%97.md">离线准备指南</a>。macOS、Linux、ARM、GPU或其他Python版本未验证。</p>
+<p>模型效果保留实际结果：B06的Ridge仅小幅优于持续性基线；B19冻结ResNet未胜过简单数字分类器；Chronos天气对照MAE约7.14，森林约6.14，q10—q90经验覆盖约69.6%；小模型问答的少量核对不是通用正确性保证。仿真结果只对公开假设与情景成立，不能直接视为现实部署成效。</p>
+<p>联网选修在对应README及<a href="%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>注明，可延后学习。新读者复跑命令、失败日志和自己的结果应保存在本机reports中，不能把历史通过记录当作自己新环境的保证。</p>
+</body></html>

@@ -1,0 +1,8 @@
+﻿time,temperature,out_of_range,was_missing,temperature_clean
+2024-07-01 00:00:00,20.0,False,False,20.0
+2024-07-01 01:00:00,22.0,False,False,22.0
+2024-07-01 02:00:00,,False,True,22.0
+2024-07-01 03:00:00,24.0,False,False,24.0
+2024-07-01 04:00:00,,True,True,24.0
+2024-07-01 05:00:00,,False,True,
+2024-07-01 06:00:00,26.0,False,False,26.0

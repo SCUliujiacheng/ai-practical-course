@@ -1,0 +1,13 @@
+{
+  "id": "B03",
+  "title": "缺失、重复和异常数据应该怎样处理？",
+  "track": "B",
+  "number": 3,
+  "sources": [
+    [
+      "pandas 缺失数据处理",
+      "https://pandas.pydata.org/docs/user_guide/missing_data.html"
+    ]
+  ],
+  "prereqs": "B01—B02；布尔条件、缺失值、copy 与按条件赋值。"
+}

@@ -1,0 +1,9 @@
+{
+  "learned_success_rate": 1.0,
+  "random_success_rate": 0.2222222222222222,
+  "learned_mean_steps": 8.705555555555556,
+  "learned_mean_return": 9.154999999999998,
+  "training_episodes": 1600,
+  "evaluation_episodes": 180,
+  "elapsed_seconds": 0.234
+}

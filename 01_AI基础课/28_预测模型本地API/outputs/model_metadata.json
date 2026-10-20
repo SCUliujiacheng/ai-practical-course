@@ -1,0 +1,10 @@
+{
+  "features": [
+    "area",
+    "rooms",
+    "floor"
+  ],
+  "model_version": "teaching-v1",
+  "data": "synthetic",
+  "target_unit": "教学货币/月"
+}

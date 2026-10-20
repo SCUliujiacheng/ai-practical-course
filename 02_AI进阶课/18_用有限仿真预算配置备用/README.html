@@ -1,0 +1,33 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>A18 堵车或故障时应该预留多少备用能力？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>你要搜索车辆备用数和触发备用的阈值。每个策略都要模拟很多场景，所以把仿真当作黑箱，比较随机搜索与Ax贝叶斯优化。</p>
+<h2>先修与运行</h2>
+<p>基础课 Python、NumPy、实验评价</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h3>1. 定义可行动的策略参数</h3>
+<p>reserve 是预先购买的备用车数量，threshold 是积压触发阈值。假设每天订单批次已到齐、故障已检查后才决定是否启用备用，这是观察后的补救动作；不能把完整日需求提前用于事前购车。模型只包含车队总容量，不能推断真实道路最优路线。训练与复评种子分开。</p>
+<h3>2. 建立同预算随机搜索</h3>
+<p>每次目标调用使用相同的10个校准情景。记录函数调用数；不能给某方法多十倍试验再宣称它更聪明。</p>
+<h3>3. 用Ax逐步选试验</h3>
+<p>Ax先用空间填充试验学习，再让代理模型建议候选。这里固定前4次Sobol、后6次贝叶斯选点，防止短教程全部停留在初始化。代理模型也有成本，不能保证十次试验就找到全局最优。</p>
+<h3>4. 只在选型之后独立复评</h3>
+<p>同样的最终情景评价两个已选策略，再记录无备用基线。学习目标是形成可靠比较，不能强求贝叶斯优化一定赢。图展示已消耗预算下的历史最好值。</p>
+<h3>保存可核验的证据</h3>
+<p>把指标写入 JSON，并用本次输出形成有条件的建议。json.dumps 把字典变成文本；不会替你判断方案是否适合现实。</p>
+<h2>常见错误与边界</h2>
+<p>Ax有拟合开销，简单小空间枚举可能更好。固定校准情景只减少比较噪声，不代表现实确定。须将搜索成本与执行策略成本分开。</p>
+<h2>数据</h2>
+<p>教学模拟数据；生成机制、参数和随机种子见本案例代码。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

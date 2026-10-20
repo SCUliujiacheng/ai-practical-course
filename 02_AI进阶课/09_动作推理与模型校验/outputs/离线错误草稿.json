@@ -1,0 +1,77 @@
+[
+  {
+    "name": "take-key",
+    "pre": [
+      "at-hall",
+      "key-hall"
+    ],
+    "add": [
+      "has-key"
+    ],
+    "delete": [
+      "key-hall"
+    ]
+  },
+  {
+    "name": "open-door",
+    "pre": [
+      "at-hall"
+    ],
+    "add": [
+      "door-open"
+    ],
+    "delete": []
+  },
+  {
+    "name": "take-package",
+    "pre": [
+      "at-hall",
+      "package-hall"
+    ],
+    "add": [
+      "carrying"
+    ],
+    "delete": [
+      "package-hall"
+    ]
+  },
+  {
+    "name": "enter-room",
+    "pre": [
+      "at-hall",
+      "door-open"
+    ],
+    "add": [
+      "at-room"
+    ],
+    "delete": [
+      "at-hall"
+    ]
+  },
+  {
+    "name": "leave-room",
+    "pre": [
+      "at-room",
+      "door-open"
+    ],
+    "add": [
+      "at-hall"
+    ],
+    "delete": [
+      "at-room"
+    ]
+  },
+  {
+    "name": "deliver",
+    "pre": [
+      "at-room",
+      "carrying"
+    ],
+    "add": [
+      "delivered"
+    ],
+    "delete": [
+      "carrying"
+    ]
+  }
+]

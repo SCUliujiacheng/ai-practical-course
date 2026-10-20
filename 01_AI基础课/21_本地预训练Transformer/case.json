@@ -1,0 +1,17 @@
+{
+  "id": "B21",
+  "title": "怎样使用预训练 Transformer 处理文本？",
+  "track": "B",
+  "number": 21,
+  "sources": [
+    [
+      "FLAN-T5-small 模型卡",
+      "https://huggingface.co/google/flan-t5-small"
+    ],
+    [
+      "Transformers 生成",
+      "https://huggingface.co/docs/transformers/main_classes/text_generation"
+    ]
+  ],
+  "prereqs": "B20；分词、掩码和生成。"
+}

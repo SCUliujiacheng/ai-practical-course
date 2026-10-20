@@ -1,0 +1,17 @@
+{
+  "id": "A07",
+  "title": "三列小火车共用轨道，怎样全部到站？",
+  "track": "A",
+  "number": 7,
+  "sources": [
+    [
+      "Sharon等：Conflict-based search for optimal multi-agent pathfinding（原论文）",
+      "https://doi.org/10.1016/j.artint.2014.11.006"
+    ],
+    [
+      "CBS原研究会议公开记录",
+      "https://ojs.aaai.org/index.php/SOCS/article/view/18222"
+    ]
+  ],
+  "prereqs": "已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。"
+}

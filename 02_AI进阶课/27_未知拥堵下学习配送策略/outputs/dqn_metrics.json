@@ -1,0 +1,35 @@
+{
+  "environment": "20段路线；快路成功率0.58，慢路成本2",
+  "dqn": [
+    {
+      "seed": 1,
+      "training_steps": 2500,
+      "training_seconds": 5.412219799996819,
+      "mean_time": 35.075,
+      "completion_rate": 1.0
+    },
+    {
+      "seed": 2,
+      "training_steps": 2500,
+      "training_seconds": 3.3802829000051133,
+      "mean_time": 35.075,
+      "completion_rate": 1.0
+    },
+    {
+      "seed": 3,
+      "training_steps": 2500,
+      "training_seconds": 2.989786299993284,
+      "mean_time": 35.075,
+      "completion_rate": 1.0
+    }
+  ],
+  "safe_rule": {
+    "mean_time": 40.0,
+    "completion_rate": 1.0
+  },
+  "known_model_reference": {
+    "mean_time": 35.075,
+    "completion_rate": 1.0
+  },
+  "caveat": "三次训练仅用于小型教学比较；DQN不保证优于规则，主例5段路线的分数不能直接与这里比较。"
+}

@@ -1,0 +1,7 @@
+Refute: Use a Placebo Treatment
+Estimated effect:1.9330444797805697
+New effect:-0.014134005105778336
+p value:0.4405663569747086
+
+
+通过反驳检验不证明识别假设成立。

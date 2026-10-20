@@ -1,0 +1,34 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>B24 怎样让本地语言模型参考资料回答问题？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<blockquote>
+<p><strong>联网选修：需要联网，可延后学习。</strong> 改用云端大模型、在线搜索或新的模型权重，需要联网；预先下载的 Qwen 与检索材料可离线运行。</p>
+</blockquote>
+<p>任务：使用虚构开放日手册完成中文本地 RAG。检索、生成、证据检查和拒答分别评价；保留原始输出，不以模板答案替代失败的生成。</p>
+<h2>先修与运行</h2>
+<p>B21—B23；RAG、拒答、引用与人工核验。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 手册、验证查询与独立测试题</h2>
+<p>验证查询只用于选择拒答阈值。测试有两道可回答题和两道资料外问题；gold=None 明确表示资料没有答案。规则仅是教学虚构。</p>
+<h2>2. 因果语言模型与提示模板</h2>
+<p>Qwen 使用 AutoModelForCausalLM。chat template 采用非思考模式，CPU float32、最多32个新 token。模型文件缺失明确失败，所有加载使用 local_files_only。</p>
+<h2>3. 门控、生成和支持检查</h2>
+<p>低分直接拒答；高分只是允许生成。引用绑定实际检索来源。人工标注的关键短语检查只是支持率代理，无法识别额外编造或矛盾，必须保存原文供人工复核。</p>
+<h2>4. 结果拆开评价</h2>
+<p>分别报告有答案题检索命中、关键短语支持代理、无答案拒答和错误拒答。高代理分数不证明所有陈述正确；四道题也不能证明生产可靠性。</p>
+<h2>常见错误与边界</h2>
+<p>字符相似度不能发现所有资料外问题；支持代理会漏掉矛盾和额外事实。原始答案必须人工复核，资料内指令不能作为程序指令。</p>
+<h2>数据</h2>
+<p>作者编写虚构中文手册、验证集和测试集；Qwen3-0.6B 权重需首次按根目录安装指南下载至 assets/models。运行时不访问网络。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

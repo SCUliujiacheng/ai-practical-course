@@ -1,0 +1,64 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>21_时段竞争与纳什均衡 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>两个团队为什么都挤在黄金时段？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">均衡 [(0, 0)] 总收益更高的组合 (1, 1) 最佳回应 {&#x27;team1_to_gold&#x27;: 0, &#x27;team1_to_normal&#x27;: 0, &#x27;team2_to_gold&#x27;: 0, &#x27;team2_to_normal&#x27;: 0}
+{
+  &quot;pure_equilibria&quot;: [
+    [
+      0,
+      0
+    ]
+  ],
+  &quot;social_optimum&quot;: [
+    1,
+    1
+  ],
+  &quot;equilibrium_total&quot;: 4.0,
+  &quot;social_total&quot;: 6.0,
+  &quot;fee&quot;: 1.5,
+  &quot;equilibria_after_fee&quot;: [
+    [
+      1,
+      1
+    ]
+  ]
+}
+当前唯一纯策略均衡为双方选择黄金，总收益4；双方普通的总收益为6。在本收益假设下，每方黄金费用1.5使普通组合成为均衡；这只是规则敏感性实验，需要确认真实偏好与费用归属。
+</pre><h2>1. 补全：均衡检查</h2>
+<p>验证黄金组合满足均衡，普通组合不满足；写出哪方可以单独改善。</p>
+<pre class="code">trial_profiles = [([1,0],[1,0]), ([0,1],[0,1])]
+# TODO：用 check_equilibrium 分别检查，返回布尔列表
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert attempt == [True,False]
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>2. 修改：减小黄金费用</h2>
+<p>费用只收0.5，重新计算纯均衡，解释为何规则改变幅度不足。</p>
+<pre class="code">trial_A=A.copy();trial_B=B.copy()
+trial_A[0,:]-=.5;trial_B[:,0]-=.5
+# TODO：调用 pure_equilibria 返回新收益矩阵的纯均衡列表
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert attempt == [(0,0)]
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>3. 迁移：匹配硬币博弈</h2>
+<p>矩阵[[1,-1],[-1,1]]与其相反矩阵，没有纯均衡；验证均匀随机策略。</p>
+<pre class="code">trial_coin=np.array([[1.,-1.],[-1.,1.]])
+# TODO：用 Nashpy 搜索后返回一个均衡 (行玩家概率数组, 列玩家概率数组)
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert check_equilibrium(trial_coin,-trial_coin,*attempt)
+    assert np.allclose(attempt[0],[.5,.5]) and np.allclose(attempt[1],[.5,.5])
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre></body></html>

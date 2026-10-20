@@ -1,0 +1,32 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>12_无标签异常记录 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>缺少故障标签时怎样发现异常传感器记录？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{&#x27;zscore&#x27;: {&#x27;alerts&#x27;: 29, &#x27;precision&#x27;: 0.5862068965517241, &#x27;recall&#x27;: 0.85}, &#x27;isolation_forest&#x27;: {&#x27;alerts&#x27;: 29, &#x27;precision&#x27;: 0.6206896551724138, &#x27;recall&#x27;: 0.9}, &#x27;threshold&#x27;: 0.5565205678108183}
+</pre><h2>1. 补全：复核队列排序</h2>
+<p>找到分数最高的前 5 条，检查分数为非递增。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    top = ...
+    assert len(top)==5 and np.all(np.diff(top[&#x27;score&#x27;])&lt;=0)
+    print(top)</pre><h2>2. 修改：复核容量减半</h2>
+<p>将历史阈值设为 97.5% 分位数，验证报警数量不多于原方案。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    strict = ...
+    assert strict.sum() &lt;= alert.sum()
+    print(score_alert(strict))</pre><h2>3. 迁移：整体温度升高不等于设备故障</h2>
+<p>把测试温度整体提高 8°C，保持其他特征不变；比较报警数，说明环境变化需要复核分布。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    shifted = test.copy(); shifted[:,0] += 8
+    shifted_alert = ...
+    assert shifted_alert.shape == alert.shape
+    print({&#x27;原报警数&#x27;:int(alert.sum()),&#x27;升温后报警数&#x27;:int(shifted_alert.sum())})</pre></body></html>

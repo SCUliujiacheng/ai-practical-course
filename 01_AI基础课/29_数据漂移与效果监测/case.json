@@ -1,0 +1,17 @@
+{
+  "id": "B29",
+  "title": "新数据变化时，怎样发现模型可能失效？",
+  "track": "B",
+  "number": 29,
+  "sources": [
+    [
+      "SciPy KS 检验",
+      "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html"
+    ],
+    [
+      "sklearn 常见陷阱",
+      "https://scikit-learn.org/stable/common_pitfalls.html"
+    ]
+  ],
+  "prereqs": "B09、B27—B28；质量检查、分布统计与延迟标签。"
+}

@@ -1,0 +1,23 @@
+{
+  "strategies": [
+    {
+      "policy": "fixed",
+      "success": false,
+      "time": 1,
+      "changes": 0,
+      "reason": "OLD_PLAN_INFEASIBLE"
+    },
+    {
+      "policy": "repair_blocked",
+      "success": true,
+      "time": 12,
+      "changes": 1
+    },
+    {
+      "policy": "rolling",
+      "success": true,
+      "time": 5,
+      "changes": 2
+    }
+  ]
+}

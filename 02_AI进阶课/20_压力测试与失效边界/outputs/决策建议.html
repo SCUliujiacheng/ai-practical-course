@@ -1,0 +1,124 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>决策建议</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>本次计算的决策建议</h1>
+<p>请依据 stress_matrix.csv 同时比较平均成本、95%分位日成本与整日全通过率。若所有时段都必须有容量，优先检查 all_periods_pass_rate；表中出现缺口的方案不能因平均得分高就称为满足硬约束。</p>
+<h2>实际指标</h2>
+<pre><code class="language-json">{
+  &quot;cost_unit&quot;: &quot;元/活动日（8时段合计）&quot;,
+  &quot;normal_reserve_minus_lean_mean&quot;: -4.17,
+  &quot;bootstrap_95_interval&quot;: [
+    -23.15825,
+    14.013749999999991
+  ],
+  &quot;stress_results&quot;: [
+    {
+      &quot;scenario&quot;: &quot;normal&quot;,
+      &quot;policy&quot;: &quot;lean&quot;,
+      &quot;mean_cost&quot;: 1045.05,
+      &quot;p95_daily_cost&quot;: 1216.5,
+      &quot;all_periods_pass_rate&quot;: 0.37,
+      &quot;period_pass_rate&quot;: 0.88,
+      &quot;scenario_regret&quot;: 4.169999999999845
+    },
+    {
+      &quot;scenario&quot;: &quot;normal&quot;,
+      &quot;policy&quot;: &quot;reserve&quot;,
+      &quot;mean_cost&quot;: 1040.88,
+      &quot;p95_daily_cost&quot;: 1064.0,
+      &quot;all_periods_pass_rate&quot;: 1.0,
+      &quot;period_pass_rate&quot;: 1.0,
+      &quot;scenario_regret&quot;: 0.0
+    },
+    {
+      &quot;scenario&quot;: &quot;normal&quot;,
+      &quot;policy&quot;: &quot;large&quot;,
+      &quot;mean_cost&quot;: 1248.0,
+      &quot;p95_daily_cost&quot;: 1248.0,
+      &quot;all_periods_pass_rate&quot;: 1.0,
+      &quot;period_pass_rate&quot;: 1.0,
+      &quot;scenario_regret&quot;: 207.1199999999999
+    },
+    {
+      &quot;scenario&quot;: &quot;higher&quot;,
+      &quot;policy&quot;: &quot;lean&quot;,
+      &quot;mean_cost&quot;: 2585.25,
+      &quot;p95_daily_cost&quot;: 3316.5,
+      &quot;all_periods_pass_rate&quot;: 0.0,
+      &quot;period_pass_rate&quot;: 0.1175,
+      &quot;scenario_regret&quot;: 1400.26
+    },
+    {
+      &quot;scenario&quot;: &quot;higher&quot;,
+      &quot;policy&quot;: &quot;reserve&quot;,
+      &quot;mean_cost&quot;: 1184.99,
+      &quot;p95_daily_cost&quot;: 1342.6499999999999,
+      &quot;all_periods_pass_rate&quot;: 0.59,
+      &quot;period_pass_rate&quot;: 0.9375,
+      &quot;scenario_regret&quot;: 0.0
+    },
+    {
+      &quot;scenario&quot;: &quot;higher&quot;,
+      &quot;policy&quot;: &quot;large&quot;,
+      &quot;mean_cost&quot;: 1291.95,
+      &quot;p95_daily_cost&quot;: 1430.2499999999998,
+      &quot;all_periods_pass_rate&quot;: 0.59,
+      &quot;period_pass_rate&quot;: 0.9375,
+      &quot;scenario_regret&quot;: 106.96000000000004
+    },
+    {
+      &quot;scenario&quot;: &quot;heavy_tail&quot;,
+      &quot;policy&quot;: &quot;lean&quot;,
+      &quot;mean_cost&quot;: 1506.15,
+      &quot;p95_daily_cost&quot;: 2853.75,
+      &quot;all_periods_pass_rate&quot;: 0.23,
+      &quot;period_pass_rate&quot;: 0.83375,
+      &quot;scenario_regret&quot;: 197.31000000000017
+    },
+    {
+      &quot;scenario&quot;: &quot;heavy_tail&quot;,
+      &quot;policy&quot;: &quot;reserve&quot;,
+      &quot;mean_cost&quot;: 1308.84,
+      &quot;p95_daily_cost&quot;: 2059.4999999999995,
+      &quot;all_periods_pass_rate&quot;: 0.64,
+      &quot;period_pass_rate&quot;: 0.9425,
+      &quot;scenario_regret&quot;: 0.0
+    },
+    {
+      &quot;scenario&quot;: &quot;heavy_tail&quot;,
+      &quot;policy&quot;: &quot;large&quot;,
+      &quot;mean_cost&quot;: 1505.4,
+      &quot;p95_daily_cost&quot;: 2227.4999999999995,
+      &quot;all_periods_pass_rate&quot;: 0.64,
+      &quot;period_pass_rate&quot;: 0.9425,
+      &quot;scenario_regret&quot;: 196.56000000000017
+    },
+    {
+      &quot;scenario&quot;: &quot;correlated_failure&quot;,
+      &quot;policy&quot;: &quot;lean&quot;,
+      &quot;mean_cost&quot;: 1684.95,
+      &quot;p95_daily_cost&quot;: 4503.0,
+      &quot;all_periods_pass_rate&quot;: 0.29,
+      &quot;period_pass_rate&quot;: 0.71375,
+      &quot;scenario_regret&quot;: 529.1100000000001
+    },
+    {
+      &quot;scenario&quot;: &quot;correlated_failure&quot;,
+      &quot;policy&quot;: &quot;reserve&quot;,
+      &quot;mean_cost&quot;: 1155.84,
+      &quot;p95_daily_cost&quot;: 1685.6499999999996,
+      &quot;all_periods_pass_rate&quot;: 0.8,
+      &quot;period_pass_rate&quot;: 0.935,
+      &quot;scenario_regret&quot;: 0.0
+    },
+    {
+      &quot;scenario&quot;: &quot;correlated_failure&quot;,
+      &quot;policy&quot;: &quot;large&quot;,
+      &quot;mean_cost&quot;: 1330.8,
+      &quot;p95_daily_cost&quot;: 1733.2499999999998,
+      &quot;all_periods_pass_rate&quot;: 0.8,
+      &quot;period_pass_rate&quot;: 0.935,
+      &quot;scenario_regret&quot;: 174.96000000000004
+    }
+  ]
+}
+</code></pre>
+<p>这些结论只适用于本例显式假设；目标权重和风险偏好由人决定。</p>
+</body></html>

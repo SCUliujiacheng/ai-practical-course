@@ -1,0 +1,10 @@
+﻿station,date,temp_max,source,city
+A,2024-07-01,25,station_A.csv,海城
+A,2024-07-02,27,station_A.csv,海城
+A,2024-07-03,29,station_A.csv,海城
+B,2024-07-01,27,station_B.csv,海城
+B,2024-07-02,29,station_B.csv,海城
+B,2024-07-03,31,station_B.csv,海城
+C,2024-07-01,21,station_C.csv,山城
+C,2024-07-02,23,station_C.csv,山城
+C,2024-07-03,25,station_C.csv,山城

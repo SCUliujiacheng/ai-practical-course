@@ -1,0 +1,17 @@
+{
+  "id": "A11",
+  "title": "预测到客流后，应该安排多少工作人员？",
+  "track": "A",
+  "number": 11,
+  "sources": [
+    [
+      "MAPIE 独立校准与测试数据的作用",
+      "https://mapie.readthedocs.io/en/stable/content/conformal-prediction/split-cross-conformal/"
+    ],
+    [
+      "梯度提升回归",
+      "https://scikit-learn.org/stable/modules/ensemble.html#histogram-based-gradient-boosting"
+    ]
+  ],
+  "prereqs": "B07、B15；先区分预测区间与平均误差，再学习成本函数。"
+}

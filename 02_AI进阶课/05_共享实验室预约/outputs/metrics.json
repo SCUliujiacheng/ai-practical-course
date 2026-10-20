@@ -1,0 +1,7 @@
+{
+  "status": "OPTIMAL",
+  "last_end": 5,
+  "backtracking_last_end": 6,
+  "constraint_check": true,
+  "infeasible_example": "INFEASIBLE"
+}

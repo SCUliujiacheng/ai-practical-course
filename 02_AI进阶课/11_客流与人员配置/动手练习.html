@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>11_客流与人员配置 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>预测到客流后，应该安排多少工作人员？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{&#x27;selected_on_validation&#x27;: &#x27;mean&#x27;, &#x27;validation&#x27;: {&#x27;fixed&#x27;: {&#x27;cost&#x27;: 179.24, &#x27;mean_staff&#x27;: 5.0, &#x27;shortage_rate&#x27;: 0.205, &#x27;mean_shortage&#x27;: 3.655}, &#x27;linear_mean&#x27;: {&#x27;cost&#x27;: 173.04, &#x27;mean_staff&#x27;: 4.74, &#x27;shortage_rate&#x27;: 0.275, &#x27;mean_shortage&#x27;: 3.855}, &#x27;mean&#x27;: {&#x27;cost&#x27;: 152.36, &#x27;mean_staff&#x27;: 4.72, &#x27;shortage_rate&#x27;: 0.18, &#x27;mean_shortage&#x27;: 1.345}, &#x27;buffered&#x27;: {&#x27;cost&#x27;: 165.43, &#x27;mean_staff&#x27;: 5.485, &#x27;shortage_rate&#x27;: 0.02, &#x27;mean_shortage&#x27;: 0.11}}, &#x27;test&#x27;: {&#x27;fixed&#x27;: {&#x27;cost&#x27;: 181.712, &#x27;mean_staff&#x27;: 5.0, &#x27;shortage_rate&#x27;: 0.276, &#x27;mean_shortage&#x27;: 3.964}, &#x27;linear_mean&#x27;: {&#x27;cost&#x27;: 177.608, &#x27;mean_staff&#x27;: 4.684, &#x27;shortage_rate&#x27;: 0.34, &#x27;mean_shortage&#x27;: 4.636}, &#x27;mean&#x27;: {&#x27;cost&#x27;: 152.128, &#x27;mean_staff&#x27;: 4.72, &#x27;shortage_rate&#x27;: 0.22, &#x27;mean_shortage&#x27;: 1.316}, &#x27;buffered&#x27;: {&#x27;cost&#x27;: 164.392, &#x27;mean_staff&#x27;: 5.468, &#x27;shortage_rate&#x27;: 0.016, &#x27;mean_shortage&#x27;: 0.044}}, &#x27;model_comparison&#x27;: [{&#x27;model&#x27;: &#x27;ridge&#x27;, &#x27;validation_mae&#x27;: 14.07781932436093, &#x27;test_mae&#x27;: 16.11330750501616, &#x27;validation_decision_cost&#x27;: 173.04, &#x27;test_decision_cost&#x27;: 177.608}, {&#x27;model&#x27;: &#x27;hist_gradient_boosting&#x27;, &#x27;validation_mae&#x27;: 8.144585994150196, &#x27;test_mae&#x27;: 8.086353009985572, &#x27;validation_decision_cost&#x27;: 152.36, &#x27;test_decision_cost&#x27;: 152.128}], &#x27;test_mae&#x27;: 8.086353009985572, &#x27;interval_coverage&#x27;: 0.864, &#x27;mean_interval_width&#x27;: 30.555892552344154, &#x27;nominal_coverage&#x27;: 0.9}
+</pre><h2>1. 补全：容量与缺口</h2>
+<p>手工计算选中方案的平均缺口，并与输出指标核对。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    gap=...
+    assert np.isclose(gap.mean(),test_scores[selected][&#x27;mean_shortage&#x27;])
+    print(gap.mean())</pre><h2>2. 修改：缺口成本翻倍</h2>
+<p>用验证集客流把缺口成本改为 16，重新比较策略；不需要重新训练预测模型。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    new_cost=...
+    assert all(np.isfinite(list(new_cost.values())))
+    print(new_cost,&#x27;新方案&#x27;,min(new_cost,key=new_cost.get))</pre><h2>3. 迁移：人员最多 6 人</h2>
+<p>给测试时段配置加入 6 人上限，输出被截断时段数与新缺口率。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    capped=...
+    assert capped.max()&lt;=6
+    print({&#x27;截断时段&#x27;:int(np.sum(test_staff[selected]&gt;6)),**evaluate_staff(capped,y_test)})</pre></body></html>

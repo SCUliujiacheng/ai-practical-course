@@ -1,0 +1,17 @@
+{
+  "id": "B26",
+  "title": "怎样让智能体通过尝试学会走迷宫？",
+  "track": "B",
+  "number": 26,
+  "sources": [
+    [
+      "Gymnasium FrozenLake 与环境建模",
+      "https://gymnasium.farama.org/environments/toy_text/frozen_lake/"
+    ],
+    [
+      "Sutton 与 Barto 强化学习教材",
+      "http://incompleteideas.net/book/the-book-2nd.html"
+    ]
+  ],
+  "prereqs": "B16 更新循环、B25 网格状态。"
+}

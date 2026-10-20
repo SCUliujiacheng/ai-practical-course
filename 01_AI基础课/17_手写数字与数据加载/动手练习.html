@@ -1,0 +1,34 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>17_手写数字与数据加载 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>怎样用神经网络识别手写数字？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">一个批次 torch.Size([64, 64])
+</pre><pre class="output">{
+  &quot;mlp_accuracy&quot;: 0.9688888888888889,
+  &quot;logistic_accuracy&quot;: 0.9711111111111111,
+  &quot;test_samples&quot;: 450,
+  &quot;errors&quot;: 14,
+  &quot;elapsed_seconds&quot;: 7.127
+}
+</pre><h2>1. 补全：批次形状</h2>
+<p>取一批数据，检查输入为二维、标签为一维，并检查模型输出每个样本有 10 个分数。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert bx.ndim == 2 and by.ndim == 1 and (bx.shape[1] == 64)
+# assert model(bx).shape == (len(by), 10)</pre><h2>2. 修改：每个数字的召回率</h2>
+<p>由混淆矩阵算每类召回率，找出最弱数字，分母使用真实样本数。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert recall.shape == (10,) and np.all((recall &gt;= 0) &amp; (recall &lt;= 1))</pre><h2>3. 迁移：改成奇偶分类</h2>
+<p>保留同一划分，标签改成 y%2，用逻辑回归训练二分类并检查输出类别。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert set(np.unique(bp)) &lt;= {0, 1}
+# assert score &gt; 0.7</pre></body></html>

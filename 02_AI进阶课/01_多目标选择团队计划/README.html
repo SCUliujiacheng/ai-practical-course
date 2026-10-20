@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>A01 三份团队计划，应该选哪一份？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>你负责推荐一份团队计划。输入是工期、成本、成员最大负担；输出必须说明可行性和取舍，不能用一个未经解释的总分代替判断。</p>
+<h2>先修与运行</h2>
+<p>已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 把文字要求变成表格</h2>
+<p>每行是一份方案，每列是一个越小越好的指标。硬限制先过滤；权重只能比较满足硬限制的方案。<code>axis=1</code> 表示沿一行的各列计算。</p>
+<h2>2. 先检查支配关系</h2>
+<p>若方案 i 在所有指标上都不比 j 差，且至少一项更好，就说 i 支配 j。双层循环刻意保留，方便逐对手算；Pareto 集不等于唯一答案。</p>
+<h2>3. 用明确权重比较，再做敏感性分析</h2>
+<p>单位不同不能直接相加。用本表最小最大值归一化，再计算权重和。这个缩放依赖候选集，新增方案时应重新检查。权重由决策者给定，不是数据自动发现的真理。</p>
+<h2>4. 输出可复核的建议</h2>
+<p>保存原始指标、分数和随权重变化的选择。图上没有“绝对最好”的位置；建议同时交代当前权重与何时重新评估。</p>
+<h2>常见错误与边界</h2>
+<p>加权和依赖单位、归一化与权重；支配判定只对已列入的指标有效。不能把主观价值评分解释为客观事实。</p>
+<h2>数据</h2>
+<p>原创教学模拟场景，规模与全部参数直接列在 solution.py；运行同时保存输入或结果 CSV。无真实个人记录，不需要下载数据。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

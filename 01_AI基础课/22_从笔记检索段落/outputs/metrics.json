@@ -1,0 +1,8 @@
+{
+  "recall_at_1": 1.0,
+  "recall_at_3": 1.0,
+  "mrr_at_3": 1.0,
+  "chunks": 12,
+  "evaluation_questions": 6,
+  "elapsed_seconds": 0.766
+}

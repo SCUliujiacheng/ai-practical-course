@@ -1,0 +1,10 @@
+{
+  "safe_time": 10.0,
+  "oracle_time": 8.915,
+  "q_mean_time": 9.593124999999999,
+  "training_mean_95_t_interval": [
+    9.347622085141616,
+    9.838627914858382
+  ],
+  "mean_interactions": 2325.25
+}

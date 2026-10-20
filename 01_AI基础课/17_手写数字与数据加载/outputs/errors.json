@@ -1,0 +1,72 @@
+[
+  {
+    "sample": 1658,
+    "actual": 9,
+    "predicted": 8
+  },
+  {
+    "sample": 794,
+    "actual": 8,
+    "predicted": 1
+  },
+  {
+    "sample": 123,
+    "actual": 8,
+    "predicted": 2
+  },
+  {
+    "sample": 77,
+    "actual": 2,
+    "predicted": 1
+  },
+  {
+    "sample": 1572,
+    "actual": 9,
+    "predicted": 7
+  },
+  {
+    "sample": 1611,
+    "actual": 4,
+    "predicted": 8
+  },
+  {
+    "sample": 1581,
+    "actual": 8,
+    "predicted": 4
+  },
+  {
+    "sample": 19,
+    "actual": 9,
+    "predicted": 3
+  },
+  {
+    "sample": 784,
+    "actual": 8,
+    "predicted": 6
+  },
+  {
+    "sample": 54,
+    "actual": 2,
+    "predicted": 1
+  },
+  {
+    "sample": 480,
+    "actual": 7,
+    "predicted": 9
+  },
+  {
+    "sample": 518,
+    "actual": 2,
+    "predicted": 1
+  },
+  {
+    "sample": 746,
+    "actual": 4,
+    "predicted": 7
+  },
+  {
+    "sample": 808,
+    "actual": 5,
+    "predicted": 3
+  }
+]

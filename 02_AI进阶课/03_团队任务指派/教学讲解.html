@@ -1,0 +1,121 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>03_团队任务指派 教学讲解</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>A03 总工时最少与团队最早完工是一回事吗？</h1>
+<p>四人同时开始、各做一项任务。你要分别求总工时最少和最晚完成时间最小的方案，再检查技能限制。</p>
+<p>先修：已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。</p>
+<p>本案例所有输入来自本地；无需联网。</p>
+<p><strong>环境准备：</strong> 下一格设置本地路径、离线模式和图表字体，直接运行即可，暂时不需要掌握所有设置。真正的解题步骤从后面的中文小节开始。</p>
+<pre class="code">from pathlib import Path
+import os
+os.environ.setdefault(&quot;HF_HUB_OFFLINE&quot;, &quot;1&quot;)
+os.environ.setdefault(&quot;TRANSFORMERS_OFFLINE&quot;, &quot;1&quot;)
+os.environ.setdefault(&quot;HF_HUB_DISABLE_TELEMETRY&quot;, &quot;1&quot;)
+os.environ.setdefault(&quot;OMP_NUM_THREADS&quot;, &quot;2&quot;)
+os.environ.setdefault(&quot;TOKENIZERS_PARALLELISM&quot;, &quot;false&quot;)
+CASE_DIR = Path(__file__).resolve().parent if &quot;__file__&quot; in globals() else Path.cwd()
+COURSE_ROOT = CASE_DIR.parents[1]
+DATA_DIR = CASE_DIR / &quot;data&quot;
+OUT_DIR = CASE_DIR / &quot;outputs&quot;
+OUT_DIR.mkdir(exist_ok=True)
+import matplotlib
+matplotlib.use(&quot;Agg&quot;)
+import matplotlib.pyplot as plt
+plt.rcParams.update({&quot;font.family&quot;: &quot;Microsoft YaHei&quot;, &quot;axes.unicode_minus&quot;: False,
+                     &quot;figure.figsize&quot;: (8, 4.5), &quot;figure.dpi&quot;: 110})
+</pre><h2>1. 用矩阵表达成员与任务</h2>
+<p>行是人，列是任务，元素是所需小时。<code>allowed</code> 是独立布尔矩阵，False代表不能接任务。数字大表示慢，不等于不允许。</p>
+<pre class="code">import json
+import itertools
+import math
+import numpy as np
+import pandas as pd
+
+def save_results(metrics, recommendation):
+    &quot;&quot;&quot;只负责保存实际计算结果；决策逻辑在下文。&quot;&quot;&quot;
+    def convert(value):
+        return value.item() if hasattr(value, &quot;item&quot;) else str(value)
+    (OUT_DIR / &quot;metrics.json&quot;).write_text(
+        json.dumps(metrics, ensure_ascii=False, indent=2, default=convert), encoding=&quot;utf-8&quot;)
+    (OUT_DIR / &quot;决策建议.md&quot;).write_text(
+        &quot;# 本次运行的决策建议\n\n&quot; + recommendation +
+        &quot;\n\n数据为本例明确给定的教学场景；结论仅对模型、目标与已检查条件成立。\n&quot;,
+        encoding=&quot;utf-8&quot;)
+    print(json.dumps(metrics, ensure_ascii=False, indent=2, default=convert))
+    print(recommendation)
+
+from scipy.optimize import linear_sum_assignment
+durations = np.array([[1,4,20,20],[4,6,20,20],[20,20,1,4],[20,20,4,6]], dtype=int)
+allowed = np.ones_like(durations, dtype=bool)
+pd.DataFrame(durations, index=[&quot;甲&quot;,&quot;乙&quot;,&quot;丙&quot;,&quot;丁&quot;], columns=list(&quot;ABCD&quot;)).to_csv(DATA_DIR / &quot;耗时.csv&quot;, encoding=&quot;utf-8-sig&quot;)
+def check_assignment(permutation, matrix, mask):
+    return (permutation is not None and len(permutation) == len(matrix)
+            and sorted(permutation) == list(range(len(matrix)))
+            and all(mask[i,j] for i,j in enumerate(permutation)))
+</pre><h2>2. 先枚举，得到可检查的基准</h2>
+<p>4!只有24种分配。<code>enumerate</code>同时给出成员编号和任务编号。总工时用sum，最晚完成用max，这两个目标不能混用。</p>
+<pre class="code">def enumerate_assignment(matrix, mask, objective=&quot;sum&quot;):
+    candidates = []
+    for assignment in itertools.permutations(range(len(matrix))):
+        if check_assignment(assignment, matrix, mask):
+            times = [int(matrix[i,j]) for i,j in enumerate(assignment)]
+            score = sum(times) if objective == &quot;sum&quot; else max(times)
+            candidates.append((score, assignment))
+    return min(candidates) if candidates else (None, None)
+sum_value, sum_plan = enumerate_assignment(durations, allowed, &quot;sum&quot;)
+end_value, end_plan = enumerate_assignment(durations, allowed, &quot;max&quot;)
+assert check_assignment(sum_plan, durations, allowed)
+assert check_assignment(end_plan, durations, allowed)
+</pre><h2>3. 使用线性和指派，并独立核对</h2>
+<p>SciPy函数求的是总成本最小。给不允许的组合置无穷值；若无可行完整指派，会抛出ValueError。不能将它直接当成最晚完工时间求解器。</p>
+<pre class="code">def sum_assignment(matrix, mask):
+    costs = np.where(mask, matrix.astype(float), np.inf)
+    try:
+        rows, cols = linear_sum_assignment(costs)
+    except ValueError:
+        return None
+    assignment = tuple(int(c) for c in cols)
+    return assignment if check_assignment(assignment, matrix, mask) else None
+solver_plan = sum_assignment(durations, allowed)
+assert sum(durations[i,j] for i,j in enumerate(solver_plan)) == sum_value
+impossible_mask = allowed.copy(); impossible_mask[0,:] = False
+assert sum_assignment(durations, impossible_mask) is None
+assert enumerate_assignment(durations, impossible_mask)[1] is None
+</pre><h2>4. 输出分工和两类目标</h2>
+<p>图的横轴是成员，条长是其耗时。所有人同时开工这一假设决定了max的含义；若有人晚到或任务有依赖，必须换模型。</p>
+<pre class="code">rows = []
+for label, plan in [(&quot;最少总工时&quot;, sum_plan), (&quot;最早团队完工&quot;, end_plan)]:
+    for worker, job in enumerate(plan):
+        rows.append({&quot;objective&quot;:label,&quot;worker&quot;:worker,&quot;task&quot;:job,&quot;hours&quot;:int(durations[worker,job])})
+table = pd.DataFrame(rows); table.to_csv(OUT_DIR / &quot;分工对照.csv&quot;, index=False, encoding=&quot;utf-8-sig&quot;)
+table.pivot(index=&quot;worker&quot;, columns=&quot;objective&quot;, values=&quot;hours&quot;).plot.bar()
+plt.ylabel(&quot;工时&quot;); plt.tight_layout(); plt.savefig(OUT_DIR / &quot;分工.png&quot;); plt.close()
+sum_finish = max(int(durations[i,j]) for i,j in enumerate(sum_plan))
+save_results({&quot;minimum_total_hours&quot;:sum_value,&quot;sum_optimal_finish&quot;:sum_finish,
+              &quot;minimum_finish_time&quot;:end_value,&quot;sum_plan&quot;:sum_plan,&quot;finish_plan&quot;:end_plan},
+             f&quot;若目标是尽早全部完成，选择{end_plan}，{end_value}小时完工；&quot;
+             f&quot;总工时方案{sum_plan}的总耗时为{sum_value}、完工时间为{sum_finish}。先确认团队真正要优化哪个指标。&quot;)
+</pre><pre class="output">{
+  &quot;minimum_total_hours&quot;: 14,
+  &quot;sum_optimal_finish&quot;: 6,
+  &quot;minimum_finish_time&quot;: 4,
+  &quot;sum_plan&quot;: [
+    0,
+    1,
+    2,
+    3
+  ],
+  &quot;finish_plan&quot;: [
+    1,
+    0,
+    3,
+    2
+  ]
+}
+若目标是尽早全部完成，选择(1, 0, 3, 2)，4小时完工；总工时方案(0, 1, 2, 3)的总耗时为14、完工时间为6。先确认团队真正要优化哪个指标。
+</pre><h2>结果图与检查</h2>
+<p>下面展示本次计算保存的图。数值以单元格和 outputs 中的实际输出为准。</p>
+<pre class="code">from IPython.display import display, Image
+for figure in sorted(OUT_DIR.glob(&quot;*.png&quot;)):
+    display(Image(filename=str(figure)))</pre><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA3AAAAHvCAYAAAAVRT1oAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjcsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvTLEjVAAAAAlwSFlzAAAQ6wAAEOsBUJTofAAAMZ1JREFUeJzt3QeY1NW9P/5DERApKoKxgCgaFUWNIrYoYieoMfauGFuMphBs2MB4E3INmIIxucFrLFHsGkVBsaJGwZZYwI6iEhULTen8nnP+/9m7u+zSd2fPzOv1PN9ndr/zne+cJTuBt59zPqfRokWLFgUAAAAavMbFHgAAAADLRoADAADIhAAHAACQCQEOAAAgEwIcAABAJgQ4AACATAhwAAAAmRDgAAAAMiHAAQAAZEKAAwAAyIQABwAAkAkBDgAAIBMCHAAAQCYEOAAAgEwIcAAAAJloGsrA7NmzwyuvvBLat28fmjYtix8ZAABoYObPnx8+++yz0K1bt9CiRYsVukdZpJkY3nr06FHsYQAAAIRx48aFHXfccYVeWxYBLlbeCn9Q6623XrGHAwAAlKEpU6akwlIhn6yIsghwhWmTMbxtuOGGxR4OAABQxpquxLIuTUwAAAAyIcABAABkQoADAADIRFmsgVsWixYtClOnTk1bDixYsKDYwyEjTZo0SW1g11lnndCoUaNiDwcAgBImwP3/4e2jjz4KM2bMCM2aNUv/IIdlNXfu3DBz5swwZ86csMEGGwhxAADUGQEuhFR5i+GtQ4cOoV27dsUeDhn6/PPPw6effpp+l1amLSwAACyJNXAhpGmTsfImvLGi4u9O/B2Kv0sAAFBXBLgQ0po30yZZWfF3yPpJAADqkgAHAACQCQEOAAAgEwJcCYpdEK+44oolXvPMM8+EtdZaK9x+++11Opann366Xt4HAADKgS6UZWrXXXcNb7/99ipv3DJp0qSw7rrrhtVXXz19v9tuu4W33nor7ZEGAACUSQUuNocYMmRI2HLLLUPz5s1TIPjLX/5S7GFlbVWHt1hl23jjjcMnn3xS5bzwBgAAZVaBO/7448Ojjz4afv3rX4eddtop7bdlw+SGJW5kDQAAlHkF7rbbbgu33npreOCBB8Ipp5wSttpqq9CzZ8+wxx57hHJ0xx13hF122SW0bNkyHbvvvnsYM2bMYtfFimWsiMWK5fbbbx8eeeSRiueeeuqpFIAff/zxinNxM/OzzjorbWjepk2b9Of77LPPVrnnG2+8EY488shUVYv33XzzzcPrr78e9txzz3DCCSeka+J7xnvH6ZSV3ydW5lZbbbUwcODAxe4Zr/n73/+evp8yZUo47rjj0tq5tddeO3zve98LEyZMWOV/jgAAkJssAtw111wTDjzwwLDDDjuEcnf11VenABUD3GOPPRZGjx4dNthgg7D//vtXCWjDhw8PL774Yrj55ptTuFtzzTXTn+H7779f433nz58fDjjggPD888+n18TAtckmm4R99tknTJ48OV0zceLEVP388MMPww033BDGjRsXzj333LBo0aIUvn7729+m6+Jr47q3DTfcsMp7xLVxcQy33HJLlfPXX399CoSHH354mD59egqOn3/+ebjvvvvCgw8+mK7Zd999U8AEAIBy1uCnUMZgEatA/fv3Dz/5yU9SNS5Wfnr37h1+85vfhLZt2y72mhgC4lEQKzqlMkVxwIABoW/fvmHo0KEV52OjkNdeey1cfvnlYe+9907n1ltvvXDTTTdVTDO98847Q6dOnVIYHjx4cI1VvRdeeCGFtfbt21eEwLvuuiuFswsuuCC9d6yKxUAYK3/RtttuWyWgRRtttFHo3LlzjT/DD3/4w3DQQQeloNi9e/eK8Bd/pvi/61VXXRVmzZoV7r333vR99Le//S3de+TIkeHoo49ehX+iAACQlwYf4L744oswe/bs9I/40047Ldx///1pOt3Pfvaz8NFHH6UqTXUx3AwaNCiUmldffTUF0xiAKmvcuHHo1atX+jMqiEGu8hrBGLy22GKLNF2xJnGq49y5c0PHjh2rnI/n3nnnnfR1XIMYp0kWwtuKiMF7/fXXT1W+GOBiFTGGxjPOOKNiHHGqZU3BvDAOWJrOF4wMpWDS4D7FHgJA2fJ3CQ1Vgw9w8+bNS49xzdull16avo7/8I/BrhDi4hTCyvr16xdOPfXUKhW4Hj16hNzFamTUpEmTGp+vfL5Zs2aLPR/DX22vjdfH0PTPf/5zsecKYSoG6Zruuzzi+5900klp2mScchmnYsbpkV26dKkYR+w0GiuC1elmCQBAuWvwAS7+o71p06Zhs802q3K+a9eu6TFWb6oHuNiAIx6lJjZvifurxSpk5SrcwoULUyUr7u1WENenVRYrb3Hft9NPP73Ge2+99dbhq6++Sts1xPepyXbbbRceeuihFCTj/ybVxUpg5aBZm9iIJnYTHTVqVJraGUNc5XHE94jNS2IzFQAAIKMmJnEdVGyc8cQTT1Q5/69//SsFhkLlphy0atUqXHLJJWlt2nnnnZdCWpxyeOyxx6Zw9stf/rLi2hjoYiUyNjKJa8cOOeSQFHTjGrSaxHvEpiXxulj9+ve//x3uueeesN9++6XKWxTX2MWOk/GaOJ3y5ZdfDsOGDUvXRoV1b3HtXXzfuJatJptuummqqMZulLG6VzmMnn322alTZZ8+fVLX0XjvESNGhIMPPniV/lkCAECOGnyAi2JoiZ0NC4EkTr+LYSWumyo03CgXF154YQpwsUoVtw+IQSd2Z3z66afTVgEFcXppPB/XxsXGH7HdfwzBsRtlZYV1ci1atAgPP/xw6NatWwp5sctlbFoSG6QUpk3GMBffN07FjN0kY7fIWEFr3bp1ej5WAM8888y0BjF2xVxS18j4HuPHj09TXStX82LVLXbTjOM84ogjwne/+93UrCbeDwAAyl2jRbENYAZiN8TLLrssTQWMHQljALj44otrnMpXXWx7H5tzxOmW1VvbR3G/sqi2zomlKIa1GMhiY5TapkyyfMrx96ihsvAcgJXl7xLqwtJySUmsgSs49NBD08GqEfd0i5U1YQMAAPKRTYBj1ewjN3bs2DRt8sorrwwnnnhiWGONNYo9LAAAYBkJcGUkbslw3HHHha+//jo1BRkyZEixhwQAACwHAa6MxC6WcZNsAAAgT1l0oQQAAECAAwAAyIYABwAAkAkBDgAAIBMCHAAAQCYEOAAAgEwIcCzRzjvvHAYOHLjM17/22mvhmWeeWez8s88+G55//vlQLPfcc0/YcMMNi/b+AACwKtgHrgRdfPHF4Zprrgnt27ev9Zq4mXeHDh2WK1TNmDEjLFy4MLRt27bWa/71r3+Fs88+OwW2b3/72+ncrFmzwjHHHBMOO+yw0L1798VeM3HixLA82rRpE9Zff/00nkceeaTKc82bNw+9e/dervsBAEAuBLil6HzByKK996TBfVb4taeddloYPHhwrc8//vjjoX///oudnzx5cujTp0+46667wqabblrluXPOOSe8++67YfTo0WH11Vev8b7HHntseO6558Jjjz1WEeAGDBgQNthggxrHM3/+/LDlllsu188Wg+Add9wR3n///fCDH/ygynPt2rULU6dOXa77AQBALgS4EnXdddeFUaNG1fr8zJkzw5prrrnY+d/85jcpVG2yySaLPTdkyJCwyy67hCOPPDLcfffdoWnT//v1+dvf/hb69u1b5fozzzyzyverrbZaevzpT38afve736Wv4z0WLVq02HuNGDEinHzyyWH27NlL/VkLr4+h9PDDD08Vv2+++abG6mEh3K2zzjpLvS8AADQ0AlyJ6tGjRzjqqKNqfX7ChAmpklbZf/7zn3Dttdem8Ne48eLLI2N168EHH0zr4mKFL15X2dZbbx3Gjh27xHGdddZZoa794he/CH/5y19qfK4wrbSm0AgAAA2dJiYlaIsttghdunRJVbbajpYtW4bdd9+9yut+9atfpcpbrLDVJt73zjvvDH//+9/DoEGDqjzXpEmTVNVb0tGsWbNQ1/785z+ngFb5iBXDOI2z8D0AAORIBa6EHHrooWHcuHHL9Zrbb789Pf7jH/8If/rTn8LIkSNrrL4VxPDTtWvX8Mc//jFVuk455ZTQsWPHUExfffVVeozBtCB2wtxoo41SaAMAgFIhwJWQ2Hhk0qRJ4bvf/W748MMPK87Hzo/Dhg1LUx9rEteGxecOPvjgsP/++y91CuQDDzyQpmAedNBBqRtk5Q6UjRo1Wuo44xq4VWmttdaqMs0zuuiii8LGG28c/vd//3eVvhcAABSTAFeCPvnkk7QereCdd95J2wbEfdDmzJlTEXJio484lTJWq2IVbejQoUu8b6y4XX/99ak5SnxdPApi1W677barsgbun//8Z2p6Uj0AxqmWq1L1JibRpZdeGvbdd99w3nnnpSmlAABQCgS4ErTuuuuGV199tUoFLoatMWPGhAMPPDBtth1D1I9+9KN0Plaw4rq2msTukvPmzQtHHHFEuO+++8K9994b9thjj8WuO/HEE9NREAPj0UcfHf7whz+E4447ruJ8bHyyqgNcTXr16hW23377cMUVV4Sbbrqpzt8PAADqgwBXohW4ylWnuF9a5eYmMVTtuOOOKbRVDno1efvtt1PHydiAJFbUvvOd7yx2TazqxbAWtwZ44okn0l5ycQpj3PftZz/7WZqWWWjbH7cGiPfo169fqGtxPDVtlQAAALkS4Eq0Ajdx4sQqFbi4Ju71119P7fXj93GtWtwyoEOHDou9Pu4DF8NdnFI5fvz4cPrpp6evK0+ZrOzWW28NTz31VFoPFzf6Lrz3qaeemip48fkf//jHqXNlvNcBBxyQpnjut99+q+TnLeztNm3atCrnd91111VyfwAAaCgEuBIyZcqUtJ4tdmOMFbC33norVdBile2cc85JG2vHNWkxvMVrnnzyybDXXnuFVq1apY2uY/UsTrOMLfc//vjjVFWLIa/yerqaxO6VJ5xwQsVG3QXxfeJec/H+n332WTj++OPTXnNxs/C4R13smBnXzsUpmtXF949r2yoH0coqb8Rd2NstKqzvAwCAUiTALcWkwX1CTl0ohwwZkrpQxipa796907TJM844I1x44YVpi4A4rTEGrjiFMgaq4cOHp7VisflIDEzxfN++fdMR2/AvzRtvvBFeeOGFMGLEiPT92muvHV555ZUU2Fq3bh2aNm0aZs2aFa6++uq0/UCsDp599tlpmmXz5s3TerrCFM+abLnlljWev+yyyyoalhSamDz33HMpqBbE4Bqfi3vPxQ3I49gAACBnAlwJidMU41FdDDCx42QMUi+//HLYfPPN0/kXX3wxVdu+/PLL1K1xp512qtKSf1nEe7333nupw2V0zDHHhFtuuSWst956YcGCBRXXde7cOYXFgliFi+K2BysqhrP4cxXE8VfeB+/KK68MN954Y7ou/lwxuAIAQM4EuDLw/PPPp8e46XZlcfriYYcdttL3L4S3wnTG2OykPsQpmi1atKj1+bjlQTxikKyPzpcAAFDXGtf5O0CRCW8AAJQKAQ4AACATAhwAAEAmBDgAAIBMCHAAAACZEOAAAAAyIcABAABkQoADAADIhABHg3bPPfeE9ddff7le88ADD4Tjjz++zsYEAADFIsCVoIsvvji0a9cubLHFFrUenTp1Ct27d6/yupNPPjk0atRomY7hw4dXvO5vf/vbMr+ucBQC1uOPP17rc9GiRYtC48bL92u68cYbhxEjRoQnnnhiiddNnTo1TJw4cbmOuXPnLtdYAABgVWq6Su9Wiga2LeJ7T1vhl5522mlh8ODBtT4fg1P//v0XO/+Tn/wk/Nd//dcS773XXnstdm733XcPDz30UI3Xv/TSS2HLLbcMLVq0SN9fccUVYdKkSRXPx7D5n//8J33do0ePsPXWW1c8t3DhwtCkSZNaf4ZevXrVOs4999yzxvNXXnll+tl/97vfLfVnre6VV16pMj4AAKhPAlyJuu6668KoUaNqfX7mzJlhzTXXXOz8aqutFlq1arXEe9dUEYvnCgGtun333Tc8//zzqfIXNW26+K9dPBdD3csvvxzuuuuuivMLFiyoNcBFzZs3D1999VVYVj179qz4OgbJeFQXxxmrkRdccMEy3xcAAOqDAFeiYiXrqKOOqvX5CRMmhNGjRy92fsiQIelYmlNPPTWsajfffHPYbbfdQufOnasEza+//rrG69dZZ51w8MEH1xoca6vKbbbZZqtkvAAAUN+sgStBsYLUpUuXFH5qO1q2bJmmPVbXr1+/MG/evCUeO+20U61r72pa7zZr1qw0hbLw/fz582t8/Q033BBOOeWUKuc+//zz8Mknn9RYZYtTGW+77bZUKVuWdXexsvib3/wmfP/731/hP1sAACgmFbgScuihh4Zx48Yt12tuv/329Pjhhx+mxxh0apriuCyqT0l86623UkiMzUJeffXViimUAwcOXOy1sVlJnNI5duzY0Ldv3yr3iOLPtd9++9X6vjXds7r4swEAQM4EuBIS147FdWTf/e53KwJZFLtNDhs2LOy8885LvUdcczZ79uwlXhPD1tK8//774Xvf+1647LLLwrnnnrtM4eraa68N22yzTfjZz36WHqPnnnsufOtb3wqPPPJIrQEuBs4VDZ0AAJATUyhLUJxyGKcXFo7XXnstrSPbcMMNQ/v27Su2Ethoo43S1MbKDUxi0Ft99dWXeMRGI0sKTLFaFteyHXfcceFHP/rRMo97q622SuHzlltuSd/HEBq7PsZumrFSWD04rsj2BfGIDUoAACBHAlwJWnfdddOUxcIRg1Fc8zZmzJjQtm3bFOjinmaxQhaPgr/+9a9pjVsMSoWjT58+4Ze//GWVc3PmzKkxBMXzsS1/bO1/4YUXLtO0xup22GGH8O6776avY0Vu8803T/vCxXV09913X5Vr4/kZM2ZUHHfccUeq1hW+j2G0W7duVa6Jx1/+8pcV+nMFAIBiM++sRCtwhfVmhemMlZub/OEPfwg77rhjuPPOO1PAi01Faps2GadUxs2rY+OTmqyxxhoVX++9997hiy++SNMdC9M1YxOSWP2LAXJJHnvssfQeDz/8cKrCxfvEfdpiR8y4jUDcn27AgAEpcBaqf/Gx8pYHcb1c3MS7cC5uMRC3N6h8TRxLPA8AADkS4Eq0AhcrbJXXwMXpiK+//nqqPsXvC2vOOnToEIYPH542/q5N3E8uVuFq246g8pTGTp06hWbNmoUf/vCH4YMPPghvvPFGer+OHTsuccyxOnjjjTemtW+xm+XZZ5+dxnbiiSem588555zw+9//PlX24kbc1cXKYXz/Y489donvc+utt4ZrrrlmuZu9AABAQyDAlZApU6aEZ555JlWyLrroolSRevvtt1OVLQagM888M+yyyy4pvMVrnnzyybDXXnulPd1q29ftwAMPTNW0GKpq8+yzz6bHTTfdtOJcfL/Jkyen6teuu+661A6QceplPKK45u3uu+9O9y1U29q0aZMCWhxP7FYZf77KYuOT2O3yrLPOqjhX03vGyt60adPSEf+8ahIrjp999lmVEFxZ5eomAADUJwFuaQZOCzl1oYxTDuMUxDgtsnfv3ilsnHHGGalyNXLkyBSO/vSnP6UplHENWay+xSpXnFa5Mp544onlatMfG5xUF9fXXXLJJeG///u/UzVu2223rfJ8nD4Zn4tdLeO+cLESF5uc9O/fPwXX+++/P23uXRAreO+9916qPMav4/q3eE1cVxcDYuXtCqobOnRoOla0CycAANQFAa6E/PjHP05HdXFK4zfffJMagcQOkjHARC+++GIKMl9++eVKv/cee+yR1r4ti8svv7yiUUn1YPTxxx+He+65p0pzlcpiWNtggw1SSI1r5H7+85+HffbZJ4wfP36xytj++++fqocxCBY2D19//fXDTTfdlBqt6EYJAEBuGi0qg3JCXP8V12DFKX2xlX51ce+0qHPnzkUYXf7ir9DChQtTs5H6FBuSxCAYt0poCPweNRydLxgZSsGkwX2KPQSAsuXvEoqRS5aFbQRYaXHqZH2Htyh2tmwo4Q0AAOqDAAcAAJAJAQ4AACATAhwAAEAmBLgQ0vqtBQsWFHsYZC7+DhVjLSAAAOWjwQe42GUwNsmofsT9vFaVFi1apM2bP//881V2T8pL/N2Jv0PxdwkAAMp2H7jPPvssPT777LOhXbt2Fefjfl6rStz8ec6cOeHTTz9NG0SrorC8lbcY3lq3bl1lI3EAACjLABcrbjvssENo2rRuhhvvHzeHnjp1apg9e7bplCyXuFF6mzZtUniLv0sAAFC2AS6GqjXXXLPOwltB/Id3+/bt6/Q9AAAASnoNXKzAffnll2H11VdPu5b37t07PPnkk0t8zfTp09Mu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8EH45ptvQqtWrdJG7C1atCj2sADI3Ny5c8Orr76a9o8FKHUqcNS5m266KWy77bZh7bXXDtttt13YZZddQrdu3ULr1q3DPvvsE5599tliDxGABuxPf/pT2gt21113DYMGDQpff/11lecnT54cdtxxx6KND6A+CXDUqauvvjqceOKJYf311w+///3vwz/+8Y+0Eft9990Xfve734XVVlst9OzZM50DgJrC29lnnx2aN28e2rVrF37961+HXr16hVmzZhV7aNCgvPHGG+nfXbfddluYN29eOhf/fRX3Tu7Ro0f4+9//XuwhsorYB446temmm4a+ffuGiy66qNZrLr/88hToxo8fX69jA6Dh23rrrcMRRxyRNiOOXnvttbDvvvuGvffeO9x4443p3DvvvBO+/e1vhwULFhR5tFAcjzzySDjwwAPDnDlz0vcxsN1yyy1hm222Cd27dw9NmjQJjz32WBg9enSa/UTeBDjqVFzj9uKLL4auXbvWes3rr78edthhh7Q2DsrRAQccEBYuXLjU6xo1apT+8oVy0rJlyzTVPv5DtGDs2LFhr732CiNGjAiHHXaYAEfZi9OLY4X62muvDfPnzw+nn356mD59eth4443D9ddfn64566yz0mfF3yP5M4WSOq/ALW16ZPyLuH379vU2JmiIFYannnoqTXlZ0hEbNUC5WXPNNcNXX31V5VxcDzdgwIBw5plnpvVvUO5iE58426lDhw5p2cqQIUPS3yvHHXdcxTVxScu///3voo6TVUMXSurUeeedF0455ZTwyiuvhEMOOSQFujXWWCOV+CdNmpSmTv75z3+umBoD5ejSSy9N/9U0/oM0Tg0D/s/3v//9MHz48LDHHnss9rl57rnn0vqe3r17F2180FBmPMW+AgWxIt24ceMU5ipXs2NVjvypwFGn4n/tueGGG9Lc7IMOOihNpdxoo43S/7HEf6jGsv7AgQPDhRdeWOyhQtG0adMmfVauuuqqYg8FGpxf/epXoW3btmkbmsrimp577703Bbw4lRLK2Xe+853w6KOPVplyHz8bsQN4wcSJE6sEOvJlDRz1Jv4fx5tvvhlmzJgRmjVrFjp16pT27Kn8X4ygXL377rvh4YcfDmeccUaxhwJZmjlzZtpjFMrRSy+9lP6ddcwxx9R6TWwq17Fjx9Q8jrwJcAAAAJkwhRIAACATAhwAAEAmBDgAAIBMCHAAAACZEOAAYDk9/vjjqU133CgXAOqTAAcAAJAJAQ4AACATAhwALIeFCxdmdV8ASosAB0BJOProo8OWW25Z5dz3vve90KFDhyrh6KCDDgoHHnhg+vqOO+4Iu+yyS2jZsmU6dt999zBmzJgq94hr3QYOHBj69u0bVl999TB06NDF3nvGjBlh++23DxtvvHGYPHlyOvfmm2+Ggw8+OLRq1Sqsu+66aXwfffRRxWv23HPPsM8++4Q//vGPoV27dulaAFgaAQ6AkvD9738/TJw4MXzwwQfp+1mzZoXHHnsszJw5M4wfPz6dmzdvXmpAEq+9+uqrw5FHHpkCXLxu9OjRYYMNNgj7779/eOSRR6rc+7rrrkvPPffcc+HQQw+t8tzcuXPDIYccEj777LPw6KOPho4dO6Yx7LbbbqFt27bp3rfddlt47733UnhcsGBBxWvfeOON9F7xvX/1q1/Vy58TAHlrWuwBAMCqEKttq622Whg1alQ4/fTTw8MPP5xCV5cuXcLIkSPDTjvtFP75z3+mYLfffvuFbbbZJlXVKlfUYuh67bXXwuWXXx723nvvivOdOnUKV1xxRcX3hZAYK3vHH398mDBhQnjiiSdSBS6KYWyjjTYKN9xwQ6rgRbHSFscQw+TOO++czn311Vfh+uuvT0EPAJaFChwAJSGGoJ49e6ZqVnT//fenStsBBxyQAlwUQ10MUVOnTg3Tp09PFbHKGjduHHr16hVeeumlKud33XXXGt/zggsuCA899FCadrnZZptVnI/bC7z88stpymWLFi3Ssccee6Tn3nnnnYrrunbtKrwBsFxU4AAoGTGwXXzxxWmqZAxtcepiXH/2i1/8IkyZMiUFuDjdcf78+en6Jk2a1Hif6udbt25d43VxuuSzzz6bjhjGCpo1a5YqeL///e8Xe81666231PsCQG0EOABKRmwEcs4554Rhw4al6Y1xSmSsqsVplDfffHN4/vnn03q2GLxidSxW6SpX4eJr4pq12ipu1cX3ipW30047LTRv3jwcd9xx6fzWW2+d1tp17tw5Vd8AYFUR4AAoGXGt2ne+850wZMiQFMxieIv69OmT1qBtsskmFZ0qL7nkklSti1MYDz/88NSMJAa/t99+O61LW1ZxbVxsYHLSSSelEBfvFadWjhgxIlUEzz///LDWWmulaZlxndzy3BsAqrMGDoCSEkNTbNcfp0oWxAD3/vvvp+cKLrzwwjB8+PC0hi1uHxCvidsBPP3002lLgOVxzTXXhB/84Afh2GOPDffdd1+aTvnggw+m+8XmKnvttVf4n//5n/Q1AKyMRosWLVq0UncAAACgXqjAAQAAZEKAAwAAyIQABwAAkAkBDgAAIBMCHAAAQCYEOAAAgEwIcAAAAJkQ4AAAADIhwAEAAGRCgAMAAMiEAAcAAJAJAQ4AACATAhwAAEAmBDgAAIBMCHAAAACZEOAAAAAyIcABAABkQoADAADIhAAHAACQCQEOAAAg5OH/AZlFJ86Fqd66AAAAAElFTkSuQmCC"><h2>适用边界与常见错误</h2>
+<p>本例要求人数等于任务数、每人只做一项且同时开工。存在任务依赖或多人协作时，需要调度模型。</p>
+<h2>独立练习</h2>
+<p>打开「动手练习.ipynb」，完成补全、修改、迁移，再查看「参考答案.ipynb」。</p>
+</body></html>

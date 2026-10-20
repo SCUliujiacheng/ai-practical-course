@@ -1,0 +1,9 @@
+{
+  "forecast_windows": 8,
+  "forest_mae": 6.138293515018776,
+  "seasonal_mae": 6.8722398243423095,
+  "empirical_coverage": 0.9642857142857143,
+  "interval_width": 30.10406630928395,
+  "nominal_target": 0.9,
+  "iid_guarantee_claimed": false
+}

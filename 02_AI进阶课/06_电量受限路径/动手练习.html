@@ -1,0 +1,60 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>06_电量受限路径 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>最快路线超出电量时，怎样重新规划？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{
+  &quot;route&quot;: [
+    &quot;S&quot;,
+    &quot;B&quot;,
+    &quot;C&quot;,
+    &quot;G&quot;
+  ],
+  &quot;time&quot;: 6,
+  &quot;energy&quot;: 6,
+  &quot;battery&quot;: 6,
+  &quot;unconstrained_time&quot;: 2,
+  &quot;unconstrained_energy&quot;: 10,
+  &quot;expanded_states&quot;: 10
+}
+推荐S→B→C→G，时间6、电量6/6。忽略电量的最快路线耗电10，可行性为False。电池容量或耗电估计改变时重算。
+</pre><pre class="output">[课程目录]\02_AI进阶课\06_电量受限路径\solution.py:101: UserWarning: This figure includes Axes that are not compatible with tight_layout, so results might be incorrect.
+  plt.title(&quot;满足电量限制的路线&quot;);plt.tight_layout();plt.savefig(OUT_DIR / &quot;路线.png&quot;);plt.close()
+</pre><h2>1. 补全：按原始边累计</h2>
+<p>检查S-A-G的时间和电量，说明为什么不能推荐。</p>
+<pre class="code">trial_path = [&quot;S&quot;,&quot;A&quot;,&quot;G&quot;]
+# TODO：调用 path_totals，返回 (总时间, 总耗电)
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert attempt == (2,10) and attempt[1] &gt; battery
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>2. 修改：更换大电池</h2>
+<p>电量增至10，求新路线并校验。</p>
+<pre class="code">trial_capacity = 10
+# TODO：返回 battery_route(roads,&quot;S&quot;,&quot;G&quot;,容量) 的完整四元组
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    trial_path,trial_time,trial_energy,_=attempt
+    assert trial_time == 2 and trial_energy &lt;= trial_capacity
+    assert path_totals(trial_path,roads) == (trial_time,trial_energy)
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>3. 迁移：步行路线受爬升限制</h2>
+<p>道路时间保持不变，把energy解释为爬升单位，预算4；检查模型所需条件。</p>
+<pre class="code">trial_capacity = 4
+# TODO：把耗电解释为可累加风险，返回 battery_route 的完整结果
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    trial_path,trial_time,trial_risk,_=attempt
+    assert trial_path is not None and trial_risk &lt;= trial_capacity
+    assert path_totals(trial_path,roads) == (trial_time,trial_risk)
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre></body></html>

@@ -1,0 +1,17 @@
+{
+  "id": "B08",
+  "title": "怎样识别垃圾短信并分析误报？",
+  "track": "B",
+  "number": 8,
+  "sources": [
+    [
+      "UCI SMS Spam Collection",
+      "https://archive.ics.uci.edu/dataset/228/sms+spam+collection"
+    ],
+    [
+      "scikit-learn 稀疏特征文本分类示例",
+      "https://scikit-learn.org/stable/auto_examples/text/plot_document_classification_20newsgroups.html"
+    ]
+  ],
+  "prereqs": "B06—B07；稀疏表示、朴素贝叶斯与分类指标。"
+}

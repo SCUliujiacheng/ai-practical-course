@@ -1,0 +1,13 @@
+{
+  "id": "A18",
+  "title": "堵车或故障时应该预留多少备用能力？",
+  "track": "A",
+  "number": 18,
+  "sources": [
+    [
+      "Ax service API tutorial",
+      "https://ax.dev/docs/0.5.0/tutorials/gpei_hartmann_service/"
+    ]
+  ],
+  "prereqs": "基础课 Python、NumPy、实验评价"
+}

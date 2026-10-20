@@ -1,0 +1,13 @@
+{
+  "id": "A24",
+  "title": "一台设备该先到先得、抽签，还是拍卖？",
+  "track": "A",
+  "number": 24,
+  "sources": [
+    [
+      "Vickrey：Counterspeculation, Auctions, and Competitive Sealed Tenders",
+      "https://doi.org/10.1111/j.1540-6261.1961.tb02789.x"
+    ]
+  ],
+  "prereqs": "已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。"
+}

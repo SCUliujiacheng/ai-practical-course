@@ -1,0 +1,50 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>04_解析训练日志 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>怎样把训练日志自动变成学习曲线？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">epoch=1 train=0.90 val=0.95
+epoch=2 train=0.65 val=0.70
+WARNING: example warning
+epoch=3 train=0.48 val=0.54
+   epoch  train   val   gap
+0      1   0.90  0.95  0.05
+1      2   0.65  0.70  0.05
+2      3   0.48  0.54  0.06
+3      4   0.35  0.49  0.14
+4      5   0.27  0.53  0.26
+5      6   0.20  0.59  0.39
+6      7   0.16  0.67  0.51 {&#x27;parsed_epochs&#x27;: 7, &#x27;skipped_lines&#x27;: 1, &#x27;best_epoch&#x27;: 4, &#x27;best_validation_loss&#x27;: 0.49}
+</pre><h2>1. 补全：核对最优轮次</h2>
+<p>不用 idxmin，用 Python min 与 key 找验证损失最低的一行。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    chosen = ...
+    assert chosen[&#x27;epoch&#x27;] == metrics[&#x27;best_epoch&#x27;]
+    print(chosen)</pre><h2>2. 修改：处理科学计数法</h2>
+<p>解析一行 train=1e-3、val=2.5e-2 的新日志，验证转换值。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    match = ...
+    assert match is not None
+    assert abs(float(match[&#x27;val&#x27;]) - 0.025) &lt; 1e-12
+    print(match.groupdict())</pre><h2>3. 迁移：早停耐心值</h2>
+<p>写 patience=2 的扫描函数：验证损失连续两轮未刷新最低值时停止。此样例应在第 6 轮触发。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    lowest, stale, stop_epoch = float(&#x27;inf&#x27;), 0, None
+    for row in parsed:
+        if row[&#x27;val&#x27;] &lt; lowest:
+            lowest, stale = row[&#x27;val&#x27;], 0
+        else:
+            stale += 1
+        if stale &gt;= 2:
+            stop_epoch = ...; break
+    assert stop_epoch == 6
+    print(&#x27;触发早停轮次&#x27;, stop_epoch)</pre></body></html>

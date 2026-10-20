@@ -1,0 +1,13 @@
+{
+  "id": "A01",
+  "title": "三份团队计划，应该选哪一份？",
+  "track": "A",
+  "number": 1,
+  "sources": [
+    [
+      "pymoo：有约束双目标问题与Pareto解",
+      "https://pymoo.org/getting_started/part_1.html"
+    ]
+  ],
+  "prereqs": "已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。"
+}

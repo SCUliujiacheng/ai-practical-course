@@ -1,0 +1,5 @@
+population,days,scenario,reserve,mean_final_backlog
+全部留出日期，非周末目标主评价,20,normal,False,0.0
+全部留出日期，非周末目标主评价,20,normal,True,0.0
+全部留出日期，非周末目标主评价,20,demand_plus20,False,10.65
+全部留出日期，非周末目标主评价,20,demand_plus20,True,1.65

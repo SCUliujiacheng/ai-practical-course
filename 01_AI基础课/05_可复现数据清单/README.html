@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>B05 怎样把带标签的文件整理成可复现的数据集？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>建立文件清单并划分训练、验证、测试。模拟同一人的多条记录，说明随机按行切分会让同一人的信息泄漏到测试集；本例按人切分。</p>
+<h2>先修与运行</h2>
+<p>B01—B04；Path、JSON、集合、不交集与随机种子。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 文件和标签是两种信息</h2>
+<p>生成小型教学文件，文件名不编码标签。标签表记录 sample_id、person_id 和 label；同一人的记录必须保持在同一划分。路径使用相对路径才能搬迁课程。</p>
+<h2>2. 在独立单位上分层抽样</h2>
+<p>先取每人的一行信息，再分层保持类别比例。固定随机种子使同样的输入得到同样的名单；随机种子不能修复错误的划分单位。</p>
+<h2>3. 自动检查泄漏与内容版本</h2>
+<p>断言不同划分没有相同 person_id。SHA-256 用于发现内容改变，不是匿名化工具。检查每个文件存在，并把校验值随清单保存。</p>
+<h2>4. 清单成为数据集入口</h2>
+<p>保存 JSON Lines 和 CSV，使训练脚本可以按 split 读取。输出类别计数图；如果数据具有时间关系，还应增加时间约束，本例仅演示独立人物分组。</p>
+<h2>常见错误与边界</h2>
+<p>这些小文件仅用来练习清单，不是真实医疗或人体数据。按行随机划分可能把同一人物放进训练和测试。</p>
+<h2>数据</h2>
+<p>教学模拟数据；生成机制、参数和随机种子见本案例代码。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

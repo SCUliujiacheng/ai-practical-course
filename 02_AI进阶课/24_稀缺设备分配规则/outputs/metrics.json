@@ -1,0 +1,9 @@
+{
+  "first_winner": 2,
+  "first_value": 4.0,
+  "lottery_expected_value": 5.25,
+  "lottery_observed_value": 5.24125,
+  "auction_winner": 0,
+  "auction_payment": 6.0,
+  "deviation_checks": 104
+}

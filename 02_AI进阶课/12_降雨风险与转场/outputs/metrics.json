@@ -1,0 +1,12 @@
+{
+  "assumed_rain_probability": 0.35,
+  "expected_losses": {
+    "outdoor": 4200.0,
+    "indoor_now": 3000,
+    "wait": 2898.0
+  },
+  "selected": "wait",
+  "immediate_indoor_threshold": 0.25,
+  "signal_sensitivity": 0.8,
+  "signal_false_positive": 0.2
+}

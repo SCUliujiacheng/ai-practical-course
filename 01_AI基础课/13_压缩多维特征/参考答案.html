@@ -1,0 +1,42 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>13_压缩多维特征 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>特征很多时怎样压缩并观察结构？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">训练矩阵 (133, 13) 测试矩阵 (45, 13)
+{&#x27;n_features&#x27;: 13, &#x27;retained_components&#x27;: 5, &#x27;training_variance_retained&#x27;: 0.802957184592555, &#x27;test_reconstruction_mse&#x27;: 0.24244722632633586, &#x27;mean_baseline_mse&#x27;: 1.1407206931576077}
+</pre><h2>1. 补全：逐特征重构误差</h2>
+<p>平均各特征误差，核对它与整体测试重构 MSE 相同。</p>
+<pre class="code">assert np.isclose(comparison[&#x27;standardized_mse&#x27;].mean(),reconstruction_mse)
+print(comparison.sort_values(&#x27;standardized_mse&#x27;,ascending=False).head())</pre><pre class="output">                feature  standardized_mse
+8       proanthocyanins          0.502430
+7  nonflavanoid_phenols          0.352682
+0               alcohol          0.307955
+1            malic_acid          0.258955
+9       color_intensity          0.247876
+</pre><h2>2. 修改：只保留 2 维</h2>
+<p>训练集重新拟合 2 维 PCA，检查测试误差不能优于保留更多同一 PCA 方向的结果。</p>
+<pre class="code">two = PCA(n_components=2).fit(train)
+two_mse = float(np.mean((test-two.inverse_transform(two.transform(test)))**2))
+assert two_mse &gt;= reconstruction_mse - 1e-9
+print(&#x27;2 维测试重构 MSE&#x27;,two_mse)</pre><pre class="output">2 维测试重构 MSE 0.5686335202498786
+</pre><h2>3. 迁移：新观测恢复到原单位</h2>
+<p>对一个新观测执行标准化→降维→重构→还原单位，验证形状。</p>
+<pre class="code">new = dataset.data.iloc[[test_idx[0]]]
+recovered = scaler.inverse_transform(pca.inverse_transform(pca.transform(scaler.transform(new))))
+assert recovered.shape == (1,13) and np.isfinite(recovered).all()
+print(pd.DataFrame({&#x27;原值&#x27;:new.iloc[0],&#x27;重构值&#x27;:recovered[0]}))</pre><pre class="output">                                  原值         重构值
+alcohol                        13.48   13.284851
+malic_acid                      1.81    2.029731
+ash                             2.41    2.447550
+alcalinity_of_ash              20.50   18.923188
+magnesium                     100.00  102.808976
+total_phenols                   2.70    2.868287
+flavanoids                      2.98    2.896822
+nonflavanoid_phenols            0.26    0.299349
+proanthocyanins                 1.86    2.010350
+color_intensity                 5.10    4.811677
+hue                             1.04    1.068727
+od280/od315_of_diluted_wines    3.47    3.187078
+proline                       920.00  902.069754
+</pre></body></html>

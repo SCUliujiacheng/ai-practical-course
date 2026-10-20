@@ -1,0 +1,13 @@
+{
+  "id": "A06",
+  "title": "最快路线超出电量时，怎样重新规划？",
+  "track": "A",
+  "number": 6,
+  "sources": [
+    [
+      "NetworkX A* 与路径代价接口",
+      "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.shortest_paths.astar.astar_path.html"
+    ]
+  ],
+  "prereqs": "已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。"
+}

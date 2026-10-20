@@ -1,0 +1,26 @@
+{
+  "equilibrium_profile": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "equilibrium_total": 30.0,
+  "optimal_profile": [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1
+  ],
+  "optimal_total": 24.0,
+  "equilibrium_count": 21,
+  "worst_equilibrium_ratio": 1.25,
+  "potential_trace": [
+    21.0,
+    20.0
+  ]
+}

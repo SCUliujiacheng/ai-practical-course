@@ -1,0 +1,17 @@
+{
+  "id": "B24",
+  "title": "怎样让本地语言模型参考资料回答问题？",
+  "track": "B",
+  "number": 24,
+  "sources": [
+    [
+      "Qwen3-0.6B 模型卡",
+      "https://huggingface.co/Qwen/Qwen3-0.6B"
+    ],
+    [
+      "检索与重排",
+      "https://sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html"
+    ]
+  ],
+  "prereqs": "B21—B23；RAG、拒答、引用与人工核验。"
+}

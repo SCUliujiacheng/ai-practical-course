@@ -1,0 +1,60 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>25_合作节省额分配 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>三个团队合作节省的成本怎样分配？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{
+  &quot;shapley&quot;: [
+    5.0,
+    4.0,
+    3.0
+  ],
+  &quot;equal&quot;: [
+    4.0,
+    4.0,
+    4.0
+  ],
+  &quot;proportional&quot;: [
+    6.0,
+    3.5999999999999996,
+    2.4000000000000004
+  ],
+  &quot;in_core&quot;: {
+    &quot;平均&quot;: true,
+    &quot;投入比例&quot;: true,
+    &quot;Shapley&quot;: true
+  },
+  &quot;blocking_coalitions&quot;: {
+    &quot;平均&quot;: [],
+    &quot;投入比例&quot;: [],
+    &quot;Shapley&quot;: []
+  },
+  &quot;majority_counterexample&quot;: [
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333
+  ]
+}
+本联盟价值下Shapley分配为[5.0, 4.0, 3.0]，是否在核心：True。三种规则的联盟阻挡检查为{&#x27;平均&#x27;: [], &#x27;投入比例&#x27;: [], &#x27;Shapley&#x27;: []}。建议先确认所采用的公平原则，再核查联盟退出激励；Shapley并非自动稳定。
+</pre><h2>1. 补全：效率性质</h2>
+<p>检查三种方案分配总额是否等于12，并解释总额相同为何分配仍不同。</p>
+<pre class="code">assert all(np.isclose(shares.sum(),12) for shares in schemes.values())
+assert not np.allclose(equal,allocation)
+print(&quot;总额守恒不决定公平原则。&quot;)
+</pre><pre class="output">总额守恒不决定公平原则。
+</pre><h2>2. 修改：甲乙合作价值增加</h2>
+<p>把联盟{甲,乙}的价值改成10，重新计算Shapley及联盟阻挡。</p>
+<pre class="code">changed=dict(worth);changed[frozenset([0,1])]=10.
+new=shapley(changed,3)
+assert np.isclose(new.sum(),12)
+assert new[0]&gt;allocation[0] and new[1]&gt;allocation[1] and new[2]&lt;allocation[2]
+print(new,&quot;阻挡联盟&quot;,blocking_coalitions(new,changed))
+</pre><pre class="output">[5.33333333 4.33333333 2.33333333] 阻挡联盟 [frozenset({0, 1})]
+</pre><h2>3. 迁移：没有边际贡献的团队</h2>
+<p>两队甲乙共同创造6，丙加入任何联盟都不改变价值，检查丙的Shapley值为0。</p>
+<pre class="code">dummy={s:(6. if {0,1}&lt;=s else 0.) for s in all_coalitions(3)}
+answer=shapley(dummy,3)
+assert np.allclose(answer,[3,3,0])
+print(answer)
+</pre><pre class="output">[3. 3. 0.]
+</pre></body></html>

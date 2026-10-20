@@ -1,0 +1,35 @@
+{
+  "rules": [
+    {
+      "rule": "固定贡献",
+      "mean_total_reward": 125.465,
+      "reward_sd": 1.1883084292711725,
+      "shortage_rate": 0.0
+    },
+    {
+      "rule": "各自不贡献",
+      "mean_total_reward": 80.0,
+      "reward_sd": 0.0,
+      "shortage_rate": 1.0
+    },
+    {
+      "rule": "条件合作",
+      "mean_total_reward": 122.345,
+      "reward_sd": 7.699215744277016,
+      "shortage_rate": 0.06875
+    },
+    {
+      "rule": "混入搭便车",
+      "mean_total_reward": 91.22,
+      "reward_sd": 8.571006583018933,
+      "shortage_rate": 0.6725
+    },
+    {
+      "rule": "约定轮值",
+      "mean_total_reward": 102.83000000000001,
+      "reward_sd": 0.8800349643403611,
+      "shortage_rate": 0.0975
+    }
+  ],
+  "replications": 40
+}

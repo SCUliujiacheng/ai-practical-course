@@ -1,0 +1,31 @@
+# Local environments and offline bundles are generated, not published.
+/.venv*/
+/runtime/
+/wheelhouse/
+/备份/
+/reports/
+/assets_manifest.json
+**/__pycache__/
+**/.ipynb_checkpoints/
+*.pyc
+*.part
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Keep sources and licenses, download pretrained model files separately.
+/assets/models/**/*
+!/assets/models/**/
+!/assets/models/README.md
+!/assets/models/README.html
+!/assets/models/**/SOURCE.json
+!/assets/models/**/LICENSE
+!/assets/models/**/LICENSE.txt
+/assets/data/*.zip
+
+# Personal progress is created from the public template.
+/学习记录_个人.csv
+.DS_Store
+Thumbs.db

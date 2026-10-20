@@ -1,0 +1,9 @@
+from,to,time,energy
+S,A,1,5
+A,G,1,5
+S,B,2,2
+B,C,2,2
+C,G,2,2
+S,D,3,1
+D,G,4,3
+B,D,2,1

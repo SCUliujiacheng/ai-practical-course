@@ -1,0 +1,13 @@
+{
+  "id": "B04",
+  "title": "怎样把训练日志自动变成学习曲线？",
+  "track": "B",
+  "number": 4,
+  "sources": [
+    [
+      "Python 正则表达式",
+      "https://docs.python.org/3/library/re.html"
+    ]
+  ],
+  "prereqs": "B01；字符串、正则命名组、字典列表与图表。"
+}

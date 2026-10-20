@@ -1,0 +1,58 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>AI 实践课：从预测到决策的 60 个问题</h1>
+<p><strong>用 Python 把问题变成可检查的分析、预测、规划与策略。</strong></p>
+<p>这套中文课程从一位 AI 研究生的实际需求出发：理论学过不少，却不擅长独立写代码；希望通过临摹完整案例，逐渐学会用 AI 解决问题。课程分为 <strong>30 个基础案例 + 30 个进阶案例</strong>，先练实现，再练建模、推演和决策。</p>
+<p>每个案例有独立文件夹，包含任务说明、中文教学 Notebook、完整脚本、三层练习、参考答案、数据说明、来源和实际输出。案例运行不依赖你完成前一课的作业。</p>
+<p><strong>知识值得分享。</strong> 欢迎学习、改编、纠错，也欢迎贡献你解决过的具体问题。</p>
+<h2>两套课学什么</h2>
+<table>
+<thead>
+<tr>
+  <th>课程</th>
+  <th>你要练习的能力</th>
+  <th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><a href="01_AI%E5%9F%BA%E7%A1%80%E8%AF%BE/%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1.md">AI 基础课</a></td>
+  <td>读数据、写函数、训练模型、正确评价、调试并交付程序</td>
+  <td>明天天气、垃圾短信、图像识别、本地资料问答、预测 API</td>
+</tr>
+<tr>
+  <td><a href="02_AI%E8%BF%9B%E9%98%B6%E8%AF%BE/%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1.md">AI 进阶课</a></td>
+  <td>定义目标与约束，结合预测、优化、仿真和博弈提出方案</td>
+  <td>多列车避碰、人员排班、工期缓冲、因果分析、备货策略、信息价值、开放日计划</td>
+</tr>
+</tbody>
+</table>
+<p>完整目录见 <strong><a href="%E6%A1%88%E4%BE%8B%E7%9B%AE%E5%BD%95.md">60 个案例导航</a></strong>。学习顺序见 <a href="%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF%E4%B8%8E%E8%BF%81%E7%A7%BB%E6%8C%91%E6%88%98.md">学习路线与迁移挑战</a>，语法和排错可查 <a href="Python%E7%A6%BB%E7%BA%BF%E6%95%91%E6%80%A5%E6%89%8B%E5%86%8C.md">Python 离线救急手册</a> 与 <a href="Python%E7%9F%A5%E8%AF%86%E7%B4%A2%E5%BC%95.md">知识索引</a>。</p>
+<h2>快速开始</h2>
+<p>首版验证平台是 <strong>Windows x64、Python 3.12、CPU</strong>。大型模型课建议至少16GB内存，一次运行一个模型内核。其他操作系统尚未完成同等验收。</p>
+<pre><code class="language-powershell">git clone https://github.com/SCUliujiacheng/ai-practical-course.git
+cd ai-practical-course
+py -3.12 tools/setup_environment.py
+</code></pre>
+<p>安装成功后，双击 <strong>开始学习.cmd</strong>，进入 <code>01_AI基础课/01_天气CSV统计/教学讲解.ipynb</code>，按 <strong>Shift+Enter</strong> 逐格运行。无需手动激活虚拟环境。</p>
+<p>模型课需要先下载固定版本权重：</p>
+<pre><code class="language-powershell">.\.venv\Scripts\python.exe tools\prepare_models.py --all
+</code></pre>
+<p>详细步骤、模型选择与报错处理见 <strong><a href="%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a></strong>。第一次安装和下载需要互联网；代码、数据和模型准备完成后，核心案例可以离线运行。若只想阅读，下载仓库后打开 <strong>课程首页.html</strong>，或直接在 GitHub 查看 Notebook。</p>
+<h2>仓库提供什么</h2>
+<ul>
+<li>60个完整脚本、180份Notebook、180道补全/修改/迁移练习及答案。</li>
+<li>已执行的教学和答案网页、图表与小型结果文件。</li>
+<li>有明确来源与许可的天气、短信、单车小数据；模拟输入明确标注。</li>
+<li>精确依赖清单、模型固定revision与SHA256、安装与离线准备工具。</li>
+<li>基线、独立测试、失败情景、方法边界；进阶课还有决策建议。</li>
+</ul>
+<p>虚拟环境、Python运行时、wheel安装包和大型预训练权重由准备工具在本机生成，<strong>不存入Git仓库</strong>。五套预训练模型约2GB，来源及许可见 <a href="THIRD_PARTY_NOTICES.html">第三方说明</a>。联网选修见 <a href="%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可以延后学习。</p>
+<h2>需要去没有网络的地方学习？</h2>
+<p>先按 <a href="%E7%A6%BB%E7%BA%BF%E5%87%86%E5%A4%87%E6%8C%87%E5%8D%97.md">离线准备指南</a> 下载依赖、模型和恢复材料，完成自检，并在自己的电脑上关网试运行。GitHub仓库本身不等于已经配置好的离线环境。模型和运行环境备妥后，整目录一起携带。</p>
+<h2>怎样使用这些案例</h2>
+<p>先写输入、目标和预期结果，再运行示例；临摹关键步骤后，关闭答案做练习。每五课完成一次迁移挑战。简单方法表现更好时保留它，模型回答错误时核对依据，求解器给出方案时检查现实约束。</p>
+<p>首版60课曾在Windows本机完成240项脚本/Notebook运行检查；这是特定环境的记录，不保证在任意环境或真实业务上有效。公开版测试范围见 <strong><a href="%E9%AA%8C%E6%94%B6%E6%8A%A5%E5%91%8A.md">验收与复现说明</a></strong>。</p>
+<p>这是一套 <strong>AI辅助编写并经程序执行检查的教学案例库</strong>。它依据公开方法重新实现，不冒充企业生产系统或“行业最优方案”。科学问题、模型假设和结果解释仍值得持续审阅，欢迎在Issue中指出问题。</p>
+<h2>共享与贡献</h2>
+<p>原创代码采用 <a href="LICENSE">MIT</a>，原创讲解采用 <a href="LICENSE-DOCS">CC BY 4.0</a>。第三方数据、模型、软件保留各自许可，详见 <a href="THIRD_PARTY_NOTICES.html">署名与改编记录</a>。</p>
+<p>欢迎按 <a href="CONTRIBUTING.html">贡献指南</a> 提交问题或PR。改进解释、补充失败案例、增加独立检查，与加入新算法同样有价值。</p>
+</body></html>

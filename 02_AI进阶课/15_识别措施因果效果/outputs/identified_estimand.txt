@@ -1,0 +1,28 @@
+Estimand type: EstimandType.NONPARAMETRIC_ATE
+
+### Estimand : 1
+Estimand name: backdoor
+Estimand expression:
+     d                            
+───────────(E[outcome|experience])
+d[training]                       
+Estimand assumption 1, Unconfoundedness: If U→{training} and U→outcome then P(outcome|training,experience,U) = P(outcome|training,experience)
+
+### Estimand : 2
+Estimand name: iv
+No such variable(s) found!
+
+### Estimand : 3
+Estimand name: frontdoor
+No such variable(s) found!
+
+### Estimand : 4
+Estimand name: general_adjustment
+Estimand expression:
+     d                            
+───────────(E[outcome|experience])
+d[training]                       
+Estimand assumption 1, Unconfoundedness: If U→{training} and U→outcome then P(outcome|training,experience,U) = P(outcome|training,experience)
+
+
+假设：经验是所有共同原因；无未测混杂；个体间无干扰；培训含义一致；每种经验附近都可能参训或不参训。

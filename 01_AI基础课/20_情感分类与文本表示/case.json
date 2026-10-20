@@ -1,0 +1,17 @@
+{
+  "id": "B20",
+  "title": "怎样训练一个评论情感分类器？",
+  "track": "B",
+  "number": 20,
+  "sources": [
+    [
+      "PyTorch Embedding",
+      "https://docs.pytorch.org/docs/stable/generated/torch.nn.Embedding.html"
+    ],
+    [
+      "sklearn 文本特征",
+      "https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction"
+    ]
+  ],
+  "prereqs": "B08 文本向量与 B16 训练；补充词表、未知词、padding 掩码。"
+}

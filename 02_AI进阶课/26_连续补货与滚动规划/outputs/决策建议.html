@@ -1,0 +1,46 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>决策建议</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>本次计算的决策建议</h1>
+<p>已知小模型的最优期望成本为 20.25 元。滚动策略应在每天观察需求后重新求解；若需求机制变化，需要更新概率模型，不能仅增加求解次数。 基础设置中三种视野得到相同策略；加入每次8元配送费后再比较 fixed_fee_comparison.csv，理解跨日耦合为何改变规划价值。</p>
+<h2>实际指标</h2>
+<pre><code class="language-json">{
+  &quot;exact_optimal_expected_cost&quot;: 20.25,
+  &quot;simulation&quot;: [
+    {
+      &quot;mode&quot;: &quot;full&quot;,
+      &quot;mean&quot;: 20.331666666666667,
+      &quot;std&quot;: 2.9924901373642356
+    },
+    {
+      &quot;mode&quot;: &quot;rolling2&quot;,
+      &quot;mean&quot;: 20.331666666666667,
+      &quot;std&quot;: 2.9924901373642356
+    },
+    {
+      &quot;mode&quot;: &quot;myopic&quot;,
+      &quot;mean&quot;: 20.331666666666667,
+      &quot;std&quot;: 2.9924901373642356
+    }
+  ],
+  &quot;heavy_demand_total&quot;: 24.0,
+  &quot;fixed_order_fee&quot;: 8,
+  &quot;with_fee_exact_optimal_expected_cost&quot;: 34.116,
+  &quot;with_fee_simulation&quot;: [
+    {
+      &quot;mode&quot;: &quot;full&quot;,
+      &quot;mean&quot;: 34.19833333333333,
+      &quot;std&quot;: 6.896303156200591
+    },
+    {
+      &quot;mode&quot;: &quot;rolling2&quot;,
+      &quot;mean&quot;: 35.75,
+      &quot;std&quot;: 8.742472952965501
+    },
+    {
+      &quot;mode&quot;: &quot;myopic&quot;,
+      &quot;mean&quot;: 39.43333333333333,
+      &quot;std&quot;: 10.51580820585
+    }
+  ]
+}
+</code></pre>
+<p>这些结论只适用于本例显式假设；目标权重和风险偏好由人决定。</p>
+</body></html>

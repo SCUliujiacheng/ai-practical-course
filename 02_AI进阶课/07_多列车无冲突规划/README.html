@@ -1,0 +1,33 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>A07 三列小火车共用轨道，怎样全部到站？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>用5×5教学轨道网规划三列车。每步移动一格或等待，禁止同点碰撞和相向交换。比较按顺序规划与小规模CBS，并逐时刻检查整组轨迹。</p>
+<h2>先修与运行</h2>
+<p>已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 定义地图、动作和碰撞</h2>
+<p>坐标是(row,column)元组。车辆到达终点后持续占据终点，必须检查后来到达的车辆。这个约定属于模型，不应藏在动画里。</p>
+<h2>2. 时空A*：同一地点在不同时间是不同状态</h2>
+<p>约束分两种：时刻t禁止占据某点，或禁止在t-1到t走某条边。到终点时还要检查未来约束。有限时间窗没有找到路径只能报告窗口内未找到。</p>
+<h2>3. 先规划的车占用后续车辆的时空资源</h2>
+<p>优先规划把已规划路径当成预约表。这通常较快，但车辆次序会影响结果，也可能让后车在当前时间窗内找不到路。</p>
+<h2>4. CBS：发现冲突，再分支限制其中一辆车</h2>
+<p>高层节点保存每辆车的限制与路径；每次按总路径长度取最便宜节点。冲突产生两个子节点，分别禁止其中一辆车造成该冲突；仅重算受影响车辆。资源上限返回UNKNOWN，不能当成无解。</p>
+<h2>5. 保存逐时刻轨迹并解释目标</h2>
+<p>本例最小化各车到达时间之和，另报告全部到站时间。时间图的每一行能与碰撞检查器对应；不是仅展示单车路径。</p>
+<h2>常见错误与边界</h2>
+<p>教学模型不是铁路安全控制系统。各边移动耗时为1，到站后永久占位；CBS的最优性依赖低层最短路、冲突划分和目标定义，有限窗口/节点预算未找到解只能报告UNKNOWN。</p>
+<h2>数据</h2>
+<p>原创教学模拟场景，规模与全部参数直接列在 solution.py；运行同时保存输入或结果 CSV。无真实个人记录，不需要下载数据。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

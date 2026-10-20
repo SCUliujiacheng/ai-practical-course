@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>A14 设备可能出问题时，什么时候值得停机检查？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>将故障概率转换为预期维护收益，受最多检查 40 台的容量约束。比较不检查、固定 0.5 阈值与按净收益排序；概率校准与决策收益分别核验。</p>
+<h2>先修与运行</h2>
+<p>B09、B29；概率校准、期望损失、排序与容量约束。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 明确维修作用与成本</h2>
+<p>模拟传感器特征与故障结果；故障标签表示不干预时的潜在故障。检查每台成本 40，故障损失 600，检查可消除 85% 风险。这个干预有效性是教学假设，真实应用需独立证据。</p>
+<h2>2. 先用验证概率质量选择概率模型</h2>
+<p>误报和漏报成本不能直接修复概率偏差；先用验证 Brier 分数比较原始与校准概率，锁定候选后再看测试。校准不一定获胜，因此由实际验证结果选择。</p>
+<h2>3. 正净收益且容量允许才检查</h2>
+<p>检查收益是可避免故障损失减去检查成本。设备检查耗时相同时，按正净收益从大到小取前 40 台；若检查时长不同应改背包或约束优化，而不能继续简单排序。</p>
+<h2>4. 决策报告区分预测、假设与实际情景结算</h2>
+<p>测试标签不参与检查排序。检查后的残余故障成本按 15% 期望值结算，属于模拟干预假设下的评价，不是观察到的真实维修效果。报告被容量挡住的正收益设备。</p>
+<h2>常见错误与边界</h2>
+<p>有故障风险并不自动意味着检查有效。此处潜在结果与维护效果来自教学模拟，真实观察标签不能直接识别维修因果效果。</p>
+<h2>数据</h2>
+<p>教学模拟数据；生成机制、参数和随机种子见本案例代码。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

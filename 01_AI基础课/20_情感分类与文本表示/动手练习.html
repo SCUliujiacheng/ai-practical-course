@@ -1,0 +1,32 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>20_情感分类与文本表示 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>怎样训练一个评论情感分类器？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{
+  &quot;tfidf_accuracy&quot;: 0.75,
+  &quot;embedding_accuracy&quot;: 0.625,
+  &quot;test_samples&quot;: 8,
+  &quot;vocabulary_size&quot;: 77,
+  &quot;training_loss&quot;: 0.00035102423862554133,
+  &quot;elapsed_seconds&quot;: 4.249
+}
+</pre><h2>1. 补全：未知词比例</h2>
+<p>计算测试语料中未知词占全部词的比例，检查分母非零，打印有哪些未知词。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert 0 &lt;= ratio &lt;= 1</pre><h2>2. 修改：补齐不应改变结果</h2>
+<p>同一句话编码到长度 10 和 20，检查掩码平均产生的分数一致。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert torch.allclose(a, b, atol=1e-06)</pre><h2>3. 迁移：另建中文词级基线</h2>
+<p>用分好词的中文服务评价训练一个新分类器，不混用英文词表；核对正负对照。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert cp.tolist() == [1, 0]</pre></body></html>

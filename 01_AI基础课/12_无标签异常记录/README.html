@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>B12 缺少故障标签时怎样发现异常传感器记录？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>用多数正常的历史数据建立分布，再比较单变量标准分数与 Isolation Forest。异常分数只产生复核队列，不能直接等同故障诊断。</p>
+<h2>先修与运行</h2>
+<p>B09、B11；异常分数、阈值与人工复核。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 历史参考与未来复核集分开</h2>
+<p>训练历史不使用故障标签，测试标签只在教学模拟中用于事后评分。三个传感器分别代表温度、振动、电流，异常机制包括高振动与高电流。</p>
+<h2>2. 简单基线：最大绝对标准分数</h2>
+<p>每列用历史均值和标准差标准化，任一列极端就报警。用历史分数的 95% 分位数设定候选复核比例，不拿测试标签调阈值。</p>
+<h2>3. Isolation Forest：以隔离难度产生分数</h2>
+<p>随机切分较容易隔离的点可能异常。score_samples 越小越异常，所以取负号统一为高分更可疑。仍用历史分位数作阈值，模型并没有学会故障类别。</p>
+<h2>4. 输出排序后的复核队列</h2>
+<p>评价报警数量、精确率和召回率，允许简单方法胜出。真实无标签场景需要人工抽查被报警与未报警记录，才知道是否漏掉重要异常。</p>
+<h2>常见错误与边界</h2>
+<p>历史正常性是教学假设。分布变化、罕见但正常行为也会触发报警；无监督异常不等于已识别故障。</p>
+<h2>数据</h2>
+<p>教学模拟数据；生成机制、参数和随机种子见本案例代码。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

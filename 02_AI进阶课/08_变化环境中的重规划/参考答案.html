@@ -1,0 +1,57 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>08_变化环境中的重规划 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>道路封闭或拥堵后，怎样修订剩余计划？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{
+  &quot;strategies&quot;: [
+    {
+      &quot;policy&quot;: &quot;fixed&quot;,
+      &quot;success&quot;: false,
+      &quot;time&quot;: 1,
+      &quot;changes&quot;: 0,
+      &quot;reason&quot;: &quot;OLD_PLAN_INFEASIBLE&quot;
+    },
+    {
+      &quot;policy&quot;: &quot;repair_blocked&quot;,
+      &quot;success&quot;: true,
+      &quot;time&quot;: 12,
+      &quot;changes&quot;: 1
+    },
+    {
+      &quot;policy&quot;: &quot;rolling&quot;,
+      &quot;success&quot;: true,
+      &quot;time&quot;: 5,
+      &quot;changes&quot;: 2
+    }
+  ]
+}
+本情景推荐rolling，实际耗时5、修改2次。仅在封路时修复会忽视仍可通行但变慢的道路；可将成本明显变化也设为事件触发。本例是图上反馈重规划，没有声称具备连续控制MPC的稳定性保证。
+</pre><h2>1. 补全：辨认不可行的旧计划</h2>
+<p>回放时刻1事件，检查原路线哪条边已经失效。</p>
+<pre class="code">g=initial.copy();seen=set();observe(g,1,seen)
+invalid=[(u,v) for u,v in zip(old_path,old_path[1:]) if not g.has_edge(u,v)]
+assert invalid==[(&quot;A&quot;,&quot;G&quot;)]
+print(invalid)
+</pre><pre class="output">[(&#x27;A&#x27;, &#x27;G&#x27;)]
+</pre><h2>2. 修改：没有任何环境事件</h2>
+<p>暂时设事件为空，重新比较三种策略。完成后恢复事件，避免后续单元格使用错误环境。</p>
+<pre class="code">saved_events=events
+try:
+    events=[]
+    unchanged=[execute(p) for p in [&quot;fixed&quot;,&quot;repair_blocked&quot;,&quot;rolling&quot;]]
+    assert all(r[&quot;success&quot;] and r[&quot;time&quot;]==2 for r in unchanged)
+    assert all(r[&quot;changes&quot;]==0 for r in unchanged)
+finally: events=saved_events
+print(&quot;稳定环境下，本例反复重算没有路线收益。&quot;)
+</pre><pre class="output">稳定环境下，本例反复重算没有路线收益。
+</pre><h2>3. 迁移：物流执行审计</h2>
+<p>复制滚动策略轨迹，篡改一个道路耗时，验证审计器能发现不一致。</p>
+<pre class="code">import copy
+corrupted=copy.deepcopy(results[2])
+corrupted[&quot;trace&quot;][0][&quot;duration&quot;]+=3
+assert not verify_execution(corrupted)
+assert verify_execution(results[2])
+print(&quot;执行日志必须与当时可观测数据一致。&quot;)
+</pre><pre class="output">执行日志必须与当时可观测数据一致。
+</pre></body></html>

@@ -1,0 +1,64 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>09_动作推理与模型校验 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>怎样自动决定拿钥匙、开门与送货的顺序？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">初始事实 [&#x27;at-hall&#x27;, &#x27;key-hall&#x27;, &#x27;package-hall&#x27;]
+动作计划 [&#x27;take-key&#x27;, &#x27;open-door&#x27;, &#x27;take-package&#x27;, &#x27;enter-room&#x27;, &#x27;deliver&#x27;]
+{
+  &quot;plan&quot;: [
+    &quot;take-key&quot;,
+    &quot;open-door&quot;,
+    &quot;take-package&quot;,
+    &quot;enter-room&quot;,
+    &quot;deliver&quot;
+  ],
+  &quot;action_count&quot;: 5,
+  &quot;visited_states&quot;: 9,
+  &quot;business_validator_pass&quot;: true,
+  &quot;draft_plan&quot;: [
+    &quot;open-door&quot;,
+    &quot;take-package&quot;,
+    &quot;enter-room&quot;,
+    &quot;deliver&quot;
+  ],
+  &quot;draft_validator_pass&quot;: false,
+  &quot;external_pddl_solver_run&quot;: false
+}
+采用5步计划：take-key → open-door → take-package → enter-room → deliver。独立业务执行检查通过。漏写钥匙前提的草稿产生4步计划，但独立检查拒绝；求解器只能解已写出的模型，不能自动补齐现实需求。
+</pre><h2>1. 补全：动作前提</h2>
+<p>初始状态不能执行开门；先拿钥匙后可以。</p>
+<pre class="code">trial_start = initial_state
+# TODO：捕获直接开门的 ValueError，再执行取钥匙与开门；返回 (是否拒绝直接开门, 最终状态)
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert attempt[0] is True and &quot;door-open&quot; in attempt[1]
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>2. 修改：包裹不存在</h2>
+<p>从初始状态移除package-hall，原动作模型应报告目标不可达。</p>
+<pre class="code">trial_start = set(initial_state)-{&quot;package-hall&quot;}
+# TODO：调用 plan_actions，返回 (计划或None, 搜索扩展数)
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert attempt[0] is None
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>3. 迁移：实验前置步骤</h2>
+<p>使用同一搜索器表达“未准备→已校准→已实验→报告完成”，并检查缺少校准动作时不能完成。</p>
+<pre class="code">trial_actions = [action(&quot;calibrate&quot;,[&quot;ready&quot;],[&quot;calibrated&quot;],[]),
+                 action(&quot;experiment&quot;,[&quot;calibrated&quot;],[&quot;measured&quot;],[]),
+                 action(&quot;report&quot;,[&quot;measured&quot;],[&quot;reported&quot;],[])]
+# TODO：从 {ready} 到 {reported} 调用 plan_actions，返回计划列表
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert attempt == [&quot;calibrate&quot;,&quot;experiment&quot;,&quot;report&quot;]
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre></body></html>

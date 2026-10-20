@@ -1,0 +1,28 @@
+{
+  "critical_ratio": 0.75,
+  "selected_quantity": 115,
+  "test_results": [
+    {
+      "policy": "mean",
+      "quantity": 100,
+      "test_cost": 151.648,
+      "stockout_rate": 0.458,
+      "leftovers": 8.83
+    },
+    {
+      "policy": "critical_quantile",
+      "quantity": 111,
+      "test_cost": 130.656,
+      "stockout_rate": 0.28,
+      "leftovers": 15.768
+    },
+    {
+      "policy": "validation_search",
+      "quantity": 115,
+      "test_cost": 129.92,
+      "stockout_rate": 0.234,
+      "leftovers": 18.722
+    }
+  ],
+  "shifted_demand_cost": 172.448
+}

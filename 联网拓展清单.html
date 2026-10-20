@@ -1,0 +1,46 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>联网拓展清单</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>联网拓展：可以延后学习</h1>
+<p>60 个核心案例按本地运行设计；首次克隆仍需按<a href="%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>联网配置环境与下载权重。下面列出不计入离线核心验收的延伸活动；相关案例 README 会链接本页。课程会提供本地替代练习，但不把它冒充在线服务的真实运行结果。</p>
+<table>
+<thead>
+<tr>
+  <th>课程</th>
+  <th>需要联网的延伸活动</th>
+  <th>原因与准备</th>
+  <th>山林中先做什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>B07/B10 表格预测</td>
+  <td>获取并比较另一个版本的 TabPFN 权重</td>
+  <td>可能需要模型访问授权；需复核具体权重许可、Python依赖与硬件。未提供或未测试的权重不算已配置</td>
+  <td>先完成线性/梯度提升对照与同预算选型</td>
+</tr>
+<tr>
+  <td>B15 时间序列</td>
+  <td>下载其他 Chronos/TimesFM 版本与更多真实时间序列</td>
+  <td>需要下载新增权重/数据；现有 Chronos-Bolt-tiny 本地拓展以其实际验收记录为准</td>
+  <td>学季节/树模型、滚动回测和预先下载的本地模型</td>
+</tr>
+<tr>
+  <td>B21—B24 文本与问答</td>
+  <td>换用云端大模型、联网搜索或下载新模型</td>
+  <td>需要网络，云服务可能需要账号和费用。本课程未创建API密钥，也不依赖收费服务</td>
+  <td>使用预先下载的本地模型和笔记语料，完成检索、回答支持与拒答评价</td>
+</tr>
+<tr>
+  <td>A09/A30 规划与综合决策</td>
+  <td>实时获取外部资料、调用云模型生成新的规划草稿</td>
+  <td>在线数据与服务需要单独接入及检查；草稿仍须独立校验</td>
+  <td>用本地任务书、合法/错误草稿和检查器练习</td>
+</tr>
+<tr>
+  <td>全部课程</td>
+  <td>阅读外部参考链接、更新依赖与下载新数据</td>
+  <td>外部网站需要网络，未来版本可能与课程锁定环境不同</td>
+  <td>本地讲解、代码、参考答案和HTML输出足够完成核心课</td>
+</tr>
+</tbody>
+</table>
+<p>标识原则：需要联网的步骤须在运行前写清楚，不让你在断网时遇到未说明的下载或缺库。不要为延伸实验升级现有课程环境；以后联网时建立另一个实验环境。</p>
+</body></html>

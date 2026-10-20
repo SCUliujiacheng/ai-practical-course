@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>A02 时间与预算有限，应完成哪些任务？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>给定10项任务的预算、工时和教学价值评分，选择一组任务。先理解单预算背包，再把工时和依赖加入模型；输出是任务组合及其合法性证明式检查。</p>
+<h2>先修与运行</h2>
+<p>已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 明确输入与评分来源</h2>
+<p>用列表保存任务，字典字段让每个数字有名字。价值是本例假设评分。依赖 <code>(a,b)</code> 表示选择 a 必须同时选择 b。</p>
+<h2>2. 单预算背包：理解动态规划</h2>
+<p><code>dp[b]</code> 表示预算最多 b 时的最高价值。预算倒序更新，防止同一个任务被重复选取。这一步暂时没有工时和依赖，不能把结果误用到完整任务。</p>
+<h2>3. CP-SAT 同时处理多个约束</h2>
+<p>0/1变量表示是否选中。<code>x[a] &lt;= x[b]</code> 精确表达依赖。检查器根据原始任务重新累加，不以求解器返回状态代替需求检查。</p>
+<h2>4. 与简单选择法比较并保存计划</h2>
+<p>简单基线按价值/预算排序，在满足当前约束时才加入。它可能错过需要一起选择的依赖组合。图展示本例真实计算，不宣称求解器在所有问题上都更快。</p>
+<h2>常见错误与边界</h2>
+<p>普通一维背包不处理任意任务依赖。所有成本和时间使用整数单位。UNKNOWN表示尚未确定，不等于INFEASIBLE；评分是显式假设。</p>
+<h2>数据</h2>
+<p>原创教学模拟场景，规模与全部参数直接列在 solution.py；运行同时保存输入或结果 CSV。无真实个人记录，不需要下载数据。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

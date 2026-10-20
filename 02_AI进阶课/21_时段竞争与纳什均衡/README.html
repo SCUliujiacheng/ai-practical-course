@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>A21 两个团队为什么都挤在黄金时段？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>两个团队各选黄金或普通时段。评分体现曝光与拥挤的假设取舍。找出最佳回应、纳什均衡与总收益最优组合，并检验“均衡就是最好”是否成立。</p>
+<h2>先修与运行</h2>
+<p>已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 收益矩阵必须解释每个格子</h2>
+<p>A[i,j]是行团队选i、列团队选j时行团队的收益；B[i,j]是同一局面的列团队收益。分数为教学假设，不能视为真实团队偏好的测量。</p>
+<h2>2. 单方改变能否获利？</h2>
+<p>纳什均衡只要求在别人不变时，任何一方都没有更好的单方选择。不要求社会总收益最大。逐格计算最佳回应比背术语更容易核对。</p>
+<h2>3. 用Nashpy求混合策略并独立检查</h2>
+<p>概率向量x、y分别描述两队选择。<code>x @ A @ y</code>是期望收益；独立检查所有纯动作的期望收益不高于当前混合收益，从而检查没有单方获利偏离。</p>
+<h2>4. 推荐协调规则而不冒充行为预测</h2>
+<p>矩阵假设给定后，均衡分析可以解释激励。若加入黄金时段费用会改变均衡，应说明费用由谁收取、能否转移，而不能直接说总收益凭空增加。</p>
+<h2>常见错误与边界</h2>
+<p>完全信息、同时选择、收益可量化是本例假设。均衡不是必然发生的心理预测；总收益更高也不自动代表公平。</p>
+<h2>数据</h2>
+<p>原创教学模拟场景，规模与全部参数直接列在 solution.py；运行同时保存输入或结果 CSV。无真实个人记录，不需要下载数据。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

@@ -1,0 +1,14 @@
+{
+  "route": [
+    "S",
+    "B",
+    "C",
+    "G"
+  ],
+  "time": 6,
+  "energy": 6,
+  "battery": 6,
+  "unconstrained_time": 2,
+  "unconstrained_energy": 10,
+  "expanded_states": 10
+}

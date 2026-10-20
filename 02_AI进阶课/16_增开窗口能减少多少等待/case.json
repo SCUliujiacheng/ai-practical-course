@@ -1,0 +1,13 @@
+{
+  "id": "A16",
+  "title": "校园活动增加一个窗口，能少排多久？",
+  "track": "A",
+  "number": 16,
+  "sources": [
+    [
+      "SimPy共享资源示例",
+      "https://simpy.readthedocs.io/en/latest/simpy_intro/shared_resources.html"
+    ]
+  ],
+  "prereqs": "基础课 Python、NumPy、实验评价"
+}

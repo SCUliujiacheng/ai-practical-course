@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>B13 特征很多时怎样压缩并观察结构？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>使用 sklearn 自带葡萄酒数值特征，训练集拟合标准化与 PCA，独立测试集检查重构误差。图中颜色仅用于事后观察，不参与无监督拟合。</p>
+<h2>先修与运行</h2>
+<p>B07、B11；NumPy 广播、矩阵形状、方差、线性投影。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 理解矩阵形状</h2>
+<p>一行是一个样本，一列是一个测量值。不同单位先在训练集标准化。学习 shape、axis 与二维索引，避免把样本轴和特征轴颠倒。</p>
+<h2>2. 用训练集方差决定保留维数</h2>
+<p>PCA 寻找线性变化最大的方向，不寻找最有预测价值的方向。保留累计至少 80% 的训练方差；这个比例是预先设定的教学目标，不是用测试效果挑出来的。</p>
+<h2>3. 逆变换检查丢失的信息</h2>
+<p>inverse_transform 返回标准化空间的近似原始点。与始终预测训练均值的基线比较重构误差；低重构误差不保证分类效果。先还原再查看一个样本的特征误差。</p>
+<h2>4. 保存方差曲线与二维投影</h2>
+<p>二维图只供观察，不能把重叠样本强行解释成明显分群。将原始标签仅作为颜色加入，表明这一步是诊断展示而非训练过程。</p>
+<h2>常见错误与边界</h2>
+<p>PCA 方差大不等于预测有用；标准化与 PCA 都只拟合训练集。</p>
+<h2>数据</h2>
+<p>真实 sklearn wine 内置数值数据，离线加载。类别标签仅用于分层划分和事后可视化。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

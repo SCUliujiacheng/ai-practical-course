@@ -1,0 +1,18 @@
+{
+  "raw_rows": 17379,
+  "usable_rows": 16950,
+  "test_rows": 2543,
+  "selected_model": "hist_gradient_boosting",
+  "validation_mae": {
+    "ridge": 58.90707101568961,
+    "hist_gradient_boosting": 53.68451649707337
+  },
+  "test_mae": 55.29867861252311,
+  "yesterday_baseline_mae": 77.56940621313409,
+  "test_rmse": 86.64522709073388,
+  "relative_mae_change": 0.2871071043062862,
+  "api_status": 200,
+  "invalid_api_status": 422,
+  "leakage_columns_excluded": true,
+  "elapsed_seconds": 1.509
+}

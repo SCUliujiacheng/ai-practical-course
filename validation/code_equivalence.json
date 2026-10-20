@@ -1,0 +1,1446 @@
+{
+  "scope": "Executable code only; compares publication to the original 240 passing script/notebook targets. Output path redaction and prose do not affect this check.",
+  "passed": true,
+  "results": [
+    {
+      "case": "B01",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "50f5f3963ae30733871c923364cc952eea95998cee77934a536adeb1839e294f"
+    },
+    {
+      "case": "B01",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "50790b9593ad2d05e65609d6124f560ad2d346b6012f71fee57a37fcd778622f"
+    },
+    {
+      "case": "B01",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "2318992534e76c939996b3fc3384abd0c7785784484cb6261572206bdcd28d52"
+    },
+    {
+      "case": "B01",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "ea44ae4e266a3c88e83ccee2432b8fa828afd5b8b06fbc87291bea64c6bbff5e"
+    },
+    {
+      "case": "B02",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "1a562f92d9c97d086cd464e30c7c50977eac65128e311596ad3a6f3526717411"
+    },
+    {
+      "case": "B02",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "be7b7ecc7338391bf07c0ebe3468d0f7c8dd4e45b786247a30fe3f24b1f5cd7a"
+    },
+    {
+      "case": "B02",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "f323d89116b838d0a1d671cf27de0ddc48850aeced857bf254f182252fca32b9"
+    },
+    {
+      "case": "B02",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "5e1dd8b9408a922d748dcc7d36f531a12e0902fde06bcb3b98a4f6510dcc0ec7"
+    },
+    {
+      "case": "B03",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "3a077cd8732472db40e79eac3c1bc784975093edd7b0435335e9e4684d0cb915"
+    },
+    {
+      "case": "B03",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "405826f133460f08b7b0f5412197744563d4feed6d786143cecd3470fcf32d20"
+    },
+    {
+      "case": "B03",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "1f0c6c11c3b9e6cfae7dbd913e92074da0dd7ee55e8138774c77a832397c577f"
+    },
+    {
+      "case": "B03",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "d3fa9878e97c93e0f9057b00064c177bfee2292cc5ec656b50e4eb016b307487"
+    },
+    {
+      "case": "B04",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "98345644cd5ca03f05cb0af6642c637479a46c8ea038941a05bd17e6fb878817"
+    },
+    {
+      "case": "B04",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "2a137b48fb73dc22fb118fb00aa6a102a19d67cc1e31b968969618c39c2923d0"
+    },
+    {
+      "case": "B04",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "2664b563d5dcadb732314f422bdabc99b2098ef1c0c6aeaa18c3689e6d966758"
+    },
+    {
+      "case": "B04",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "67fc6409274156ad610c8bc6b6e335877d07ddf48494819e27b997da2571c72c"
+    },
+    {
+      "case": "B05",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "da701bda52c190ef69fe227e8d1737161c14bcffa57563bd0ba9e995f4d78e46"
+    },
+    {
+      "case": "B05",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "7de0246bc565cbd5e0ad2d2acd7f902ba605a78c243d10385fe0da8467a75096"
+    },
+    {
+      "case": "B05",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "31ea377cc5752fb0ec0b5a6b5573addab718dfb76ffb92435dd753812672b191"
+    },
+    {
+      "case": "B05",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "c7a19333bedcc69f9acd6fd2501ff5bd5ffc1ced2ca3d3f0d90528d233c5b283"
+    },
+    {
+      "case": "B06",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "2e6633aecc2cc6095334667bce416e22acec5d30b7e4e6e1a6d76c59c1706b36"
+    },
+    {
+      "case": "B06",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "6583b9a4273ff767492c6e982c995eef49d26aace1e6a7ef33a4b7caec3d151d"
+    },
+    {
+      "case": "B06",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "0c71b2bb7be5af9559dc7b55c910f0e9cb707802b564acadcf323bba9562fe6d"
+    },
+    {
+      "case": "B06",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "7e87d1830fe4a0e7a3ad00f1e65d2d76308f8ed7bdb196caa8670de6c9673225"
+    },
+    {
+      "case": "B07",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "1a0f117fecc0d2b0fc4de8384552b958c6daff5563523048ef7f09d8e4a23b0d"
+    },
+    {
+      "case": "B07",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "bd277a746933f549c5b11f89f277eb95e959ae8d4294993ef97ab854e9d7449b"
+    },
+    {
+      "case": "B07",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "c0e5eef8f55bd6c3852c98cbe700036241e7e6771343196fccd3f43dee07903b"
+    },
+    {
+      "case": "B07",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "eccab06a7cdf28c554048e972d1957b106408e247aec5fbd22be97bb7c855703"
+    },
+    {
+      "case": "B08",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "989bd7bfa46026b6acff534c57eae92ae025bf5c02b4b39dc0d12b907d881b68"
+    },
+    {
+      "case": "B08",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "370af02f649dd3571a536540fbc2fa7499b60b12f29440ad44be0cce2d155958"
+    },
+    {
+      "case": "B08",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "668c1e3cd7c5e9ad65c31ac75640cc1bc3fc6e964d260061f6df8fbfab2ec35f"
+    },
+    {
+      "case": "B08",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "e68e9f4e9fdd92460fd120e3d9861b4b86d588094eed099b260a61bbe9c3a1f3"
+    },
+    {
+      "case": "B09",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "9a3a3312fbf9d1804b6d5e1984945b0c4de63773fa8f057743ba83a4ebc9d44b"
+    },
+    {
+      "case": "B09",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "30ae01b69c3e58c3d4006b061e3b983ae95e58eebe6730aa7279377d8a3dd66e"
+    },
+    {
+      "case": "B09",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "622c26490a2992fdf01a05a19b34b3333b21ecce31e0cd63e3591663f82ad761"
+    },
+    {
+      "case": "B09",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "a7a41e89786e25638deab0b7fd58c8ed8bee5e8fcbb1235ce0d0d16118a1dd62"
+    },
+    {
+      "case": "B10",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "08240e50f5c0c2031779fa2ac1bb4732d138272d9a7d3ea8241f662d05198d6e"
+    },
+    {
+      "case": "B10",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "4a1e36b92d0bd36645b5ec56e1f5e46f0865e80e1a75f6569504953865d69dc7"
+    },
+    {
+      "case": "B10",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "36035fb576e1be2e7093faeaf5f9ad8778699be4b2d69cb35be6452916ac38e5"
+    },
+    {
+      "case": "B10",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "1cc443a8ad750c47befcecbbf05c90c6bdc1d9317a9611c0fc9c974ae3026f81"
+    },
+    {
+      "case": "B11",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "8d4dd44d90f8394cff85afb1f876ee34915af9a18c9690c315133e5c849daab8"
+    },
+    {
+      "case": "B11",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "7355c57cda905f948f2fac44c71876aa2dc7e69fd386b02a8370ea90219171aa"
+    },
+    {
+      "case": "B11",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "b9f069e41fd5c162348dd4752da7837cbb31ff0b862ac7bb10074158c144ad76"
+    },
+    {
+      "case": "B11",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "c17dfdf6ae8aba1a216c6220cb5821936c0df4c8e366bb0ead77f847c0e7d449"
+    },
+    {
+      "case": "B12",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "f64cb0b146af570e77221bda564ab5f064515ce8bd6cb4d38cbf106407a48bd8"
+    },
+    {
+      "case": "B12",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "28d8abd6c6b8d92529ec58f4b83ed22c42306c1eb26fea372e46f03144c28451"
+    },
+    {
+      "case": "B12",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "a875cb11da405ce97d7eddddd885181c233a527569cda1847a04cdb9d47f1d9a"
+    },
+    {
+      "case": "B12",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "98f32d1d36905b72d1dcc9cbb93b75bcd93090fb509c4ef4f59cc3ba2a508b4d"
+    },
+    {
+      "case": "B13",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "aafa1285a877fc45c3084f01294a88a8291632bb7909eddc9a2e4f8958a76d86"
+    },
+    {
+      "case": "B13",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "0f49cf12460e8ac7b8a3f90a5f860fdad624689b486bd71a608b41fb9539620e"
+    },
+    {
+      "case": "B13",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "5726f3054a6826c7695fdc6b4ee006c4c79049ea00ee8c117f483490e633e775"
+    },
+    {
+      "case": "B13",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "edaf66d6bc99308b41d045386319588ae8b4076350f12bc65f2e482fca9ead58"
+    },
+    {
+      "case": "B14",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "73bfd78a647b10a52f21e93bafeeea67128faf5d9196da9ff18791b48f59d319"
+    },
+    {
+      "case": "B14",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "8efa38f7eab8d5285c0ff8477d6915213cab35fec9015d200af4a826e0aaea2b"
+    },
+    {
+      "case": "B14",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "1c4894743ba3799ed02358c825de488d244c60dc820ccd13fe6290ae5f04d5c5"
+    },
+    {
+      "case": "B14",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "62d3827a3120b2aa35f664911ad985a4767b57fdb84f8b81aa32938951d1a816"
+    },
+    {
+      "case": "B15",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "6737a7d2ec6472923661f9adc5be4d1b50e5ec4cc7cb7a49e36915cad26f43ce"
+    },
+    {
+      "case": "B15",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "5fc1c53b6917622e305508421da19a264f4a96d217725735710a92748ee5d217"
+    },
+    {
+      "case": "B15",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "d2d5b5fdb092a51b13dbab6328c251573d3bec806289b2bd34287be3e28dc6ab"
+    },
+    {
+      "case": "B15",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "13cb8e16913af24ef3d9f0f35f459a4e48694ef3365a8404d924707860d89bd1"
+    },
+    {
+      "case": "B16",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "a6a4e4621546e4dc205859a18475970cb5ca5d50d827c338519da83e748f4963"
+    },
+    {
+      "case": "B16",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "d7f7d3b7ffe1316657824af14665ac6a61d7127f5fff83f2c7c0f5ba43fb7642"
+    },
+    {
+      "case": "B16",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "5cb789eb2e2ab534261cc3435c74eac76d490dff199ed497ba5899147abaf747"
+    },
+    {
+      "case": "B16",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "dea8d73421690cac296bb23e019048777324e9940c72d3e149c9f63f11a686f7"
+    },
+    {
+      "case": "B17",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "2582beccd21cfe0c6e835d387175f06bf394ef1f9aec3cc2d851293e632ae735"
+    },
+    {
+      "case": "B17",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "e7c41c86c51e9d739108981033804c466a7f34a2ee07d58994929c82ec7a1e45"
+    },
+    {
+      "case": "B17",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "7faaec2eedf7d4676e67792a9f46eacf3bb33e2a9a0e06ead790bb0bce6a107f"
+    },
+    {
+      "case": "B17",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "7abb0be5bb6bd2a0dcffe3d0c36154bd4671877763cd832f682702435aa664bc"
+    },
+    {
+      "case": "B18",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "97518f429e8b87c7fe6e1d6ec390bbf3b6ceafe43593dd89af1f75dca8e347eb"
+    },
+    {
+      "case": "B18",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "e185d3adedb8c06ec9e233555c2e4883c6f1afa63605b22419f9a19674e779d8"
+    },
+    {
+      "case": "B18",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "b099f05be6710aae9b67da38ae81d7741389df4698d6725854bb0d78a149859a"
+    },
+    {
+      "case": "B18",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "d24bdb6c68f83f0926466231f4cd87541c363ddb4320c7157347e61513a78ee3"
+    },
+    {
+      "case": "B19",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "73f4d3837fcdafb28a4049cbc063555c7e744e4f367af28111713059ee2445a9"
+    },
+    {
+      "case": "B19",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "c5c3d9e724702669ca666261d83e003b275208d86dce2f3a4d26a046b5db8825"
+    },
+    {
+      "case": "B19",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "97997f5fb0d058950cef8e556025263e1cf6719c84a2a6fc4265483909f2e43f"
+    },
+    {
+      "case": "B19",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "807d3e8a1aaad842837db7737ab029eeef91cf57f9835b88d2dc08f29607b63a"
+    },
+    {
+      "case": "B20",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "e04fff08fd4dfffd52e28c984a442582722c4e028e5580ec49b5827b9dec6ee0"
+    },
+    {
+      "case": "B20",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "7ff2348158f6a0ec33385f8fdf26343738d5cfa4b9f95b071998e3497559a04e"
+    },
+    {
+      "case": "B20",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "a4a5b3c8c9ab50444cc2994ba2154c9c766aca399f92be8b3e8fb2f2705343f2"
+    },
+    {
+      "case": "B20",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "97ad552edf05de3391234e9a846e1778ef825a43631549ce9c02d99d197123ff"
+    },
+    {
+      "case": "B21",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "f864861b7f69c4da151f2b0d587caef10527c2fed3b3de953a0edceaa25a2186"
+    },
+    {
+      "case": "B21",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "8b262979d3bf12beb2b3b91f3831d54f6e5878f0ef952b94323917b2ca498f02"
+    },
+    {
+      "case": "B21",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "ffbdbaaf11e23cab31f8e3efadf0d7fbec80ccba83338d37db24d54635d3583e"
+    },
+    {
+      "case": "B21",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "d97487fb8a6f081cecc751f87af8e3647cf568b89dd5a93c4022cb318d99b77d"
+    },
+    {
+      "case": "B22",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "0bdead91cc6e14fac0256d5ca48715c125f6c9b8290dd95677e4bb955f0a623e"
+    },
+    {
+      "case": "B22",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "b1edcac38e21dda02abdb55e64a61b52466543734370251a7f09cc8485d1b0f3"
+    },
+    {
+      "case": "B22",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "468bd00a91e3cd4291e37742b15d0cf53843a128292dc7beff08c065460f82e9"
+    },
+    {
+      "case": "B22",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "5f8c31f9934de4af59acc919d938692d1c20d51e6109b73edaad23a7bd1d41aa"
+    },
+    {
+      "case": "B23",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "c4703dcf823ef06c5dcd28fac69e30a5f2a5c6a3959dbf78ba9fe2a407448507"
+    },
+    {
+      "case": "B23",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "dea2bfa80617b36747fa99b7faee9c49a365710622bc3cdd31997e7bc64137fa"
+    },
+    {
+      "case": "B23",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "ee1272e9c348b93c710e3864d9aeb04c9aabc92e23d73cef26ae0d0eb9abe96d"
+    },
+    {
+      "case": "B23",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "44d4b3e42984deb74b4b43de704771c3cbf78d81a3e75f01346f56a314351c61"
+    },
+    {
+      "case": "B24",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "4938a3144357d46c818986dd7191aab5f25418efe8bebfd4ba8788252c0f9265"
+    },
+    {
+      "case": "B24",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "d847584e709862dedf6041a2e8a8a52fcb43b5c0ce8595be90686e12f2dc3987"
+    },
+    {
+      "case": "B24",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "66a6905a54d4d0347c15e0b294d89f10d8587dee16aa7538ab865b0ac3e3974d"
+    },
+    {
+      "case": "B24",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "8855a05700b4fcd622de007228eb28be6ee8ef124552684718302ea9d21ec435"
+    },
+    {
+      "case": "B25",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "5f018e03e8c9d0ac84b15e8f233836b0b98054cc2c71b650a6697394edcb7ab0"
+    },
+    {
+      "case": "B25",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "a352a02a230764e6860f4101487dfe69f6f1c3781a9625c0a2e968bdd68dd005"
+    },
+    {
+      "case": "B25",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "3864786449d18281d0f16344b58e555f8be9d8c8437f25aab4263bd728064fff"
+    },
+    {
+      "case": "B25",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "8cb8b4f4918282e15986ecc9f4118d49c21f54622971f7bbd906fff96d4866d1"
+    },
+    {
+      "case": "B26",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "e339ef33fd4cf103a3d06fc11216695252e92c12847540d1e0dbcf1c0249add5"
+    },
+    {
+      "case": "B26",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "0b262a8a280b9b4a6528db2bdaeb081c39689257777d9304d5e3a8ec4d5e8999"
+    },
+    {
+      "case": "B26",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "4690359375ad744346bafa129cd11f74d4e50040a22c5a7bcd4074ecefed9c74"
+    },
+    {
+      "case": "B26",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "79a315afa7987fe9d1d24aaf0259ef3ec67c3856e696b3fe839175177f65e47c"
+    },
+    {
+      "case": "B27",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "5823eb709e7a541bd344df9d45ce3b6ca92082be3334ceb9aca43c59466fcdcb"
+    },
+    {
+      "case": "B27",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "60f4f01e740360afcda9d26f7d6b66ff5c7c8ce76b4cc525296350b37a4b8c80"
+    },
+    {
+      "case": "B27",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "9bce98318d61d62ff78c0cf75658614353833e788d024b2cd79abff84fe2bfbd"
+    },
+    {
+      "case": "B27",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "23938513084ca609ca303605b5c0e70736be5aa8833adefde87b51ff63fea360"
+    },
+    {
+      "case": "B28",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "6fd44c6569027d977e6644c0243c2084851620b875047881433770903de6a427"
+    },
+    {
+      "case": "B28",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "7a1e00dc20ef91f1563af6d4fdd3990927084b6c2619a228d87a54650d9f15ae"
+    },
+    {
+      "case": "B28",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "026acf491061b5eb36afa3163a23c9087098583ec61914bc13c1f3950bf28420"
+    },
+    {
+      "case": "B28",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "4c470ce73aea7e8449d4c6afcd9af8b217052735df5235fe85f235c82970a11d"
+    },
+    {
+      "case": "B29",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "ffdfbbcec3eb82743b321aa360f9ff67f6e0c973506abdf648b5f778328962fa"
+    },
+    {
+      "case": "B29",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "d536199fe7ec77ff1b0fd5f87c18edf72b357fe37aed6e4a7d29617c120bb794"
+    },
+    {
+      "case": "B29",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "72ff032884229e21e5bed0c0446d245673eee4d6dfe499969c21a1e00ebd152a"
+    },
+    {
+      "case": "B29",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "86d70d0e544141e5f7295015418ffe0434619b5512fe9804f4450d33cf4472d5"
+    },
+    {
+      "case": "B30",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "0f46ce04f75250450442444f6ddc1bca9b7f0297b88a62b8a307ee31a43b8b6d"
+    },
+    {
+      "case": "B30",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "0e1d8af6131371444ec5921b8865c55338532c1bae58e493faaca3fb97a2ef0a"
+    },
+    {
+      "case": "B30",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "ff6b282eca3c2b01df749df346e06fff9ed8395baff364e150534e93c913aeb0"
+    },
+    {
+      "case": "B30",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "772bbb5fa9027f00f4d385e830882db055d40cea0215f55667c276a6cc67a481"
+    },
+    {
+      "case": "A01",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "5f4bc344bc5a8d52a9ac8dd2193e6352fdaca29c64ac2d2a0df434d7947edb06"
+    },
+    {
+      "case": "A01",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "0305298daa1ae1c91e53acbef8248e85d0c22bb930662a040b08eaf5113a41c9"
+    },
+    {
+      "case": "A01",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "6ae44158a625379ad99f8d059bf1303f30947e677a274e455d049aabaa64682e"
+    },
+    {
+      "case": "A01",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "251d2fbc5fcdcffc802bbc1f8c2c6467162eec4c6611b3b1ee470fb7916d2f1d"
+    },
+    {
+      "case": "A02",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "0789c8924073af2c9317388bd8c5d85707e31c914ea4bdf0f6aed86a57581a69"
+    },
+    {
+      "case": "A02",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "88caf69e7fb754dcd19ededaef2ef43a371c0a8aace8c658527de0b4453a2eae"
+    },
+    {
+      "case": "A02",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "5031dd4f6da61e6a9bf8fa2c32ee5b38e8e3b5dbc441f4e72ebda1cbde12e512"
+    },
+    {
+      "case": "A02",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "4233b7ac6ea937e1ccdcf8e063a786a03f9e129cd6d32efe4d69e9cbf00e18d1"
+    },
+    {
+      "case": "A03",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "c6f0d4c02d1307fccaaed28e8e20dcbaae0a14f8e65f19dcc80aa4c26a9f19a9"
+    },
+    {
+      "case": "A03",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "00e7b4346c2f4fc456fbff366f64ad9383903fbda29d92fec6e55caa4f6a1b4b"
+    },
+    {
+      "case": "A03",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "1cb6a379e61fb4ff15f4641ace55776c4b24683c0a42e396d1639b3c1541c249"
+    },
+    {
+      "case": "A03",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "6b2f71bbebe85c48d01cacb704c4e50501bd3ab60eedd251b54e033ae866ad49"
+    },
+    {
+      "case": "A04",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "700c4058041147279c795d4811cc74cfa73374a6ebbe736f08353aeaa6ba0459"
+    },
+    {
+      "case": "A04",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "0141973b1f4fb8b25925e76db39d248ba177d2b1fd31695278e83249c560068d"
+    },
+    {
+      "case": "A04",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "0442f1d6873566c32e202c7c90721a0fd8712bdb7d80caf5900870ae32ef521b"
+    },
+    {
+      "case": "A04",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "5b01233eb9ed4436121ad04af506232cf5c18792c4c9db183970213e5795e70c"
+    },
+    {
+      "case": "A05",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "12e5a0ab90e65b03e41afb7e95036c55c3248027f52d1c011ab62cf875515d0a"
+    },
+    {
+      "case": "A05",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "748fed914761376300ede75311d2f865921b06719c2d6f910f2ba8cbc577b0cb"
+    },
+    {
+      "case": "A05",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "dc79c0b7166ab4fb78ef1cea14641052de97220cccd03b65e223cc1fb9501f68"
+    },
+    {
+      "case": "A05",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "b88df995b4964ac88010a78b72f9d55f3fd97bb9277326459d217428d9721089"
+    },
+    {
+      "case": "A06",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "a6b1d1ec44b94a6e26790079202f03b7d32cf12b829a2c532c991e3f0323efec"
+    },
+    {
+      "case": "A06",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "ce5ef7eb352b88ce1e5cbe2184fac285be5f5c0b71fdb8985d8ef57fa9b5084c"
+    },
+    {
+      "case": "A06",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "4522fe500918402d9b04592b6b50ccedf08bb77047fbd03f2a1ef1a9af846809"
+    },
+    {
+      "case": "A06",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "33efc4b51bee04c8e00a6400e870ad1dfb86d1467cb60323ed8c44c7201c699c"
+    },
+    {
+      "case": "A07",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "95b30aabe678f297d0ebffb6a93517da4ae2bc05743a9de470d0b7a0171dc07c"
+    },
+    {
+      "case": "A07",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "36b0368f2cedcf954c7c02e429d18a8c1c1ce37e825510bec1ce6f332b9c5794"
+    },
+    {
+      "case": "A07",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "6bbb4ec011b477d8e3bff134a1c73d54fd4d40032ff07c237c9aa3f3e7986e03"
+    },
+    {
+      "case": "A07",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "ed95b7410580126aca25e26d02ee071286b11d61ffa58e315bed53ae06dd83c7"
+    },
+    {
+      "case": "A08",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "ae8111e6276d807a7c68577cfd9c75253127f4cd2297d537eed99d55c1fa8fb5"
+    },
+    {
+      "case": "A08",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "147d80e9590327ff83f9378ba24f1d11a7b954a11b7aa914c4598465e6ee74f2"
+    },
+    {
+      "case": "A08",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "12abb84c8f35f9f93c63eb5f81327fe546c6446cfdc8171b84b81df211303f75"
+    },
+    {
+      "case": "A08",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "1d78f1ede4589e7a7f40b05dde880111e670751f7e1d82a813a1346278f324a7"
+    },
+    {
+      "case": "A09",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "edb3909571e5cdfd37739096bf9248b2c7c322370577e5862728db409618c1c0"
+    },
+    {
+      "case": "A09",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "579cea9a7cf70a9d7523b5d011f89cf66eb6bdfee0e81d69471380592bb8b155"
+    },
+    {
+      "case": "A09",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "f0fd84e3d1e341ee8c6e4c3accf662b3e677ee2a5fd99fc73f8324d558a087cf"
+    },
+    {
+      "case": "A09",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "54c658b363d094246becdd46c47bdd0a7bd4f67462053f630ed7b7acf44e4c67"
+    },
+    {
+      "case": "A10",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "b8e7cfa7713dc24f8632536dd26a006c113c8775679090e539caa47cd3f4f828"
+    },
+    {
+      "case": "A10",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "5defeb7b34b647a46cc5ec33bbcae76dd3267ceca656cd7abf53c70e26460531"
+    },
+    {
+      "case": "A10",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "37b02f6550d1e89d7221b36b63dfd55f14b65021478f722a0887e71c2c52ca8b"
+    },
+    {
+      "case": "A10",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "61a4cffe545546a89ee01b89782429c69a64a641282160b823c0ea3d0cff252d"
+    },
+    {
+      "case": "A11",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "f3bc814845ccfe2e8d85f772107828f389e78a582e2a76e8001c88b449c3e33e"
+    },
+    {
+      "case": "A11",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "2f78bbde086274f339f9d07a2f8e1f18dc2947defb95ec8bbe2898674bd91c07"
+    },
+    {
+      "case": "A11",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "85669e564ef8e53ebf553f735be098a7077cd1febe0081d6311d708deba76824"
+    },
+    {
+      "case": "A11",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "f470558c6dbe5990a2738467d10c4211188c2cdcc212ad100bd3c1b78dbac5e0"
+    },
+    {
+      "case": "A12",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "7ac4860ece715018869bcda65ebe0d037dc0de2102e45bc9cb4036ceff82819d"
+    },
+    {
+      "case": "A12",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "82f539a60e6d55998c174597e12a6cf78d8640d962a944f4da925ba44b598109"
+    },
+    {
+      "case": "A12",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "7b790aae1f7567401938de86540ddd2ab40dc1552b285912e37566c56fdbb21a"
+    },
+    {
+      "case": "A12",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "aeb7474f571a9eef94d17b1118efbb6567a45bdbfc6ccf678707faaffe82e256"
+    },
+    {
+      "case": "A13",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "fb2ad91cc3b6241ca99692ec8f298365984b7cf540abccf45e8decffb0576d67"
+    },
+    {
+      "case": "A13",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "8b2dfecf7a955f10e6f9271282bf1c0926325d307f2c79c11e270e059b712f18"
+    },
+    {
+      "case": "A13",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "2c7e3dbe1928fdeb9a405be8ed0a4651daa0257bc4538b3daeb7ea37caa8836c"
+    },
+    {
+      "case": "A13",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "2b8d2c02078052c81bfe45926b2945e4c2d7195e755485ca8832971b2f4804df"
+    },
+    {
+      "case": "A14",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "2565efa081a07434d4f3b34bb2d7d810f2080a85125c6cf08f91c7db2d81e6d9"
+    },
+    {
+      "case": "A14",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "f7a2f07334c1ced4914fe205235c38040e9cdb9446bc43680710e5513ceacae4"
+    },
+    {
+      "case": "A14",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "89b8e568fa059e827a8a5faf2371178b18361c95754726283743a61a6d25299e"
+    },
+    {
+      "case": "A14",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "0fd44ef7d33f4d03fe3e8a93bf718ed3ecf727325a1fc2e19a51ca2940f38b08"
+    },
+    {
+      "case": "A15",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "5e66ebe609fd5290e6db6fcaab62f601167e8f904aff44127dfe6f25b0e82374"
+    },
+    {
+      "case": "A15",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "9235c6d346c88f45fe3fdcf3fe9cf45cf31623b423a0bc68ed77ae1c95b1c0f0"
+    },
+    {
+      "case": "A15",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "df86c0d8ce9cb7fda6276d0c2a3498e35d076081ae4406e1005ea44a22678b58"
+    },
+    {
+      "case": "A15",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "03421b03602c8cfa0799cadc4be31410f1adca964408b3241c4080603944804f"
+    },
+    {
+      "case": "A16",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "d849e39b4bace8d1bf670b38240ee478963e56489e68387a77e195db863939fb"
+    },
+    {
+      "case": "A16",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "97962291b8f657e8362f8f73ee60e4809ffe8c967dfa93c5f4a7b0e142ca2303"
+    },
+    {
+      "case": "A16",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "8a197b971223096de424f25023c2bc8901b30602d21c601e147ea4f683dec0b9"
+    },
+    {
+      "case": "A16",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "2825b5f63cdd0cdc1c6c48adfe0bad61cc915cdc9c49271d5cc02c674eaf8c09"
+    },
+    {
+      "case": "A17",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "60fd5738d28815d5ceb16887a4a851a5ff2b4b13040fca1ac23370886d06ffcc"
+    },
+    {
+      "case": "A17",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "ee50616be3f1ef09a9ac391302c6ab000c9c0960fd0a8961a10c009364b8ef4f"
+    },
+    {
+      "case": "A17",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "2573c1e01ea3fb2a9ec5b2bd05cdd6203ab5341c4b98958abe9b07cb898314c9"
+    },
+    {
+      "case": "A17",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "c1628a4c03f818a8210c690ea1d80878613feb967d538e6bf968960e8fb033a5"
+    },
+    {
+      "case": "A18",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "ba95a0788ffb1c6928190fdc109da88d1327671671c5406c58b6f4a3702e8ab6"
+    },
+    {
+      "case": "A18",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "c06956dcb81ff7eb415ebedec4520589e47e97bb7e130f8bcdd5ce706922f5f3"
+    },
+    {
+      "case": "A18",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "4a08f56b857a338fdab55c367d18d5d91d660e2ace320d0f1bbe295a5dfe1549"
+    },
+    {
+      "case": "A18",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "03c473451b4cdc5b13a625ad65248cecdb9a00b5ac7c4a67c833cc75f99c0956"
+    },
+    {
+      "case": "A19",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "6b0a33cd4c5994b87d6032dbfe548666f77182047a8f0632afb7020e73a0719e"
+    },
+    {
+      "case": "A19",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "665b144f932440669b38e239d90591ac3679afb68443885035b952f41ae735a6"
+    },
+    {
+      "case": "A19",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "0188a47c3cf4b864c15440ba501dc4081479148391bf6442efe730acf2eb616a"
+    },
+    {
+      "case": "A19",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "71a165dbb93c5c2b8d7618ad81d3930efc6d0852530e6b774ea83e6e90543b27"
+    },
+    {
+      "case": "A20",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "b46a6629ca09039b2e115f275cf5e74a05141daad9aeceb8c05e5886279d75b6"
+    },
+    {
+      "case": "A20",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "677ce5ae2c4d2e6cc98aff451f76f97aef54f55a1d9a2231c0f9db365a51bc0f"
+    },
+    {
+      "case": "A20",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "93addc3999572ce33f509fc00bad44948e8b73cc182563bbbacdde3b89161aad"
+    },
+    {
+      "case": "A20",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "bb8d5f1e6fd2b14f2cc47e6d1c8b7c09c81448d48d0bc5bb29c185279b77dd93"
+    },
+    {
+      "case": "A21",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "98646e9f171898f6b4fb813aba2d1ea66f4a7339b38351dea2b604d126eaa35b"
+    },
+    {
+      "case": "A21",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "df7628f2bb18bb365907a43474e211f661ccd98c5b7255cb5d7de04ce085aa22"
+    },
+    {
+      "case": "A21",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "78c77e442537e5cfe2911a5a146d8329c52c3c3eee27e697333055f01e7bdf52"
+    },
+    {
+      "case": "A21",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "658588b22152043c06d4e86c1cfcced55ece665876f083ae8f07d515e7a08fc7"
+    },
+    {
+      "case": "A22",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "f74c8a89c0ae6758a8e07361b233d3db76fc58aba35575eda3997bc8c865587c"
+    },
+    {
+      "case": "A22",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "75c8180362be5d523c98349a06672a12ce3ac6dd2d56b45edb6e3dc4922a7124"
+    },
+    {
+      "case": "A22",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "081b7e9c8b69f51960e3aefe7899ff0006c9b15fc0a089f6696b6b6a63e066e4"
+    },
+    {
+      "case": "A22",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "54fc993fd944fccf53de17b5ed71a66e0ee31c4f6676ebb84d08e54d6dda58c1"
+    },
+    {
+      "case": "A23",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "358cc42c7c87b40aa59ca7a6f9ff823c1013ecf97dc2889ef60e6679fdbb81cf"
+    },
+    {
+      "case": "A23",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "b9e919f08550f508f0e0722810b4a776dfa41a46363e5d2e4eed179fc0b5c199"
+    },
+    {
+      "case": "A23",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "8aaa43cb2c4eaf93b58136c4198361bac977e92b4d13d3aa3bbdee4da3e7f707"
+    },
+    {
+      "case": "A23",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "964b5b5b218931ef3697f5c0ce08cab60f8602839d1fbc54a15dd627286d80e7"
+    },
+    {
+      "case": "A24",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "8191ac04a86c5354bf981e85547b1ecb7d91ca679d8c2df4c84b62de504cfdca"
+    },
+    {
+      "case": "A24",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "81d8acbb9f08c725a3828f510c118182718d040fa2c85156dba37be348fe391e"
+    },
+    {
+      "case": "A24",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "4d3aee64783fb79611f8e61c19788f09be99c180f84ed438ca03174f51a4c362"
+    },
+    {
+      "case": "A24",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "7c5926218cb595a45990d804f843ba36149aa36827a9c65a42c76d03d7f6e37b"
+    },
+    {
+      "case": "A25",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "49d65d7e297cd3e2f7ed8d4f84666038d37c1d9b4f86383653d2e683ae6d2385"
+    },
+    {
+      "case": "A25",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "eb76b697920ead4e76514ae1b6b1b10739bdb1ee9b47a7f1471588a9f0e8153e"
+    },
+    {
+      "case": "A25",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "535db9ead769f570f092e9e7b83f4539a9a890db2c8b8a2fe69efd22c2a0da13"
+    },
+    {
+      "case": "A25",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "6ec698535aebcc8ab70f78d2dc51a88c065fff033a176a6937bec1ba2045b0b2"
+    },
+    {
+      "case": "A26",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "47cc6b4d528bfd6f26d215eeee8a32722718e6a9f12384b57c610d546a9d4b40"
+    },
+    {
+      "case": "A26",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "e40869b8a416e5c3b64ec41530ae98c8b012374674c1ce8ba4ea3d14c473c223"
+    },
+    {
+      "case": "A26",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "57f4e527643415cf0ba2c090f89809c33eadc45c573ba2b8bd50c2d3a9d1d89f"
+    },
+    {
+      "case": "A26",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "12891b2c27d748cf1228c7dc33f44ea9ad44573f130a8ef011bb52376cbf2ed8"
+    },
+    {
+      "case": "A27",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "10504e41add76bd6a0cb59444705ec3c9119d7fdbdddbc03bbfd848b3c68a925"
+    },
+    {
+      "case": "A27",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "4afe30f41bade454b11b5ee808f59d2fbe5bd199cdb13cb1f05b07d44f5a86cb"
+    },
+    {
+      "case": "A27",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "a932297d794212d896562aa9aca941709d26716f50a442e9d7b15dc75090b66b"
+    },
+    {
+      "case": "A27",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "9f49e2003fb04cf0272fcdbcb215fc5ec7b536cd5f285637e35b96b2bcf5ad48"
+    },
+    {
+      "case": "A28",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "22941013bd061db2431b832ca00081bf0af2c44504785eb5b8c3ee6ac0feba2a"
+    },
+    {
+      "case": "A28",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "a5283397dd495e2647ad62b29be9105d10d3b43647ce5e262a9f8eeca6ccd3fd"
+    },
+    {
+      "case": "A28",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "caf2b03681fbf7ebac234e5b899f3f225df3008a65f7ad3cf0b13f5a42da71c2"
+    },
+    {
+      "case": "A28",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "759f60bd871c089a58114801721aa36263c79842328b64e31a5ddf096073e248"
+    },
+    {
+      "case": "A29",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "d6cbae53b4620784156d9f6b95e2cc4f431be36754392422cab0167475d67479"
+    },
+    {
+      "case": "A29",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "23d88b51ef38856ab47bebbccf1ee4722b14b40b05bd287034c0ca928b77ec47"
+    },
+    {
+      "case": "A29",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "81bbf8cf31a400d392b7be52c88114bb3cc8d3dbceac0d39b623cc2388c3a294"
+    },
+    {
+      "case": "A29",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "8291f97f6fc19d0388ab9510635ae2512df1e7551b2a6ec70f04bec8c56c70d1"
+    },
+    {
+      "case": "A30",
+      "file": "solution.py",
+      "code_unchanged": true,
+      "code_sha256": "b210acfa598dcc84253d07f5c63d5690a04c05fd47cc035927c71908507f8eec"
+    },
+    {
+      "case": "A30",
+      "file": "教学讲解.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "156cd031bfa784597419290ea6c027a1ba648bb8a64ccc37b3d161ab6977fa2e"
+    },
+    {
+      "case": "A30",
+      "file": "参考答案.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "535ce808cf1e845bb412c60b16f46b54f9ad415f61175db6f0b4281ca641ea01"
+    },
+    {
+      "case": "A30",
+      "file": "动手练习.ipynb",
+      "code_unchanged": true,
+      "code_sha256": "f8cc8b4896747d338dca44d26b201d465725e891516d81b2cc1edcdfbe477d0c"
+    }
+  ]
+}

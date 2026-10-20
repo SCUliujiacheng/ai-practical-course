@@ -1,0 +1,33 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>14_少量评分推荐电影 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>用户只评价过少量电影，怎样推荐？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{&#x27;eligible_users&#x27;: 34, &#x27;cf_hit_at_3&#x27;: 0.9411764705882353, &#x27;popular_hit_at_3&#x27;: 0.4117647058823529}
+</pre><h2>1. 补全：确认无训练测试评分交叉</h2>
+<p>把用户、电影组成二元组，检查两份评分集合没有交集。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    train_pairs=set(zip(train[&#x27;user&#x27;],train[&#x27;item&#x27;]))
+    test_pairs=...
+    assert train_pairs.isdisjoint(test_pairs)
+    print(len(train_pairs),len(test_pairs))</pre><h2>2. 修改：推荐 5 部</h2>
+<p>对用户 4 产生 5 个不同且未看过的推荐。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    items=...
+    assert len(set(items))==5
+    assert set(items).isdisjoint(train.loc[train[&#x27;user&#x27;]==4,&#x27;item&#x27;])
+    print(items)</pre><h2>3. 迁移：没有历史的新用户</h2>
+<p>调用新用户 999 的回退方案，并核对与全局均分排序一致。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    items=...
+    assert np.array_equal(items,np.argsort(-popularity)[:3])
+    print(&#x27;冷启动候选&#x27;,items)</pre></body></html>

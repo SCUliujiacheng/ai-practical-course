@@ -1,0 +1,62 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>02_合并多个气象站 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>怎样合并多个气象站并按城市统计？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">  station       date  temp_max         source
+0       A 2024-07-01        25  station_A.csv
+1       A 2024-07-02        27  station_A.csv
+2       A 2024-07-03        29  station_A.csv
+3       B 2024-07-01        27  station_B.csv
+4       B 2024-07-02        29  station_B.csv
+  station city       date  temp_max
+0       A   海城 2024-07-01        25
+1       A   海城 2024-07-02        27
+2       A   海城 2024-07-03        29
+3       B   海城 2024-07-01        27
+4       B   海城 2024-07-02        29
+5       B   海城 2024-07-03        31
+6       C   山城 2024-07-01        21
+7       C   山城 2024-07-02        23
+8       C   山城 2024-07-03        25
+      mean   max  count
+city                   
+山城    23.0  25.0      3
+海城    28.0  30.0      3
+</pre><h2>1. 补全：检查连接键</h2>
+<p>统计每个站点几天有记录，并验证站点元数据唯一。</p>
+<pre class="code">counts = merged.groupby(&#x27;station&#x27;)[&#x27;date&#x27;].nunique()
+assert counts.eq(3).all()
+assert stations[&#x27;station&#x27;].is_unique
+print(counts)</pre><pre class="output">station
+A    3
+B    3
+C    3
+Name: date, dtype: int64
+</pre><h2>2. 修改：只统计前两天</h2>
+<p>筛选日期早于 2024-07-03 的记录，再按城市和日期算均值。</p>
+<pre class="code">early = merged.loc[merged[&#x27;date&#x27;] &lt; pd.Timestamp(&#x27;2024-07-03&#x27;)]
+early_summary = early.groupby([&#x27;city&#x27;, &#x27;date&#x27;])[&#x27;temp_max&#x27;].mean()
+assert len(early) == 6 and len(early_summary) == 4
+print(early_summary)</pre><pre class="output">city  date      
+山城    2024-07-01    21.0
+      2024-07-02    23.0
+海城    2024-07-01    26.0
+      2024-07-02    28.0
+Name: temp_max, dtype: float64
+</pre><h2>3. 迁移：用 SQLite 复算城市日均</h2>
+<p>可选 SQL 迁移：把已合并数据写入内存数据库，使用 GROUP BY 复算，不建立服务器。</p>
+<pre class="code">import sqlite3
+with sqlite3.connect(&#x27;:memory:&#x27;) as connection:
+    merged.to_sql(&#x27;weather&#x27;, connection, index=False)
+    sql_result = pd.read_sql_query(&#x27;SELECT city, date, AVG(temp_max) AS temp_max FROM weather GROUP BY city, date ORDER BY city, date&#x27;, connection)
+sql_result[&#x27;date&#x27;] = pd.to_datetime(sql_result[&#x27;date&#x27;])
+pd.testing.assert_frame_equal(sql_result, city_day.sort_values([&#x27;city&#x27;,&#x27;date&#x27;]).reset_index(drop=True))
+print(sql_result)</pre><pre class="output">  city       date  temp_max
+0   山城 2024-07-01      21.0
+1   山城 2024-07-02      23.0
+2   山城 2024-07-03      25.0
+3   海城 2024-07-01      26.0
+4   海城 2024-07-02      28.0
+5   海城 2024-07-03      30.0
+</pre></body></html>

@@ -1,0 +1,16 @@
+* text=auto
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.ipynb text eol=lf
+*.html text eol=lf
+*.cmd text eol=crlf
+*.png binary
+*.npy binary
+*.npz binary
+*.pt binary
+*.joblib binary
+
+# Preserve bytes used by SHA-256 asset checks on Windows clones.
+/assets/data/** -text
+/assets/models/** -text

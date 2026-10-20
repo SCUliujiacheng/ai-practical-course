@@ -1,0 +1,49 @@
+{
+  "solver_status": "OPTIMAL",
+  "hard_constraints_pass": true,
+  "total_staff_shifts": 31,
+  "evaluation_population": "留出周末",
+  "heldout_target_days": 6,
+  "forecast_mae_on_heldout_weekends": 4.90343391550409,
+  "empirical_buffer": 7.742360148661724,
+  "stress_evaluation": [
+    {
+      "scenario": "normal",
+      "reserve": false,
+      "mean_final_backlog": 0.0,
+      "all_slots_zero_backlog_rate": 1.0,
+      "mean_reserve_shifts": 0.0,
+      "mean_reserve_cost": 0.0,
+      "reserve_constraints_pass": true
+    },
+    {
+      "scenario": "normal",
+      "reserve": true,
+      "mean_final_backlog": 0.0,
+      "all_slots_zero_backlog_rate": 1.0,
+      "mean_reserve_shifts": 0.0,
+      "mean_reserve_cost": 120.0,
+      "reserve_constraints_pass": true
+    },
+    {
+      "scenario": "demand_plus20",
+      "reserve": false,
+      "mean_final_backlog": 35.5,
+      "all_slots_zero_backlog_rate": 0.0,
+      "mean_reserve_shifts": 0.0,
+      "mean_reserve_cost": 0.0,
+      "reserve_constraints_pass": true
+    },
+    {
+      "scenario": "demand_plus20",
+      "reserve": true,
+      "mean_final_backlog": 5.5,
+      "all_slots_zero_backlog_rate": 0.0,
+      "mean_reserve_shifts": 3.3333333333333335,
+      "mean_reserve_cost": 170.0,
+      "reserve_constraints_pass": true
+    }
+  ],
+  "revision_status": "OPTIMAL",
+  "revision_feasible": true
+}

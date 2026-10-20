@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>B01 怎样从天气 CSV 找到最热的一天？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>输入是一份 10 天的教学天气记录。先不用 pandas：亲手把文本转成数字，遍历记录，输出日最高温、平均值和高温天数。</p>
+<h2>先修与运行</h2>
+<p>能读懂变量赋值即可；本例讲解列表、字典、循环、函数和文件路径。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 读入：文件中的数字最初也是字符串</h2>
+<p><code>with</code> 负责关闭文件，<code>DictReader</code> 用首行作字段名；<code>list</code> 把逐行读取器变成可重复查看的列表。输入是 CSV，输出是字典列表。先观察类型，避免按字符串大小排序。</p>
+<h2>2. 转换：建立清楚的数据约定</h2>
+<p>逐条转成浮点数，同时检查日期和合理范围。<code>append</code> 将一条结果加入列表。检查失败时停止，比忽略错误继续出结论更容易排查。</p>
+<h2>3. 函数：把统计过程变成能重复调用的步骤</h2>
+<p>函数接收记录与阈值，返回字典。最热日相同温度时保留最先出现的日期；空列表必须显式报错。循环里的累计和与计数，是以后向量化计算的基础。</p>
+<h2>4. 交付：数值与图互相检查</h2>
+<p>把结果写为 JSON，便于程序再次读取；图用于发现异常，不代替精确数值。折线的每个点应对应一行输入，阈值线帮助核对计数。</p>
+<h2>常见错误与边界</h2>
+<p>温度字符串必须转为数字；这里的均值是日最高温均值，不是全天平均温。小数据为手工构造，不能用于气候结论。</p>
+<h2>数据</h2>
+<p>手工构造的 10 天教学天气数据，单位 °C，无真实城市含义。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

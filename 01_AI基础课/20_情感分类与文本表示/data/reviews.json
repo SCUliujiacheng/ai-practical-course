@@ -1,0 +1,134 @@
+{
+  "train": [
+    [
+      "great food and friendly service",
+      1
+    ],
+    [
+      "excellent quality and fast delivery",
+      1
+    ],
+    [
+      "I love this useful product",
+      1
+    ],
+    [
+      "wonderful experience with helpful staff",
+      1
+    ],
+    [
+      "good value and reliable design",
+      1
+    ],
+    [
+      "the room was clean and comfortable",
+      1
+    ],
+    [
+      "very happy with the purchase",
+      1
+    ],
+    [
+      "delicious meal and nice atmosphere",
+      1
+    ],
+    [
+      "works perfectly and feels sturdy",
+      1
+    ],
+    [
+      "amazing support solved my problem",
+      1
+    ],
+    [
+      "easy to use and good performance",
+      1
+    ],
+    [
+      "I recommend this excellent book",
+      1
+    ],
+    [
+      "terrible food and rude service",
+      0
+    ],
+    [
+      "poor quality and slow delivery",
+      0
+    ],
+    [
+      "I hate this useless product",
+      0
+    ],
+    [
+      "awful experience with unhelpful staff",
+      0
+    ],
+    [
+      "bad value and unreliable design",
+      0
+    ],
+    [
+      "the room was dirty and uncomfortable",
+      0
+    ],
+    [
+      "very unhappy with the purchase",
+      0
+    ],
+    [
+      "disgusting meal and noisy atmosphere",
+      0
+    ],
+    [
+      "does not work and feels fragile",
+      0
+    ],
+    [
+      "horrible support ignored my problem",
+      0
+    ],
+    [
+      "hard to use and bad performance",
+      0
+    ],
+    [
+      "I regret buying this boring book",
+      0
+    ]
+  ],
+  "test": [
+    [
+      "friendly staff and excellent food",
+      1
+    ],
+    [
+      "slow delivery and terrible quality",
+      0
+    ],
+    [
+      "good product with reliable performance",
+      1
+    ],
+    [
+      "rude staff and dirty room",
+      0
+    ],
+    [
+      "not good at all",
+      0
+    ],
+    [
+      "not a terrible experience",
+      1
+    ],
+    [
+      "helpful support but slow delivery",
+      0
+    ],
+    [
+      "I love the clean comfortable room",
+      1
+    ]
+  ]
+}

@@ -1,0 +1,35 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>A26 连续三天活动，每晚应补多少货？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>将库存变成状态，采购变成动作。动态规划同时考虑今天与明天；滚动方法每晚更新真实库存，只执行当前动作。</p>
+<h2>先修与运行</h2>
+<p>基础课 Python、NumPy、实验评价</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h3>1. 列出状态、动作与转移</h3>
+<p>库存容量为8，三天需求可取0/2/4。先假设需求分布已知。采购、缺货与持有成本统一为元。末日剩余仍计持有成本，无残值。</p>
+<h3>2. 倒推未来价值</h3>
+<p>V(days,stock)返回未来最小期望成本和当前最优动作。lru_cache记住重复子问题，避免指数重复计算；每次动作都受容量限制。</p>
+<h3>3. 执行反馈而非照抄整条计划</h3>
+<p>full使用剩余全部天数；rolling2只看最多两天；myopic只看一天。每执行一步都用真实需求更新库存，因此三者均为闭环策略。</p>
+<h3>4. 检查理论值与模拟</h3>
+<p>大量独立模拟的均值应接近动态规划的期望值，但不是逐次相等。再使用需求总为4的压力轨迹说明模型偏差。</p>
+<h3>5. 什么条件下看得更远才有价值？</h3>
+<p>上面的简单模型中三种策略恰好相同，这是实验结果，不能宣称动态规划总能改善结果。现在增加“每次下单固定支付8元配送费”，多买一些以减少未来下单次数才有价值。保持同一批需求轨迹，比较三种视野；最后一天仍没有残值。</p>
+<h3>保存可核验的证据</h3>
+<p>把指标写入 JSON，并用本次输出形成有条件的建议。json.dumps 把字典变成文本；不会替你判断方案是否适合现实。</p>
+<h2>常见错误与边界</h2>
+<p>状态必须包含影响未来的信息。无限期策略不适用于有限三天活动；未来真实需求不能在决策时提前读取。</p>
+<h2>数据</h2>
+<p>教学模拟数据；生成机制、参数和随机种子见本案例代码。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

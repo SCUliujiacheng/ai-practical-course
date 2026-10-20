@@ -1,0 +1,36 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>28_预测模型本地API 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>怎样把训练好的模型做成可调用的预测接口？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{
+  &quot;test_mae&quot;: 74.54137711788938,
+  &quot;valid_request_status&quot;: 200,
+  &quot;invalid_request_status&quot;: 422,
+  &quot;serialization_match&quot;: true,
+  &quot;sample_prediction&quot;: {
+    &quot;predicted_rent&quot;: 2399.72,
+    &quot;unit&quot;: &quot;教学货币/月&quot;,
+    &quot;model_version&quot;: &quot;teaching-v1&quot;
+  },
+  &quot;elapsed_seconds&quot;: 1.211
+}
+</pre><h2>1. 补全：响应契约</h2>
+<p>调用接口，核对响应含预测值、单位和版本。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert r.status_code == 200 and set(r.json()) == {&#x27;predicted_rent&#x27;, &#x27;unit&#x27;, &#x27;model_version&#x27;}</pre><h2>2. 修改：缺失与类型错误</h2>
+<p>缺失floor、rooms传abc、面积0，均应返回422。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert c.post(&#x27;/predict&#x27;, json=body).status_code == 422</pre><h2>3. 迁移：批量客户端</h2>
+<p>客户端顺序发送三条记录，一条输入对应一条输出。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert len(responses) == 3 and all((r.status_code == 200 for r in responses))</pre></body></html>

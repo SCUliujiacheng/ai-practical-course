@@ -1,0 +1,13 @@
+{
+  "id": "A05",
+  "title": "六个团队怎样预约两间实验室？",
+  "track": "A",
+  "number": 5,
+  "sources": [
+    [
+      "OR-Tools 人员排班完整实例",
+      "https://developers.google.com/optimization/scheduling/employee_scheduling"
+    ]
+  ],
+  "prereqs": "已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。"
+}

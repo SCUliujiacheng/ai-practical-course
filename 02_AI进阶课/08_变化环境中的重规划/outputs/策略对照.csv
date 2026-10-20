@@ -1,0 +1,4 @@
+﻿policy,success,time,changes,reason
+fixed,False,1,0,OLD_PLAN_INFEASIBLE
+repair_blocked,True,12,1,
+rolling,True,5,2,

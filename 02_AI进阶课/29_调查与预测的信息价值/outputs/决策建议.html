@@ -1,0 +1,28 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>决策建议</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>本次计算的决策建议</h1>
+<p>当前先验下直接行动的最小期望损失为350.00元；该噪声信号价值为107.62元，因此在其他成本不变时购买价格应低于该值。完美信息价值227.50元只是上界。</p>
+<h2>实际指标</h2>
+<pre><code class="language-json">{
+  &quot;baseline_action&quot;: 1,
+  &quot;baseline_loss&quot;: 350.0,
+  &quot;perfect_information_value&quot;: 227.5,
+  &quot;noisy_information_value&quot;: 107.625,
+  &quot;signal_policy&quot;: [
+    {
+      &quot;signal&quot;: 0,
+      &quot;signal_probability&quot;: 0.6075,
+      &quot;posterior_rain&quot;: 0.14403292181069957,
+      &quot;action&quot;: 0,
+      &quot;conditional_loss&quot;: 172.8395061728395
+    },
+    {
+      &quot;signal&quot;: 1,
+      &quot;signal_probability&quot;: 0.39249999999999996,
+      &quot;posterior_rain&quot;: 0.6687898089171974,
+      &quot;action&quot;: 1,
+      &quot;conditional_loss&quot;: 350.0
+    }
+  ]
+}
+</code></pre>
+<p>这些结论只适用于本例显式假设；目标权重和风险偏好由人决定。</p>
+</body></html>

@@ -1,0 +1,132 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>25_合作节省额分配 教学讲解</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>A25 三个团队合作节省的成本怎样分配？</h1>
+<p>输入每个团队联盟可创造的节省额。比较平均分、按投入分和Shapley值，另行检查任何联盟是否愿意退出；公平原则与稳定性要分别讨论。</p>
+<p>先修：已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。</p>
+<p>本案例所有输入来自本地；无需联网。</p>
+<p><strong>环境准备：</strong> 下一格设置本地路径、离线模式和图表字体，直接运行即可，暂时不需要掌握所有设置。真正的解题步骤从后面的中文小节开始。</p>
+<pre class="code">from pathlib import Path
+import os
+os.environ.setdefault(&quot;HF_HUB_OFFLINE&quot;, &quot;1&quot;)
+os.environ.setdefault(&quot;TRANSFORMERS_OFFLINE&quot;, &quot;1&quot;)
+os.environ.setdefault(&quot;HF_HUB_DISABLE_TELEMETRY&quot;, &quot;1&quot;)
+os.environ.setdefault(&quot;OMP_NUM_THREADS&quot;, &quot;2&quot;)
+os.environ.setdefault(&quot;TOKENIZERS_PARALLELISM&quot;, &quot;false&quot;)
+CASE_DIR = Path(__file__).resolve().parent if &quot;__file__&quot; in globals() else Path.cwd()
+COURSE_ROOT = CASE_DIR.parents[1]
+DATA_DIR = CASE_DIR / &quot;data&quot;
+OUT_DIR = CASE_DIR / &quot;outputs&quot;
+OUT_DIR.mkdir(exist_ok=True)
+import matplotlib
+matplotlib.use(&quot;Agg&quot;)
+import matplotlib.pyplot as plt
+plt.rcParams.update({&quot;font.family&quot;: &quot;Microsoft YaHei&quot;, &quot;axes.unicode_minus&quot;: False,
+                     &quot;figure.figsize&quot;: (8, 4.5), &quot;figure.dpi&quot;: 110})
+</pre><h2>1. 联盟价值不是个人成本</h2>
+<p>用frozenset表示联盟，字典值是该联盟相对独立行动创造的可分配节省额。所有7个非空联盟都要给出数值，不能只知道大联盟收益就计算Shapley值。</p>
+<pre class="code">import json
+import itertools
+import math
+import numpy as np
+import pandas as pd
+
+def save_results(metrics, recommendation):
+    &quot;&quot;&quot;只负责保存实际计算结果；决策逻辑在下文。&quot;&quot;&quot;
+    def convert(value):
+        return value.item() if hasattr(value, &quot;item&quot;) else str(value)
+    (OUT_DIR / &quot;metrics.json&quot;).write_text(
+        json.dumps(metrics, ensure_ascii=False, indent=2, default=convert), encoding=&quot;utf-8&quot;)
+    (OUT_DIR / &quot;决策建议.md&quot;).write_text(
+        &quot;# 本次运行的决策建议\n\n&quot; + recommendation +
+        &quot;\n\n数据为本例明确给定的教学场景；结论仅对模型、目标与已检查条件成立。\n&quot;,
+        encoding=&quot;utf-8&quot;)
+    print(json.dumps(metrics, ensure_ascii=False, indent=2, default=convert))
+    print(recommendation)
+
+names=[&quot;甲&quot;,&quot;乙&quot;,&quot;丙&quot;];players=tuple(range(3))
+worth={frozenset():0.,frozenset([0]):0.,frozenset([1]):0.,frozenset([2]):0.,
+       frozenset([0,1]):8.,frozenset([0,2]):6.,frozenset([1,2]):4.,frozenset([0,1,2]):12.}
+def all_coalitions(n):
+    return [frozenset(s) for size in range(n+1) for s in itertools.combinations(range(n),size)]
+assert set(worth)==set(all_coalitions(3))
+pd.DataFrame([dict(coalition=&quot;&quot;.join(names[i] for i in sorted(s)) or &quot;空&quot;,saving=v) for s,v in worth.items()]).to_csv(DATA_DIR/&quot;联盟价值.csv&quot;,index=False,encoding=&quot;utf-8-sig&quot;)
+</pre><h2>2. Shapley：平均边际贡献</h2>
+<p>遍历6种加入顺序，每次计算新成员使联盟价值增加多少。平均后得到每人分配。它依据一组公平公理，不代表每个人都一定接受。</p>
+<pre class="code">def shapley(values,n):
+    allocation=np.zeros(n);orders=list(itertools.permutations(range(n)))
+    for order in orders:
+        before=frozenset()
+        for person in order:
+            after=before|{person}
+            allocation[person]+=values[after]-values[before]
+            before=after
+    return allocation/len(orders)
+allocation=shapley(worth,3)
+assert np.isclose(allocation.sum(),worth[frozenset(players)]-worth[frozenset()])
+equal=np.full(3,worth[frozenset(players)]/3)
+effort=np.array([5.,3.,2.]);proportional=effort/effort.sum()*worth[frozenset(players)]
+</pre><h2>3. 单独检查个体和联盟接受条件</h2>
+<p>如果某联盟成员分到的总额小于它独立合作能得到的价值，这个联盟有离开的利益。满足所有联盟条件且总额守恒称为核心中的分配；Shapley值不保证总在核心中。</p>
+<pre class="code">def blocking_coalitions(shares,values):
+    return [s for s in values if s and sum(shares[i] for i in s)&lt;values[s]-1e-8]
+def in_core(shares,values):
+    n=len(shares)
+    return np.isclose(sum(shares),values[frozenset(range(n))]) and not blocking_coalitions(shares,values)
+schemes={&quot;平均&quot;:equal,&quot;投入比例&quot;:proportional,&quot;Shapley&quot;:allocation}
+core_results={name:in_core(shares,worth) for name,shares in schemes.items()}
+# 三人简单多数游戏：任意两人值1，大联盟值1，其Shapley均分但任意两人想退出。
+majority={s:float(len(s)&gt;=2) for s in all_coalitions(3)}
+majority_shapley=shapley(majority,3)
+assert np.allclose(majority_shapley,[1/3]*3)
+assert not in_core(majority_shapley,majority)
+</pre><h2>4. 输出公平原则与稳定性对照</h2>
+<p>表中列出不同规则分配及被哪些联盟反对。投入比例依赖投入测量，Shapley依赖所有联盟价值；真实价值估计有误时，应做敏感性检查再谈谈判建议。</p>
+<pre class="code">table=pd.DataFrame(schemes,index=names)
+table.to_csv(OUT_DIR/&quot;节省额分配.csv&quot;,encoding=&quot;utf-8-sig&quot;)
+table.plot.bar();plt.ylabel(&quot;分得节省额&quot;);plt.xticks(rotation=0)
+plt.tight_layout();plt.savefig(OUT_DIR/&quot;合作分配.png&quot;);plt.close()
+blocking={name:[sorted(s) for s in blocking_coalitions(shares,worth)] for name,shares in schemes.items()}
+save_results({&quot;shapley&quot;:allocation.tolist(),&quot;equal&quot;:equal.tolist(),&quot;proportional&quot;:proportional.tolist(),
+              &quot;in_core&quot;:core_results,&quot;blocking_coalitions&quot;:blocking,&quot;majority_counterexample&quot;:majority_shapley.tolist()},
+             f&quot;本联盟价值下Shapley分配为{np.round(allocation,3).tolist()}，是否在核心：{core_results[&#x27;Shapley&#x27;]}。&quot;
+             f&quot;三种规则的联盟阻挡检查为{blocking}。建议先确认所采用的公平原则，再核查联盟退出激励；Shapley并非自动稳定。&quot;)
+</pre><pre class="output">{
+  &quot;shapley&quot;: [
+    5.0,
+    4.0,
+    3.0
+  ],
+  &quot;equal&quot;: [
+    4.0,
+    4.0,
+    4.0
+  ],
+  &quot;proportional&quot;: [
+    6.0,
+    3.5999999999999996,
+    2.4000000000000004
+  ],
+  &quot;in_core&quot;: {
+    &quot;平均&quot;: true,
+    &quot;投入比例&quot;: true,
+    &quot;Shapley&quot;: true
+  },
+  &quot;blocking_coalitions&quot;: {
+    &quot;平均&quot;: [],
+    &quot;投入比例&quot;: [],
+    &quot;Shapley&quot;: []
+  },
+  &quot;majority_counterexample&quot;: [
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333
+  ]
+}
+本联盟价值下Shapley分配为[5.0, 4.0, 3.0]，是否在核心：True。三种规则的联盟阻挡检查为{&#x27;平均&#x27;: [], &#x27;投入比例&#x27;: [], &#x27;Shapley&#x27;: []}。建议先确认所采用的公平原则，再核查联盟退出激励；Shapley并非自动稳定。
+</pre><h2>结果图与检查</h2>
+<p>下面展示本次计算保存的图。数值以单元格和 outputs 中的实际输出为准。</p>
+<pre class="code">from IPython.display import display, Image
+for figure in sorted(OUT_DIR.glob(&quot;*.png&quot;)):
+    display(Image(filename=str(figure)))</pre><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA3AAAAHvCAYAAAAVRT1oAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjcsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvTLEjVAAAAAlwSFlzAAAQ6wAAEOsBUJTofAAAMmdJREFUeJzt3Qe4VNXZP+yHDkoVRJEiNQnYG/aXGDUoaNAYxcSCJiqaWFHBWCE2jBE1mtjQiL1EY+wRUaMx+qKIBtTYETBYAAUsdP7X2t93zsuBgxLnwMxm7vu69jUze8peeMjk/HjWelatJUuWLAkAAABKXu1iDwAAAICVI8ABAADkhAAHAACQEwIcAABATghwAAAAOSHAAQAA5IQABwAAkBMCHAAAQE4IcAAAADkhwAEAAOSEAAcAAJATAhwAAEBOCHAAAAA5IcABAADkhAAHAACQE3WjDMydOzcmTJgQ6667btStWxZ/ZAAAoMQsXLgwPvnkk9hkk02iYcOG3+ozyiLNpPDWs2fPYg8DAAAgxo4dG9tss823em9ZBLhUeav4D9WmTZtiDwcAAChD06ZNywpLFfnk2yiLAFcxbTKFt3bt2hV7OAAAQBmrW8CyLk1MAAAAckKAAwAAyAkBDgAAICfKYg0cAACUqiVLlsT06dOzra8WLVpU7OHwLdSpUyfbFqBVq1ZRq1atWJUEOAAAKGJ4++CDD2LOnDlRv379LAiQP/Pnz4/PP/885s2bF23btl2lIU6AAwCAIkmVtxTeWrduHS1btiz2cCjAjBkz4uOPP85+poVsE/BNrIEDAIAiSdMmU+VNeMu/li1bZj/L9DNdlQQ4AAAokrTmzbTJNUedOnVW+TpGAQ4AAChJX331VbGHUHIEOAAAoKhuvPHG2GOPPaqcS2sD11tvvXjuueeKNq5SJMABAAAFa968edZ98b85nn/++RV+3n333Rd169aNrbfeerX+OUqdLpQAAEDB/vWvf8XixYurnEvrwbp27Rp33313tUGsTZs2K/y8O+64I2sKcsghhyz33J577hkDBgyIcpSbAJd++JdddlmMHDky3n333WjSpEmcf/75MXDgwGIPDQAAalzH0x4q2rUnDe/7X78nTXc87bTT4vTTT69so79w4cLsdv3114+OHTtWrmtLv8On3+UbNGhQ7WdNnjw5Ro8eHccdd1z2e//S7r///mjXrl2Uq9wEuIMPPjieeOKJuPDCC2PbbbfN9ldY1bucAwAAK6devXoxbty4rGL2yCOPrPB39bPOOisefPDBuOCCC7K1b4cffnjlc+k9/fv3z1ry9+zZMy655JLl3v/uu++uMPiVg1wEuLvuuivuvPPOeOGFF2KrrbYq9nAAAIBl1K5dO0aNGhWbbbZZjBgxIk4++eTlXvP0009ns+rS9MhURUtFmp/85Cdx6623xp///Of4y1/+Ep988kn06NEjbrjhhjjiiCPioosuqrJP3vz588s6wOWiiclVV10Ve+21l/AGAAAlrFOnTtmMuVRle+utt6o898EHH8QBBxwQRx11VBbaktSkpHHjxlkgS3uopfvpNk2d3G+//eK9996L3XffPT799NPKz5kvwJW2NG82dadJSf7444/P5s9uuOGGcfTRR8esWbOqfc/s2bNj6tSplce0adNW+7gBAKAcHXPMMbHlllvG66+/XuX8+PHjs8ra5Zdf/rXv79ChQ/z2t7/NGpjce++9sWDBgujXr1/l8/PmzSvrAFfyUyhnzpwZc+fOzebHHnnkkdl82fSX4cQTT8xS/AMPPLDce1LJdtiwYUUZL6vI0GaRO0Or/wcGAIA1zYwZM7J92yqkqZSpkvb+++9njz/88MOsC2VqSJh+h6+QKnBf15CkWbNm2Xq69DkTJ07MrpMCXMOGDaNclXyAS4k76dWrV5x99tnZ/fTDT8GuIsS1bdu2ynsGDRqUzZetkCpwaREkAABQ84YMGRLXX3/9Cp/ff//9qz2fZtZNmjRphe9bsmRJTJgwIS699NKsK+W5556bdbEs5wBX8lMoW7VqlSXzbt26VTmfyq/JlClTlntP06ZNsyRfcXzd/hIAAEBhUmUtha1lj4pizDPPPFPt80uHtxTMUu+LH//4x9n9a665Jvudf++9986amKQOl2eeeWb23FprrRXlquQrcGl+a9o24O9//3uV86+88krW6aZLly5FGxsAAFCYVGG77777sg6VqfHJCSeckPW+SJ0p0xYDaQplxR5yyeeffx6NGjWKclXyAS5JXWzSbutpamRqNZp+yKl8mjYArNgkEAAAyJdUcfvlL38ZO+64Y7Zt2L777pvtJ/fOO+9k+8RV97v+jBkzokWLFlGuchHgevfune0Lcc4558SVV16Z7fJ+0kknZSVUAABYE00a3jfWdH369ImXXnoptthiiyrnK2bZpemSzz33XDRv3jyaNGmSNTRMFbiNNtooylUuAlyS5sKmAwAAWDOkJibpWJG0ZKpv375ZV/pk/fXXz9bGqcABAADUsNSMMDUrKaQfRqrCpb2h0+fUq1cvyp0ABwAAlHwQJCfbCAAAAPD/EeAAAAByQoADAADICQEOAAAgJwQ4AACAnBDgAAAAckKAAwAAytaSAvapKwYBDgAAqBGHHXZYDB06tKDP+M9//lMjY+natWvceOON3/i6UaNGxV577bVSn1mrVq348MMPo5gEOAAAYJVJoWfZ45RTTqn2tR988EFsuummceGFF67UZ//jH//IPq8QDz30UHTv3j2+//3vVzvWhQsXRimxpTkAAJSioc2KeO1ZNTo98b333ot27dpl90844YQVvr5t27YxevTo+J//+Z/o0aNH9OvXL2rSBx98EGPGjIlDDz00e5zC2WOPPRa33357nH/++fH000/HL37xi3jjjTcq31O3bmlFJhU4AACgIAsWLIi5c+fGokWLslCU7i9evDibbpiqWG3atMmCUDq+qWK2xRZbxBVXXBHHHHNMzJ49u0bD26677hq33HJLNr6KCt4XX3wRO++8c9SvXz9eeeWVrALYsGHDyiNNC73sssuiVAhwAABAQY488sho1KhRFo5SJSvdT5Wt+++/P3bcccdo0KBB5WtTUEqB7+ukEDVt2rS44IILamR8EydOjB122CG6desWDzzwQBbMkrRGbv31148mTZpUBrrmzZvH888/nx3Tp0+PUiPAAQAABUlBKE2XHDBgQJxzzjnZ/TQd8qyzzlouhPXu3TvuvvvuOProo7PXVueOO+6I9dZbL6vErUzTkFrLrFt7+eWXq3zW9ttvnwW4e++9tzJMporcbbfdVvm6+fPnx+OPP56999hjj43ddtstC6GlprQmdAIAALk3adKkePDBB+P666/PpicuG+DSVMXUbbJx48bLvTeFv7vuuivOOOOMuOeee+K3v/1tjBgx4muvN2XKlCqPU/hLhg8fHu+8807WFGXZxilpWmSqtlV4+OGHY+21184CXJ06dWLDDTeMzp07R6lRgQMAAAqS1r098cQTMWHChCw0pXVsXbp0iR/96EfVdnZs3bp1PPfcc9lrlvWXv/wlq7oddNBB8etf/zquueaab9xaoF27dlWOevXqZednzZqVjWvZ8JbW51133XVZhbDCH//4x2y9Wwpvn3zySWVHzFIjwAEAAAVJVbXUMTIFrTSN8uOPP479998/C0l77LFHtuat4njrrbdirbXWytr2Lys9f9ppp8UhhxwS66yzTva5KQyefvrp32pcF1xwwXIVwKR27drZFM699947e5y6T6b1b6lyl66dulJuvPHG2ThLjQAHAAAUJDUuSVWzFLhSx8lUAUuVtp/+9KdZM5C0jUBFF8qzzz47DjjggPje97633OekNW8fffRRnHfeeZXnLrnkkrj55puz9Wn/ra/reLn0XnNpCmaq9qUtBFJXyrTVQcVWA6VGgAMAAAqy3XbbZevHlpXO/epXv4qBAwdm0yxHjhyZ7fP2m9/8ZrnXpqmOqfqWnqtYw5Zsu+22WZfLFKg+XImGJt9k8ODBWVfKpcNdmq555plnRtOmTeO4447LGp2kSmIpEuAAAIBVJnWa/PLLL6NPnz5ZZSt1gmzfvn2V17z66qux3377ZdMuq9voO1XhUrjq06dPzJw5c4XXShtwp6rf1+0fd+2118aLL7643PkU6FInyrT/XFoz17Jly+z8LrvsUlJr4QQ4AABglfn000+jY8eOWeUtNRhJ+8AtLXWaTC3+05qzG264odrPSJW8++67LyZPnpxV+8aOHVvl+X//+99ZhW6jjTbKQlxa41adr776Kmts0qlTp2qfP+mkk7ImJks3N0mVuB/84AdZd8zkmzYiX9VsIwAAAKVo6KzIi7TG7fPPP4/XXnstunfvnoWdF154IQtnV111VTYNMjUJufPOO2OnnXbKqlqpgUgKWmnPtbQmLu0lt/SG38tKa+bGjBkTffv2zRqjpKBWsd9bCm5p37b0fK9evbJzaYuAVGlLzVVS6EpjStdI6/Cqq6ideOKJ2fYFTz31VJVxpC0P0jinTp2afU6zZs2imAQ4AACgILfcckvWnGSDDTbIgtm5554bF110Uey1115ZKEqBK9lxxx2zNXEpSP3hD3/Iwl7aTDtNe1wZm222WRba3n333Vh33XWzqZhdu3aNP/3pT1kwXNrJJ5+cTYdM16nQpEmTrEFKixYtqrw2TbkcN25cFgBTGFxa2gj8oYceyipz6c/YsGHDKKZaSypqgWuwlJbTDzd1l0llW3JoaHH/pWNN/1czAKB4G14naYrhmmTu3LmxaNGiahubLC01NkkVsUIsrIHPWF0/z5rIJaXxJwUAANYYK1ulqongVbdEwtvqookJAABATghwAAAAOSHAAQAA5IQABwAAkBMCHAAAQE4IcAAAADkhwAEAAOSEAAcAAJATAhwAALBa1KpVK84777zVcq0bb7wxu97UqVNjTVJe25YDAEBObDJqk6Jde8KACf/1e5YsWRKjRo2Kq6++Ot5444346quvYr311ssC2yGHHLJKxlmOBDgAAKBggwcPjj/+8Y8xfPjw+J//+Z+YN29evPLKK1kVjJojwAEAAAW79tprY+DAgXHcccdVnuvZs2dRx7QmsgYOAAAoWNOmTeOFF16I+fPnf+NUy3PPPTfatm0bzZo1i7333jumTZtW+Xy6f8wxx0SnTp2iUaNG8Z3vfCduuOGGyucnTZqUVfVuvvnmOO2006JNmzbRsGHD2HnnneOll1762mu/+eab8aMf/SgaN26cTe888MAD44MPPsie6927d3Tr1m2596TxbbvttlEqBDgAAKBgKZQ9++yzsdlmm8Vdd90VixcvrvZ1aY3cp59+Gg888EBcfvnlMXr06DjllFMqnx83blwWAq+66qp4/vnnY5dddokjjjgixo8fX+Vzzj777FiwYEHcf//92Wd9/vnnseeee8bs2bOrve7kyZNjxx13zELjk08+mY3xvffeywLaokWL4sgjj4y33347xo4dW/meTz75JB599NE46qijolQIcAAAQMEOO+ywLBitvfba0b9//+jRo0f87W9/W+513bt3jxEjRsSWW26ZvWffffeNp556qvL5vfbaK66//vrYY489sjB48cUXZ1W7Z555psrnbLfddnHJJZfENttsE7vvvnv8+c9/jo8//jhuu+22asd3wQUXxIYbbhg33XRT9p5evXrFFVdckQXDVDns169ftG7dOm6//fbK99xxxx2x1lprZZW6UiHAAQAANSKFohdffDEeeeSRLPikitiygWqHHXao8rhr165Z8KqQqm/XXHNN7L///lmAa9euXXZ+5syZVd636667VnncpUuXaNWqVdYBszr/+Mc/4uWXX86mZaYpl+lIzVaSd955J+rVqxcDBgyIO++8s7J6mMLez372syyUlgpNTAAAgBqVqmdp6mMKWWeddVYWgirUr1+/ymvr1KmTVdgq7LPPPlkIGzp0aFal69ChQzRv3ny5a9Rf5nPSZ6Rp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KDe5C3AAAADlSoADAADICQEOAAAgJwQ4AACAnBDgAAAAckKAAwAAyAkBDgAAICcEOAAAgJwQ4AAAAHJCgAMAAMgJAQ4AACAnBDgAAICcEOAAAAByQoADAADICQEOAAAgJ4oS4ObNm1eMywIAAORa3UI/oHPnzvHuu+9m9++8886YNWtWta/r3r177LzzznHdddfFb37zm/jnP/8Z7du3L/TyAAAAZaPgADdp0qTK+2eeeWYsWrQodtxxx+VeV69evWjWrFkcf/zxMWTIEOENAABgdQe4WrVqVXm83Xbbxc0337zc6+bOnRtbbrllHHnkkTF06NBCLwsAAFB2Cg5wS5YsiV/84hexxRZbxBdffJGdu+WWW2LkyJFRv379aNy4cbRt2zamTJkSXbt2jcsvv7wmxg0AAFB2Cg5wSZs2beLJJ5+Mzz77LHu8/fbbR4sWLWLx4sUxZ86ceP/99+OVV16JDz74IJ577rnYYYcdauKyAAAAZaVGplCed9552f1u3bplUyWbNm0a22yzTZXXHXvssXH33XdH796945FHHomddtqp0EsDQPWGNotc6dSh2CMAoJymUFZYa621YvTo0VlnymXXxx122GHx+9//Pt5+++044IAD4t///ncW9AAAAFhNAS5Nnbzsssti9uzZ8dhjj8V6661X+dxHH30UL774YvTt27fy3FlnnRX33HNPjB8/Pnr16lXo5QEAAMpGwQEuhbCDDz446y6ZpKmTv/rVr7KKWwp2H3/8cfz1r3+t8p60zYDwBgAAUIQmJsnZZ5+d3b7zzjtx1VVXxTPPPBMPPPBAjB07NjbffPNs+mRqanLSSSfpRAkAAPAt1I4CvPbaa3HEEUdkVbYKaduAp59+OiZOnJjtCdexY8do1KhRHHrooVlVrmHDhtl9AAAAVmMF7rTTTotOnTplzUjSWri0TUBSp06d+PDDD7M1cCnkLd3MZNmNvwEAAFgNAe7+++/Pbu+9996sicnpp58eM2fOzDby7t+/f2y66aZZ05L03KBBg7KOlRX3hw0bFk2aNCnk8gAAAGWloCmUS0uNSlIV7re//W2ceOKJscEGG8RBBx0U48aNi6OOOio23HDDbDrl+eefn91PVToAAABWcxOTiy++OL788sto2bJl/PKXv4zdd989nnjiiWy65JAhQ2KHHXaIzTbbrCYuBQAAULZqpAKXpktOmDAh5syZkz3u1q1bDBw4MLt/zDHHCG8AAAClUoG78cYbY+TIkXHcccdVnvvPf/7zte9JUywBAABYjQHuiy++iDPOOCOGDx8enTt3rjzfrl27yo6TqXlJul9xmyxatKjQSwMAAJSVgqdQXnjhhVlTkunTp8eYMWMqz6eglkJa/fr1sw28W7dund3Wrl1beAMAAFjdAW7+/PnZ9Mmrr7462z4gdaBcVkXFzf5vAAAARZxCmaprb7zxRqy99tpZ98kePXrE22+/HV27di1wWAAAANT4FMoU3pLvfve72XYB1157baEfCQAAQE0HuE6dOmWNSyqOAw88MG699dZsrRsAAAAlNIUyrX9bWvfu3eOEE06Ixx9/vNBxAQAAUJMBrlevXvHee+9llbgKPXv2jLvuuquQjwUAAKCmp1AuXLgwdt5557jmmmsqz/Xt2zfuu+++Qj4WAACAmg5wdevWjSuvvDJOOumkeOGFF7Jzffr0ybYUSI466qhYsGBBdjtr1qzsNq2PGzhwYCGXBQAAKEsFTaFM9tlnnyyQ7bfffjF+/PjYfPPNo0WLFrHFFltE27Zt48wzz8xeN3jw4Oz27LPPLnzUAAAAZajgAJcMHz48Hn300ejfv3/WwCRNq2zcuHGcc845NfHxAAAA1FSAa9CgQdx2223x5ZdfZo933333mDBhQk18NAAAADUZ4ObPn58FtkMPPTR7/Ktf/aomPhYAAICaamJSYc6cOXH44YfXxEcBAACwKitwyZIlSyrvpzVwTZo0iaZNm2YNTVq1ahVbbrll7LvvvjV1OQAAgLJTIxW4pFatWpX3n3322dhmm22iS5cu2flXXnklDj744DjxxBNr6nIAAABlp6AK3NNPP53dpj3ekjfffDO+853vZPdPPvnkrAJX4Z577omjjz46LrvsssJGDAAAUKYKCnD9+vWrMn3y0ksvjauuuqra13br1i0+/fTTQi4HAABQ1goKcBWBbPr06bHeeuutMLwlH3/8cbbdAAAAAEVcA7f0+rcVSc1MLrzwwpq4HAAAQFmqsS6U3xTqttpqq+wAAACgCAFu9uzZVW7nzZtXOU3y1FNPjfr166/wvb///e8LuTQAAEDZKSjANW/evEql7Zhjjokbbrihcl1cvXr1Ch8hAAAAhQe49957L7udOXNmbL311vG73/2u8rkU5JbeRgAAAIAiNjHZcMMNs6NDhw7Z43XWWWelm5qsrJdeeil++MMfxrrrrhtNmjSJ7bffPh5//PEa+3wAAICy6kK5rIp94WrCv//979h1113j4Ycfjr/97W/RsmXL2GuvveL111+vsWsAAACUVRfKpUPbOeecEw0bNqyRz/3Zz35W5fH1118f66+/flaF6969e41cAwAAoGwqcM2aNYsnn3yySoBbugPlX//616gpixYtym5btWpVY58JAABQNhW4unXrRq9evZY7n9bEpQYnP/3pT+PLL78s6BqLFy+Ot956KwYNGpQ1TPnxj3+8wtembQ0qtjZIpk2bVtC1AQAA1ogA17p16+XO9ejRI5566qkstL355puV4StNs0yNSNq0afNfXSOFtVTFS5+z4447xh133FG531x1RowYEcOGDftWfx4AAChlm4zaJPJkwoAJxR7CGqV2TUxpfO6557L76faf//xnFtqS+fPnx8YbbxwLFizIQt1GG20U7dq1iyOOOOK/ukba9Hv8+PHxyCOPROfOnWOzzTaLxx57bIWvT1W6KVOmVB5jx44t8E8JAACwBlTg6tSpE126dKm8TRYuXJjdpkYmqQrXqFGj+Oqrr7Jz999/fxx44IExcuTIlb5GCn3p2HTTTWOPPfaIyZMnZ+vs0vYC1Un7z9mDDgAAWNOskm0Evs7mm28e8+bNK+gzUlhMVT0AAIByUmPbCKysOXPmRIsWLVb69Ycddljsueee8b3vfS+r5t18883xxBNPxKhRo1bpOAEAAMo6wF1zzTWxww47xPTp01f6Pe3bt4/TTz89/vOf/2TTItM0ykcffTR69+69SscKAACwxgW4uXPnxg033JCtcfvTn/6UdYpca621lnvdKaecEjfddFPcd999/9Xnn3vuudkBAABQ7goOcKmRSOoOufvuu8fDDz+cnfvJT36S3aZtAypsscUWcfzxx0eHDh0KvSQAAEBZKijApWrbn//85yqPa9f+v74oZ555ZuX9gw46qJBLAQAAlL2CulBeeuml0bdv3/joo4+yxyeffHLss88+MXPmzOzxGWeckd2+8cYbNTFWAACAslZQBe6AAw7IOkKmDbqvuuqq+PnPfx4nnHBCtml3Or5Oeh8AAACrKcClDpEPPfRQ3HrrrXH44YfHkCFDsmB2/fXXx6BBg7K92i666KJYZ511CrkMAAAANbWNQFrflpqT7L333vHhhx/G73//+9hpp52iX79+WYfKMWPGCHEAAAClsg/czjvvHH//+99j1qxZsfnmm2fbBTz77LNZk5MGDRrU1GUAAADKVo1u5L3ZZpvFgAEDYsaMGdGyZcto3rx5DBw4sCYvAQAAULZqNMBde+21ccstt8QDDzwQdevWzfaBq1WrVk1eAgAAoGzVWIC77bbb4thjj40rr7wy+vTpk+0Hl8Jbmj659tprZ8f6668fP/jBD+K0006Lpk2b1tSlAQAAykLBAe7LL7+Ms846K/7whz/EFVdcUWXKZFoTlwLcF198ka2Ne//997OA9+qrr8Zf//rXQi8NAABQVgoKcGnLgJ/97GfRunXrrGHJVlttVeX5tBfcst0nt9tuu+jVq1chlwUAAChLBe8Dd+mll8aBBx640mvdUtibP39+IZcFAAAoSwUFuG7dumXHf+Ozzz6LOnXqFHJZAACAslS70A944YUXVvjc+PHjY/r06VXONWnSJK6++upCLwsAAFB2CgpwkydPzjbwPuigg2LmzJnLPd+7d+9Yb731onPnznHqqafGBx98EF26dImf//znhVwWAACgLBUU4Dp06BAvvfRSvPXWW1kDk1RxW9qUKVNi4sSJMWTIkHjqqadio402ivvuu6/QMQMAAJSlgqdQpk6TqQPlrrvuGjvttFM89thjlc+lLQS6d++ebS2QploOHjw4+vfvH2PGjCn0sgAAAGWnRjbyrlevXowcOTKbLtmvX79sj7dUbatbt+rHn3766TFjxowYMGBAvP3229GwYcOauDwAAEBZKLgCt7Tzzz8/jjrqqKzKdvfdd0fTpk2Xe80FF1yQbTkwevTomrw0AADAGq9GKnBLGzFiRCxevHi5DbyXnlb55JNPRteuXWv60gAAAGu0Gg9waY+3K6644mtfI7wBAAAUeQolAAAAq44ABwAAkBMCHAAAQE4IcAAAADkhwAEAAOSEAAcAAJATAhwAAEBOCHAAAAA5IcABAADkhAAHAACQEwIcAABATghwAAAAOVG32AMAAICiGdoscqdTh2KPgCJSgQMAAMgJAQ4AACAnBDgAAICcEOAAAAByQoADAADICQEOAAAgJwQ4AACAnBDgAAAAckKAAwAAyAkBDgAAICcEOAAAgJwQ4AAAAHJCgAMAAMgJAQ4AACAnBDgAAICcEOAAAAByQoADAADI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2GO1jA0oXWn2zsCBA7Nq/ejRo7MplOk75MEHH8xC3cyZM1XyqREqcACwlPPPPz/bJmBlwltqUDBt2rRqtyIByssdd9yRzd559tlno02bNpXne/XqFffcc0+su+66RR0faw4VOABYyoIFC+LVV1/N9o1s27Zt1KlTp3L/yLQXXHp+/vz5MWXKlCzspXWzW265ZbGHDRTZddddV+1es0mqwKVj6NChq31crHkEOABY5pewE044ITp27FjlfPrFrGLd7NJTs2+99dZYe+21V/MogVKzovA2fvz4yu+PJ554Ijp06LDax8aaRYCj7C37CxlQ3ir+pTxtL5I28K74jki/gC19NG3aNNZaa61iDxcocakjZepkm6Spleedd16xh0TO1Vrit1cAAPhWZsyYEV999VW0a9duha9Jv26nKdhpSjYUSoADAADICV0oAQAAckKAAwAAyAkBDgAAICcEOAAAgJwQ4AAAAHJCgAMAAMgJAQ4AACAnBDgAAICcEOAAAAByQoADAADICQEOAAAgJwQ4AACAnBDgAAAAckKAAwAAyAkBDgAAICcEOAAAgMiH/wewrCBXs793oQAAAABJRU5ErkJggg=="><h2>适用边界与常见错误</h2>
+<p>采用可转移效用合作博弈，所有联盟价值为教学假设。Shapley值满足其公平公理但不保证联盟稳定；真实谈判还涉及非金钱偏好和退出成本。</p>
+<h2>独立练习</h2>
+<p>打开「动手练习.ipynb」，完成补全、修改、迁移，再查看「参考答案.ipynb」。</p>
+</body></html>

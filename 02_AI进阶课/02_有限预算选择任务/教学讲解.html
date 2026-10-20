@@ -1,0 +1,138 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>02_有限预算选择任务 教学讲解</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>A02 时间与预算有限，应完成哪些任务？</h1>
+<p>给定10项任务的预算、工时和教学价值评分，选择一组任务。先理解单预算背包，再把工时和依赖加入模型；输出是任务组合及其合法性证明式检查。</p>
+<p>先修：已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。</p>
+<p>本案例所有输入来自本地；无需联网。</p>
+<p><strong>环境准备：</strong> 下一格设置本地路径、离线模式和图表字体，直接运行即可，暂时不需要掌握所有设置。真正的解题步骤从后面的中文小节开始。</p>
+<pre class="code">from pathlib import Path
+import os
+os.environ.setdefault(&quot;HF_HUB_OFFLINE&quot;, &quot;1&quot;)
+os.environ.setdefault(&quot;TRANSFORMERS_OFFLINE&quot;, &quot;1&quot;)
+os.environ.setdefault(&quot;HF_HUB_DISABLE_TELEMETRY&quot;, &quot;1&quot;)
+os.environ.setdefault(&quot;OMP_NUM_THREADS&quot;, &quot;2&quot;)
+os.environ.setdefault(&quot;TOKENIZERS_PARALLELISM&quot;, &quot;false&quot;)
+CASE_DIR = Path(__file__).resolve().parent if &quot;__file__&quot; in globals() else Path.cwd()
+COURSE_ROOT = CASE_DIR.parents[1]
+DATA_DIR = CASE_DIR / &quot;data&quot;
+OUT_DIR = CASE_DIR / &quot;outputs&quot;
+OUT_DIR.mkdir(exist_ok=True)
+import matplotlib
+matplotlib.use(&quot;Agg&quot;)
+import matplotlib.pyplot as plt
+plt.rcParams.update({&quot;font.family&quot;: &quot;Microsoft YaHei&quot;, &quot;axes.unicode_minus&quot;: False,
+                     &quot;figure.figsize&quot;: (8, 4.5), &quot;figure.dpi&quot;: 110})
+</pre><h2>1. 明确输入与评分来源</h2>
+<p>用列表保存任务，字典字段让每个数字有名字。价值是本例假设评分。依赖 <code>(a,b)</code> 表示选择 a 必须同时选择 b。</p>
+<pre class="code">import json
+import itertools
+import math
+import numpy as np
+import pandas as pd
+
+def save_results(metrics, recommendation):
+    &quot;&quot;&quot;只负责保存实际计算结果；决策逻辑在下文。&quot;&quot;&quot;
+    def convert(value):
+        return value.item() if hasattr(value, &quot;item&quot;) else str(value)
+    (OUT_DIR / &quot;metrics.json&quot;).write_text(
+        json.dumps(metrics, ensure_ascii=False, indent=2, default=convert), encoding=&quot;utf-8&quot;)
+    (OUT_DIR / &quot;决策建议.md&quot;).write_text(
+        &quot;# 本次运行的决策建议\n\n&quot; + recommendation +
+        &quot;\n\n数据为本例明确给定的教学场景；结论仅对模型、目标与已检查条件成立。\n&quot;,
+        encoding=&quot;utf-8&quot;)
+    print(json.dumps(metrics, ensure_ascii=False, indent=2, default=convert))
+    print(recommendation)
+
+from ortools.sat.python import cp_model
+tasks = [{&quot;name&quot;: f&quot;任务{i}&quot;, &quot;cost&quot;: c, &quot;hours&quot;: h, &quot;value&quot;: v}
+         for i, (c, h, v) in enumerate([(3,2,6),(4,3,7),(2,2,4),(5,4,10),(3,1,5),
+                                       (6,5,11),(2,1,3),(4,2,8),(3,3,5),(5,3,9)])]
+budget, hours = 16, 12
+dependencies = [(3, 0), (5, 2), (7, 1)]
+pd.DataFrame(tasks).to_csv(DATA_DIR / &quot;候选任务.csv&quot;, index=False, encoding=&quot;utf-8-sig&quot;)
+def valid_choice(chosen, jobs, money, time_limit, deps):
+    if len(set(chosen)) != len(chosen): return False
+    chosen = set(chosen)
+    return (all(0 &lt;= i &lt; len(jobs) for i in chosen)
+            and sum(jobs[i][&quot;cost&quot;] for i in chosen) &lt;= money
+            and sum(jobs[i][&quot;hours&quot;] for i in chosen) &lt;= time_limit
+            and all(a not in chosen or b in chosen for a, b in deps))
+assert not valid_choice([0,0],tasks,100,100,dependencies)
+</pre><h2>2. 单预算背包：理解动态规划</h2>
+<p><code>dp[b]</code> 表示预算最多 b 时的最高价值。预算倒序更新，防止同一个任务被重复选取。这一步暂时没有工时和依赖，不能把结果误用到完整任务。</p>
+<pre class="code">def knapsack_value(jobs, cap):
+    dp = [0] * (cap + 1)
+    for job in jobs:
+        for b in range(cap, job[&quot;cost&quot;] - 1, -1):
+            dp[b] = max(dp[b], dp[b-job[&quot;cost&quot;]] + job[&quot;value&quot;])
+    return dp[-1]
+unconstrained_value = knapsack_value(tasks, budget)
+assert knapsack_value([{&quot;cost&quot;: 2, &quot;value&quot;: 3}], 4) == 3
+print(&quot;只有预算时的价值上界：&quot;, unconstrained_value)
+</pre><pre class="output">只有预算时的价值上界： 31
+</pre><h2>3. CP-SAT 同时处理多个约束</h2>
+<p>0/1变量表示是否选中。<code>x[a] &lt;= x[b]</code> 精确表达依赖。检查器根据原始任务重新累加，不以求解器返回状态代替需求检查。</p>
+<pre class="code">def optimize_tasks(jobs, money, time_limit, deps, require_all=False):
+    model = cp_model.CpModel()
+    x = [model.new_bool_var(f&quot;pick_{i}&quot;) for i in range(len(jobs))]
+    model.add(sum(j[&quot;cost&quot;] * x[i] for i,j in enumerate(jobs)) &lt;= money)
+    model.add(sum(j[&quot;hours&quot;] * x[i] for i,j in enumerate(jobs)) &lt;= time_limit)
+    for a,b in deps: model.add(x[a] &lt;= x[b])
+    if require_all:
+        for variable in x: model.add(variable == 1)
+    model.maximize(sum(j[&quot;value&quot;] * x[i] for i,j in enumerate(jobs)))
+    solver = cp_model.CpSolver()
+    solver.parameters.max_time_in_seconds = 5
+    solver.parameters.num_search_workers = 1
+    status = solver.solve(model)
+    chosen = ([i for i,var in enumerate(x) if solver.value(var)]
+              if status in (cp_model.OPTIMAL, cp_model.FEASIBLE) else None)
+    return solver.status_name(status), chosen
+status, chosen = optimize_tasks(tasks, budget, hours, dependencies)
+assert chosen is not None, f&quot;未获得方案：{status}。UNKNOWN表示尚未找到或证明，不能解释为无解。&quot;
+assert valid_choice(chosen, tasks, budget, hours, dependencies)
+# 10个任务只有1024种组合，用独立穷举核对小实例。
+feasible = [list(i for i in range(len(tasks)) if bits[i])
+            for bits in itertools.product([0,1], repeat=len(tasks))
+            if valid_choice([i for i,b in enumerate(bits) if b], tasks, budget, hours, dependencies)]
+value = sum(tasks[i][&quot;value&quot;] for i in chosen)
+exact = max(sum(tasks[i][&quot;value&quot;] for i in c) for c in feasible)
+assert value == exact and value &lt;= unconstrained_value
+impossible, _ = optimize_tasks(tasks, 0, 0, dependencies, require_all=True)
+assert impossible == &quot;INFEASIBLE&quot;
+</pre><h2>4. 与简单选择法比较并保存计划</h2>
+<p>简单基线按价值/预算排序，在满足当前约束时才加入。它可能错过需要一起选择的依赖组合。图展示本例真实计算，不宣称求解器在所有问题上都更快。</p>
+<pre class="code">greedy = []
+for i in sorted(range(len(tasks)), key=lambda i: tasks[i][&quot;value&quot;]/tasks[i][&quot;cost&quot;], reverse=True):
+    if valid_choice(greedy+[i], tasks, budget, hours, dependencies): greedy.append(i)
+greedy_value = sum(tasks[i][&quot;value&quot;] for i in greedy)
+pd.DataFrame([tasks[i] for i in chosen]).to_csv(OUT_DIR / &quot;任务计划.csv&quot;, index=False, encoding=&quot;utf-8-sig&quot;)
+plt.bar([&quot;简单排序&quot;, &quot;约束优化&quot;], [greedy_value, value]); plt.ylabel(&quot;假设价值总分&quot;)
+plt.tight_layout(); plt.savefig(OUT_DIR / &quot;任务选择.png&quot;); plt.close()
+save_results({&quot;status&quot;:status,&quot;selected&quot;:chosen,&quot;value&quot;:value,&quot;greedy_value&quot;:greedy_value,
+              &quot;cost&quot;:sum(tasks[i][&quot;cost&quot;] for i in chosen),&quot;hours&quot;:sum(tasks[i][&quot;hours&quot;] for i in chosen),
+              &quot;infeasible_test&quot;:impossible},
+             f&quot;推荐任务{chosen}，价值{value}，基线{greedy_value}；求解状态{status}。&quot;
+             &quot;已逐条检查预算、工时和依赖，并用1024个组合核对本小实例最优值。评分变化时需要重算。&quot;)
+</pre><pre class="output">{
+  &quot;status&quot;: &quot;OPTIMAL&quot;,
+  &quot;selected&quot;: [
+    0,
+    1,
+    3,
+    7
+  ],
+  &quot;value&quot;: 31,
+  &quot;greedy_value&quot;: 29,
+  &quot;cost&quot;: 16,
+  &quot;hours&quot;: 11,
+  &quot;infeasible_test&quot;: &quot;INFEASIBLE&quot;
+}
+推荐任务[0, 1, 3, 7]，价值31，基线29；求解状态OPTIMAL。已逐条检查预算、工时和依赖，并用1024个组合核对本小实例最优值。评分变化时需要重算。
+</pre><h2>结果图与检查</h2>
+<p>下面展示本次计算保存的图。数值以单元格和 outputs 中的实际输出为准。</p>
+<pre class="code">from IPython.display import display, Image
+for figure in sorted(OUT_DIR.glob(&quot;*.png&quot;)):
+    display(Image(filename=str(figure)))</pre><img src="data:image/png;base64,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scMOO9T8vPvuu8evfvWrHOgqAS71uO2xxx7Rpk0RvxIAAEDLLKGsHd4qUinlqlWr8vsXX3wx98wJbwAAQEtWRICr74knnoiZM2fGIYcckn9OPXBLlizJoa5nz55x+OGHx3333bfO71i6dGksXLiwZlu0aNFGaj0AAECVBLj7778/Pvaxj8XAgQPjjDPOyPtGjBgRjzzySDz88MN5cpMVK1bEAQccsM5JTCZNmpTDXmUbPHjwRvwtAAAAWnCAW7lyZZx77rlx4IEH5u3uu++OTp065WO9evWKPffcM3bbbbc44ogjYsaMGdGnT5+48MIL1/p9Y8eOjQULFtRss2bN2oi/DQAAwDtXxKCxN954I4488sjcyzZ16tQ45phj1nl+27Zt80Qnc+fOXes5nTt3zhsAAEApighwX/3qV2POnDkxe/bsBic0aSjwPfroozFo0KCN0j4AAICNYZMPcGmttylTpuRxbqmM8umnn65zPI1fO//883PJZCqhfP755/PP6XXChAnN1m4AAICqC3BpAe9ly5bFFVdckbf6Ulllx44d4+yzz44XXnghunfvHnvvvXfurevXr1+ztBkAAKAqA9yWW26Ze+HWJU1gkhb7BgAAaMmKmYUSAACg2glwAAAAhRDgAAAACiHAAQAAFEKAAwAAKIQABwAAUAgBDgAAoBACHAAAQCEEOAAAgEIIcAAAAIUQ4AAAAAohwAEAABRCgAMAACiEAAcAAFAIAQ4AAKAQAhwAAEAhBDgAAIBCCHAAAACFEOAAAAAKIcABAAAUQoADAAAohAAHAABQCAEOAACgEAIcAABAIQQ4AACAQghwAAAAhRDgAAAACiHAAQAAFEKAAwAAKIQABwAAUAgBDgAAoBACHAAAQCEEOAAAgEIIcAAAAIUQ4AAAAAohwAEAABRCgAMAACiEAAcAAFAIAQ4AAKAQAhwAAEAhBDgAAIBCCHAAAACFEOAAAAAKIcABAAAUQoADAAAohAAHAABQCAEOAACgEAIcAABAIQQ4AACAQghwAAAAhRDgAAAACiHAAQAAFEKAAwAAKIQABwAAUAgBDgAAoBBFBLiXX345TjnllOjRo0e0b98++vfvH5deemmdc66++uq8v127drHjjjvG5MmTm629AAAAG0KbKMA555wTr776alx77bWx1VZbxc033xyjR4+O1atX59epU6fGqFGj4jvf+U4cfPDB+fiYMWOic+fOccIJJzR38wEAAJpEq9UpBW3i5s+fHzvssEOdfQcddFC88cYb8cADD0Tv3r3jwAMPjKuuuqrm+GGHHRZ/+ctf4vHHH1+vayxcuDB69uwZCxYsiO222y42BTuMv7W5mwDQrOafP6y5m1A89xKgms3fxO4jTZE5iiihrB/eklRKuWrVqpg7d24OeMOHD69zfNiwYTFnzpxYsmTJRmwpAABAlZdQ1vfEE0/EzJkz48wzz4x58+blfX379q1zTuqVS5577rno2rXrGt+xdOnSvFUsWrRog7cbAACgMYrogavt/vvvj4997GMxcODAOOOMM2LZsmV5f8eOHeuc16FDh/y6fPnyBr9n0qRJufuysg0ePHgjtB4AAKAKAtzKlSvj3HPPzWPd0nb33XdHp06dom3btvn4ihUr6pxfCW7pnIaMHTs2155WtlmzZm2E3wIAAKCFl1CmyUqOPPLIeOSRR/KMk8ccc0zNsV69euXXNA5up512qtn/7LPPRuvWraNPnz4NfmeaoTJtAAAApSiiB+6rX/1qnpBk9uzZdcJbMmjQoOjSpUtMmzatzv5bb701hg4dWlNKCQAAULpNvgcurXIwZcqUGDFiRC6jfPrpp+scT+PX0mQmqbyyX79+MWTIkLjpppvizjvvjHvuuafZ2g0AAFB1AS4t4J0mKrniiivyVl8qqxw/fny89dZbcd5558XixYtjwIABMX369Nh3332bpc0AAADFBLiGFt5+t7bccsvcC/d2JkyYkDcAAICWqsnHwD322GPRv3///AoAAMAmGuDSGLVTTz01B7gPfehDTfnVAAAAVa9JSyhPPvnkmDdvXjz44IN5Fsi0uHbt7b3vfa9ZIQEAAJozwFV63n7yk5/EzJkzY5dddoldd901tt5667ygdlrHLY1jS+uy7bXXXnHZZZfFwIEDm+LSAAAAVaPRJZSPPvponro/Tdt/7733xj777FNzLPXGvfbaazngLVmyJK/j1r179zjhhBMae1kAAICq06gAd/3118d+++0Xe+yxR/zmN7/Ji2o3pFWrVnmx7Q9+8INxwQUX5EW512dmSQAAAJqohPKQQw6JJ598Mrbffvv1/kybNm3ymm0p1AEAALCRAlzXrl3z9k689NJLsfnmmzfmsgAAAFWpUSWUqSftO9/5Tp6kpCGTJ0+OG2+8MZ577rmafX379o3HH3+8MZcFAACoSo0KcH/729/i8ssvjwEDBsRDDz20xvG0lMDo0aOjd+/eseeee8a0adPyzJQ77bRTYy4LAABQlRoV4LbZZpv43e9+F8OGDYsDDjggvv/979ccS2Pcbrvtthzy/vCHP8T+++8fn/70p2PcuHFN0W4AAICq0+h14LbYYov47ne/m3vYPv/5z8fzzz8f5557bp1ZJtO6cJMmTYpPfvKTOextt912cdpppzX20gAAAFWlSRbyTj772c/mCU2OOuqoaNu2bV7Yu3379nXOGTp0aFx66aXxxS9+MY455pjcgwcAAMBGWsi7to9//ONxxRVXxNe+9rU4+uij1whwyYknnph765555pmmvDQAAECL12Q9cBWf+cxncnAbMmTIWs+56667LCUAAADQnD1wFWmykvoLdaclB7785S/HJZdcIrwBAAA0Zw/c0qVL19iXQtyWW24ZS5YsyWPj5s+fH1OnTm2qSwIAAFSVJgtwW2211Rq9bptttlle5Hu//faLXXfdNX7+859Hp06dmuqSAAAAVaVRAS6Fs8WLF0fPnj3zz7/97W+jc+fOeQmBPn365DXiWrduHTfccEPed+aZZ8ZBBx0URx55ZN4PAADA+mtUirruuuti0KBBecHu1Pu2/fbb522HHXao+Tnp169fvPrqq3lfGgc3cuTIxlwWAACgKjWqBy4Fsddeey2OPfbYNY7VXsg7+dCHPhR77713jB07NgYMGBBXX311Yy4NAABQdRpdx5gW7P7973+/1uMrV66MiRMnxs477xyvv/56bLvttrFixYrGXhYAAKDqNMkkJr169Vqjxy2VS86dOzf30qXAdvnll0eHDh2ENwAAgHepSWYSScsE1J+BMunRo0de2Pvxxx+Pgw8+uCkuBQAAULUa1QOXFuc+7bTTckCrL/XIpaUF0syTf/nLX/JYueS+++7L+wEAANiIAe7HP/5xDmQ33nhjHuO2NqmM8q677srvt9566zjvvPMac1kAAICq1KgAd9xxx8XRRx8dW2yxRf75F7/4RR7nVpF+Puqoo2LmzJmNbykAAECVa1SA22yzzfJWmcjkrLPOqjmW1oA7++yzc4C76KKL8sLdxx9/fHTr1q3xrQYAAKhCTTKJSTJ//vx49tln62zz5s3Lxzp37hyXXHJJ9OzZM77whS/kSU8AAABopgC3Lp/73Ofiqaeeip/+9Kd5MpOOHTtujMsCAAC0KI0OcHPmzMlj3dbHYYcdlic+2W+//Rp7WQAAgKrT6IW8H3744bj33nvjX/7lX3I4W7Vq1dt+Zvbs2Y29LAAAQNVpdICr7aSTTooDDzwwrwH3y1/+Mj760Y+u8QoAAMAmEOCSSjllWu/ttttui65du9Z5TSozVwIAALAJTWLSqlWrDX0JAACAqtCoHrgPf/jD8eKLL8bSpUvjIx/5SLz55ptN1zIAAACargdu9OjRccABB8TOO+8cp556arRp0+QVmQAAADRFgDv++ONjn332id69e+f3yiUBAAA2nCbvMvv1r38db731Vl5O4MEHH6zzWjkGAABAMwe4Xr16xXHHHVczC2Xqlau8duvWreYYAAAAGznArVy5MpdPLl++PP/85JNPrtfnWrfe4JNfAgAAtDiNCnBpApMUxo4++uh46aWXci/b+vjBD37QmMsCAABUpUYFuJ/+9KcxY8aMmDZtWnzta1+Lbbfddr0/e+KJJzbm0gAAAFWnUQHuve99b5xwwgl5e+WVV+Kaa66JCy+8MJ599tncK/elL32p6VoKAABQ5ZpsEpMuXbrkdeFSaPvhD38YX//612PgwIG5Zw4AAIBNcBmBW2+9NY455pgYNWqUdeEAAACaUJNOB/nUU0/FiBEj4kc/+pHwBgAAsKkGuDQGbvjw4TF06NA45ZRTmuprAQAAaMoSysWLF8cnPvGJPA7uxhtvjG9961tx++23r/X8Tp06xS233NIUlwYAAKgajQ5wd9xxR3z+85+PvffeO09e0qFDh/x+q622Wutn2rVr19jLAgAAVJ1GBbghQ4bEvHnz4tvf/naddd3SAt9pAwAAYBMZA7dq1apYvXp1tG7dpHOhAAAA0NQ9cA8++GD8/Oc/z2u/TZs2La666qo8vu3ee++NJ598Mtq0aRNdu3aNbbfdNvbYY4/YbLPNGnM5AACAqtboMXCf/OQnY999941jjz02z0CZxsQ99NBDMWPGjHjrrbfipZdeigULFuT3Rx55ZF7Ye5dddmma1gMAAFSRJql9fM973pMX8E49bQcddFCceuqpcffdd+eeuDlz5sTLL78c06dPz6+77bZbTJ48uSkuCwAAUFWabPBa27Zt4yc/+Ukuk0wllbWlfal3LoW8yy67LO666653tc7cuHHj4tBDD62z/5lnnsmLhtffUmAEAABoSRpVQplKIjt27BhHHXVUHHbYYdG+ffv42c9+lgPU2qTZKmvPWPl2/vSnP8XFF18cU6ZMiTfeeCP222+/NdagS1LZZrdu3Wr2b7PNNu/qdwIAAGiRAe6LX/xinrzktNNOixdffDHe9773rfdnU8/Z+pg5c2aeEOX666+Pb37zm2scTwEuBcY0SUqaNAUAAKClalTiSeWMaUtj2tKYtyuvvDJuuOGGXE757//+73HggQc2uoEnn3xynHLKKfl9QwEuBce0aLjwBgAAtHRNlnpSWEtbWtQ7Ba20/fnPf44rrriiUcsHrKscs9IDt2TJkly+mSZTGTBgQJx11lmx//77r/NzS5cuzVvFokWL3nUbAQAANoYmXYH7H//4R/z2t7+NSy65JObNmxcXXnjhGuEtBaW0AHhTGTFiRDzyyCPx8MMPx6WXXhorVqyIAw444G0nMZk0aVL07NmzZhs8eHCTtQkAAGCTD3DLli2LT3ziE/n99ttvn0sb67voooty6GoqvXr1ij333DMvT3DEEUfk9ef69OmTw+O6jB07Nq9PV9lmzZrVZG0CAADYJEsoX3/99Zr3c+fOrSl5/OhHP5rXhDv99NOjQ4cONefceeedcfjhh8eGksbf7b777rkt69K5c+e8AQAAVE0PXKdOnWLLLbfMWxp3dvDBB+f999xzT/zwhz+M/v37x/3335/3pUW9U4nlO1lG4J1KSw08+uijscsuu2ywawAAABQ7icns2bOja9euuferR48eeV/qifv973+fSxnTGnGXX3553HLLLfGpT30qdtppp2gqEydOzCWTqYTy+eefj/PPPz+/TpgwocmuAQAA0GICXBqHtvXWW6+xv127dnH22WfHjjvuGCNHjozNN988nnjiiWhKaSHxdI0XXnghunfvHnvvvXcOlP369WvS6wAAADS3jbJ42s4775zHwaWwlULWu5XKMusbN25c3gAAAFq6Ro+BS6WSCxcujDfffLPBY2lh78pkJmm83NvNDgkAAMAG6oFbvXp1fOhDH4rWrVvnCUxSQEsTiKT9Q4YMyYt5X3XVVXHkkUfmsWpf/vKXc5jbYostGntpAACAqtLoHrjly5fHq6++Go899lieyCSNQfvDH/6Qj6Vxb88880wOb8mxxx6be+Guu+66xrccAACgyjQ6wKWJStq3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3rx5+bVv37519vfu3Tu/Pvfcc9G1a9c1Prd06dK8VSxYsCC/Llq0KDYVK5e+2NxNAGhWCxcubO4mFM+9BKhmCzex+0gla6xcubJ6A9yyZcvya8eOHevs79ChQ35dvnx5g5+bNGlSTJw4cY39gwcP3iDtBOCd6/m/zd0CAErWcxO9jyxevDh22GGH6gxwbdu2za8rVqyos78S3Dp16tTg58aOHZsnPal44403ci9c6rlr06b4fxZokidE6YHGrFmzokePHs3dHAAK4z4Ca0o9bym8DRw4MN6t4pNKr1698msaB7fTTjvV7H/22WejdevW0adPnwY/17lz57zVVr8ME4h8091uu+2auxkAFMp9BOp6tz1vLWYSk0GDBkWXLl1i2rRpdfbfeuutMXTo0JpSSgAAgNK1iBLKM888M84999zo169fDBkyJG666aa4884745577mnu5gEAADSZ4gNcMn78+HjrrbfivPPOyzWlaR246dOnx7777tvcTYNipRLj9GCkfqkxAKwP9xHYMFqtXr169Qb6bgAAAJpQ8WPgAAAAqoUABwAAUAgBDlinVGW9atWq5m4GAFVs6dKlec1eQICDosydOzcvND9nzpw1jo0YMSL+9V//dZ2f/93vftfg/tdffz2vndiQKVOmxEEHHbTG/latWsUf//jHvCBlev/000+v1++Qzj/mmGPi7rvvXq/zAWhaaemll156qc6+m2++ORYsWPCOvufII4+Miy66aL3OfeWVV/J6vU899VTNvrQM1L333lvTpnX51re+FXvssUfNz2mm8XTvEeqoRgIcFOSMM86I3XffPc+0Wtvjjz8eN9xwQ4wcOXKtn/3zn/+cl9n43ve+t8ax008/PQ488MAc5Da0FEB79eoV3/jGNzb4tQCoKz2s+9SnPhXPPPNMzb6//e1v+cHan/70pw123RTQ/vrXv0bPnj1r9qUZxFMIS9c/6aST4ogjjohXX321wUqQqVOnxqhRo9Z5jTfffDN/F7R0LWIZAagGP//5z/MC9VtvvXW85z3vqdn/gQ98IDp16hRbbLFFfOYzn6nzmV133TXuv//+WLFiRbzvfe+La665Jt+kP/zhD+djyW233RY/+tGP8tqJrVu3jn/84x95fcVKb1m6waabZ3q/2Wab5Zvt+vqP//iPmDhx4lqPN/RdqSfxuuuuW+9rALD+Uk/W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"><h2>适用边界与常见错误</h2>
+<p>普通一维背包不处理任意任务依赖。所有成本和时间使用整数单位。UNKNOWN表示尚未确定，不等于INFEASIBLE；评分是显式假设。</p>
+<h2>独立练习</h2>
+<p>打开「动手练习.ipynb」，完成补全、修改、迁移，再查看「参考答案.ipynb」。</p>
+</body></html>

@@ -1,0 +1,73 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>安装指南</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>安装课程环境</h1>
+<p>GitHub 源码包包含课程、Notebook、离线阅读页和小型数据；不包含 Python 运行时、<code>.venv</code>、190个安装包或预训练大权重。<strong>第一次需要联网准备；准备完成后，案例运行可以离线。</strong></p>
+<p>本发布版验证目标是 <strong>Windows x64、Python 3.12、CPU</strong>。其他系统、ARM、GPU环境未经验证，不能直接套用这份锁文件宣称兼容。深度学习案例建议有16 GB内存，模型下载和离线备份还需额外磁盘空间。</p>
+<h2>1. 安装 Python 3.12 x64</h2>
+<p>从 <a href="https://www.python.org/downloads/windows/">Python 官方 Windows 下载页</a>选择 Python 3.12 的64位安装程序，安装 pip、venv 和 Python Launcher。不要使用精简的嵌入式包替代完整安装。</p>
+<p>在课程根目录打开 PowerShell，核对：</p>
+<pre><code class="language-powershell">py -3.12 -c &quot;import sys,struct; print(sys.version); print(struct.calcsize('P')*8)&quot;
+</code></pre>
+<p>应显示3.12和64。找不到3.12时，安装器会给出明确提示，不会自行替换系统 Python。</p>
+<h2>2. 创建课程环境</h2>
+<p>可以双击 <code>首次安装.cmd</code>，或运行：</p>
+<pre><code class="language-powershell">py -3.12 tools/setup_environment.py
+.venv/Scripts/python.exe tools/self_check.py --core --full-hash
+</code></pre>
+<p>安装器创建课程内的 <code>.venv</code>，按 <code>requirements-lock.txt</code> 的190项精确版本安装，执行 <code>pip check</code> 并绑定课程 Jupyter 内核。已有可用 <code>.venv</code> 会原地补齐锁定版本；不会自动重命名或删除。运行中的 Notebook 请先关闭再安装，以免正在使用的库被更新。</p>
+<p>在线安装明确使用 <code>https://pypi.org/simple</code> 和 PyTorch CPU 索引 <code>https://download.pytorch.org/whl/cpu</code>；<code>torch==2.8.0+cpu</code>、<code>torchvision==0.23.0+cpu</code> 不改成CUDA版或最新版本。只安装wheel，不尝试源码编译。命令遵循 <a href="https://pip.pypa.io/en/stable/cli/pip_install/">pip安装选项</a>；虚拟环境使用 <a href="https://docs.python.org/3.12/library/venv.html">Python venv</a>。</p>
+<p>没有 Launcher 但已有合适 Python 时，可显式指定：</p>
+<pre><code class="language-powershell">&amp; 'C:/Path/To/Python312/python.exe' tools/setup_environment.py --python 'C:/Path/To/Python312/python.exe'
+</code></pre>
+<p>先看计划而不安装可加 <code>--dry-run</code>。环境不完整时安装器保留它并提示使用显式修复流程，不会悄悄移走现有环境。</p>
+<h2>3. 按需准备预训练模型</h2>
+<p>全部准备（需要联网）：</p>
+<pre><code class="language-powershell">.venv/Scripts/python.exe tools/prepare_models.py --all
+.venv/Scripts/python.exe tools/self_check.py --full-hash
+</code></pre>
+<p>也可以双击 <code>准备全部模型.cmd</code>，或仅下载即将使用的模型：</p>
+<pre><code class="language-powershell">.venv/Scripts/python.exe tools/prepare_models.py --list
+.venv/Scripts/python.exe tools/prepare_models.py --models minilm,flan-t5-small
+.venv/Scripts/python.exe tools/prepare_models.py --models minilm --verify-only
+</code></pre>
+<table>
+<thead>
+<tr>
+  <th>名称</th>
+  <th>相关案例</th>
+  <th>大致权重大小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>resnet18</code></td>
+  <td>B19 图像迁移</td>
+  <td>47 MB</td>
+</tr>
+<tr>
+  <td><code>flan-t5-small</code></td>
+  <td>B21 Transformer</td>
+  <td>308 MB</td>
+</tr>
+<tr>
+  <td><code>minilm</code></td>
+  <td>B23 向量检索</td>
+  <td>91 MB</td>
+</tr>
+<tr>
+  <td><code>qwen3-0.6b</code></td>
+  <td>B24 中文资料问答</td>
+  <td>1.50 GB</td>
+</tr>
+<tr>
+  <td><code>chronos-bolt-tiny</code></td>
+  <td>B15 时序模型拓展</td>
+  <td>35 MB</td>
+</tr>
+</tbody>
+</table>
+<p>以上为十进制近似权重大小，分词器和配置另占空间。模型固定到随仓库 <code>assets/models/*/SOURCE.json</code> 中的40位提交revision；ResNet18使用固定官方权重文件。每个已有或下载文件都按 <code>model_files.json</code> 的大小和完整SHA256校验。<code>SOURCE.json</code> 是本地溯源元数据，不从模型仓库下载。新文件只有完全下载且校验正确后才替换目标文件；已有错误文件默认保留，可显式使用 <code>--repair</code> 重下。不要自行改成 <code>main</code>、<code>latest</code> 或删除哈希检查。</p>
+<p>模型是可选准备项：<code>self_check.py --core</code> 不要求模型存在。只准备一部分模型时，全量自检报告其余缺失是预期行为，相关案例要等对应模型准备后再运行。Hugging Face 的固定revision机制见<a href="https://huggingface.co/docs/huggingface_hub/guides/download">官方下载说明</a>。模型的许可与用途说明见对应SOURCE和课程第三方声明。</p>
+<h2>4. 开始学习与记录</h2>
+<p>安装后使用已有 <code>开始学习.cmd</code>。Notebook 使用课程内核；代码运行时禁止联网，模型缺失会明确报错，不会临时下载或伪造答案。只阅读HTML不需要安装Python。</p>
+<p>安装日志位于 <code>reports/setup_environment.json</code>，模型校验记录位于 <code>reports/model_preparation.json</code>，自检结果位于 <code>reports/self_check.json</code>。自检通过不替代全部案例重跑；具体环境的案例结果仍由课程验收工具记录。</p>
+<p>完整离线恢复和外部wheelhouse安装见 <a href="%E7%A6%BB%E7%BA%BF%E5%87%86%E5%A4%87%E6%8C%87%E5%8D%97.md">离线准备指南</a>。</p>
+</body></html>

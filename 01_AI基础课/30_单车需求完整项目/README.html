@@ -1,0 +1,33 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>B30 怎样独立完成可复现、可交接的预测项目？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>任务：用真实 UCI 小时单车记录预测下一小时需求，完成数据契约、时序评价、模型交接与本地接口。先阅读独立任务书，再对照参考实现。</p>
+<h2>先修与运行</h2>
+<p>B01—B29；重点 B15、B27—B29。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 明确预测时点并读取真实数据</h2>
+<p>在目标小时t开始前预测cnt；只使用日历信息与t−24、t−168小时已观测需求。实际天气、casual和registered均禁止作输入。原数据有缺失小时，先补齐时间索引，再shift，避免把24条记录误作24小时。</p>
+<h2>2. 只构造当时可用特征</h2>
+<p>shift(24)先移位再取值，绝不能使用未来信息补齐历史。缺少目标或历史滞后值的行删除并报告。按时间70%/15%/15%分割；测试阶段是逐小时滚动预测，可使用当时已发生的早期测试需求，不是固定起点预测整季。</p>
+<h2>3. 验证集选择简单模型与实用模型</h2>
+<p>基线是昨天同一小时需求；另比较 Ridge 和 HistGradientBoosting。固定候选与预算，验证集按MAE选方案，再在训练+验证上重拟合一次。最终测试不参与选择。</p>
+<h2>4. 保存可交接结果、错误与模型卡</h2>
+<p>记录完整数据哈希、日期范围、输入列和预测口径。图展示测试开头168个小时，误差表覆盖全部测试。改善必须来自实际计算；疫情、城市与用户变化不在此历史数据保证内。</p>
+<h2>5. 接口验证与完整项目验收</h2>
+<p>API 接收已在外部准备好的日历与历史滞后值，拒绝负需求和额外字段。服务不偷偷回看未来CSV。用测试中一条记录核对批预测和API输出一致。</p>
+<h2>常见错误与边界</h2>
+<p>没有未来天气预报数据，因此不使用实际天气字段。测试采用滚动单步协议；不能把该结果描述为固定起点的长期预测。真实部署需重新校准监测阈值。</p>
+<h2>数据</h2>
+<p>真实 UCI Bike Sharing 小时数据，原作者 Hadi Fanaee-T 和 Joao Gama，2011—2012 Capital Bikeshare。assets/data/bike_hour.csv 由课程预先下载；原始来源、许可、哈希见assets与第三方清单。cnt=casual+registered，二者禁止作为输入。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

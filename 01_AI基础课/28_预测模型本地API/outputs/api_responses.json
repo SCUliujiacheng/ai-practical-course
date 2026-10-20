@@ -1,0 +1,9 @@
+{
+  "valid": {
+    "predicted_rent": 2399.72,
+    "unit": "教学货币/月",
+    "model_version": "teaching-v1"
+  },
+  "invalid_status": 422,
+  "extra_field_status": 422
+}

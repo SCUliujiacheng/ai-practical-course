@@ -1,0 +1,32 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>13_项目延期与缓冲 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>工期不稳定时，怎样估计延期概率与安排缓冲？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{&#x27;deadline&#x27;: 16.174379145417845, &#x27;selected_on_development&#x27;: &#x27;end&#x27;, &#x27;development&#x27;: {&#x27;end&#x27;: {&#x27;late_probability&#x27;: 0.471, &#x27;mean_finish&#x27;: 16.149741325248, &#x27;missed_booking_rate&#x27;: 0.471}, &#x27;before&#x27;: {&#x27;late_probability&#x27;: 0.492, &#x27;mean_finish&#x27;: 16.46304327325856, &#x27;missed_booking_rate&#x27;: 0.079}}, &#x27;independent_simulation&#x27;: {&#x27;end&#x27;: {&#x27;late_probability&#x27;: 0.4595, &#x27;mean_finish&#x27;: 16.13339112782704, &#x27;p90_finish&#x27;: 20.106908841698377, &#x27;missed_booking_rate&#x27;: 0.46}, &#x27;before&#x27;: {&#x27;late_probability&#x27;: 0.46, &#x27;mean_finish&#x27;: 16.5573198637733, &#x27;p90_finish&#x27;: 19.526055838271578, &#x27;missed_booking_rate&#x27;: 0.103}}, &#x27;simulation_only&#x27;: True, &#x27;before_minus_end_late_probability&#x27;: {&#x27;estimate&#x27;: 0.0005, &#x27;approx_95_monte_carlo_interval&#x27;: [-0.02113211256320042, 0.02213211256320042], &#x27;excludes_model_uncertainty&#x27;: True}}
+</pre><h2>1. 补全：核对延期率</h2>
+<p>从 finish_by_policy 重算选中方案延期比例，并与指标核对。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    rate=...
+    assert np.isclose(rate,future_results[selected][&#x27;late_probability&#x27;])
+    print(rate)</pre><h2>2. 修改：承诺日期晚两天</h2>
+<p>保持模拟结果不变，仅将交付承诺推迟两天；延期率不应上升。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    later=...
+    assert all(later[name]&lt;=future_results[name][&#x27;late_probability&#x27;] for name in policies)
+    print(later)</pre><h2>3. 迁移：没有预约限制的小项目</h2>
+<p>去掉预约时点与重新预约等待，按纯依赖计算完工时间，验证不晚于受预约约束的结果。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    ready=future[:,0]+np.maximum(future[:,1],future[:,2])
+    unconstrained=...
+    assert np.all(unconstrained&lt;=finish_by_policy[&#x27;end&#x27;]+1e-10)
+    print({&#x27;无预约约束平均工期&#x27;:float(unconstrained.mean()),&#x27;延期率&#x27;:float(np.mean(unconstrained&gt;deadline))})</pre></body></html>

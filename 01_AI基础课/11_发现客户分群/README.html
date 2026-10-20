@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>B11 没有标签，怎样发现行为相近的客户群？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>模拟客户的购买频次、客单价与最近购买间隔，标准化后聚类。用轮廓系数辅助选择，再回原单位解释各群，不把聚类编号当真实人格标签。</p>
+<h2>先修与运行</h2>
+<p>B07；均值、距离、标准化、无标签分析。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 定义行为特征而非臆测客户身份</h2>
+<p>三个特征单位不同：次数、金额、天数。生成机制包含三种购买习惯，但拟合阶段不提供潜在类别。聚类的输出只是相似性分组，不是因果解释。</p>
+<h2>2. 尺度改变距离</h2>
+<p>K-means 最小化群内平方距离；不标准化时金额可能压过次数。固定 n_init 与随机种子，避免把初始化偶然结果误认成稳定结构。先试 k=2—5，而不是直接写死三群。</p>
+<h2>3. 返回原单位解释</h2>
+<p>群 0/1/2 没有天然大小含义。按原始金额、间隔等描述，检查每群样本量；很小群可能是异常或样本不足，不能急着设计客户政策。</p>
+<h2>4. 保存选择依据与分群</h2>
+<p>二维散点仅显示三维空间的一部分。轮廓系数是内部指标，不能证明分群有商业价值；后续需要稳定性与实际行动收益验证。</p>
+<h2>常见错误与边界</h2>
+<p>潜在组是模拟机制。内部聚类指标不保证真实世界群体有效，群编号不是等级。</p>
+<h2>数据</h2>
+<p>教学模拟数据；生成机制、参数和随机种子见本案例代码。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

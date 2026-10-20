@@ -1,0 +1,49 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>10_志愿者排班 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>八名志愿者怎样兼顾覆盖、技能和公平？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{
+  &quot;status&quot;: &quot;OPTIMAL&quot;,
+  &quot;workload_spread&quot;: 1,
+  &quot;preferred_assignments&quot;: 12,
+  &quot;coverage&quot;: [
+    3,
+    3,
+    3,
+    3
+  ],
+  &quot;all_constraints_pass&quot;: true,
+  &quot;infeasible_test&quot;: &quot;INFEASIBLE&quot;
+}
+推荐排班表，4段覆盖[3, 3, 3, 3]，总班数差1，满足12个偏好。状态OPTIMAL；如果急救员在首段都不可用，需求已被证明无解，需要改需求或增加合格人员。
+</pre><h2>1. 补全：覆盖人数</h2>
+<p>分别计算每段覆盖和每人班数，用断言核对需求。</p>
+<pre class="code">coverage=roster.sum(axis=0);loads=roster.sum(axis=1)
+assert coverage.tolist()==demand and loads.max()&lt;=2
+print(coverage,loads)
+</pre><pre class="output">[3 3 3 3] [2 2 1 1 1 2 2 1]
+</pre><h2>2. 修改：偏好全部相同</h2>
+<p>去掉偏好差异，只保留覆盖与负担差目标。不要要求排班表逐格保持相同。</p>
+<pre class="code">state,p=schedule(availability,np.zeros_like(preferences),skilled,demand)
+assert check_roster(p,availability,skilled,demand)
+assert np.ptp(p.sum(axis=1))==1
+print(state,p)
+</pre><pre class="output">OPTIMAL [[1 0 0 0]
+ [0 1 0 1]
+ [0 0 1 0]
+ [1 0 1 0]
+ [0 1 0 0]
+ [1 1 0 0]
+ [0 0 1 1]
+ [0 0 0 1]]
+</pre><h2>3. 迁移：六人值守三段</h2>
+<p>每段2人、前两人合格，所有人所有时段可用。能否让所有人恰好一段，同时每段都有合格人员？用方案检查你的判断。</p>
+<pre class="code">avail=np.ones((6,3),int)
+state,p=schedule(avail,np.zeros_like(avail),{0,1},[2,2,2])
+assert check_roster(p,avail,{0,1},[2,2,2])
+# 三段都需合格者，只有两名合格者，至少一人必须值守两段。
+assert p[:2].sum()&gt;=3
+print(&quot;不能同时要求六人各一段并满足三段技能覆盖。&quot;,state,p.sum(axis=1))
+</pre><pre class="output">不能同时要求六人各一段并满足三段技能覆盖。 OPTIMAL [2 1 1 1 0 1]
+</pre></body></html>

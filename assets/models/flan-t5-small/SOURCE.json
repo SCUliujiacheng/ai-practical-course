@@ -1,0 +1,16 @@
+{
+  "repository": "google/flan-t5-small",
+  "revision": "0fc9ddf78a1e988dac52e2dac162b0ede4fd74ab",
+  "files": [
+    "README.md",
+    "config.json",
+    "generation_config.json",
+    "model.safetensors",
+    "special_tokens_map.json",
+    "spiece.model",
+    "tokenizer.json",
+    "tokenizer_config.json"
+  ],
+  "download_date": "2026-10-20",
+  "license": "apache-2.0"
+}

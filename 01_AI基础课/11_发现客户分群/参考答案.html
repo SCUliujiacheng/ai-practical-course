@@ -1,0 +1,35 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>11_发现客户分群 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>没有标签，怎样发现行为相近的客户群？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">            visits      basket  days_since  size
+cluster                                         
+0         2.163287   56.841850   40.310490    90
+1        12.011051   46.108465    5.386059    90
+2         3.979422  257.282038   18.123852    90
+</pre><h2>1. 补全：找到最大群</h2>
+<p>从 profiles 中找人数最多的群，核对输出人数。</p>
+<pre class="code">largest = profiles[&#x27;size&#x27;].idxmax()
+assert int((customers[&#x27;cluster&#x27;]==largest).sum()) == int(profiles.loc[largest,&#x27;size&#x27;])
+print(profiles.loc[largest])</pre><pre class="output">visits         2.163287
+basket        56.841850
+days_since    40.310490
+size          90.000000
+Name: 0, dtype: float64
+</pre><h2>2. 修改：不标准化会怎样</h2>
+<p>对原单位特征运行相同 k，比较两种标签的调整兰德指数，不能直接逐个比较群编号。</p>
+<pre class="code">from sklearn.metrics import adjusted_rand_score
+unscaled = KMeans(n_clusters=selected_k,n_init=10,random_state=11).fit(customers[[&#x27;visits&#x27;,&#x27;basket&#x27;,&#x27;days_since&#x27;]])
+agreement = adjusted_rand_score(model.labels_,unscaled.labels_)
+assert -1 &lt;= agreement &lt;= 1
+print(&#x27;两种分群的一致性 ARI&#x27;,agreement)</pre><pre class="output">两种分群的一致性 ARI 1.0
+</pre><h2>3. 迁移：给新客户分组</h2>
+<p>用已拟合标准化器处理新客户，不能对一个新客户重新 fit。</p>
+<pre class="code">new = pd.DataFrame({&#x27;visits&#x27;:[3,11],&#x27;basket&#x27;:[250,50],&#x27;days_since&#x27;:[15,4]})
+labels = model.predict(scaler.transform(new))
+assert labels.shape == (2,) and set(labels).issubset(set(model.labels_))
+print(new.assign(cluster=labels))</pre><pre class="output">   visits  basket  days_since  cluster
+0       3     250          15        2
+1      11      50           4        1
+</pre></body></html>

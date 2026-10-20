@@ -1,0 +1,56 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>24_中文本地资料问答 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>怎样让本地语言模型参考资料回答问题？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">验证集选定阈值 0.25000000000000006
+</pre><pre class="output">`torch_dtype` is deprecated! Use `dtype` instead!
+</pre><pre class="output">The following generation flags are not valid and may be ignored: [&#x27;temperature&#x27;, &#x27;top_p&#x27;, &#x27;top_k&#x27;]. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+</pre><pre class="output">签到地点在哪里 一号楼大厅 [来源:D1]
+</pre><pre class="output">下大雨活动转到哪里 体育馆 [来源:D3]
+明天股票价格是多少 资料不足，无法回答。
+校长的生日是什么时候 资料不足，无法回答。
+{
+  &quot;answerable_retrieval_recall&quot;: 1.0,
+  &quot;phrase_support_proxy_rate&quot;: 1.0,
+  &quot;unanswerable_refusal_rate&quot;: 1.0,
+  &quot;false_refusal_rate&quot;: 0.0,
+  &quot;threshold&quot;: 0.25000000000000006,
+  &quot;test_questions&quot;: 4,
+  &quot;human_full_claim_review&quot;: &quot;required; phrase proxy is not full verification&quot;,
+  &quot;model&quot;: &quot;Qwen/Qwen3-0.6B&quot;,
+  &quot;elapsed_seconds&quot;: 12.849
+}
+</pre><h2>1. 补全：核对引用</h2>
+<p>非拒答答案的引用必须指向实际检索来源。</p>
+<pre class="code">for row in rows:
+    if not row[&#x27;abstained&#x27;]:
+        assert &#x27;[来源:&#x27; + row[&#x27;retrieved_doc&#x27;] + &#x27;]&#x27; in row[&#x27;answer_with_source&#x27;]
+assert len(rows) == 4
+print(&#x27;引用绑定通过；不是事实正确性证明&#x27;)</pre><pre class="output">引用绑定通过；不是事实正确性证明
+</pre><h2>2. 修改：提高拒答阈值</h2>
+<p>仅在验证集比较原阈值与0.8导致的拒答数。解释错误拒答可能增加。</p>
+<pre class="code">original = sum((s &lt; threshold for s in validation_scores))
+strict = sum((s &lt; 0.8 for s in validation_scores))
+assert strict &gt;= original
+print(&#x27;原阈值拒答&#x27;, original, &#x27;严格阈值拒答&#x27;, strict)</pre><pre class="output">原阈值拒答 2 严格阈值拒答 4
+</pre><h2>3. 迁移：受约束的计算工具</h2>
+<p>只允许 add，参数必须为有限数值；拒绝未知工具和字符串参数，不执行代码字符串。</p>
+<pre class="code">def call_tool(name, args):
+    if name != &#x27;add&#x27;:
+        raise ValueError(&#x27;不允许的工具&#x27;)
+    if set(args) != {&#x27;a&#x27;, &#x27;b&#x27;}:
+        raise ValueError(&#x27;参数字段错误&#x27;)
+    if any((type(x) not in (int, float) or not np.isfinite(x) for x in args.values())):
+        raise ValueError(&#x27;数值无效&#x27;)
+    return args[&#x27;a&#x27;] + args[&#x27;b&#x27;]
+assert call_tool(&#x27;add&#x27;, {&#x27;a&#x27;: 2, &#x27;b&#x27;: 3}) == 5
+for name, args in [(&#x27;shell&#x27;, {}), (&#x27;add&#x27;, {&#x27;a&#x27;: &#x27;2&#x27;, &#x27;b&#x27;: 3})]:
+    try:
+        call_tool(name, args)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError(&#x27;非法调用未拒绝&#x27;)
+print(&#x27;工具边界检查通过&#x27;)</pre><pre class="output">工具边界检查通过
+</pre></body></html>

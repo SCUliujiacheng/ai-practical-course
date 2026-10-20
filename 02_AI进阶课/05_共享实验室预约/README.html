@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>A05 六个团队怎样预约两间实验室？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>团队各有可用时间、实验时长、房间要求和成员。输出一份不重叠、成员不分身的安排，并展示无解时该怎样描述。</p>
+<h2>先修与运行</h2>
+<p>已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 先列出每个团队的合法选项</h2>
+<p>一个预约用(room,start,end)表示，区间采用左闭右开：[1,3)与[3,4)不冲突。先过滤房间和可用时间，再解决团队间冲突。</p>
+<h2>2. 回溯寻找第一份合法计划</h2>
+<p>先安排选项少的团队。递归每增加一个预约就检查已安排团队，遇到冲突撤销选择。它有助于理解约束，不保证最小完工时间。</p>
+<h2>3. 用CP-SAT选择互不冲突的选项</h2>
+<p>每个团队恰好选一个选项。冲突的两个选项不能同时被选中。我们最小化最后结束时刻；求解状态和预约合法性分开检查。</p>
+<h2>4. 保存预约表与冲突反例</h2>
+<p>空结果不一定表示数学上无解：只有INFEASIBLE是证明无解。这个小例的冲突需求可通过增加房间或时间修复，但一般可能需要同时放宽多个条件。</p>
+<h2>常见错误与边界</h2>
+<p>本例时间离散、时长固定且实验不可中断；成员共享也属于资源互斥。逐条放宽仅是诊断方法，不保证找到最少的修改。</p>
+<h2>数据</h2>
+<p>原创教学模拟场景，规模与全部参数直接列在 solution.py；运行同时保存输入或结果 CSV。无真实个人记录，不需要下载数据。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

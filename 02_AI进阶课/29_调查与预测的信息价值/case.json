@@ -1,0 +1,13 @@
+{
+  "id": "A29",
+  "title": "再做一次调查，最多值得付多少钱？",
+  "track": "A",
+  "number": 29,
+  "sources": [
+    [
+      "Bayesian decision theory textbook chapter",
+      "https://artint.info/3e/html/ArtInt3e.Ch12.html"
+    ]
+  ],
+  "prereqs": "基础课 Python、NumPy、实验评价"
+}

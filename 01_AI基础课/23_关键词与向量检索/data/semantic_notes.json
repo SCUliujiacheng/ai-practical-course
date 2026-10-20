@@ -1,0 +1,54 @@
+{
+  "notes": [
+    [
+      "D1",
+      "Cancel a laboratory booking at least four hours before it starts."
+    ],
+    [
+      "D2",
+      "The library closes at ten in the evening on weekdays."
+    ],
+    [
+      "D3",
+      "During heavy rain the outdoor event moves to the sports hall."
+    ],
+    [
+      "D4",
+      "Report a broken bicycle and include its identification number."
+    ],
+    [
+      "D5",
+      "Reimbursement requires an invoice and proof of payment."
+    ],
+    [
+      "D6",
+      "Save random seeds and software versions before training a model."
+    ]
+  ],
+  "questions": [
+    [
+      "How do I withdraw my reservation?",
+      0
+    ],
+    [
+      "When must readers leave on Monday night?",
+      1
+    ],
+    [
+      "Where will people gather if it pours?",
+      2
+    ],
+    [
+      "What should I do about a damaged bike?",
+      3
+    ],
+    [
+      "Which receipts are needed to get my money back?",
+      4
+    ],
+    [
+      "What helps make an experiment repeatable?",
+      5
+    ]
+  ]
+}

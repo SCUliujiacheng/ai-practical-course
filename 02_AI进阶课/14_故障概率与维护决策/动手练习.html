@@ -1,0 +1,35 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>14_故障概率与维护决策 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>设备可能出问题时，什么时候值得停机检查？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{&#x27;probability_model&#x27;: &#x27;calibrated&#x27;, &#x27;validation_brier&#x27;: {&#x27;raw&#x27;: 0.0803071585982848, &#x27;calibrated&#x27;: 0.04474469729236851}, &#x27;test_brier&#x27;: 0.04872725557281508, &#x27;action_threshold&#x27;: 0.0784313725490196, &#x27;capacity&#x27;: 40, &#x27;costs_under_assumed_effectiveness&#x27;: {&#x27;none&#x27;: {&#x27;total_cost&#x27;: 29400.0, &#x27;inspections&#x27;: 0, &#x27;uninspected_failures&#x27;: 49}, &#x27;threshold_0_5&#x27;: {&#x27;total_cost&#x27;: 17030.0, &#x27;inspections&#x27;: 35, &#x27;uninspected_failures&#x27;: 22}, &#x27;net_benefit&#x27;: {&#x27;total_cost&#x27;: 15700.0, &#x27;inspections&#x27;: 40, &#x27;uninspected_failures&#x27;: 19}}, &#x27;positive_benefit_without_capacity&#x27;: 56}
+</pre><h2>1. 补全：盈亏平衡</h2>
+<p>在理论阈值处验证预期避免损失恰等于检查成本。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    assert np.isclose(threshold*failure_loss*effectiveness,inspection_cost)
+    assert False
+    print(threshold)</pre><h2>2. 修改：容量减半</h2>
+<p>把容量改为 20，核对检查不超过 20 台，并输出情景成本。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    small=...
+    assert small.sum()&lt;=20
+    assert np.all(~small|selected)
+    print(policy_cost(small,y_test.astype(bool)))</pre><h2>3. 迁移：检查效果只剩 50%</h2>
+<p>仅重新计算理论阈值与检查名单，说明为什么阈值升高；不要继续使用旧效果结算函数。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    weaker=0.5
+    new_threshold=inspection_cost/(failure_loss*weaker)
+    new_mask=choose_inspections(p,new_threshold,capacity)
+    new_cost=...
+    assert new_threshold&gt;threshold
+    print({&#x27;新阈值&#x27;:new_threshold,&#x27;检查数&#x27;:int(new_mask.sum()),&#x27;新效果假设成本&#x27;:new_cost})</pre></body></html>

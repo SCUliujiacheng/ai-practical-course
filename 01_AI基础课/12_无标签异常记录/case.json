@@ -1,0 +1,13 @@
+{
+  "id": "B12",
+  "title": "缺少故障标签时怎样发现异常传感器记录？",
+  "track": "B",
+  "number": 12,
+  "sources": [
+    [
+      "异常检测官方指南",
+      "https://scikit-learn.org/stable/modules/outlier_detection.html"
+    ]
+  ],
+  "prereqs": "B09、B11；异常分数、阈值与人工复核。"
+}

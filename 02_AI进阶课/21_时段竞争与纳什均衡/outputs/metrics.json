@@ -1,0 +1,21 @@
+{
+  "pure_equilibria": [
+    [
+      0,
+      0
+    ]
+  ],
+  "social_optimum": [
+    1,
+    1
+  ],
+  "equilibrium_total": 4.0,
+  "social_total": 6.0,
+  "fee": 1.5,
+  "equilibria_after_fee": [
+    [
+      1,
+      1
+    ]
+  ]
+}

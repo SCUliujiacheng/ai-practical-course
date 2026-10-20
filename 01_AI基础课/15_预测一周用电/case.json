@@ -1,0 +1,17 @@
+{
+  "id": "B15",
+  "title": "怎样预测未来一周用电量并滚动评价？",
+  "track": "B",
+  "number": 15,
+  "sources": [
+    [
+      "scikit-learn 滞后特征时间序列案例",
+      "https://scikit-learn.org/stable/auto_examples/applications/plot_time_series_lagged_features.html"
+    ],
+    [
+      "随机森林多输出回归",
+      "https://scikit-learn.org/stable/modules/ensemble.html#forest"
+    ]
+  ],
+  "prereqs": "B06、B07、B10；多输出回归、滚动起点、经验预测区间。"
+}

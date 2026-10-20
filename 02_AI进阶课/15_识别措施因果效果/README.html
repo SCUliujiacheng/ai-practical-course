@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>A15 措施实施后结果变好，真的是措施的作用吗？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>用已知机制的模拟培训数据比较直接均值差、控制混杂后的估计与随机 A/B。使用 DoWhy 明确建模、识别、估计和安慰剂反驳；检验通过不等于证明因果。</p>
+<h2>先修与运行</h2>
+<p>B10、B27；相关与因果、因果图、线性估计、bootstrap。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 明确目标效应与混杂机制</h2>
+<p>W 是原有经验，T 是是否参加培训，Y 是结果。经验同时影响参训与结果，直接比较培训组会混入经验差异。模拟真实平均效应设为 2，只用于核验教学代码；真实数据通常不知道这个答案。</p>
+<h2>2. 先识别，再估计</h2>
+<p>图来自机制假设，不由数据自动证明。DoWhy 先给出后门调整表达式，再调用线性回归估计。本例已知模拟图没有未测共同原因；另构造有未观测 U 的假设图，展示后门调整失败时停止估计。proceed_when_unidentifiable=True 只避免交互提示，不是允许强行得出因果结果。</p>
+<h2>3. 安慰剂、抽样不确定性与随机 A/B</h2>
+<p>打乱培训标签后应不再保留原来的效应，这是可反驳检查而非因果证明。为控制练习时长，只运行 10 次安慰剂和 250 次 bootstrap；次数仅适合演示，不能把小规模检验结果当充分证据。对独立行重抽样重算系数，区间只描述抽样不确定性；另生成随机参训数据，展示随机化减少系统性混杂。</p>
+<h2>4. 用偏差情景说明未测混杂的风险</h2>
+<p>假设遗漏变量在两组条件均值差为 delta，对结果作用为 gamma，则线性加性情景下偏差为 gamma×delta。扫描假设强度，观察结论何时翻转；不是从数据估出了隐藏变量。若真实图还有未测共同原因且无其他识别设计，应停止因果估计并提出随机试验。</p>
+<h2>常见错误与边界</h2>
+<p>identify 返回表达式只说明在输入图与假设下可识别；图可能错误。反驳检验通过不能验证没有未测混杂，bootstrap 也不涵盖识别假设错误。</p>
+<h2>数据</h2>
+<p>教学模拟数据；生成机制、参数和随机种子见本案例代码。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

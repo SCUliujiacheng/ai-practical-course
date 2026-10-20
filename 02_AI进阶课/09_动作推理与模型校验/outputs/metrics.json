@@ -1,0 +1,20 @@
+{
+  "plan": [
+    "take-key",
+    "open-door",
+    "take-package",
+    "enter-room",
+    "deliver"
+  ],
+  "action_count": 5,
+  "visited_states": 9,
+  "business_validator_pass": true,
+  "draft_plan": [
+    "open-door",
+    "take-package",
+    "enter-room",
+    "deliver"
+  ],
+  "draft_validator_pass": false,
+  "external_pddl_solver_run": false
+}

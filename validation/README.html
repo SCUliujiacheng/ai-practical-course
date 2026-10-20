@@ -1,0 +1,12 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>验证证据说明</h1>
+<ul>
+<li><code>original_windows_validation.json</code>：原离线课程在 Windows x64 / Python 3.12.13 上执行60个脚本和180份Notebook的240条结果；已去掉本机日志路径。该文件记录历史运行，不表示任意操作系统或后续修改均通过。</li>
+<li><code>code_equivalence.json</code>：公开打包时，240个目标的可执行代码与上述原版一致；Notebook中的个人目录输出已匿名化。只比较代码，不把改动说明文字误算为运行验证。</li>
+<li><code>publication_windows_validation.json</code>：公开副本中新建虚拟环境、依赖与素材校验、代表案例重跑的结果。只适用于报告明确列出的检查范围。</li>
+</ul>
+<p>新增读者先按安装指南准备自己的环境。要重跑全套，可在根目录执行：</p>
+<pre><code class="language-powershell">.venv/Scripts/python.exe tools/verify_course.py --mode all
+</code></pre>
+<p>这会执行60个脚本和180份Notebook，更新Notebook内输出，并在 <code>reports/</code> 保存本机日志；可能耗时较长。原练习模板可运行，不代表学生已完成题目。运行器启用 Python socket 防护、空 Hugging Face 缓存和离线加载设置，允许本机 Jupyter 通信；这不等同于物理断网、操作系统防火墙或所有第三方原生组件的网络隔离。</p>
+<p>发布前检查运行 <code>py -3.12 tools/check_publication.py</code>，它检查待发布文件、案例数量、Python语法和常见个人路径/凭据形状；无法证明不存在所有可能的隐私或安全问题。</p>
+</body></html>

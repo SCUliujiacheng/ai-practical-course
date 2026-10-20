@@ -1,0 +1,35 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>离线准备指南</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>先准备，再离线使用</h1>
+<p>GitHub 下载不等于已经取得完整离线包。先依照 <a href="%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a> 安装课程环境，下载所需模型，再准备恢复包；这几步需要联网或一份已经完整下载的本地资源。课程运行阶段可断网。</p>
+<h2>在能联网的 Windows x64 电脑上准备</h2>
+<p>在课程根目录运行：</p>
+<pre><code class="language-powershell">py -3.12 tools/setup_environment.py
+.venv/Scripts/python.exe tools/prepare_models.py --all
+.venv/Scripts/python.exe tools/prepare_offline.py
+.venv/Scripts/python.exe tools/self_check.py --full-hash
+</code></pre>
+<p><code>prepare_offline.py</code> 会复制当前 Python 3.12 的基础运行时到 <code>runtime/python</code>，从指定官方索引下载锁文件的190项wheel到 <code>wheelhouse</code>，使用 <code>--no-index --dry-run --ignore-installed</code> 检查本地依赖解析，最后生成 <code>runtime/offline_manifest.json</code>。复制基础运行时不复制其第三方 <code>Lib/site-packages</code>；依赖由wheel重建。<strong>它不移动或修改正在使用的 <code>.venv</code>。</strong></p>
+<p>如果 <code>runtime/python</code> 已存在，脚本会复用当前基础运行时本身，或逐文件核对它是否与要复制的基础运行时一致。一致时继续准备wheel；不一致时保留目录并停止，不会覆盖正在使用的运行时。</p>
+<p><code>准备离线恢复包.cmd</code> 提供同样入口。<code>--dry-run</code> 只检查和显示计划，不复制或下载。模型单独由 <code>prepare_models.py</code> 准备，运行时与190个wheel就绪不能代表大模型也已准备。</p>
+<h2>已有外部 wheelhouse：全程使用本地安装包</h2>
+<p>例如在U盘上已有同一锁文件对应的190个Windows/Python3.12 wheel：</p>
+<pre><code class="language-powershell">py -3.12 tools/setup_environment.py --wheelhouse 'E:/course-packages/wheelhouse'
+.venv/Scripts/python.exe tools/prepare_offline.py --wheelhouse-source 'E:/course-packages/wheelhouse'
+</code></pre>
+<p>第一条从外部目录安装；第二条将这些wheel复制到课程目录，同时复制当前基础运行时。<code>--wheelhouse</code> 使用 <code>--no-index --no-cache-dir --find-links</code> 和课程离线网络防护，不会在缺包时悄悄回退联网。缺少、版本错误或平台不兼容的wheel会报错。准备程序验证wheel元数据、复制哈希与本地解析；它不把未知来源安装包自动认定为可信来源，应使用自己从官方索引准备的包。</p>
+<p>课程内恢复清单记录运行时及每个wheel的SHA256，供以后检测文件缺失或损坏。锁文件锁定版本，但并非自带所有包的上游SHA；第一次下载仍依赖官方HTTPS索引与包分发。模型则使用仓库已记录的原始文件SHA。</p>
+<h2>复制到另一台电脑或移动文件夹</h2>
+<p>仅面向已验证目标 <strong>Windows x64 / Python 3.12 / CPU</strong>。将整个已准备的课程文件夹复制过去，至少保留源码、数据、需要的模型、<code>runtime/python</code>、<code>runtime/offline_manifest.json</code>、<code>wheelhouse</code>和锁文件。运行时许可文件也要保留。</p>
+<p><code>.venv</code> 和 Jupyter 内核含本机绝对路径，不应当作可直接搬动的便携环境。移动目录或换电脑后，关闭所有课程进程，显式重建：</p>
+<pre><code class="language-powershell">runtime/python/python.exe tools/repair_environment.py --dry-run
+runtime/python/python.exe tools/repair_environment.py --rebuild
+.venv/Scripts/python.exe tools/self_check.py --full-hash
+</code></pre>
+<p>也可双击 <code>重建离线环境.cmd</code>。重建前先校验恢复清单；验证通过后才把原 <code>.venv</code> 保留为 <code>.venv_backup_时间</code>，再从本地运行时和wheel建立新环境并重新绑定内核。失败会尝试回滚，失败的新环境保留为 <code>.venv_failed_时间</code> 供诊断。无 <code>--rebuild</code> 的普通调用不会移动环境。此流程不下载文件，也不删除备份。</p>
+<p>恢复包未准备好时，不要运行重建来“试试看”；先在有网电脑上补齐。macOS、Linux、Windows ARM及不同Python版本不在这份离线包的验证范围内。</p>
+<h2>确认检查范围</h2>
+<pre><code class="language-powershell">.venv/Scripts/python.exe tools/self_check.py --core --full-hash
+.venv/Scripts/python.exe tools/self_check.py --full-hash
+</code></pre>
+<p>前者检查190项依赖、60个案例和小数据，允许尚未下载模型；后者还校验全部模型。<code>--core --assets-only</code> 可用于仅检查小数据/课程文件；单独 <code>--assets-only</code> 仍检查模型，但不证明Python环境或案例执行成功。恢复包准备记录见 <code>reports/offline_preparation.json</code>，重建记录见 <code>reports/repair_validation.json</code>。</p>
+<p>准备成功后可断网启动课程。不要把 <code>.venv</code>、<code>runtime</code>、<code>wheelhouse</code> 或权重提交到源码Git仓库；它们是本地准备产物，完整离线拷贝应独立保存。</p>
+</body></html>

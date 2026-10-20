@@ -1,0 +1,33 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>01_天气CSV统计 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>怎样从天气 CSV 找到最热的一天？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">[{&#x27;date&#x27;: &#x27;2024-07-01&#x27;, &#x27;temp_max&#x27;: &#x27;25&#x27;}, {&#x27;date&#x27;: &#x27;2024-07-02&#x27;, &#x27;temp_max&#x27;: &#x27;27&#x27;}] &lt;class &#x27;str&#x27;&gt;
+{&#x27;date&#x27;: &#x27;2024-07-01&#x27;, &#x27;temp_max&#x27;: 25.0}
+{&#x27;hottest_date&#x27;: &#x27;2024-07-06&#x27;, &#x27;hottest_temp&#x27;: 34.0, &#x27;mean_temp&#x27;: 28.6, &#x27;hot_days&#x27;: 4, &#x27;threshold&#x27;: 30}
+</pre><h2>1. 补全：核对平均值</h2>
+<p>用循环重算平均值，并与 summarize 的结果比较；不要直接抄结果数字。</p>
+<pre class="code">total = 0
+for row in rows:
+    total += row[&#x27;temp_max&#x27;]
+average = total / len(rows)
+assert abs(average - metrics[&#x27;mean_temp&#x27;]) &lt; 1e-10
+print(average)</pre><pre class="output">28.6
+</pre><h2>2. 修改：改变高温定义</h2>
+<p>将阈值从 30 改成 32；结果应不超过原来的高温天数，并核对恰有 2 天。</p>
+<pre class="code">changed = summarize(rows, threshold=32)
+assert changed[&#x27;hot_days&#x27;] == 2
+assert changed[&#x27;hot_days&#x27;] &lt;= metrics[&#x27;hot_days&#x27;]
+print(changed)</pre><pre class="output">{&#x27;hottest_date&#x27;: &#x27;2024-07-06&#x27;, &#x27;hottest_temp&#x27;: 34.0, &#x27;mean_temp&#x27;: 28.6, &#x27;hot_days&#x27;: 2, &#x27;threshold&#x27;: 32}
+</pre><h2>3. 迁移：另一座城市与空输入</h2>
+<p>给另一座城市的 3 天记录计算结果，再验证空输入确实报错。</p>
+<pre class="code">other = [{&#x27;date&#x27;: &#x27;2024-01-01&#x27;, &#x27;temp_max&#x27;: 10}, {&#x27;date&#x27;: &#x27;2024-01-02&#x27;, &#x27;temp_max&#x27;: 15}, {&#x27;date&#x27;: &#x27;2024-01-03&#x27;, &#x27;temp_max&#x27;: 12}]
+assert summarize(other, 13)[&#x27;hot_days&#x27;] == 1
+try:
+    summarize([])
+except ValueError:
+    print(&#x27;空输入检查通过&#x27;)
+else:
+    raise AssertionError(&#x27;空输入不应返回有效平均值&#x27;)</pre><pre class="output">空输入检查通过
+</pre></body></html>

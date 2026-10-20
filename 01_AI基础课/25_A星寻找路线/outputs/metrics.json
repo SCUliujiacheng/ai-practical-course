@@ -1,0 +1,8 @@
+{
+  "steps": 9,
+  "astar_expanded": 10,
+  "dijkstra_expanded": 18,
+  "path_valid": true,
+  "unreachable_checked": true,
+  "elapsed_seconds": 0.07
+}

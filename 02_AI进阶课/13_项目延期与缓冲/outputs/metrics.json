@@ -1,0 +1,39 @@
+{
+  "deadline": 16.174379145417845,
+  "selected_on_development": "end",
+  "development": {
+    "end": {
+      "late_probability": 0.471,
+      "mean_finish": 16.149741325248,
+      "missed_booking_rate": 0.471
+    },
+    "before": {
+      "late_probability": 0.492,
+      "mean_finish": 16.46304327325856,
+      "missed_booking_rate": 0.079
+    }
+  },
+  "independent_simulation": {
+    "end": {
+      "late_probability": 0.4595,
+      "mean_finish": 16.13339112782704,
+      "p90_finish": 20.106908841698377,
+      "missed_booking_rate": 0.46
+    },
+    "before": {
+      "late_probability": 0.46,
+      "mean_finish": 16.5573198637733,
+      "p90_finish": 19.526055838271578,
+      "missed_booking_rate": 0.103
+    }
+  },
+  "simulation_only": true,
+  "before_minus_end_late_probability": {
+    "estimate": 0.0005,
+    "approx_95_monte_carlo_interval": [
+      -0.02113211256320042,
+      0.02213211256320042
+    ],
+    "excludes_model_uncertainty": true
+  }
+}

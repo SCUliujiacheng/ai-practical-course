@@ -1,0 +1,17 @@
+{
+  "id": "A30",
+  "title": "怎样形成能执行、能应变的开放日计划？",
+  "track": "A",
+  "number": 30,
+  "sources": [
+    [
+      "OR-Tools employee scheduling",
+      "https://developers.google.com/optimization/scheduling/employee_scheduling"
+    ],
+    [
+      "Time series lagged features",
+      "https://scikit-learn.org/stable/auto_examples/applications/plot_time_series_lagged_features.html"
+    ]
+  ],
+  "prereqs": "基础课 Python、NumPy、实验评价"
+}

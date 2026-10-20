@@ -1,0 +1,13 @@
+{
+  "id": "A03",
+  "title": "总工时最少与团队最早完工是一回事吗？",
+  "track": "A",
+  "number": 3,
+  "sources": [
+    [
+      "SciPy linear_sum_assignment",
+      "https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linear_sum_assignment.html"
+    ]
+  ],
+  "prereqs": "已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。"
+}

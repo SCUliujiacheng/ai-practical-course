@@ -1,0 +1,8 @@
+epoch=1 train=0.90 val=0.95
+epoch=2 train=0.65 val=0.70
+WARNING: example warning
+epoch=3 train=0.48 val=0.54
+epoch=4 train=0.35 val=0.49
+epoch=5 train=0.27 val=0.53
+epoch=6 train=2.0e-1 val=0.59
+epoch=7 train=0.16 val=0.67

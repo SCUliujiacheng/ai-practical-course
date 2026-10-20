@@ -1,0 +1,17 @@
+{
+  "id": "B07",
+  "title": "数字与类别混在一起，怎样预测房价？",
+  "track": "B",
+  "number": 7,
+  "sources": [
+    [
+      "混合类型列转换器",
+      "https://scikit-learn.org/stable/auto_examples/compose/plot_column_transformer_mixed_types.html"
+    ],
+    [
+      "梯度提升官方说明",
+      "https://scikit-learn.org/stable/modules/ensemble.html#histogram-based-gradient-boosting"
+    ]
+  ],
+  "prereqs": "B06；学习列选择、独热编码、列转换器与验证选型。"
+}

@@ -1,0 +1,10 @@
+{
+  "lexical_recall_at_1": 0.0,
+  "semantic_recall_at_1": 1.0,
+  "model_load_seconds": 0.306,
+  "index_seconds": 0.288,
+  "semantic_query_seconds": 0.036,
+  "lexical_query_seconds": 0.002,
+  "language": "English controlled comparison",
+  "elapsed_seconds": 14.548
+}

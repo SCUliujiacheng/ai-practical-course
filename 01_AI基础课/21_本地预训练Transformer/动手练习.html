@@ -1,0 +1,37 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>21_本地预训练Transformer 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>怎样使用预训练 Transformer 处理文本？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">输入形状 torch.Size([6, 24])
+</pre><pre class="output">{
+  &quot;baseline_accuracy&quot;: 0.8333333333333334,
+  &quot;transformer_accuracy&quot;: 1.0,
+  &quot;format_valid_rate&quot;: 1.0,
+  &quot;generation_seconds&quot;: 0.359,
+  &quot;examples&quot;: 6,
+  &quot;model&quot;: &quot;google/flan-t5-small&quot;,
+  &quot;elapsed_seconds&quot;: 9.846
+}
+</pre><h2>1. 补全：解析边界</h2>
+<p>检查大小写、句点和未知输出。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert parse_label(&#x27; Positive. &#x27;) == 1
+# assert parse_label(&#x27;negative&#x27;) == 0
+# assert parse_label(&#x27;I am not certain&#x27;) == -1</pre><h2>2. 修改：观察补齐</h2>
+<p>两句不同长度输入一批，核对短句的真实长度较小。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert b[&#x27;attention_mask&#x27;][0].sum() &lt; b[&#x27;attention_mask&#x27;][1].sum()
+# assert len(ids) == int(b[&#x27;attention_mask&#x27;][0].sum())</pre><h2>3. 迁移：资料内抽取地点</h2>
+<p>让模型从资料抽取 Room 204，保留真实输出，检查是否命中人工答案。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert isinstance(answer, str) and len(answer) &gt; 0</pre></body></html>

@@ -1,0 +1,36 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>B15 怎样预测未来一周用电量并滚动评价？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<blockquote>
+<p><strong>联网选修：需要联网，可延后学习。</strong> 下载其他 Chronos/TimesFM 权重或新天气数据需要联网；预先下载的 Chronos-Bolt-tiny 可离线运行。</p>
+</blockquote>
+<p>用标明机制的模拟每日用电量，训练同时输出未来 7 天的随机森林。分开区间校准窗口与最终回测窗口，比较同星期基线和直接多步预测。</p>
+<h2>先修与运行</h2>
+<p>B06、B07、B10；多输出回归、滚动起点、经验预测区间。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 模拟日历与负荷机制</h2>
+<p>日用电由周节律、季节、缓慢趋势及噪声组成。单位 kWh 是教学单位，数据不代表实际城市。多步预测时不能把未来真实用电填进滞后特征。</p>
+<h2>2. 每个预测起点只训练已经获得完整标签的行</h2>
+<p>若今天索引为 origin，训练行的未来第 7 天必须不晚于今天。因此只取到 origin−7。森林一次输出 7 个数，直接多步预测避免递归把自己的误差再喂回去。</p>
+<h2>3. 区间只用早期回测误差校准</h2>
+<p>用早期窗口绝对误差的 90% 分位数扩展点预测。这是时序经验区间，没有直接套用独立同分布 conformal 保证。校准后固定宽度，在更晚窗口检查覆盖与误差。</p>
+<h2>4. 按预测距离检查，而非混成一个漂亮数字</h2>
+<p>分别报告第 1—7 天误差，整体 MAE、区间覆盖和宽度。测试窗口从未用于调宽度；覆盖不足是需要报告的结果，不能看完测试再把区间加宽。</p>
+<h2>常见错误与边界</h2>
+<p>数据是模拟用电，不能把模型分数当真实能源预测成绩。校准残差有时间相关性，这里的区间只是经验评估；预训练候选另见拓展。</p>
+<h2>数据</h2>
+<p>教学模拟数据；生成机制、参数和随机种子见本案例代码。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+<h2>已附本地拓展</h2>
+<p>见 <a href="%E6%8B%93%E5%B1%95_Chronos%E7%A6%BB%E7%BA%BF%E5%AF%B9%E7%85%A7.md">Chronos离线对照</a>，使用预先下载的小模型，验收状态见总报告。</p>
+</body></html>

@@ -1,0 +1,13 @@
+{
+  "id": "B02",
+  "title": "怎样合并多个气象站并按城市统计？",
+  "track": "B",
+  "number": 2,
+  "sources": [
+    [
+      "pandas 合并与连接",
+      "https://pandas.pydata.org/docs/user_guide/merging.html"
+    ]
+  ],
+  "prereqs": "B01；本例首次引入 DataFrame、按列选择、分组和连接。"
+}

@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>A03 总工时最少与团队最早完工是一回事吗？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>四人同时开始、各做一项任务。你要分别求总工时最少和最晚完成时间最小的方案，再检查技能限制。</p>
+<h2>先修与运行</h2>
+<p>已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 用矩阵表达成员与任务</h2>
+<p>行是人，列是任务，元素是所需小时。<code>allowed</code> 是独立布尔矩阵，False代表不能接任务。数字大表示慢，不等于不允许。</p>
+<h2>2. 先枚举，得到可检查的基准</h2>
+<p>4!只有24种分配。<code>enumerate</code>同时给出成员编号和任务编号。总工时用sum，最晚完成用max，这两个目标不能混用。</p>
+<h2>3. 使用线性和指派，并独立核对</h2>
+<p>SciPy函数求的是总成本最小。给不允许的组合置无穷值；若无可行完整指派，会抛出ValueError。不能将它直接当成最晚完工时间求解器。</p>
+<h2>4. 输出分工和两类目标</h2>
+<p>图的横轴是成员，条长是其耗时。所有人同时开工这一假设决定了max的含义；若有人晚到或任务有依赖，必须换模型。</p>
+<h2>常见错误与边界</h2>
+<p>本例要求人数等于任务数、每人只做一项且同时开工。存在任务依赖或多人协作时，需要调度模型。</p>
+<h2>数据</h2>
+<p>原创教学模拟场景，规模与全部参数直接列在 solution.py；运行同时保存输入或结果 CSV。无真实个人记录，不需要下载数据。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

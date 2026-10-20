@@ -1,0 +1,20 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>28_边试边选服务方案 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>不知道哪种服务引导有效，怎样边试边选择？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{&#x27;true_rates&#x27;: [0.4, 0.48, 0.58], &#x27;horizon&#x27;: 600, &#x27;runs_per_method&#x27;: 100, &#x27;summary&#x27;: [{&#x27;method&#x27;: &#x27;epsilon&#x27;, &#x27;successes&#x27;: 325.61, &#x27;regret&#x27;: 22.605800000000098, &#x27;regret_std&#x27;: 23.887590674708807}, {&#x27;method&#x27;: &#x27;greedy&#x27;, &#x27;successes&#x27;: 297.47, &#x27;regret&#x27;: 50.89080000000064, &#x27;regret_std&#x27;: 44.79942193169682}, {&#x27;method&#x27;: &#x27;random&#x27;, &#x27;successes&#x27;: 293.72, &#x27;regret&#x27;: 55.91900000000013, &#x27;regret_std&#x27;: 1.8138666216709887}, {&#x27;method&#x27;: &#x27;ucb&#x27;, &#x27;successes&#x27;: 316.07, &#x27;regret&#x27;: 32.48180000000008, &#x27;regret_std&#x27;: 6.310476839304173}]}
+</pre><h2>1. 补全：次数守恒</h2>
+<p>100轮UCB总选择次数应为100，各动作至少试一次。</p>
+<pre class="code">_,_,counts=run_bandit(&quot;ucb&quot;,5,100)
+assert counts.sum()==100 and (counts&gt;=1).all()</pre><h2>2. 修改：极短活动</h2>
+<p>将活动限制为20轮，重复50次后比较各策略成功数。</p>
+<pre class="code">short={m:np.mean([run_bandit(m,s,20)[0][-1] for s in range(50)]) for m in methods}
+print(short)
+assert all(0&lt;=v&lt;=20 for v in short.values())</pre><pre class="output">{&#x27;random&#x27;: 9.7, &#x27;greedy&#x27;: 9.52, &#x27;epsilon&#x27;: 9.72, &#x27;ucb&#x27;: 9.78}
+</pre><h2>3. 迁移：遗憾的含义</h2>
+<p>连续选第一种方案10次，计算期望伪遗憾；说明它不同于本次真实少成功几人。</p>
+<pre class="code">expected_regret=10*(rates.max()-rates[0])
+assert np.isclose(expected_regret,1.8)
+print(expected_regret)</pre><pre class="output">1.7999999999999994
+</pre></body></html>

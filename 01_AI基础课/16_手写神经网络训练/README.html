@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>B16 怎样亲手写出神经网络的训练过程？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>任务：从带噪声的传感器读数学习非线性关系。你将看清预测、损失、梯度、更新四步，而不是把 fit 当作黑箱。</p>
+<h2>先修与运行</h2>
+<p>B13 数组与 B07 回归；补充 Tensor、自动求导、for 循环。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 把数据变成形状明确的 Tensor</h2>
+<p>输入 x 是 N×1，目标 y 也是 N×1。保留测试集，只用训练集学习；同形状避免广播偷偷产生 N×N 的损失。Python 的切片用于划分，float32 是本例的计算类型。</p>
+<h2>2. 从一个导数到网络参数</h2>
+<p>requires_grad=True 告诉 PyTorch 记录运算。先核对 (w−3)² 在 w=1 的梯度为 −4，再建立 1→24→1 网络；ReLU 提供非线性，参数不是手工指定的答案。</p>
+<h2>3. 写出每一次更新</h2>
+<p>zero_grad 清掉上次梯度，backward 计算当前梯度，step 更新参数。缺少清零会累加梯度。每次循环都记录训练损失，但不据测试损失挑选轮数。</p>
+<h2>4. 在未参与训练的数据上检查</h2>
+<p>eval 切换推理模式，no_grad 不建立梯度图。把网络与只猜训练均值的基线比较；保存权重时同时保留模型结构。观察拟合曲线比只看最终损失更直观。</p>
+<h2>常见错误与边界</h2>
+<p>训练损失小不能证明泛化；不得把测试集用于调轮数。传感器公式是教学假设。</p>
+<h2>数据</h2>
+<p>由本例完整代码生成的教学模拟数据；不是企业生产记录。随机种子、生成公式与划分方式均可检查。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

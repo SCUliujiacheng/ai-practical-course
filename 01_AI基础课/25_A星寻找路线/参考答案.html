@@ -1,0 +1,33 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>25_A星寻找路线 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>怎样让程序在有障碍的地图上找到路线？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{
+  &quot;steps&quot;: 9,
+  &quot;astar_expanded&quot;: 10,
+  &quot;dijkstra_expanded&quot;: 18,
+  &quot;path_valid&quot;: true,
+  &quot;unreachable_checked&quot;: true,
+  &quot;elapsed_seconds&quot;: 0.07
+}
+</pre><h2>1. 补全：合法邻居</h2>
+<p>核对左上角只有右邻居可行，终点的所有邻居均在边界内且可通行。</p>
+<pre class="code">assert set(neighbors((0, 0), grid)) == {(0, 1)}
+assert all((grid[p] == 0 for p in neighbors(goal, grid)))
+print(list(neighbors(goal, grid)))</pre><pre class="output">[(3, 5), (4, 4)]
+</pre><h2>2. 修改：封闭关键路口</h2>
+<p>把 (1,2) 封闭后重新规划，检查原路线无效且新图中起点无法到终点。</p>
+<pre class="code">closed = grid.copy()
+closed[1, 2] = 1
+assert not validate_path(closed, path, start, goal)
+new_path, _ = astar(closed, start, goal)
+assert new_path == []
+print(&#x27;道路封闭导致无路可走&#x27;)</pre><pre class="output">道路封闭导致无路可走
+</pre><h2>3. 迁移：空仓库地图</h2>
+<p>新建 7×7 无障碍地图，从 (0,0) 到 (6,6)，独立核对最短步数 12。</p>
+<pre class="code">warehouse = np.zeros((7, 7), dtype=int)
+route, _ = astar(warehouse, (0, 0), (6, 6))
+assert validate_path(warehouse, route, (0, 0), (6, 6)) and len(route) - 1 == 12
+print(route)</pre><pre class="output">[(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (0, 6), (1, 6), (2, 6), (3, 6), (4, 6), (5, 6), (6, 6)]
+</pre></body></html>

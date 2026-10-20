@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>B20 怎样训练一个评论情感分类器？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>任务：用一份可检查的小型英文评论语料比较 TF-IDF 线性模型和词向量平均网络；中文解释帮助你观察分词、词表和否定句错误。</p>
+<h2>先修与运行</h2>
+<p>B08 文本向量与 B16 训练；补充词表、未知词、padding 掩码。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 先写清语料和划分</h2>
+<p>此语料由课程作者编写，不是真实用户数据。训练和测试句子分别列出，测试包含否定、同义改写和混合评价。很小的语料只能学习流程，不能给出产品质量结论。</p>
+<h2>2. TF-IDF 基线与只来自训练集的词表</h2>
+<p>词表把 token 映射到整数，0 是补齐、1 是未知词。不能先用测试语料建立词表。TF-IDF 使用一元和二元词组，给否定搭配保留一些表达空间。</p>
+<h2>3. Embedding 加掩码平均</h2>
+<p>Embedding 将编号变成 24 维可学习向量。mask 排除 padding，分母 clamp 防止空句除零。平均池化会丢失顺序，所以这是一个特意简单、有明确局限的网络。交叉熵的类别标签使用 torch.long，保持与损失函数的类型约定一致。</p>
+<h2>4. 保存逐条预测和失败类型</h2>
+<p>输出两种预测以便人工检查“not good”等否定句。准确率只是这八句上的描述统计，不能当总体保证；复杂模型在小数据上很可能过拟合。</p>
+<h2>常见错误与边界</h2>
+<p>混合评价的标签依赖任务定义；本例将物流差的混合评价标负面，必须在真实任务中和业务方约定。</p>
+<h2>数据</h2>
+<p>由本例完整代码生成的教学模拟数据；不是企业生产记录。随机种子、生成公式与划分方式均可检查。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

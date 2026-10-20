@@ -1,0 +1,17 @@
+{
+  "id": "B13",
+  "title": "特征很多时怎样压缩并观察结构？",
+  "track": "B",
+  "number": 13,
+  "sources": [
+    [
+      "PCA 官方指南",
+      "https://scikit-learn.org/stable/modules/decomposition.html#pca"
+    ],
+    [
+      "wine 内置数据",
+      "https://scikit-learn.org/stable/datasets/toy_dataset.html#wine-recognition-dataset"
+    ]
+  ],
+  "prereqs": "B07、B11；NumPy 广播、矩阵形状、方差、线性投影。"
+}

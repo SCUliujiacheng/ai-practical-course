@@ -1,0 +1,17 @@
+{
+  "id": "B11",
+  "title": "没有标签，怎样发现行为相近的客户群？",
+  "track": "B",
+  "number": 11,
+  "sources": [
+    [
+      "K-means 官方说明",
+      "https://scikit-learn.org/stable/modules/clustering.html#k-means"
+    ],
+    [
+      "轮廓系数选择聚类数",
+      "https://scikit-learn.org/stable/auto_examples/cluster/plot_kmeans_silhouette_analysis.html"
+    ]
+  ],
+  "prereqs": "B07；均值、距离、标准化、无标签分析。"
+}

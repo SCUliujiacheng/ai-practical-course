@@ -1,0 +1,43 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>18_卷积网络与增强 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>怎样用卷积网络改善图像识别？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">(1077, 1, 8, 8)
+</pre><pre class="output">{
+  &quot;mlp_accuracy&quot;: 0.9583333333333334,
+  &quot;cnn_accuracy&quot;: 0.9555555555555556,
+  &quot;mlp_parameters&quot;: 4810,
+  &quot;cnn_parameters&quot;: 3818,
+  &quot;selected_by&quot;: &quot;validation loss&quot;,
+  &quot;elapsed_seconds&quot;: 4.735
+}
+</pre><h2>1. 补全：计算特征图形状</h2>
+<p>把一个全零批次逐层送进 CNN，断言第一卷积和池化之后的形状。</p>
+<pre class="code">net = build_cnn()
+z = torch.zeros(2, 1, 8, 8)
+z = net[0](z)
+assert z.shape == (2, 8, 8, 8)
+z = net[2](net[1](z))
+assert z.shape == (2, 8, 4, 4)
+print(z.shape)</pre><pre class="output">torch.Size([2, 8, 4, 4])
+</pre><h2>2. 修改：移到左边</h2>
+<p>写一个零填充左平移函数，用非对称小图核对，不得环绕边缘。</p>
+<pre class="code">def shift_left(batch):
+    out = torch.zeros_like(batch)
+    out[:, :, :, :-1] = batch[:, :, :, 1:]
+    return out
+a = torch.arange(8.0).reshape(1, 1, 2, 4)
+b = shift_left(a)
+assert torch.equal(b[0, 0, 0], torch.tensor([1.0, 2.0, 3.0, 0.0]))
+assert b[:, :, :, -1].sum() == 0
+print(b)</pre><pre class="output">tensor([[[[1., 2., 3., 0.],
+          [5., 6., 7., 0.]]]])
+</pre><h2>3. 迁移：检查采集位置变化</h2>
+<p>在测试图像统一右移一格后评价同一个 CNN；不重新训练，比较原始和扰动准确率。</p>
+<pre class="code">with torch.no_grad():
+    shifted = cnn(shift_right(torch.tensor(X[te]))).argmax(1).numpy()
+score = float(accuracy_score(y[te], shifted))
+assert len(shifted) == len(te) and 0 &lt;= score &lt;= 1
+print(&#x27;原始&#x27;, accuracy_score(y[te], p_cnn), &#x27;右移&#x27;, score)</pre><pre class="output">原始 0.9555555555555556 右移 0.9055555555555556
+</pre></body></html>

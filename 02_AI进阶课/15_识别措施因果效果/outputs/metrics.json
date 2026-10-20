@@ -1,0 +1,17 @@
+{
+  "true_effect_in_simulator": 2,
+  "naive_difference": 4.268001388583295,
+  "adjusted_effect": 1.9330444797805697,
+  "bootstrap_interval_95": [
+    1.8181928635063824,
+    2.0672562933721235
+  ],
+  "randomized_ab_difference": 2.064872763941141,
+  "placebo_effect": -0.014134005105778336,
+  "adjustment_variables": [
+    "experience"
+  ],
+  "assumptions": "经验是所有共同原因；无未测混杂；个体间无干扰；培训含义一致；每种经验附近都可能参训或不参训。",
+  "refutation_is_proof": false,
+  "unobserved_scenario_backdoor_unidentified": true
+}

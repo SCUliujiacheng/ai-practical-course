@@ -1,0 +1,34 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>16_手写神经网络训练 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>怎样亲手写出神经网络的训练过程？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">训练形状： torch.Size([160, 1])
+</pre><pre class="output">可训练参数： 73
+</pre><pre class="output">{
+  &quot;test_mse&quot;: 0.014536291360855103,
+  &quot;mean_baseline_mse&quot;: 0.9138361745687907,
+  &quot;train_first_loss&quot;: 2.533810615539551,
+  &quot;train_last_loss&quot;: 0.012649884447455406,
+  &quot;elapsed_seconds&quot;: 5.773
+}
+</pre><h2>1. 补全：核对梯度与一步更新</h2>
+<p>对 (a−5)² 在 a=2 求导，按学习率 0.1 手动更新，断言新值为 2.6。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert abs(a.item() - 2.6) &lt; 1e-06</pre><h2>2. 修改：改为绝对误差</h2>
+<p>用当前预测计算 MAE，并与直接 NumPy 计算核对；解释它为何不像 MSE 一样放大大误差。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert np.isclose(mae, np.abs(predicted - y[160:, 0]).mean())
+# assert mae &gt;= 0</pre><h2>3. 迁移：学习线性计量关系</h2>
+<p>另生成 y=3x−2，无噪声。只用一个 Linear 层训练，最后检查斜率、截距；不要复用非线性答案。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert abs(linear.weight.item() - 3) &lt; 0.02 and abs(linear.bias.item() + 2) &lt; 0.02</pre></body></html>

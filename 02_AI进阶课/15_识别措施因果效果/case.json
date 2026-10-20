@@ -1,0 +1,13 @@
+{
+  "id": "A15",
+  "title": "措施实施后结果变好，真的是措施的作用吗？",
+  "track": "A",
+  "number": 15,
+  "sources": [
+    [
+      "DoWhy 官方基本因果效应示例",
+      "https://www.pywhy.org/dowhy/v0.13/example_notebooks/dowhy_simple_example.html"
+    ]
+  ],
+  "prereqs": "B10、B27；相关与因果、因果图、线性估计、bootstrap。"
+}

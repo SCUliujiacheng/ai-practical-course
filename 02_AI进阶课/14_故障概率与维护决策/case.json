@@ -1,0 +1,17 @@
+{
+  "id": "A14",
+  "title": "设备可能出问题时，什么时候值得停机检查？",
+  "track": "A",
+  "number": 14,
+  "sources": [
+    [
+      "概率校准",
+      "https://scikit-learn.org/stable/modules/calibration.html"
+    ],
+    [
+      "基于代价的阈值选择",
+      "https://scikit-learn.org/stable/auto_examples/model_selection/plot_cost_sensitive_learning.html"
+    ]
+  ],
+  "prereqs": "B09、B29；概率校准、期望损失、排序与容量约束。"
+}

@@ -1,0 +1,25 @@
+{
+  "selected_before_test": "logistic",
+  "folds": 3,
+  "candidates_per_model": 3,
+  "comparison": [
+    {
+      "model": "logistic",
+      "cv_score": 0.9679527948554872,
+      "seconds": 0.06916249997448176,
+      "best_parameters": {
+        "logisticregression__C": 1
+      },
+      "test_balanced_accuracy": 0.970020964360587
+    },
+    {
+      "model": "boosting",
+      "cv_score": 0.9504275316232068,
+      "seconds": 0.9877366999862716,
+      "best_parameters": {
+        "max_leaf_nodes": 3
+      },
+      "test_balanced_accuracy": 0.9683438155136268
+    }
+  ]
+}

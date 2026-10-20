@@ -1,0 +1,55 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>决策建议</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>本次计算的决策建议</h1>
+<p>原排班状态OPTIMAL，全部排班硬约束检查通过，总工时段31。主评价使用留出的6个周末，压力情景结果见stress_evaluation.csv；积压超过10人时下一段启用2名预留人员。需求抬升后的修订状态为OPTIMAL。缓冲为历史经验分位数，未声称所有未来活动达到90%整案保证。</p>
+<h2>实际指标</h2>
+<pre><code class="language-json">{
+  &quot;solver_status&quot;: &quot;OPTIMAL&quot;,
+  &quot;hard_constraints_pass&quot;: true,
+  &quot;total_staff_shifts&quot;: 31,
+  &quot;evaluation_population&quot;: &quot;留出周末&quot;,
+  &quot;heldout_target_days&quot;: 6,
+  &quot;forecast_mae_on_heldout_weekends&quot;: 4.90343391550409,
+  &quot;empirical_buffer&quot;: 7.742360148661724,
+  &quot;stress_evaluation&quot;: [
+    {
+      &quot;scenario&quot;: &quot;normal&quot;,
+      &quot;reserve&quot;: false,
+      &quot;mean_final_backlog&quot;: 0.0,
+      &quot;all_slots_zero_backlog_rate&quot;: 1.0,
+      &quot;mean_reserve_shifts&quot;: 0.0,
+      &quot;mean_reserve_cost&quot;: 0.0,
+      &quot;reserve_constraints_pass&quot;: true
+    },
+    {
+      &quot;scenario&quot;: &quot;normal&quot;,
+      &quot;reserve&quot;: true,
+      &quot;mean_final_backlog&quot;: 0.0,
+      &quot;all_slots_zero_backlog_rate&quot;: 1.0,
+      &quot;mean_reserve_shifts&quot;: 0.0,
+      &quot;mean_reserve_cost&quot;: 120.0,
+      &quot;reserve_constraints_pass&quot;: true
+    },
+    {
+      &quot;scenario&quot;: &quot;demand_plus20&quot;,
+      &quot;reserve&quot;: false,
+      &quot;mean_final_backlog&quot;: 35.5,
+      &quot;all_slots_zero_backlog_rate&quot;: 0.0,
+      &quot;mean_reserve_shifts&quot;: 0.0,
+      &quot;mean_reserve_cost&quot;: 0.0,
+      &quot;reserve_constraints_pass&quot;: true
+    },
+    {
+      &quot;scenario&quot;: &quot;demand_plus20&quot;,
+      &quot;reserve&quot;: true,
+      &quot;mean_final_backlog&quot;: 5.5,
+      &quot;all_slots_zero_backlog_rate&quot;: 0.0,
+      &quot;mean_reserve_shifts&quot;: 3.3333333333333335,
+      &quot;mean_reserve_cost&quot;: 170.0,
+      &quot;reserve_constraints_pass&quot;: true
+    }
+  ],
+  &quot;revision_status&quot;: &quot;OPTIMAL&quot;,
+  &quot;revision_feasible&quot;: true
+}
+</code></pre>
+<p>这些结论只适用于本例显式假设；目标权重和风险偏好由人决定。</p>
+</body></html>

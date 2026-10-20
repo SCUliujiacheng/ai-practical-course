@@ -1,0 +1,34 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>决策建议</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>本次计算的决策建议</h1>
+<p>两个搜索方法各使用10次目标调用，候选通过独立情景复评。请按 independent_evaluation.csv 比较损失和延误率；本次小预算实验不支持宣布某搜索方法普遍更优。</p>
+<h2>实际指标</h2>
+<pre><code class="language-json">{
+  &quot;calls_per_method&quot;: 10,
+  &quot;initial_sobol_trials&quot;: 4,
+  &quot;bayesian_trials&quot;: 6,
+  &quot;independent_results&quot;: [
+    {
+      &quot;method&quot;: &quot;random&quot;,
+      &quot;reserve&quot;: 2,
+      &quot;threshold&quot;: 2,
+      &quot;test_cost&quot;: 16.656000000000002,
+      &quot;late_rate&quot;: 0.008869021362450746
+    },
+    {
+      &quot;method&quot;: &quot;ax&quot;,
+      &quot;reserve&quot;: 3,
+      &quot;threshold&quot;: 0,
+      &quot;test_cost&quot;: 16.61733333333333,
+      &quot;late_rate&quot;: 0.0017981809753917343
+    },
+    {
+      &quot;method&quot;: &quot;no_reserve&quot;,
+      &quot;reserve&quot;: 0,
+      &quot;threshold&quot;: 0,
+      &quot;test_cost&quot;: 51.845333333333336,
+      &quot;late_rate&quot;: 0.06845635996695291
+    }
+  ]
+}
+</code></pre>
+<p>这些结论只适用于本例显式假设；目标权重和风险偏好由人决定。</p>
+</body></html>

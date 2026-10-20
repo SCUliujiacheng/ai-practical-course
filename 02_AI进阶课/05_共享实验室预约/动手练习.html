@@ -1,0 +1,50 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>05_共享实验室预约 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>六个团队怎样预约两间实验室？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{
+  &quot;status&quot;: &quot;OPTIMAL&quot;,
+  &quot;last_end&quot;: 5,
+  &quot;backtracking_last_end&quot;: 6,
+  &quot;constraint_check&quot;: true,
+  &quot;infeasible_example&quot;: &quot;INFEASIBLE&quot;
+}
+采用预约表中的方案，最后在时段5结束，回溯基线为6；状态OPTIMAL。房间重叠和成员分身均独立检查通过。若可用时间变化，应先更新需求再求解。
+</pre><h2>1. 补全：同一成员不能同时出现</h2>
+<p>房间不同但两组共享成员Li，检查两个重叠预约。</p>
+<pre class="code">trial_pairs = [((0,1,3),(1,2,4)), ((0,0,2),(1,2,4))]
+# TODO：用 jobs[0]、jobs[2] 和 conflict 检查两对预约，返回布尔列表
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert attempt == [True,False]
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>2. 修改：修复无解需求</h2>
+<p>给两个冲突团队都开放第二个时段，验证出现合法解。</p>
+<pre class="code">trial_jobs = [dict(j,starts=[0,1]) for j in impossible]
+# TODO：调用 solve_booking 并返回 (状态, 预约方案)
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    trial_state,trial_plan=attempt
+    assert check_booking(trial_plan,trial_jobs)
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>3. 迁移：共享相机预约</h2>
+<p>只有一台相机，两人各借2小时，可从0、2开始。直接用资源编号0表示相机。</p>
+<pre class="code">trial_jobs = [dict(name=n,duration=2,rooms=[0],starts=[0,2],members={n}) for n in [&quot;A&quot;,&quot;B&quot;]]
+# TODO：同一相机视作房间0，返回 solve_booking 的结果
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    trial_state,trial_plan=attempt
+    assert check_booking(trial_plan,trial_jobs)
+    assert sorted(c[1] for c in trial_plan.values()) == [0,2]
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre></body></html>

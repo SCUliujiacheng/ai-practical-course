@@ -1,0 +1,75 @@
+{
+  "selected_on_validation": "mean",
+  "validation": {
+    "fixed": {
+      "cost": 179.24,
+      "mean_staff": 5.0,
+      "shortage_rate": 0.205,
+      "mean_shortage": 3.655
+    },
+    "linear_mean": {
+      "cost": 173.04,
+      "mean_staff": 4.74,
+      "shortage_rate": 0.275,
+      "mean_shortage": 3.855
+    },
+    "mean": {
+      "cost": 152.36,
+      "mean_staff": 4.72,
+      "shortage_rate": 0.18,
+      "mean_shortage": 1.345
+    },
+    "buffered": {
+      "cost": 165.43,
+      "mean_staff": 5.485,
+      "shortage_rate": 0.02,
+      "mean_shortage": 0.11
+    }
+  },
+  "test": {
+    "fixed": {
+      "cost": 181.712,
+      "mean_staff": 5.0,
+      "shortage_rate": 0.276,
+      "mean_shortage": 3.964
+    },
+    "linear_mean": {
+      "cost": 177.608,
+      "mean_staff": 4.684,
+      "shortage_rate": 0.34,
+      "mean_shortage": 4.636
+    },
+    "mean": {
+      "cost": 152.128,
+      "mean_staff": 4.72,
+      "shortage_rate": 0.22,
+      "mean_shortage": 1.316
+    },
+    "buffered": {
+      "cost": 164.392,
+      "mean_staff": 5.468,
+      "shortage_rate": 0.016,
+      "mean_shortage": 0.044
+    }
+  },
+  "model_comparison": [
+    {
+      "model": "ridge",
+      "validation_mae": 14.07781932436093,
+      "test_mae": 16.11330750501616,
+      "validation_decision_cost": 173.04,
+      "test_decision_cost": 177.608
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "validation_mae": 8.144585994150196,
+      "test_mae": 8.086353009985572,
+      "validation_decision_cost": 152.36,
+      "test_decision_cost": 152.128
+    }
+  ],
+  "test_mae": 8.086353009985572,
+  "interval_coverage": 0.864,
+  "mean_interval_width": 30.555892552344154,
+  "nominal_coverage": 0.9
+}

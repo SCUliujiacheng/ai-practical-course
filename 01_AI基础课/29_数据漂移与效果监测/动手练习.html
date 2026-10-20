@@ -1,0 +1,66 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>29_数据漂移与效果监测 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>新数据变化时，怎样发现模型可能失效？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{
+  &quot;reference_accuracy&quot;: 0.9066666666666666,
+  &quot;window_results&quot;: {
+    &quot;正常&quot;: {
+      &quot;valid_rows&quot;: 400,
+      &quot;invalid_rows&quot;: 0,
+      &quot;ks_statistics&quot;: [
+        0.035,
+        0.0465
+      ],
+      &quot;input_drift&quot;: false,
+      &quot;accuracy&quot;: 0.9175,
+      &quot;performance_alarm&quot;: false
+    },
+    &quot;输入偏移&quot;: {
+      &quot;valid_rows&quot;: 400,
+      &quot;invalid_rows&quot;: 0,
+      &quot;ks_statistics&quot;: [
+        0.572,
+        0.05
+      ],
+      &quot;input_drift&quot;: true,
+      &quot;accuracy&quot;: 0.9375,
+      &quot;performance_alarm&quot;: false
+    },
+    &quot;概念改变&quot;: {
+      &quot;valid_rows&quot;: 400,
+      &quot;invalid_rows&quot;: 0,
+      &quot;ks_statistics&quot;: [
+        0.0565,
+        0.0455
+      ],
+      &quot;input_drift&quot;: false,
+      &quot;accuracy&quot;: 0.13,
+      &quot;performance_alarm&quot;: true
+    }
+  },
+  &quot;invalid_rows_detected&quot;: 2,
+  &quot;thresholds&quot;: &quot;teaching assumptions; calibrate for real deployment&quot;,
+  &quot;elapsed_seconds&quot;: 0.86
+}
+</pre><h2>1. 补全：无标签口径</h2>
+<p>隐藏正常窗口标签，检查准确率未知而输入统计仍可用。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert r[&#x27;accuracy&#x27;] is None and len(r[&#x27;ks_statistics&#x27;]) == 2</pre><h2>2. 修改：错误数据结构</h2>
+<p>一列数据必须报错，坏记录必须检出。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert monitor(broken)[&#x27;invalid_rows&#x27;] == 2</pre><h2>3. 迁移：同输入不同关系</h2>
+<p>保持完全相同的X，反转标签；输入统计相同，两种准确率之和为1。</p>
+<pre class="code"># 本单元可直接使用上方载入的本例函数与数据。
+# TODO：先写预期结果，再实现题目要求。
+
+# 完成后取消下面检查的注释；运行空白练习不代表已完成。
+# assert a[&#x27;ks_statistics&#x27;] == b[&#x27;ks_statistics&#x27;]
+# assert np.isclose(a[&#x27;accuracy&#x27;] + b[&#x27;accuracy&#x27;], 1)</pre></body></html>

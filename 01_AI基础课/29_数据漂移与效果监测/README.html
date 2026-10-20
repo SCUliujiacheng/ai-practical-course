@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>B29 新数据变化时，怎样发现模型可能失效？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>任务：区分数据质量、输入分布变化与标签延迟后的实际效果下降。报警用于调查，不等于自动重训。</p>
+<h2>先修与运行</h2>
+<p>B09、B27—B28；质量检查、分布统计与延迟标签。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 固定模型与三个监测窗口</h2>
+<p>生成正常、输入偏移、关系反转三种情况。关系反转时输入可能不变但模型失效；所有机制与随机种子公开，便于手工验证。</p>
+<h2>2. 输入质量先于预测</h2>
+<p>缺失、无限值和列数错误需要单独报告。明确隔离坏记录，不把所有缺失填成0后宣称数据正常。</p>
+<h2>3. 标签前后使用不同指标</h2>
+<p>KS统计量反映输入差异，阈值0.2只是教学假设。无标签时 accuracy 必须未知；标签到达后才能判断效果。输入漂移既不是性能下降的充分条件，也不是必要条件。</p>
+<h2>4. 从报警到行动</h2>
+<p>输入异常先查管道与人群组成，效果下降再评估回退或新模型。候选必须在后续留出数据上验收，不能用同一报警窗口训练并验收。</p>
+<h2>常见错误与边界</h2>
+<p>报警不等于失效证明；真实阈值须结合样本量、错误代价和多重检验确定。</p>
+<h2>数据</h2>
+<p>由本例完整代码生成的教学模拟数据；不是企业生产记录。随机种子、生成公式与划分方式均可检查。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

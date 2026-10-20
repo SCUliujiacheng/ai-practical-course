@@ -1,0 +1,17 @@
+{
+  "id": "B19",
+  "title": "图片不多时，怎样利用已有模型完成分类？",
+  "track": "B",
+  "number": 19,
+  "sources": [
+    [
+      "PyTorch 迁移学习教程",
+      "https://docs.pytorch.org/tutorials/beginner/transfer_learning_tutorial.html"
+    ],
+    [
+      "torchvision ResNet18",
+      "https://docs.pytorch.org/vision/stable/models/generated/torchvision.models.resnet18.html"
+    ]
+  ],
+  "prereqs": "B17—B18；补充参数冻结、特征提取与迁移边界。"
+}

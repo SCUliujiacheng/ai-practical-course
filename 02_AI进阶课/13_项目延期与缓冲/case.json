@@ -1,0 +1,17 @@
+{
+  "id": "A13",
+  "title": "工期不稳定时，怎样估计延期概率与安排缓冲？",
+  "track": "A",
+  "number": 13,
+  "sources": [
+    [
+      "NumPy 随机抽样官方 API",
+      "https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.choice.html"
+    ],
+    [
+      "NetworkX 有向无环图算法",
+      "https://networkx.org/documentation/stable/reference/algorithms/dag.html"
+    ]
+  ],
+  "prereqs": "B27、A04；概率分布、任务依赖、整行 bootstrap 与独立情景。"
+}

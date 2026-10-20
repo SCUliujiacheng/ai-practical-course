@@ -1,0 +1,15 @@
+[
+  {
+    "time": 1,
+    "kind": "close",
+    "u": "A",
+    "v": "G"
+  },
+  {
+    "time": 2,
+    "kind": "cost",
+    "u": "B",
+    "v": "C",
+    "value": 9
+  }
+]

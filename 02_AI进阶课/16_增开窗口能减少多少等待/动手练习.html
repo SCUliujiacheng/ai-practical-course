@@ -1,0 +1,45 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>16_增开窗口能减少多少等待 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>校园活动增加一个窗口，能少排多久？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">校准均值/留出均值 2.218925750531993 3.7838939753849363 {&#x27;interarrival&#x27;: 2.2042546485310366, &#x27;service&#x27;: 4.069848256714398}
+</pre><pre class="output">{&#x27;calibrated_interarrival_mean&#x27;: 2.218925750531993, &#x27;calibrated_service_mean&#x27;: 3.7838939753849363, &#x27;mean_wait_reduction_minutes&#x27;: 4.085658418609135, &#x27;extra_staff_cost&#x27;: 160, &#x27;heldout_wait_minutes&#x27;: {&#x27;2&#x27;: 8.576067353315386, &#x27;3&#x27;: 0.6738596190558158}}
+</pre><h2>1. 补全：手算验证</h2>
+<p>三个顾客在0、1、2分钟到达，服务均为3分钟，只有一个窗口。写出等待时间并验证。</p>
+<pre class="code"># 本题：三个顾客在0、1、2分钟到达，服务均为3分钟，只有一个窗口。写出等待时间并验证。
+# 输入与函数来自上面的本例初始化；先在纸上写预期值。
+your_result = None  # TODO：替换为你的计算
+
+# 完成后把finished改为True，并补充自己的结果检查。
+finished = False
+if finished:
+    assert np.allclose(simulate([0,1,2],[3,3,3],1),[0,2,4])
+else:
+    print(&quot;本题尚未完成，补全变量后启用检查。&quot;)</pre><pre class="output">本题尚未完成，补全变量后启用检查。
+</pre><h2>2. 修改：服务变慢</h2>
+<p>将留出服务时长乘1.5，比较两个与三个窗口。</p>
+<pre class="code"># 本题：将留出服务时长乘1.5，比较两个与三个窗口。
+# 输入与函数来自上面的本例初始化；先在纸上写预期值。
+slow = None  # TODO：替换为你的计算
+
+# 完成后把finished改为True，并补充自己的结果检查。
+finished = False
+if finished:
+    assert slow[3]&lt;=slow[2]
+else:
+    print(&quot;本题尚未完成，补全变量后启用检查。&quot;)</pre><pre class="output">本题尚未完成，补全变量后启用检查。
+</pre><h2>3. 迁移：计算机任务队列</h2>
+<p>5个任务同时提交，每个运行2秒，分别使用1与2个worker，比较平均等待。</p>
+<pre class="code"># 本题：5个任务同时提交，每个运行2秒，分别使用1与2个worker，比较平均等待。
+# 输入与函数来自上面的本例初始化；先在纸上写预期值。
+one = None  # TODO：替换为你的计算
+two = None  # TODO：替换为你的计算
+
+# 完成后把finished改为True，并补充自己的结果检查。
+finished = False
+if finished:
+    assert np.allclose(one,[0,2,4,6,8]) and two.mean()&lt;one.mean()
+else:
+    print(&quot;本题尚未完成，补全变量后启用检查。&quot;)</pre><pre class="output">本题尚未完成，补全变量后启用检查。
+</pre></body></html>

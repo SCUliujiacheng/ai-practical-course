@@ -1,0 +1,2 @@
+﻿step,action,valid,location,key,door,carrying,delivered
+0,open-door,False,hall,False,False,False,False

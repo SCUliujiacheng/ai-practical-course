@@ -1,0 +1,21 @@
+{
+  "id": "B28",
+  "title": "怎样把训练好的模型做成可调用的预测接口？",
+  "track": "B",
+  "number": 28,
+  "sources": [
+    [
+      "FastAPI 测试",
+      "https://fastapi.tiangolo.com/tutorial/testing/"
+    ],
+    [
+      "FastAPI 请求体",
+      "https://fastapi.tiangolo.com/tutorial/body/"
+    ],
+    [
+      "sklearn 模型持久化",
+      "https://scikit-learn.org/stable/model_persistence.html"
+    ]
+  ],
+  "prereqs": "B07、B10；序列化、输入校验与 HTTP。"
+}

@@ -1,0 +1,34 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>B10 怎样在同一预算下比较分类模型？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<blockquote>
+<p><strong>联网选修：需要联网，可延后学习。</strong> 新增 TabPFN 模型对照，需要在线确认访问权限与下载；本课同预算选型主线不需要。</p>
+</blockquote>
+<p>使用 sklearn 自带乳腺癌数值数据练习模型比较，仅作算法教学。逻辑回归与梯度提升各搜索 3 组参数、使用同样 3 折验证，再一次性评价留出测试集。</p>
+<h2>先修与运行</h2>
+<p>B07—B09；交叉验证、参数字典、折内拟合与计时。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 先锁定独立测试集</h2>
+<p>本例使用公开内置数据。正类明确设为恶性，指标用 balanced accuracy 避免类别比例影响。它不是临床工具；公开小数据表现不能用于诊断。</p>
+<h2>2. 预算意味着候选数与验证次数都一致</h2>
+<p>标准化放在 Pipeline 内部，每个折只学习本折训练数据。逻辑回归测试 3 个 C，树模型测试 3 个叶子数；每种方法都是 9 次折内拟合。相同搜索次数不等于相同耗时，所以还记录时间。</p>
+<h2>3. 用交叉验证选模型，测试只作结算</h2>
+<p>选中的模型已在完整开发集上重拟合。测试结果可能改变模型排名，但本轮推荐仍由预先的 CV 规则决定，不能反复拿测试集挑赢家。</p>
+<h2>4. 保存全部候选，而非只保存最佳分数</h2>
+<p>交付参数表、运行时间和测试预测。图显示 CV 与测试的差异，不能从少量折推断严格泛化置信区间。若真实应用存在患者分组，须改分组验证。</p>
+<h2>常见错误与边界</h2>
+<p>内置医学数据只用于算法教学，不输出个体诊断。统一候选次数不保证严格统一计算量；耗时单独记录。</p>
+<h2>数据</h2>
+<p>使用 sklearn 包内自带的 Wisconsin Diagnostic Breast Cancer 数据，离线读取；练习使用 wine 数据。数据出处及许可见 sklearn 官方数据说明。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

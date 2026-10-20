@@ -1,0 +1,13 @@
+{
+  "id": "A12",
+  "title": "有降雨风险时，应该提前转场还是等待？",
+  "track": "A",
+  "number": 12,
+  "sources": [
+    [
+      "AIMA 官方概率与决策网络实现：期望效用",
+      "https://github.com/aimacode/aima-python/blob/master/aima/probability.py"
+    ]
+  ],
+  "prereqs": "B09；概率、条件概率、期望损失；不要求外部天气服务。"
+}

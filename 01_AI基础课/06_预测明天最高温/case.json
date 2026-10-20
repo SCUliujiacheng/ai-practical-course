@@ -1,0 +1,17 @@
+{
+  "id": "B06",
+  "title": "怎样根据历史天气预测明天的最高温度？",
+  "track": "B",
+  "number": 6,
+  "sources": [
+    [
+      "TensorFlow Jena 时间序列教程",
+      "https://www.tensorflow.org/tutorials/structured_data/time_series"
+    ],
+    [
+      "scikit-learn 滞后特征预测",
+      "https://scikit-learn.org/stable/auto_examples/applications/plot_time_series_lagged_features.html"
+    ]
+  ],
+  "prereqs": "B01—B05；学习 shift、训练/验证/测试、Pipeline、拟合与预测。"
+}

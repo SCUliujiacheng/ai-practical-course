@@ -1,0 +1,40 @@
+{
+  "exact_optimal_expected_cost": 20.25,
+  "simulation": [
+    {
+      "mode": "full",
+      "mean": 20.331666666666667,
+      "std": 2.9924901373642356
+    },
+    {
+      "mode": "rolling2",
+      "mean": 20.331666666666667,
+      "std": 2.9924901373642356
+    },
+    {
+      "mode": "myopic",
+      "mean": 20.331666666666667,
+      "std": 2.9924901373642356
+    }
+  ],
+  "heavy_demand_total": 24.0,
+  "fixed_order_fee": 8,
+  "with_fee_exact_optimal_expected_cost": 34.116,
+  "with_fee_simulation": [
+    {
+      "mode": "full",
+      "mean": 34.19833333333333,
+      "std": 6.896303156200591
+    },
+    {
+      "mode": "rolling2",
+      "mean": 35.75,
+      "std": 8.742472952965501
+    },
+    {
+      "mode": "myopic",
+      "mean": 39.43333333333333,
+      "std": 10.51580820585
+    }
+  ]
+}

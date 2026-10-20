@@ -1,0 +1,10 @@
+{
+  "samples": 60,
+  "people": 30,
+  "counts": {
+    "train": 36,
+    "test": 12,
+    "validation": 12
+  },
+  "group_leakage": false
+}

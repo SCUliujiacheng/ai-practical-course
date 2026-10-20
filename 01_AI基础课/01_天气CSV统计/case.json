@@ -1,0 +1,13 @@
+{
+  "id": "B01",
+  "title": "怎样从天气 CSV 找到最热的一天？",
+  "track": "B",
+  "number": 1,
+  "sources": [
+    [
+      "Python CSV 官方文档",
+      "https://docs.python.org/3/library/csv.html"
+    ]
+  ],
+  "prereqs": "能读懂变量赋值即可；本例讲解列表、字典、循环、函数和文件路径。"
+}

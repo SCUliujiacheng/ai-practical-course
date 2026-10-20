@@ -1,0 +1,13 @@
+{
+  "status": "OPTIMAL",
+  "workload_spread": 1,
+  "preferred_assignments": 12,
+  "coverage": [
+    3,
+    3,
+    3,
+    3
+  ],
+  "all_constraints_pass": true,
+  "infeasible_test": "INFEASIBLE"
+}

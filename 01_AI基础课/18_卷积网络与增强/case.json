@@ -1,0 +1,13 @@
+{
+  "id": "B18",
+  "title": "怎样用卷积网络改善图像识别？",
+  "track": "B",
+  "number": 18,
+  "sources": [
+    [
+      "PyTorch 图像分类教程",
+      "https://docs.pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html"
+    ]
+  ],
+  "prereqs": "B16—B17；补充四维张量、卷积和验证集。"
+}

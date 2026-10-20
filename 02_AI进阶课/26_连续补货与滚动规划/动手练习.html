@@ -1,0 +1,43 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>26_连续补货与滚动规划 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>连续三天活动，每晚应补多少货？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{&#x27;exact_optimal_expected_cost&#x27;: 20.25, &#x27;simulation&#x27;: [{&#x27;mode&#x27;: &#x27;full&#x27;, &#x27;mean&#x27;: 20.331666666666667, &#x27;std&#x27;: 2.9924901373642356}, {&#x27;mode&#x27;: &#x27;rolling2&#x27;, &#x27;mean&#x27;: 20.331666666666667, &#x27;std&#x27;: 2.9924901373642356}, {&#x27;mode&#x27;: &#x27;myopic&#x27;, &#x27;mean&#x27;: 20.331666666666667, &#x27;std&#x27;: 2.9924901373642356}], &#x27;heavy_demand_total&#x27;: 24.0, &#x27;fixed_order_fee&#x27;: 8, &#x27;with_fee_exact_optimal_expected_cost&#x27;: 34.116, &#x27;with_fee_simulation&#x27;: [{&#x27;mode&#x27;: &#x27;full&#x27;, &#x27;mean&#x27;: 34.19833333333333, &#x27;std&#x27;: 6.896303156200591}, {&#x27;mode&#x27;: &#x27;rolling2&#x27;, &#x27;mean&#x27;: 35.75, &#x27;std&#x27;: 8.742472952965501}, {&#x27;mode&#x27;: &#x27;myopic&#x27;, &#x27;mean&#x27;: 39.43333333333333, &#x27;std&#x27;: 10.51580820585}]}
+</pre><h2>1. 补全：容量约束</h2>
+<p>验证策略表中每个动作都不超过剩余容量。</p>
+<pre class="code"># 本题：验证策略表中每个动作都不超过剩余容量。
+# 输入与函数来自上面的本例初始化；先在纸上写预期值。
+your_result = None  # TODO：替换为你的计算
+
+# 完成后把finished改为True，并补充自己的结果检查。
+finished = False
+if finished:
+    assert (policy_table.stock+policy_table.order&lt;=CAPACITY).all()
+else:
+    print(&quot;本题尚未完成，补全变量后启用检查。&quot;)</pre><pre class="output">本题尚未完成，补全变量后启用检查。
+</pre><h2>2. 修改：初始库存</h2>
+<p>分别查看初始库存0与6时三天问题的采购量和价值，解释沉没采购成本未计入。</p>
+<pre class="code"># 本题：分别查看初始库存0与6时三天问题的采购量和价值，解释沉没采购成本未计入。
+# 输入与函数来自上面的本例初始化；先在纸上写预期值。
+your_result = None  # TODO：替换为你的计算
+
+# 完成后把finished改为True，并补充自己的结果检查。
+finished = False
+if finished:
+    assert optimal(3,6)[1]&lt;=2
+else:
+    print(&quot;本题尚未完成，补全变量后启用检查。&quot;)</pre><pre class="output">本题尚未完成，补全变量后启用检查。
+</pre><h2>3. 迁移：一期穷举</h2>
+<p>仅一天、初始0，直接枚举采购0到8，复算最小期望成本。</p>
+<pre class="code"># 本题：仅一天、初始0，直接枚举采购0到8，复算最小期望成本。
+# 输入与函数来自上面的本例初始化；先在纸上写预期值。
+brute = None  # TODO：替换为你的计算
+
+# 完成后把finished改为True，并补充自己的结果检查。
+finished = False
+if finished:
+    assert np.isclose(brute[0],optimal(1,0)[0])
+else:
+    print(&quot;本题尚未完成，补全变量后启用检查。&quot;)</pre><pre class="output">本题尚未完成，补全变量后启用检查。
+</pre></body></html>

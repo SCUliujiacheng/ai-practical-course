@@ -1,0 +1,25 @@
+{
+  "baseline_accuracy": 0.8684027777777777,
+  "improved_accuracy": 0.8909722222222223,
+  "mean_accuracy_gain": 0.022569444444444444,
+  "paired_95_percent_interval": [
+    -0.0006944444444444445,
+    0.04618055555555556
+  ],
+  "per_seed_gain": [
+    0.030555555555555544,
+    0.022222222222222227,
+    0.02500000000000001,
+    0.024999999999999994,
+    0.016666666666666663,
+    0.01944444444444446,
+    0.02777777777777779,
+    0.013888888888888881
+  ],
+  "mean_training_seconds": [
+    0.0017039874946931377,
+    0.003079250003793277
+  ],
+  "interval_scope": "fixed trained models; iid test examples; not full training uncertainty",
+  "elapsed_seconds": 1.075
+}

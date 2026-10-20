@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>A23 大家各选最快路，为什么总耗时还偏高？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>六个团队同时出发，可走容量紧张的捷径或固定耗时的绕行路。分别求个体无单方改进的配置和系统总耗时最低配置。</p>
+<h2>先修与运行</h2>
+<p>已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 耗时依赖同路人数</h2>
+<p>捷径上n人时每人耗时n，绕行路每人恒为5。每队是一名不可分割参与者；本例是有限原子拥堵博弈。</p>
+<h2>2. 逐个参与者严格改进</h2>
+<p>每次只让一名参与者改变，而且只有成本严格下降才行动。有限拥堵博弈的势函数随这种更新下降；同步更新或无差别切换不能套用同一停止论证。</p>
+<h2>3. 系统优化与均衡分别枚举</h2>
+<p>6人2条路只有64种配置，用穷举取得系统最优与全部纯均衡。最佳回应稳定只保证个人不愿单独改变，未优化系统总耗时。</p>
+<h2>4. 输出协调收益和个体代价</h2>
+<p>统一安排可能使某些参与者比其原来更慢，不能只展示总量。建议提供协调方式或补偿讨论；本例不把协调配置假装成自发均衡。</p>
+<h2>常见错误与边界</h2>
+<p>本例有限、原子、不可分割参与者，成本只依赖使用者数量。只对顺序严格改进使用势函数停止论证；其他动态需重新分析。</p>
+<h2>数据</h2>
+<p>原创教学模拟场景，规模与全部参数直接列在 solution.py；运行同时保存输入或结果 CSV。无真实个人记录，不需要下载数据。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

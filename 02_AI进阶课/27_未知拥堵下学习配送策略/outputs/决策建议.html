@@ -1,0 +1,16 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>决策建议</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>本次计算的决策建议</h1>
+<p>本环境快路真实成功率为0.58，已知模型参照拥有更多信息。学习策略平均耗时9.59分钟，且需要训练交互；若模型已知且状态很小，应先用规划而不是增加神经网络。</p>
+<h2>实际指标</h2>
+<pre><code class="language-json">{
+  &quot;safe_time&quot;: 10.0,
+  &quot;oracle_time&quot;: 8.915,
+  &quot;q_mean_time&quot;: 9.593124999999999,
+  &quot;training_mean_95_t_interval&quot;: [
+    9.347622085141616,
+    9.838627914858382
+  ],
+  &quot;mean_interactions&quot;: 2325.25
+}
+</code></pre>
+<p>这些结论只适用于本例显式假设；目标权重和风险偏好由人决定。</p>
+</body></html>

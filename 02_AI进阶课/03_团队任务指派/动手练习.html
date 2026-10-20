@@ -1,0 +1,60 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>03_团队任务指派 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>总工时最少与团队最早完工是一回事吗？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{
+  &quot;minimum_total_hours&quot;: 14,
+  &quot;sum_optimal_finish&quot;: 6,
+  &quot;minimum_finish_time&quot;: 4,
+  &quot;sum_plan&quot;: [
+    0,
+    1,
+    2,
+    3
+  ],
+  &quot;finish_plan&quot;: [
+    1,
+    0,
+    3,
+    2
+  ]
+}
+若目标是尽早全部完成，选择(1, 0, 3, 2)，4小时完工；总工时方案(0, 1, 2, 3)的总耗时为14、完工时间为6。先确认团队真正要优化哪个指标。
+</pre><h2>1. 补全：识别重复任务</h2>
+<p>合法分配必须每人一项、每项一人，检查两份分配。</p>
+<pre class="code">trial_assignments = [[0,0,2,3], [0,1,2,3]]
+# TODO：用 check_assignment 分别检查，返回布尔列表
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert attempt == [False,True]
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>2. 修改：成员甲不能做任务B</h2>
+<p>修改技能矩阵重新求总工时最优，并与枚举核对。</p>
+<pre class="code">trial_allowed = allowed.copy()
+trial_allowed[0,1] = False
+# TODO：用 sum_assignment 返回新分配；每个列表位置表示一名成员
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert check_assignment(attempt,durations,trial_allowed)
+    assert sum(durations[i,j] for i,j in enumerate(attempt)) == enumerate_assignment(durations,trial_allowed)[0]
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>3. 迁移：两台设备加工两件物品</h2>
+<p>耗时[[1,3],[2,8]]。分别比较总工时与最晚完成目标。</p>
+<pre class="code">trial_machines = np.array([[1,3],[2,8]])
+trial_allowed = np.ones((2,2),bool)
+# TODO：分别最小化总工时和最大工时，返回 (总工时最优值, 最大工时最优值)
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert attempt == (5,3)
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre></body></html>

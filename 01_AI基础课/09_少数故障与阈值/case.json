@@ -1,0 +1,17 @@
+{
+  "id": "B09",
+  "title": "故障很少时，怎样避免模型只预测正常？",
+  "track": "B",
+  "number": 9,
+  "sources": [
+    [
+      "概率校准官方指南",
+      "https://scikit-learn.org/stable/modules/calibration.html"
+    ],
+    [
+      "阈值调优",
+      "https://scikit-learn.org/stable/modules/classification_threshold.html"
+    ]
+  ],
+  "prereqs": "B08；混淆矩阵、概率、阈值与验证集。"
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "text": "friendly staff and excellent food",
+    "label": 1,
+    "tfidf": 1,
+    "embedding": 1
+  },
+  {
+    "text": "slow delivery and terrible quality",
+    "label": 0,
+    "tfidf": 0,
+    "embedding": 0
+  },
+  {
+    "text": "good product with reliable performance",
+    "label": 1,
+    "tfidf": 1,
+    "embedding": 1
+  },
+  {
+    "text": "rude staff and dirty room",
+    "label": 0,
+    "tfidf": 0,
+    "embedding": 0
+  },
+  {
+    "text": "not good at all",
+    "label": 0,
+    "tfidf": 1,
+    "embedding": 1
+  },
+  {
+    "text": "not a terrible experience",
+    "label": 1,
+    "tfidf": 0,
+    "embedding": 0
+  },
+  {
+    "text": "helpful support but slow delivery",
+    "label": 0,
+    "tfidf": 0,
+    "embedding": 1
+  },
+  {
+    "text": "I love the clean comfortable room",
+    "label": 1,
+    "tfidf": 1,
+    "embedding": 1
+  }
+]

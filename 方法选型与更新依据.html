@@ -1,0 +1,233 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>方法选型与更新依据</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>方法选型与更新依据</h1>
+<p>核验日期：2026-10-20。适用范围：<a href="01_AI%E5%9F%BA%E7%A1%80%E8%AF%BE/%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1.md">AI 基础课</a>与 <a href="02_AI%E8%BF%9B%E9%98%B6%E8%AF%BE/%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1.md">AI 进阶课</a>的本轮课程设计。</p>
+<h2>1. 按什么标准优化课程</h2>
+<p>学习目标是增强处理问题的能力。学校课程用于理解已有背景，具体内容按问题需要取舍；AI、统计、运筹优化、控制、因果推断和决策分析都可以进入课程。</p>
+<p>这里没有一种对所有问题都“最好”的方法。选型先问：需要预测、解释原因、满足约束，还是连续采取行动？随后检查数据、假设、计算条件和错误代价。方法的新旧、模型大小、论文榜单名次都不能单独决定采用它。</p>
+<p>本次保留基础课原有 30 个问题及顺序、进阶课的 30 个问题结构，更新解题路线和评价方法。第1—6节保留选型阶段的研究记录；随后完成的案例和本机验证见第7节及根目录验收报告，候选清单不表示所有模型都已实现或提供权重。</p>
+<h2>2. 具体改了什么</h2>
+<table>
+<thead>
+<tr>
+  <th>能力</th>
+  <th>主线必须完成</th>
+  <th>新方法或进一步比较</th>
+  <th>对应案例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>从数据预测</td>
+  <td>数据质量与合理划分；简单基线与梯度提升树等实用方法；独立评价</td>
+  <td>小样本表格基础模型；预训练时间序列模型</td>
+  <td>B07、B10、B15</td>
+</tr>
+<tr>
+  <td>判断预测是否值得相信</td>
+  <td>概率校准、误差代价、预测区间及其假设；评价最终行动的损失</td>
+  <td>适用于当前数据条件的 Conformal Prediction 实现</td>
+  <td>B09、B15、A11—A14</td>
+</tr>
+<tr>
+  <td>判断措施是否有效</td>
+  <td>明确目标效应；因果图、识别假设、简单估计与敏感性分析</td>
+  <td>用 DoWhy 组织分析，识别失败时设计进一步试验</td>
+  <td>A15</td>
+</tr>
+<tr>
+  <td>让计划满足限制并跟上变化</td>
+  <td>手算或枚举小例子；约束求解；执行后观察并重算</td>
+  <td>LLM 起草结构化输入，经过求解与独立检查再使用</td>
+  <td>A05—A10、A26、A30</td>
+</tr>
+<tr>
+  <td>用仿真比较策略</td>
+  <td>验证代码、校准模型、留出情景、压力测试</td>
+  <td>昂贵黑箱仿真中用 Ax 搜索少量策略参数，和同预算随机搜索比较</td>
+  <td>A16—A20</td>
+</tr>
+<tr>
+  <td>检索资料并形成回答</td>
+  <td>关键词与向量方法；一条本地问答路径；检索与答案分别评价</td>
+  <td>混合检索、少量候选重排；中文适用的模型比较；受约束的工具调用</td>
+  <td>B20—B24、A09、A30</td>
+</tr>
+<tr>
+  <td>连续选择行动</td>
+  <td>规则、动态规划、滚动优化、表格 Q-learning、多臂老虎机</td>
+  <td>状态空间扩大后再比较深度强化学习的收益与交互成本</td>
+  <td>A26—A28</td>
+</tr>
+<tr>
+  <td>把技能迁移到新问题</td>
+  <td>每五例一次迁移挑战；说明选型理由与失败条件；进阶课提交决策建议</td>
+  <td>改变数据、目标、资源限制或其他参与者行为，重新选择方法</td>
+  <td>两套课程全程</td>
+</tr>
+</tbody>
+</table>
+<p>A*、动态规划、博弈论、线性模型、树模型等继续保留。它们用于适合的问题，并为新方法提供可检查的对照。经典方法的保留不表示学校教过的内容一律最优；加入新方法也不预先承诺它会胜出。</p>
+<h2>3. 候选模型与工具如何落地</h2>
+<p>以下是制作案例时的候选清单，不是已验证可在当前电脑顺畅运行的最终配置。核心课程提供 CPU 小规模路径，不要求付费 API；可选模型受硬件、网络或授权条件限制时，不阻塞核心案例。</p>
+<table>
+<thead>
+<tr>
+  <th>场景</th>
+  <th>候选与采用方式</th>
+  <th>必须核验的条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>表格预测</td>
+  <td>scikit-learn <code>HistGradientBoostingRegressor/Classifier</code> 作为实用对照；TabPFN 作小样本拓展</td>
+  <td>同一数据划分及调参预算；类别与缺失值处理；TabPFN 明确选定版本和权重，不能把某篇论文的成绩移用到后来版本</td>
+</tr>
+<tr>
+  <td>时间序列预测</td>
+  <td>优先尝试 <code>amazon/chronos-bolt-tiny</code> 的小规模拓展；涉及协变量时另评估 Chronos-2；TimesFM 可作为替代候选</td>
+  <td>不强求所有模型都跑；记录模型版本、资源需求、预测长度和变量支持；未来协变量必须在预测时已经可知</td>
+</tr>
+<tr>
+  <td>中文语义检索</td>
+  <td><code>Qwen/Qwen3-Embedding-0.6B</code> 是候选；<code>Qwen/Qwen3-Reranker-0.6B</code> 作资源允许时的重排拓展</td>
+  <td>小语料、短文本先测；嵌入和重排不是同一模型任务；质量改善与额外延迟分开报告</td>
+</tr>
+<tr>
+  <td>本地中文回答</td>
+  <td><code>Qwen/Qwen3-0.6B</code> 是候选，先评估非思考模式的短回答与引用支持</td>
+  <td>小模型仍会犯错；CPU 内存和速度需实测；能加载不等于回答合格</td>
+</tr>
+<tr>
+  <td>原有轻量模型</td>
+  <td>all-MiniLM-L6-v2、FLAN-T5-small 保留适合其用途和语言条件的对照材料</td>
+  <td>英文与中文实验分别设基线，不能把语言条件差异包装成算法优劣；核心只要求完成一个合格路径</td>
+</tr>
+<tr>
+  <td>预测区间与因果分析</td>
+  <td>MAPIE 与 DoWhy 按模块引入</td>
+  <td>先理解区间和识别假设，再调用 API；反驳检验通过不等于因果证明</td>
+</tr>
+<tr>
+  <td>调度、规划与仿真</td>
+  <td>OR-Tools、NetworkX、SimPy；少量黑箱参数搜索使用 Ax</td>
+  <td>求解状态、独立约束检查、仿真校准与评价预算；不为简单可枚举问题增加复杂工具</td>
+</tr>
+<tr>
+  <td>强化学习拓展</td>
+  <td>Gymnasium 环境与 Stable-Baselines3 的 DQN 候选</td>
+  <td>选择适合动作空间的算法；独立训练与评价；固定稳定依赖版本，不直接跟随开发版文档安装</td>
+</tr>
+</tbody>
+</table>
+<p>实施时记录：库版本、模型 ID、权重 revision、精度、代码及权重各自的许可、获取方式、实际耗时和资源占用。模型家族不同版本的授权条件可能不同，应查看所选权重的具体说明；不能只读取代码仓库顶层许可。此处没有预先批准任何具体用途的授权。</p>
+<h2>4. 证据与课程决策的对应关系</h2>
+<p>资料核验以官方文档、模型卡、原始论文为主。下表说明资料支持什么，也明确它不能支持什么。访问时间均为 2026-10-20；“未标日期”表示使用访问日期记录，不推断发布日期。</p>
+<table>
+<thead>
+<tr>
+  <th>研究问题与课程决策</th>
+  <th>原始资料与定位</th>
+  <th>证据支持及边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>表格预测应有强实用基线，并允许基础模型参与比较</td>
+  <td><a href="https://scikit-learn.org/stable/modules/ensemble.html#histogram-based-gradient-boosting">scikit-learn 梯度提升文档</a>，Histogram-based Gradient Boosting；<a href="https://github.com/PriorLabs/TabPFN">TabPFN 官方仓库</a>，使用与许可说明；<a href="https://arxiv.org/html/2511.08667v1">TabPFN-2.5 论文</a>，2025-11-11，§5—§6</td>
+  <td>支持将这些方法列入候选与记录资源/版本限制；不支持保证某方法在本课程数据上胜出。2.5 论文不能代表仓库后来默认版本的实验结果。</td>
+</tr>
+<tr>
+  <td>时序预训练模型值得加入对照，但仍需正确回测</td>
+  <td><a href="https://github.com/amazon-science/chronos-forecasting">Chronos 官方仓库</a>，News、Available Models；<a href="https://arxiv.org/html/2510.15821v1">Chronos-2 论文</a>，2025-10-17，Table 1、§5.1；<a href="https://github.com/google-research/timesfm">TimesFM 官方仓库</a>，版本与许可说明</td>
+  <td>支持不同规模、变量支持的候选比较；公开预训练数据可能与评测数据重叠。无法排除重叠时记录未知，不宣称严格零样本测试。</td>
+</tr>
+<tr>
+  <td>预测区间必须教授假设和覆盖的含义</td>
+  <td><a href="https://mapie.readthedocs.io/en/stable/content/conformal-prediction/">MAPIE 共形预测说明</a>、<a href="https://mapie.readthedocs.io/en/stable/content/exchangeability-testing/">可交换性说明</a>、<a href="https://mapie.readthedocs.io/en/stable/generated/regression/1-quickstart/plot_ts-tutorial/">时间序列示例</a>；<a href="https://proceedings.mlr.press/v162/zaffran22a/zaffran22a.pdf">时间序列自适应共形预测论文</a>，ICML 2022，摘要与导论</td>
+  <td>边际覆盖不等于每个样本或每个子群的保证；时间依赖、漂移需要相应处理。检验未拒绝某假设也不等于证明假设成立。</td>
+</tr>
+<tr>
+  <td>“找得到”和“答得有依据”需要分别检验</td>
+  <td><a href="https://www.sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html">SentenceTransformers 检索与重排教程</a>，Pipeline、Cross-Encoder；<a href="https://arxiv.org/html/2506.05176v1">Qwen3 Embedding 论文</a>，2025-06-05，Table 1、§4.2；<a href="https://huggingface.co/Qwen/Qwen3-0.6B">Qwen3-0.6B 模型卡</a>，模式切换说明</td>
+  <td>支持先召回、再对小候选集重排，以及中文候选模型的选择。重排不能找回未召回的文档；模型卡不证明生成答案始终正确。</td>
+</tr>
+<tr>
+  <td>约束规划应采用成熟求解器并检查状态</td>
+  <td><a href="https://developers.google.com/optimization/cp/cp_solver">OR-Tools CP-SAT</a>，整数变量与求解状态；<a href="https://developers.google.com/optimization/scheduling/employee_scheduling">人员排班</a>；<a href="https://developers.google.com/optimization/scheduling/job_shop">Job Shop</a></td>
+  <td>支持整数约束、覆盖、资源互斥等建模。FEASIBLE 不是最优证明，UNKNOWN 不是无解证明；输入模型正确仍需独立检查。</td>
+</tr>
+<tr>
+  <td>执行后的反馈是规划课程的重要组成</td>
+  <td><a href="https://www.do-mpc.com/en/latest/theory_mpc.html">do-mpc 理论文档</a>，MPC 问题定义；<a href="https://www.mathworks.com/help/mpc/gs/what-is-mpc.html">MathWorks MPC 原理</a>，滚动时域执行流程，未标日期</td>
+  <td>支持预测有限未来、执行当前动作、观察状态并重新优化的结构。课程用离散库存/调度实现相应思路，不要求安装上述商业工具。</td>
+</tr>
+<tr>
+  <td>LLM 可以辅助表达需求，方案仍需外部校验</td>
+  <td><a href="https://arxiv.org/html/2410.12112">Planning Anything with Rigor</a>，2024 年首发，当前所读版本 2025-07-09，§3 与 Limitations；<a href="https://arxiv.org/html/2411.14484v1">LLM-Modulo Planning</a>，2024-11-20，§3、§7</td>
+  <td>支持语言模型与形式化工具协作。保证取决于建模和检查器，遗漏现实约束时不能声称已验证真实任务。论文方案作为拓展依据，不当作本课程实测结果。</td>
+</tr>
+<tr>
+  <td>方案评价要看整案硬约束是否全部通过</td>
+  <td><a href="https://arxiv.org/html/2605.20873v2">PlanningBench</a>，2026-05-29，§4.1.1；结合前述求解器状态说明</td>
+  <td>区分整案全部通过与平均分项通过，采用这一评价区分。该研究部分评价使用 LLM 裁判，不能把其评分称作形式化证明，也不据此给本课模型排名。</td>
+</tr>
+<tr>
+  <td>因果识别应早于估计和工具调用</td>
+  <td><a href="https://www.pywhy.org/dowhy/v0.13/user_guide/causal_tasks/estimating_causal_effects/index.html">DoWhy 因果效应流程</a>，四阶段；<a href="https://www.pywhy.org/dowhy/v0.14/user_guide/refuting_causal_estimates/index.html">反驳检验说明</a>，未标日期</td>
+  <td>支持建模、识别、估计与反驳检验。不同版本文档用于概念核验，实现时统一依赖版本；观察性分析的检查通过不证明未观测混杂不存在。</td>
+</tr>
+<tr>
+  <td>仿真必须区分代码正确和对现实有效</td>
+  <td><a href="https://informs-sim.org/wsc11papers/016.pdf">Sargent：Verification and Validation of Simulation Models</a>，2011，§4、§8</td>
+  <td>支持历史数据验证、参数变化检查和运行有效性评价。这是仍适用的成熟方法；更换随机种子不能替代模型对现实的验证。</td>
+</tr>
+<tr>
+  <td>有限仿真预算可以通过实验选点提高利用率</td>
+  <td><a href="https://botorch.org/docs/introduction.html">BoTorch 介绍</a>；<a href="https://ax.dev/docs/tutorials/quickstart/">Ax 快速教程</a>，Core concepts 与试验循环，页面更新 2026-06-09</td>
+  <td>支持昂贵黑箱目标的顺序优化；Ax 是更易进入的路径。是否优于随机搜索仍取决于问题、噪声、维度及预算，必须实测。</td>
+</tr>
+<tr>
+  <td>深度 RL 的评价需要考虑交互与随机性</td>
+  <td><a href="https://stable-baselines3.readthedocs.io/en/master/guide/rl_tips.html">Stable-Baselines3 RL Tips</a>，Current Limitations、Evaluation；<a href="https://arxiv.org/html/2108.13264v3">Deep RL 统计评价论文</a>，2021-10-13，§4</td>
+  <td>支持多次独立训练、独立评价与不确定性报告；模型无关 RL 可能需要大量交互。小型教学环境不会仅因使用了神经网络就升级主线方法。</td>
+</tr>
+</tbody>
+</table>
+<h2>5. 制作案例时如何决定推荐哪种解法</h2>
+<p>每例先填写一张简短的方法选择卡：</p>
+<pre><code class="language-text">要作出的预测或决定：
+目标指标、硬约束和错误代价：
+当时能获得的数据：
+简单基线与实用解法：
+可选候选及增加的成本：
+验证划分、计算/搜索预算与选择规则：
+独立检查与最终测试：
+实际结果、失败条件及采用理由：
+</code></pre>
+<p>比较遵循以下顺序：</p>
+<ol>
+<li>冻结任务、评价方法和数据划分；预处理、选型、调参不接触最终测试数据。</li>
+<li>跑通可检查的基线，再评估实用方案。新方法至少在任务效果、约束满足或成本上有明确价值，才升级为该任务的推荐方案。</li>
+<li>按问题类型报告成本：预测误差及行动损失；规划合法性、目标代价和耗时；搜索的仿真调用数与总时间；RL 的交互样本数与训练时间。不能用一个通用分数替代这些差异。</li>
+<li>候选在验证环节比较，选定后用独立测试或新情景复评；测试结果用于报告，不反复用于挑选方案。记录均值、变异和失败样例，不只保留最好一次。</li>
+<li>简单方案已满足要求时允许停止升级；复杂方案只在更大规模或不同信息条件下有价值时，清楚写出适用范围。</li>
+</ol>
+<p>仿真分别保留校准数据、选策略的情景与最终评价情景。缺少现实数据时只能说明“在这些假设下”的结果。语言模型生成的约束须对照原任务书，检查器不能只验证模型自己写出的条件。</p>
+<h2>6. 本次核验的范围与尚待验证项</h2>
+<p>本次研究聚焦五个问题：表格与时序的新方法是否值得比较；不确定性与因果如何接入决策；规划求解与语言模型如何协作；仿真、实验搜索与 RL 如何评价；检索问答如何形成有依据的结果。</p>
+<p>研究使用官方文档、模型卡与论文原文，完成到课程选型所需的文档证据层。选型阶段没有用论文成绩替代本机实验；后续实测见第7节。</p>
+<p><strong>已核验：</strong> 方法与工具的用途、主要假设、候选模型信息、与课程问题的对应关系。较早但仍适用的验证、规划与评价方法保留，并标注来源年份。</p>
+<p><strong>尚待案例制作时验证：</strong> 数据是否能稳定获取、具体数据和权重许可、依赖兼容性、本机运行时间与资源占用、真实学习难度，以及各候选在相同任务上的实际收益。表中的模型是候选，不是当前电脑实测排名。</p>
+<p>更新方式：开始制作对应案例时复核来源与版本；之后只有数据、需求、环境或方法证据发生相关变化时再升级，并重跑对照。不会因为出现新模型就重写学习路线。</p>
+<h2>7. 已落实的本机配置与对照</h2>
+<p>2026-10-20：60个核心案例均已实际运行，结果保留于各例outputs及Notebook。MiniLM、FLAN-T5-small、Qwen3-0.6B、Chronos-Bolt-tiny与ResNet18在本机CPU运行；模型revision、素材哈希、精确依赖版本均在仓库记录；权重需按安装指南下载。原版运行耗时见validation/original_windows_validation.json，未逐例测量进程内存峰值。</p>
+<ul>
+<li>B06真实天气中Ridge仅小幅优于持续性基线，不能写成精准气象系统。</li>
+<li>B19冻结ResNet在本例手写数字上输给简单分类器；领域差异和算力成本仍需考虑。</li>
+<li>B15本机Chronos对照MAE约7.14，森林约6.14；q10—q90经验覆盖约69.6%，未达到名义80%。保留结果，说明预训练模型并非在本任务上更好。</li>
+<li>B24保存Qwen实际生成答案和资料外拒答，小规模人工核对不等于通用事实正确保证。</li>
+<li>A18运行Ax/BoTorch同预算搜索并独立复评；采用0.5.0兼容API而非照搬新文档接口。A27运行三次独立DQN训练。</li>
+<li>TabPFN新权重、TimesFM、Chronos-2、Qwen嵌入/重排新模型及云端服务未计入已验证范围，作为需要联网或额外资源的后续选修。没有为它们编造实测成绩。</li>
+</ul>
+<p>来源和许可处理见THIRD_PARTY_NOTICES.md。教学模拟对现实的有效性、你的实际学习负担、未知任务上的方法收益仍需在使用时验证；本机跑通不消除这些问题。</p>
+</body></html>

@@ -1,0 +1,13 @@
+{
+  "id": "A17",
+  "title": "明天应该准备多少份餐食？",
+  "track": "A",
+  "number": 17,
+  "sources": [
+    [
+      "Quantile Regression",
+      "https://scikit-learn.org/stable/auto_examples/linear_model/plot_quantile_regression.html"
+    ]
+  ],
+  "prereqs": "基础课 Python、NumPy、实验评价"
+}

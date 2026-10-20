@@ -1,0 +1,17 @@
+{
+  "id": "B17",
+  "title": "怎样用神经网络识别手写数字？",
+  "track": "B",
+  "number": 17,
+  "sources": [
+    [
+      "PyTorch：数据集与加载器",
+      "https://docs.pytorch.org/tutorials/beginner/basics/data_tutorial.html"
+    ],
+    [
+      "sklearn digits",
+      "https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html"
+    ]
+  ],
+  "prereqs": "B16 训练循环；补充 Dataset、批次、类别轴。"
+}

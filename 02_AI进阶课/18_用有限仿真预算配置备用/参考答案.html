@@ -1,0 +1,29 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>18_用有限仿真预算配置备用 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>堵车或故障时应该预留多少备用能力？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">[WARNING 10-20 15:45:31] ax.service.ax_client: Random seed set to 18. Note that this setting only affects the Sobol quasi-random generator and BoTorch-powered Bayesian optimization models. For the latter models, setting random seed to the same number for two optimizations will make the generated trials similar, but not exactly the same, and over time the trials will diverge more.
+</pre><pre class="output">[INFO 10-20 15:45:31] ax.service.utils.instantiation: Created search space: SearchSpace(parameters=[RangeParameter(name=&#x27;reserve&#x27;, parameter_type=INT, range=[0, 6]), RangeParameter(name=&#x27;threshold&#x27;, parameter_type=INT, range=[0, 25])], parameter_constraints=[]).
+</pre><pre class="output">[课程目录]\.venv\Lib\site-packages\ax\modelbridge\cross_validation.py:439: UserWarning: Encountered exception in computing model fit quality: RandomModelBridge does not support prediction.
+  warn(&quot;Encountered exception in computing model fit quality: &quot; + str(e))
+[课程目录]\.venv\Lib\site-packages\ax\modelbridge\cross_validation.py:439: UserWarning: Encountered exception in computing model fit quality: RandomModelBridge does not support prediction.
+  warn(&quot;Encountered exception in computing model fit quality: &quot; + str(e))
+[课程目录]\.venv\Lib\site-packages\ax\modelbridge\cross_validation.py:439: UserWarning: Encountered exception in computing model fit quality: RandomModelBridge does not support prediction.
+  warn(&quot;Encountered exception in computing model fit quality: &quot; + str(e))
+[课程目录]\.venv\Lib\site-packages\ax\modelbridge\cross_validation.py:439: UserWarning: Encountered exception in computing model fit quality: RandomModelBridge does not support prediction.
+  warn(&quot;Encountered exception in computing model fit quality: &quot; + str(e))
+</pre><pre class="output">{&#x27;calls_per_method&#x27;: 10, &#x27;initial_sobol_trials&#x27;: 4, &#x27;bayesian_trials&#x27;: 6, &#x27;independent_results&#x27;: [{&#x27;method&#x27;: &#x27;random&#x27;, &#x27;reserve&#x27;: 2, &#x27;threshold&#x27;: 2, &#x27;test_cost&#x27;: 16.656000000000002, &#x27;late_rate&#x27;: 0.008869021362450746}, {&#x27;method&#x27;: &#x27;ax&#x27;, &#x27;reserve&#x27;: 3, &#x27;threshold&#x27;: 0, &#x27;test_cost&#x27;: 16.61733333333333, &#x27;late_rate&#x27;: 0.0017981809753917343}, {&#x27;method&#x27;: &#x27;no_reserve&#x27;, &#x27;reserve&#x27;: 0, &#x27;threshold&#x27;: 0, &#x27;test_cost&#x27;: 51.845333333333336, &#x27;late_rate&#x27;: 0.06845635996695291}]}
+</pre><h2>1. 补全：无备用边界</h2>
+<p>reserve=0时，触发阈值不应影响容量。验证两个阈值损失相同。</p>
+<pre class="code">assert fleet_cost(0,0,[1,2,3])==fleet_cost(0,25,[1,2,3])</pre><h2>2. 修改：枚举小空间</h2>
+<p>固定阈值为10，枚举0—6辆备用车，使用训练情景选参数，测试情景复评。</p>
+<pre class="code">q=min(range(7),key=lambda n:fleet_cost(n,10,train_seeds)[0])
+print(q,fleet_cost(q,10,test_seeds))
+assert 0&lt;=q&lt;=6</pre><pre class="output">3 (26.909333333333333, 0.017710319268278207)
+</pre><h2>3. 迁移：预算账本</h2>
+<p>若一次策略评估使用10个情景，每情景30天，两个搜索各10次，总共模拟多少天？最终复评另计。</p>
+<pre class="code">search_days=2*budget*len(train_seeds)*30
+assert search_days==6000
+print(search_days)</pre><pre class="output">6000
+</pre></body></html>

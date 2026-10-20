@@ -1,0 +1,13 @@
+{
+  "id": "B05",
+  "title": "怎样把带标签的文件整理成可复现的数据集？",
+  "track": "B",
+  "number": 5,
+  "sources": [
+    [
+      "scikit-learn 交叉验证与分组划分",
+      "https://scikit-learn.org/stable/modules/cross_validation.html"
+    ]
+  ],
+  "prereqs": "B01—B04；Path、JSON、集合、不交集与随机种子。"
+}

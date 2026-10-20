@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>B08 怎样识别垃圾短信并分析误报？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>使用本地真实 SMS Spam Collection 数据，去除重复文本，再比较多数类基线与 TF-IDF+朴素贝叶斯。垃圾短信召回和正常短信误报分别评价。</p>
+<h2>先修与运行</h2>
+<p>B06—B07；稀疏表示、朴素贝叶斯与分类指标。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 读入真实文本并处理重复</h2>
+<p>同一短信的复制版本出现在训练和测试会虚高分数。先按原文检查冲突标签，再去重。只做保守空白清理，保留金额、链接等有用线索。</p>
+<h2>2. 文本转换只学习训练集词表</h2>
+<p>TF-IDF 的每一列代表词，值表示词在某短信中的相对重要程度。Pipeline 保证测试文本不能影响词表与词频；稀疏矩阵无需展开成巨大的密集表。</p>
+<h2>3. 指标需要围绕误报与漏报</h2>
+<p>“全部正常”可能准确率很高，但垃圾召回为零。混淆矩阵的行是真实类别、列是预测类别；precision 回答拦截短信中多少真是垃圾，recall 回答垃圾短信中拦住多少。</p>
+<h2>4. 保存错误样例与矩阵</h2>
+<p>错误列表用于理解，而不是回看测试集后不断修改模型。若要调阈值或平滑参数，应另留验证集。数据含真实短信文本，只在本地教学使用。</p>
+<h2>常见错误与边界</h2>
+<p>英文旧短信数据不能代表当前中文诈骗；真实部署前需要新数据评估与误报处理。此例未把概率作严格校准概率使用。</p>
+<h2>数据</h2>
+<p>真实 SMS Spam Collection 本地副本 assets/data/sms.tsv，label 为 ham/spam，text 为英文短信。原始来源、许可和下载记录见根目录资产说明。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

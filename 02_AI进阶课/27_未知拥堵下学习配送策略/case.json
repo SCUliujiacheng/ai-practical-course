@@ -1,0 +1,13 @@
+{
+  "id": "A27",
+  "title": "拥堵概率未知，怎样通过交互学习策略？",
+  "track": "A",
+  "number": 27,
+  "sources": [
+    [
+      "Reinforcement learning evaluation tips",
+      "https://stable-baselines3.readthedocs.io/en/master/guide/rl_tips.html"
+    ]
+  ],
+  "prereqs": "基础课 Python、NumPy、实验评价"
+}

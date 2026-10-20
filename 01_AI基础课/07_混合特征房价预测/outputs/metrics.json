@@ -1,0 +1,11 @@
+{
+  "selected_by_validation": "boosting",
+  "validation_mae": {
+    "ridge": 29.377516458812316,
+    "boosting": 18.43812590797727
+  },
+  "test_mae": {
+    "ridge": 28.349006127844724,
+    "boosting": 17.31136141207576
+  }
+}

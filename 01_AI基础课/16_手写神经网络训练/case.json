@@ -1,0 +1,13 @@
+{
+  "id": "B16",
+  "title": "怎样亲手写出神经网络的训练过程？",
+  "track": "B",
+  "number": 16,
+  "sources": [
+    [
+      "PyTorch：优化参数",
+      "https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html"
+    ]
+  ],
+  "prereqs": "B13 数组与 B07 回归；补充 Tensor、自动求导、for 循环。"
+}

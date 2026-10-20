@@ -1,0 +1,122 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>25_A星寻找路线 教学讲解</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>B25 怎样让程序在有障碍的地图上找到路线？</h1>
+<p>任务：给配送小车寻找四方向可通行的最短路线。先定义合法移动，再用 Dijkstra 对照 A*，检查启发式为什么可用。</p>
+<p>先修：B05、B13；元组、字典、生成器与 heapq。</p>
+<p>本案例所有输入来自本地；无需联网。</p>
+<p><strong>环境准备：</strong> 下一格设置本地路径、离线模式和图表字体，直接运行即可，暂时不需要掌握所有设置。真正的解题步骤从后面的中文小节开始。</p>
+<pre class="code">from pathlib import Path
+import os
+os.environ.setdefault(&quot;HF_HUB_OFFLINE&quot;, &quot;1&quot;)
+os.environ.setdefault(&quot;TRANSFORMERS_OFFLINE&quot;, &quot;1&quot;)
+os.environ.setdefault(&quot;HF_HUB_DISABLE_TELEMETRY&quot;, &quot;1&quot;)
+os.environ.setdefault(&quot;OMP_NUM_THREADS&quot;, &quot;2&quot;)
+os.environ.setdefault(&quot;TOKENIZERS_PARALLELISM&quot;, &quot;false&quot;)
+CASE_DIR = Path(__file__).resolve().parent if &quot;__file__&quot; in globals() else Path.cwd()
+COURSE_ROOT = CASE_DIR.parents[1]
+DATA_DIR = CASE_DIR / &quot;data&quot;
+OUT_DIR = CASE_DIR / &quot;outputs&quot;
+OUT_DIR.mkdir(exist_ok=True)
+import matplotlib
+matplotlib.use(&quot;Agg&quot;)
+import matplotlib.pyplot as plt
+plt.rcParams.update({&quot;font.family&quot;: &quot;Microsoft YaHei&quot;, &quot;axes.unicode_minus&quot;: False,
+                     &quot;figure.figsize&quot;: (8, 4.5), &quot;figure.dpi&quot;: 110})
+</pre><h2>1. 地图、状态与合法动作</h2>
+<p>状态是 (行,列) 元组，0 可走、1 障碍，每步成本 1。边界与障碍检查集中写在 neighbors 中；没有对角移动，曼哈顿距离才是对应的下界。</p>
+<pre class="code">import json
+import time
+import numpy as np
+started = time.perf_counter()
+def finish(metrics):
+    metrics[&quot;elapsed_seconds&quot;] = round(time.perf_counter() - started, 3)
+    (OUT_DIR / &quot;metrics.json&quot;).write_text(json.dumps(metrics, ensure_ascii=False, indent=2), encoding=&quot;utf-8&quot;)
+    print(json.dumps(metrics, ensure_ascii=False, indent=2))
+def barplot(labels, values, title, filename=&quot;comparison.png&quot;):
+    fig, ax = plt.subplots()
+    ax.bar(labels, values)
+    ax.set_title(title)
+    fig.tight_layout()
+    fig.savefig(OUT_DIR / filename)
+    plt.close(fig)
+
+import heapq
+from collections import deque
+grid = np.array([[0, 0, 0, 1, 0, 0], [1, 1, 0, 1, 0, 1], [0, 0, 0, 0, 0, 0], [0, 1, 1, 1, 1, 0], [0, 0, 0, 0, 0, 0]], dtype=int)
+start = (0, 0)
+goal = (4, 5)
+
+def neighbors(node, board):
+    r, c = node
+    for dr, dc in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+        nr, nc = (r + dr, c + dc)
+        if 0 &lt;= nr &lt; board.shape[0] and 0 &lt;= nc &lt; board.shape[1] and (board[nr, nc] == 0):
+            yield (nr, nc)
+
+def manhattan(a, b):
+    return abs(a[0] - b[0]) + abs(a[1] - b[1])
+assert manhattan(start, goal) == 9
+np.savetxt(DATA_DIR / &#x27;map.csv&#x27;, grid, fmt=&#x27;%d&#x27;, delimiter=&#x27;,&#x27;)</pre><h2>2. 优先队列与 g+h</h2>
+<p>g 保存当前已知的实际代价，h 是剩余代价下界。heapq 每次取最小 f；更短路径出现时更新父指针。旧队列项可能过时，要跳过，避免重复扩展污染统计。</p>
+<pre class="code">def astar(board, source, target, use_heuristic=True):
+    for p in [source, target]:
+        if not (0 &lt;= p[0] &lt; board.shape[0] and 0 &lt;= p[1] &lt; board.shape[1]) or board[p] != 0:
+            raise ValueError(&#x27;起终点必须可通行&#x27;)
+    h = (lambda p: manhattan(p, target)) if use_heuristic else lambda p: 0
+    queue = [(h(source), 0, source)]
+    g = {source: 0}
+    parent = {}
+    expanded = 0
+    while queue:
+        _, distance, node = heapq.heappop(queue)
+        if distance != g[node]:
+            continue
+        expanded += 1
+        if node == target:
+            path = [node]
+            while node != source:
+                node = parent[node]
+                path.append(node)
+            return (list(reversed(path)), expanded)
+        for nxt in neighbors(node, board):
+            tentative = distance + 1
+            if tentative &lt; g.get(nxt, float(&#x27;inf&#x27;)):
+                g[nxt] = tentative
+                parent[nxt] = node
+                heapq.heappush(queue, (tentative + h(nxt), tentative, nxt))
+    return ([], expanded)
+path, expanded = astar(grid, start, goal)</pre><h2>3. 独立验证每一步与最短长度</h2>
+<p>检查路径从起点到终点、每步邻接、不穿障碍。再用不含启发式的 Dijkstra 对照最短长度；A* 能减少扩展是经验结果，不预设它在所有地图都更快。</p>
+<pre class="code">def validate_path(board, path, source, target):
+    return bool(path and path[0] == source and (path[-1] == target) and all((board[p] == 0 for p in path)) and all((b in set(neighbors(a, board)) for a, b in zip(path, path[1:]))))
+reference, reference_expanded = astar(grid, start, goal, use_heuristic=False)
+assert validate_path(grid, path, start, goal)
+assert len(path) == len(reference)
+blocked = np.array([[0, 1], [1, 0]])
+assert astar(blocked, (0, 0), (1, 1))[0] == []</pre><h2>4. 输出路线和搜索工作量</h2>
+<p>图上展示坐标路径，JSON 保存可重放坐标。报告步数和扩展节点数，不把路径长度与运行时间混成一个指标。</p>
+<pre class="code">fig, ax = plt.subplots()
+ax.imshow(grid, cmap=&#x27;Greys&#x27;, vmin=0, vmax=1)
+ax.plot([p[1] for p in path], [p[0] for p in path], &#x27;-o&#x27;, color=&#x27;tab:red&#x27;)
+ax.set_title(&#x27;A* 最短可行路线&#x27;)
+ax.text(start[1], start[0], &#x27;S&#x27;, color=&#x27;blue&#x27;)
+ax.text(goal[1], goal[0], &#x27;G&#x27;, color=&#x27;blue&#x27;)
+fig.tight_layout()
+fig.savefig(OUT_DIR / &#x27;route.png&#x27;)
+plt.close(fig)
+(OUT_DIR / &#x27;path.json&#x27;).write_text(json.dumps(path), encoding=&#x27;utf-8&#x27;)
+finish({&#x27;steps&#x27;: len(path) - 1, &#x27;astar_expanded&#x27;: expanded, &#x27;dijkstra_expanded&#x27;: reference_expanded, &#x27;path_valid&#x27;: True, &#x27;unreachable_checked&#x27;: True})</pre><pre class="output">{
+  &quot;steps&quot;: 9,
+  &quot;astar_expanded&quot;: 10,
+  &quot;dijkstra_expanded&quot;: 18,
+  &quot;path_valid&quot;: true,
+  &quot;unreachable_checked&quot;: true,
+  &quot;elapsed_seconds&quot;: 0.104
+}
+</pre><h2>结果图与检查</h2>
+<p>下面展示本次计算保存的图。数值以单元格和 outputs 中的实际输出为准。</p>
+<pre class="code">from IPython.display import display, Image
+for figure in sorted(OUT_DIR.glob(&quot;*.png&quot;)):
+    display(Image(filename=str(figure)))</pre><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA3AAAAHvCAYAAAAVRT1oAAAAOnRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjEwLjcsIGh0dHBzOi8vbWF0cGxvdGxpYi5vcmcvTLEjVAAAAAlwSFlzAAAQ6wAAEOsBUJTofAAALVlJREFUeJzt3Q2Y1WWZP/B7YBREBQ01TFAELVPRco1y3TLzDRJMXV/a0tZM1/6muZlvWeqqtbmb0WZWlsWGlqm7acqLr2vtutaGorbK+pIoAQqBYmAhKMz8r/tHZ+JlGAaEOfPMfD7X9bsOc86ZM888oGe+cz/P/TQ0Nzc3BwAAAJ1ej3oPAAAAgPYR4AAAAAohwAEAABRCgAMAACiEAAcAAFAIAQ4AAKAQAhwAAEAhBDgAAIBCCHAAAACFEOAAAAAKIcABAAAUQoADAAAohAAHAABQCAEOANbgueeei+bm5ugsXnvttXoPAYA6E+AAWC9Lly6NxYsXt/tasmTJaq8xffr0GDp0aPzmN79puS8D0x/+8Id2Xfm6G8uCBQvir/7qr+K0007baF8jX/u4445r13OnTp0ab37zm+P+++9f7bEDDzwwRo8eXf35mmuuidNPPz1eeeWVDT5eAOqvsd4DAGDjOfLII+O2226LT3ziE/G9731vjc9761vfGh/5yEfiH/7hH9r92l/4whfin/7pn9r9/B122CFmzZq10n3jx4+Pl19+OYYMGdJy3/PPPx+DBg1q12v+9V//dXzlK1+JX/3qV/FG7bfffrHTTju1fPypT32qCkHnnXde9fHf//3fx9e//vU2X+OAAw6In//859WfTz311Or7W9Utt9wSf/mXfxlPPvlkfP/734/Pf/7z8fvf/36l5/Ts2TO23HLLle7753/+5+jbt28MHz58tdfs1atXS5h9z3veE1/72tfine98Z9x0003xF3/xF+s0DwB0bgIcQBc1d+7cmDhxYmyyySbxb//2b3HVVVdFnz59Wh5vamqKHj2WL8TYdtttY7vttlvt/rU57LDD4s4771zr837wgx9UgW9VGXDe8pa3xLXXXttyX1aZZs6c2a6vn9/P7bffHh//+Mfjjbr++utbAlzO1Y9+9KO47rrrYpdddqnuu/DCC+OTn/zkWsdTk8F02LBh8dnPfrb6OAPWUUcd1bIMMl9v2bJlcdlll1XXirIq+cwzz7R8nBXKG264oQrhGdZWtfnmm8eLL75Y/fkd73hHPPjgg3HSSSfF/Pnz38CMANAZCXAAXdQPf/jDapnj3/7t38a4cePiJz/5SZx44oktj2f15+qrr65+0M+QN2fOnDjzzDOrCtETTzxRVXvW5j/+4z9iq622WuvzMrS86U1vWum+rMbdd9991fK/c845pwpKee2xxx5V0GmvHH9e6yKXbu68887xr//6r6t9bgalz3zmM1UoXHG+MuDWQu66VB1HjBhR/TmXfK4YFm+99dYYOXJkjB07tuX+3/3ud/H+97+/CsYruvjii6t5yfH89re/jS222CL69+/f8nh+nKH39ddfryqYObfHHntsPPLIIzF58uSqygdA1yDAAXRRGU5yKWIuc8xQkh+vGEhyf1dWhXL54X/+539WS/pOOOGEakliQ0NDu77GQQcdtN4VuO985ztVILrjjjtit912q4JULlNMEyZMaNnT1dbyyX//93+PDenb3/52nHHGGXH00UfHd7/73Wps//3f/10tLc2QuyE8/fTTVVUuA1ZWIH/5y19WgTX3COYy1lw6ecUVV7Q8P79+LoX82c9+VlVGczns7Nmz45RTTqmCaAa3fI2suPbu3buqoKYMzPn3n3MLQNchwAF0QQ899FA8/vjjccEFF1RLErMKlKEof+AfPHhw9Zy3v/3t1fW///u/ccghh1TVmg9+8IPxgQ98oN1f56677mp32Mtq1IqyIpVLEhsb1/xWlN9D7gdbVW1f2qpNRzLYrElWrHKpaFuyGnbEEUfEj3/842p546c//enq+7vooovWK8Bl5TOvFWWVbd99960qpF/60pfiox/9aBXQctnmL37xi7jnnnta9r9lwM69dBns3vve91aBL6ueWSXNUJyhb+DAgdWSy6y+5bgztOWVyyoB6HoEOIAuKKttqVZxy2WU+cN//tC/YqOSXEKZe71yyeRPf/rTqiNiLrlbsanImmRzjGyskcsu1yYrRKs29MhGG2vztre9rdWAl8s7V+1AmUsS29oLd/75569U2VrTvNW+Zi47nDZtWtWUJJuMrNpopK19cDvuuGNLE5kvf/nLVaUyK3tZacvH8rWzmpZVyaysZWjMj2+++eYqqNVkVTSv3AOXf09p1KhR1eusuMw05zJfK4M4AF2bAAfQxWRVJisx++yzT+y+++7Vfbkcceut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xlaa0047Le68805LJzeAVcNbyqWUqppvTG3+ttlmm3oPpTiLFi2KE044IS688MLYfffd6z2cYr344oux1VZbCW9QCAEOOqGnn366ut1ll11Wq8qlGTNm1GVcJcp9HGwcU6dOjXvuuafaz8W6a2pqiqeeeipOPfXU2HfffePoo4+u95CKk0vM+/XrF+edd169h1L8Esr8xWD+QmbQoEFVNfO//uu/6j0sYA0EOOiEXnnllep28803X+n+Pn36VLevvvpqXcYFNffff38cfPDBMWzYMD88r4cMa5tssknstttuVYOdG2+8sWpWRPtdeeWV1XLom2++OXr27Fnv4RTt+OOPjwcffDB+9atfVY2JlixZEu9///s1MYFOSoCDTmjTTTetbvNNdEW14LbFFlvUZVyQ+4suueSSan9mXj/72c/8e1wPud/tkUceiTvuuCOGDBkSe++9d9x99931HlYxMvBedNFF1Z63rBjxxuy4445VFXivvfaq9sLlsvP8d/m1r32t3kMDWmGxM3TSN9OU++B23XXXlvufe+656NGjR/XGCh0tm5UceeSR1W/qs0vqcccdV+8hFWvgwIHVlT8wZ3OiXBadwdhy1Pb53Oc+V/2CK6vAK/5yIfcT9u7dO0488cS49tpr6zrG0n+J+I53vENnVOikBDjohPbZZ59qX8f48ePjkEMOabl/4sSJVbe12lJK6Ejnnntu1UQnj7VoraEJ6y+XAL7++uv1HkYxcunkqvOVx1lk19lHH320+v8nb+yXNQ899FD1XgR0PgIcdNLffp5//vnVb+Szs9p73/ve+MlPflL90PLzn/+83sOjG8oTZ8aNG1ftlclKxzPPPLPS47mMzR6u9skzHbNJRO5/yy6K119/fdx3333V/NI+eWj3qmpdPHNeWTeXXnpptbIjK8J5rEWeq5e3n//85+s9NKAVAhx0UhdccEHVpe6LX/xi1SFszz33rDaU77///vUeGt1QHuCdzXW+973vVdeqclll7qFh7TLsZtv7F154Ifr27Vv90OyoC+opG2blv8m5c+fGtttuG+9+97urSrujGaBzcpA3AABAIXShBAAAKIQABwAAUAgBDgAAoBACHAAAQCEEOAAAgEIIcAAAAIUQ4AAAAAohwAEAABRCgAMAACiEAAcAAFAIAQ4AAKAQAhwAAEAhBDgAAIBCCHAAAACFEOAAAAAKIcABAAAUQoADAAAohAAHAABQCAEOAACgEAIcAABAlOH/A2uU6I/9DZAiAAAAAElFTkSuQmCC"><h2>适用边界与常见错误</h2>
+<p>最短性依赖非负边代价与有效启发式；改成对角移动、带电量状态或动态路况后必须重审建模和启发式。</p>
+<h2>独立练习</h2>
+<p>打开「动手练习.ipynb」，完成补全、修改、迁移，再查看「参考答案.ipynb」。</p>
+</body></html>

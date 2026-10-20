@@ -1,0 +1,42 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>26_Qlearning学习迷宫 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>怎样让智能体通过尝试学会走迷宫？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{
+  &quot;learned_success_rate&quot;: 1.0,
+  &quot;random_success_rate&quot;: 0.2222222222222222,
+  &quot;learned_mean_steps&quot;: 8.705555555555556,
+  &quot;learned_mean_return&quot;: 9.154999999999998,
+  &quot;training_episodes&quot;: 1600,
+  &quot;evaluation_episodes&quot;: 180,
+  &quot;elapsed_seconds&quot;: 0.229
+}
+</pre><h2>1. 补全：终止目标</h2>
+<p>终点奖励 10，旧Q=2，学习率0.2。终止时不得加下一状态价值，更新结果应为3.6。</p>
+<pre class="code">old = 2.0
+reward = 10.0
+alpha = 0.2
+done = True
+next_value = 100.0
+target = reward if done else reward + 0.95 * next_value
+updated = old + alpha * (target - old)
+assert np.isclose(updated, 3.6)
+print(updated)</pre><pre class="output">3.6
+</pre><h2>2. 修改：检查确定性动作</h2>
+<p>slip=0，从起点向右应到 (0,1)，向上撞墙应留原地，核对奖励。</p>
+<pre class="code">rng = np.random.default_rng(0)
+s, r, done = transition(start, 3, rng, slip=0)
+assert s == (0, 1) and np.isclose(r, -0.1) and (not done)
+s, r, done = transition(start, 0, rng, slip=0)
+assert s == start and np.isclose(r, -0.3)
+print(&#x27;环境边界检查通过&#x27;)</pre><pre class="output">环境边界检查通过
+</pre><h2>3. 迁移：道路改变后的旧策略</h2>
+<p>封闭 (0,3)，用旧 Q 表在新图评价，不重新训练；打印性能变化，解释何时需要重新规划或学习。</p>
+<pre class="code">changed = board.copy()
+changed[0, 3] = 1
+snapshot = Q.copy()
+shifted = evaluate(Q, seed=2026, grid=changed)
+assert np.array_equal(Q, snapshot) and shifted.shape == (180, 3)
+print(&#x27;原成功率&#x27;, learned[:, 0].mean(), &#x27;变更后&#x27;, shifted[:, 0].mean())</pre><pre class="output">原成功率 1.0 变更后 0.022222222222222223
+</pre></body></html>

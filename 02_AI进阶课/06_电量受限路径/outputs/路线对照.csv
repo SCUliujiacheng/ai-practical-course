@@ -1,0 +1,3 @@
+﻿method,path,time,energy,feasible
+忽略电量,S→A→G,2,10,False
+电量约束,S→B→C→G,6,6,True

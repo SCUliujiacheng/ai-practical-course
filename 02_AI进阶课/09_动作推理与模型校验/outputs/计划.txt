@@ -1,0 +1,5 @@
+take-key
+open-door
+take-package
+enter-room
+deliver

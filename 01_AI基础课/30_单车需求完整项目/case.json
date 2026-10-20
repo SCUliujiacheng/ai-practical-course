@@ -1,0 +1,21 @@
+{
+  "id": "B30",
+  "title": "怎样独立完成可复现、可交接的预测项目？",
+  "track": "B",
+  "number": 30,
+  "sources": [
+    [
+      "UCI Bike Sharing 数据集",
+      "https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset"
+    ],
+    [
+      "sklearn 时序滞后特征案例",
+      "https://scikit-learn.org/stable/auto_examples/applications/plot_time_series_lagged_features.html"
+    ],
+    [
+      "FastAPI 测试",
+      "https://fastapi.tiangolo.com/tutorial/testing/"
+    ]
+  ],
+  "prereqs": "B01—B29；重点 B15、B27—B29。"
+}

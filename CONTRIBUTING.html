@@ -1,0 +1,15 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>CONTRIBUTING</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>一起改进这套课程</h1>
+<p>欢迎分享你在练习中发现的错误、解释不清楚的步骤和新的迁移案例。请先查看已有 issue，避免重复报告。</p>
+<h2>报错或提建议</h2>
+<p>请附案例编号、操作系统、Python版本、最小复现步骤、预期与实际结果。日志中的个人路径、账号、API密钥等信息请先移除。可以贴小型模拟数据，避免上传个人或业务敏感数据。</p>
+<h2>修改代码</h2>
+<ol>
+<li>Fork仓库并新建分支。</li>
+<li>尽量一次解决一个问题，同时修改代码、中文解释及参考答案。</li>
+<li>涉及教学逻辑时更新 <code>tools/build_*_cases.py</code> 中相应原稿，避免未来重新生成覆盖修复。生成工具会覆盖教材，先备份自己的练习。</li>
+<li>用一个可手算的小例子或独立检查说明修改正确；模型比较保留基线、合理划分和失败结果。</li>
+<li>运行相关脚本与Notebook，提交实际验证命令和结果。不要把模板能运行描述成练习已经答对。</li>
+</ol>
+<p>无需把模型权重、虚拟环境、wheel、私人日志或下载缓存提交到Git。新增数据须注明来源、作者、许可和改编内容。新方法不因“更前沿”自动进入主线，应说明何时比简单方案更有用。</p>
+<p>贡献原创代码按MIT，原创讲解按CC BY 4.0提供；第三方材料遵循其原许可。提交贡献表示你有权按相应许可提供这些内容。</p>
+</body></html>

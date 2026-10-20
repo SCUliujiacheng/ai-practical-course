@@ -1,0 +1,21 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>29_调查与预测的信息价值 参考答案</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>再做一次调查，最多值得付多少钱？：参考答案</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{&#x27;baseline_action&#x27;: 1, &#x27;baseline_loss&#x27;: 350.0, &#x27;perfect_information_value&#x27;: 227.5, &#x27;noisy_information_value&#x27;: 107.625, &#x27;signal_policy&#x27;: [{&#x27;signal&#x27;: 0, &#x27;signal_probability&#x27;: 0.6075, &#x27;posterior_rain&#x27;: 0.14403292181069957, &#x27;action&#x27;: 0, &#x27;conditional_loss&#x27;: 172.8395061728395}, {&#x27;signal&#x27;: 1, &#x27;signal_probability&#x27;: 0.39249999999999996, &#x27;posterior_rain&#x27;: 0.6687898089171974, &#x27;action&#x27;: 1, &#x27;conditional_loss&#x27;: 350.0}]}
+</pre><h2>1. 补全：后验</h2>
+<p>出现雨信号时，手算下雨后验并与公式验证。</p>
+<pre class="code">post=.75*.35/(.75*.35+.2*.65)
+assert np.isclose(post,records[1][&quot;posterior_rain&quot;])
+print(post)</pre><pre class="output">0.6687898089171974
+</pre><h2>2. 修改：无信息信号</h2>
+<p>两种天气下信号均为50/50，证明信息价值为0。</p>
+<pre class="code">uninformative=np.full((2,2),.5)
+expected=sum(float((row*prior).sum())*choose(row*prior/(row*prior).sum())[1] for row in uninformative)
+assert np.isclose(baseline_loss-expected,0)</pre><h2>3. 迁移：信息购买决策</h2>
+<p>报价分别为50、150、300元，给出是否值得购买，注意等于价值时无净收益。</p>
+<pre class="code">decisions={price:price&lt;evsi for price in [50,150,300]}
+print(decisions)
+assert not decisions[300]</pre><pre class="output">{50: True, 150: False, 300: False}
+</pre></body></html>

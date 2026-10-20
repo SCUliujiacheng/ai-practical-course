@@ -1,0 +1,2406 @@
+{
+  "scope": "Original local Windows course execution before public packaging; not a guarantee for every machine. Notebook outputs may have been sanitized for publication.",
+  "python": "3.12.13",
+  "results": [
+    {
+      "case": "B01",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 4.28,
+      "external_network_attempt": false,
+      "source_sha256": "50f5f3963ae30733871c923364cc952eea95998cee77934a536adeb1839e294f",
+      "tested_at": "2026-10-20 15:44:03"
+    },
+    {
+      "case": "B01",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 9.44,
+      "external_network_attempt": false,
+      "source_sha256": "e8caabb8b95c6bef59249ef34525ccb3442b052a480effcb7a3ceb310d70fda1",
+      "tested_at": "2026-10-20 15:44:13"
+    },
+    {
+      "case": "B01",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.16,
+      "external_network_attempt": false,
+      "source_sha256": "369e0b9ecdd0f8b543bdbb6ecad15660081a2585a318257a6c99056a9bccd890",
+      "tested_at": "2026-10-20 15:44:16"
+    },
+    {
+      "case": "B01",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.09,
+      "external_network_attempt": false,
+      "source_sha256": "0f875790411c64d3a49f202a904a70d60e197db8e427ddd78e6efbb9dd90edca",
+      "tested_at": "2026-10-20 15:44:19"
+    },
+    {
+      "case": "B02",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.42,
+      "external_network_attempt": false,
+      "source_sha256": "1a562f92d9c97d086cd464e30c7c50977eac65128e311596ad3a6f3526717411",
+      "tested_at": "2026-10-20 15:44:20"
+    },
+    {
+      "case": "B02",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.12,
+      "external_network_attempt": false,
+      "source_sha256": "1306956528416227f39fb59330980cdeba57a28ca792e3e3b6d4fb781d1044f6",
+      "tested_at": "2026-10-20 15:44:25"
+    },
+    {
+      "case": "B02",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.8,
+      "external_network_attempt": false,
+      "source_sha256": "54c609c971ba0ece2ffc259c3a3c0daeb66d80e0e313f9ca6acc53f3331d8c3d",
+      "tested_at": "2026-10-20 15:44:28"
+    },
+    {
+      "case": "B02",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.45,
+      "external_network_attempt": false,
+      "source_sha256": "54ddecdcde9a6e18844437b823dd89c23ea1b0ac425816c8c5a2c62198d49cc5",
+      "tested_at": "2026-10-20 15:44:33"
+    },
+    {
+      "case": "B03",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.17,
+      "external_network_attempt": false,
+      "source_sha256": "3a077cd8732472db40e79eac3c1bc784975093edd7b0435335e9e4684d0cb915",
+      "tested_at": "2026-10-20 15:44:34"
+    },
+    {
+      "case": "B03",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.0,
+      "external_network_attempt": false,
+      "source_sha256": "61216f0a5e909d2ce6a0b957bc63f929ee42173364d739207a527232dc8538a1",
+      "tested_at": "2026-10-20 15:44:38"
+    },
+    {
+      "case": "B03",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.7,
+      "external_network_attempt": false,
+      "source_sha256": "e079f8e3a325459603d50672b87e70e12fee9494b8582dcb8af99fd18d9751f1",
+      "tested_at": "2026-10-20 15:44:42"
+    },
+    {
+      "case": "B03",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.61,
+      "external_network_attempt": false,
+      "source_sha256": "7995712a0a9b8303b570b733c9916acd596b1477fb9a1976dab54af737419095",
+      "tested_at": "2026-10-20 15:44:45"
+    },
+    {
+      "case": "B04",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.05,
+      "external_network_attempt": false,
+      "source_sha256": "98345644cd5ca03f05cb0af6642c637479a46c8ea038941a05bd17e6fb878817",
+      "tested_at": "2026-10-20 15:44:46"
+    },
+    {
+      "case": "B04",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.55,
+      "external_network_attempt": false,
+      "source_sha256": "66f98b3f53b0bafea83623f90ffd4f8fd3ee1595c5c9f9c84c3cf186ecf0d526",
+      "tested_at": "2026-10-20 15:44:50"
+    },
+    {
+      "case": "B04",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 6.67,
+      "external_network_attempt": false,
+      "source_sha256": "122a5f423fc61cdb530b36e46cbd426b81d2b93aaf5fd862fd0a3bb8c6adbbfd",
+      "tested_at": "2026-10-20 15:44:57"
+    },
+    {
+      "case": "B04",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.64,
+      "external_network_attempt": false,
+      "source_sha256": "94b227466efd313f1579719f3f2138da93844ebdcdd1bc6091be2f721491f80d",
+      "tested_at": "2026-10-20 15:45:01"
+    },
+    {
+      "case": "B05",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 2.58,
+      "external_network_attempt": false,
+      "source_sha256": "da701bda52c190ef69fe227e8d1737161c14bcffa57563bd0ba9e995f4d78e46",
+      "tested_at": "2026-10-20 15:45:04"
+    },
+    {
+      "case": "B05",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 5.38,
+      "external_network_attempt": false,
+      "source_sha256": "b9f7eef20fb8bd76bfa2fe34f980cfa3c5988eeebb5559ecfcc3b395e9d1fa18",
+      "tested_at": "2026-10-20 15:45:09"
+    },
+    {
+      "case": "B05",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.53,
+      "external_network_attempt": false,
+      "source_sha256": "89a279a9824fe9f5df76336bf5c58c54b7cd6a7438f133bfc2c8b5f29528a68a",
+      "tested_at": "2026-10-20 15:45:14"
+    },
+    {
+      "case": "B05",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 5.19,
+      "external_network_attempt": false,
+      "source_sha256": "ffa7e2cb8c14c359fccd3cc32830ade64a3bc72327fbdff2646196afcaf64b31",
+      "tested_at": "2026-10-20 15:45:19"
+    },
+    {
+      "case": "B07",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 2.17,
+      "external_network_attempt": false,
+      "source_sha256": "1a0f117fecc0d2b0fc4de8384552b958c6daff5563523048ef7f09d8e4a23b0d",
+      "tested_at": "2026-10-20 15:45:38"
+    },
+    {
+      "case": "B07",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.45,
+      "external_network_attempt": false,
+      "source_sha256": "f83fe75ee19bcdf78fc6f2129a335954a35c93041e42eb0f598b51d3c2485835",
+      "tested_at": "2026-10-20 15:45:43"
+    },
+    {
+      "case": "B07",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 5.34,
+      "external_network_attempt": false,
+      "source_sha256": "07e102494037af4c30d2a2da96502a00ee6865a40ce18889e4a1b31beae05360",
+      "tested_at": "2026-10-20 15:45:48"
+    },
+    {
+      "case": "B07",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.69,
+      "external_network_attempt": false,
+      "source_sha256": "8738fb0b7a35f348b6c0a3fe11bad00b84a761ea1b45eca7b2c16dd299f3db88",
+      "tested_at": "2026-10-20 15:45:53"
+    },
+    {
+      "case": "B08",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 2.08,
+      "external_network_attempt": false,
+      "source_sha256": "989bd7bfa46026b6acff534c57eae92ae025bf5c02b4b39dc0d12b907d881b68",
+      "tested_at": "2026-10-20 15:45:55"
+    },
+    {
+      "case": "B08",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.42,
+      "external_network_attempt": false,
+      "source_sha256": "1a114a36d969044c9240f4720726f8d646650c2d7d7780929529bd4569f8da06",
+      "tested_at": "2026-10-20 15:45:59"
+    },
+    {
+      "case": "B08",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 5.62,
+      "external_network_attempt": false,
+      "source_sha256": "6d8a6bced45b9296399c2eaab372ad24bbfab443b3ea700804a8cce13801e83b",
+      "tested_at": "2026-10-20 15:46:05"
+    },
+    {
+      "case": "B08",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.36,
+      "external_network_attempt": false,
+      "source_sha256": "5101d9db7263bb11b76cb911d430933ecdbf1fa7ccba26f718b2e488bc0f9165",
+      "tested_at": "2026-10-20 15:46:09"
+    },
+    {
+      "case": "B09",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.97,
+      "external_network_attempt": false,
+      "source_sha256": "9a3a3312fbf9d1804b6d5e1984945b0c4de63773fa8f057743ba83a4ebc9d44b",
+      "tested_at": "2026-10-20 15:46:11"
+    },
+    {
+      "case": "B09",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.84,
+      "external_network_attempt": false,
+      "source_sha256": "c42aa124ea2cfc81fe9a7fd1929940e2b5485dd39fc2621bf1257879220e5fd1",
+      "tested_at": "2026-10-20 15:46:16"
+    },
+    {
+      "case": "B09",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 5.45,
+      "external_network_attempt": false,
+      "source_sha256": "521979032dd80c3d44d8c3f1c9f07c4b10d9aa1d69beb4b7e395fdbfcba80f3e",
+      "tested_at": "2026-10-20 15:46:22"
+    },
+    {
+      "case": "B09",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.91,
+      "external_network_attempt": false,
+      "source_sha256": "58559954c5314b209f61e17e91eb9b5d5b84a127bd99567d8b4459f6c232836e",
+      "tested_at": "2026-10-20 15:46:26"
+    },
+    {
+      "case": "B10",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 3.59,
+      "external_network_attempt": false,
+      "source_sha256": "08240e50f5c0c2031779fa2ac1bb4732d138272d9a7d3ea8241f662d05198d6e",
+      "tested_at": "2026-10-20 15:46:30"
+    },
+    {
+      "case": "B10",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 7.39,
+      "external_network_attempt": false,
+      "source_sha256": "ef0e0d7dac9784f114d6a08c81be9bceb1c06226ac9d3369f0662bda74fb4e67",
+      "tested_at": "2026-10-20 15:46:37"
+    },
+    {
+      "case": "B10",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 8.89,
+      "external_network_attempt": false,
+      "source_sha256": "50b0fb3621e8007c501b86099e3af5eb3a9e95178ea9b1ff35f7248ee2309591",
+      "tested_at": "2026-10-20 15:46:46"
+    },
+    {
+      "case": "B10",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 7.41,
+      "external_network_attempt": false,
+      "source_sha256": "283f2e8316050a5ac068ce6f270e523b17c8c82046258537ce2edae049bb9b98",
+      "tested_at": "2026-10-20 15:46:54"
+    },
+    {
+      "case": "B11",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 2.48,
+      "external_network_attempt": false,
+      "source_sha256": "8d4dd44d90f8394cff85afb1f876ee34915af9a18c9690c315133e5c849daab8",
+      "tested_at": "2026-10-20 15:46:56"
+    },
+    {
+      "case": "B11",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 5.16,
+      "external_network_attempt": false,
+      "source_sha256": "822af3c493524d37945167c9d91a9ed780ae7b5e52265dac8faa3ccf9bf59ec8",
+      "tested_at": "2026-10-20 15:47:01"
+    },
+    {
+      "case": "B11",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.86,
+      "external_network_attempt": false,
+      "source_sha256": "8d24f5ce59d1c58a77db93c22a847103d3507a46dcfc890fc2959f2df5ba1bd6",
+      "tested_at": "2026-10-20 15:47:06"
+    },
+    {
+      "case": "B11",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 5.22,
+      "external_network_attempt": false,
+      "source_sha256": "3a297a9579c5795cb9f97d08a1e7c14cbb0566d20bc1be8a9df5ca58b840a4d9",
+      "tested_at": "2026-10-20 15:47:12"
+    },
+    {
+      "case": "B12",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 2.36,
+      "external_network_attempt": false,
+      "source_sha256": "f64cb0b146af570e77221bda564ab5f064515ce8bd6cb4d38cbf106407a48bd8",
+      "tested_at": "2026-10-20 15:47:14"
+    },
+    {
+      "case": "B12",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 6.14,
+      "external_network_attempt": false,
+      "source_sha256": "559e3c8a32e5992ba84b15e1b1f8354fdceae3b80f7f9eb90a3a6d1e5fe03aeb",
+      "tested_at": "2026-10-20 15:47:20"
+    },
+    {
+      "case": "B12",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.94,
+      "external_network_attempt": false,
+      "source_sha256": "db36a1d4322112199076ce996cf5a951424b4fb3d914cb5a4c9ecf36277c43a0",
+      "tested_at": "2026-10-20 15:47:25"
+    },
+    {
+      "case": "B12",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 5.0,
+      "external_network_attempt": false,
+      "source_sha256": "cca65960aae4c7a10d423f4e0f0d977f8b2f170a7c8c75ead3c0a8af623de2ae",
+      "tested_at": "2026-10-20 15:47:30"
+    },
+    {
+      "case": "B13",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 2.52,
+      "external_network_attempt": false,
+      "source_sha256": "aafa1285a877fc45c3084f01294a88a8291632bb7909eddc9a2e4f8958a76d86",
+      "tested_at": "2026-10-20 15:47:33"
+    },
+    {
+      "case": "B13",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.8,
+      "external_network_attempt": false,
+      "source_sha256": "403b64a0216023676cf7d759d9722fd37c53207a47e2a3d72444a9382afd669e",
+      "tested_at": "2026-10-20 15:47:37"
+    },
+    {
+      "case": "B13",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.53,
+      "external_network_attempt": false,
+      "source_sha256": "74fb2ea4fed3cfb2d27da7877421049bb8259e9444618cb002e41d26796bb281",
+      "tested_at": "2026-10-20 15:47:42"
+    },
+    {
+      "case": "B13",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 5.69,
+      "external_network_attempt": false,
+      "source_sha256": "51b2f7cec3a44faf687fe0dfadd57f3d4ba149a65229fd9ece455a6b69ff373b",
+      "tested_at": "2026-10-20 15:47:48"
+    },
+    {
+      "case": "B14",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.91,
+      "external_network_attempt": false,
+      "source_sha256": "73bfd78a647b10a52f21e93bafeeea67128faf5d9196da9ff18791b48f59d319",
+      "tested_at": "2026-10-20 15:47:49"
+    },
+    {
+      "case": "B14",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.11,
+      "external_network_attempt": false,
+      "source_sha256": "6745e0c35213300a809336baabd17abaccf9f05bffb38efea8e1b49b5400ad14",
+      "tested_at": "2026-10-20 15:47:54"
+    },
+    {
+      "case": "B14",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.84,
+      "external_network_attempt": false,
+      "source_sha256": "db0730cc315f3df93cce96b009b0ac702459f9f742410b3dfa06b87a2d4552f7",
+      "tested_at": "2026-10-20 15:47:57"
+    },
+    {
+      "case": "B14",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.14,
+      "external_network_attempt": false,
+      "source_sha256": "54b6bc6ccadf37646d0c1e0e251b2695c2d1b3099ae03ff5b2067cce6a9f4614",
+      "tested_at": "2026-10-20 15:48:02"
+    },
+    {
+      "case": "B15",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 4.84,
+      "external_network_attempt": false,
+      "source_sha256": "6737a7d2ec6472923661f9adc5be4d1b50e5ec4cc7cb7a49e36915cad26f43ce",
+      "tested_at": "2026-10-20 15:48:06"
+    },
+    {
+      "case": "B15",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 8.23,
+      "external_network_attempt": false,
+      "source_sha256": "823f4b4648a8c736f3a99a9984548cc70806ae3478dcfa7c0072db857d813772",
+      "tested_at": "2026-10-20 15:48:15"
+    },
+    {
+      "case": "B15",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 10.45,
+      "external_network_attempt": false,
+      "source_sha256": "fe2ce35db7c05b72e6278f82026e8748e0ad1db3f6332e4e6dfdbbe492857886",
+      "tested_at": "2026-10-20 15:48:25"
+    },
+    {
+      "case": "B15",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 7.52,
+      "external_network_attempt": false,
+      "source_sha256": "f8c2e72f3867ae6dec41973b88577562046e9cf9efa1753c3db6b4934af85588",
+      "tested_at": "2026-10-20 15:48:33"
+    },
+    {
+      "case": "A12",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 0.95,
+      "external_network_attempt": false,
+      "source_sha256": "7ac4860ece715018869bcda65ebe0d037dc0de2102e45bc9cb4036ceff82819d",
+      "tested_at": "2026-10-20 15:48:53"
+    },
+    {
+      "case": "A12",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 6.5,
+      "external_network_attempt": false,
+      "source_sha256": "77ccb9d50444d486f6daf427f9f7b399b8502ae7df2efbf85d47bf7aa169b1d6",
+      "tested_at": "2026-10-20 15:49:00"
+    },
+    {
+      "case": "A12",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.03,
+      "external_network_attempt": false,
+      "source_sha256": "8588511c85a7d770089fe67d14bc47ccbb584d6be600f692aa484fbd7d444675",
+      "tested_at": "2026-10-20 15:49:03"
+    },
+    {
+      "case": "A12",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.03,
+      "external_network_attempt": false,
+      "source_sha256": "4ae7e7a154e5a2154c568f350b4747ddb5005f864b338e79df8e31d98f36614e",
+      "tested_at": "2026-10-20 15:49:06"
+    },
+    {
+      "case": "A14",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 2.3,
+      "external_network_attempt": false,
+      "source_sha256": "2565efa081a07434d4f3b34bb2d7d810f2080a85125c6cf08f91c7db2d81e6d9",
+      "tested_at": "2026-10-20 15:49:19"
+    },
+    {
+      "case": "A14",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 5.86,
+      "external_network_attempt": false,
+      "source_sha256": "4d0db0cbef3f02d98e3a0b6641eaadd43388e41c9631c9081302fe55faf2ff3c",
+      "tested_at": "2026-10-20 15:49:25"
+    },
+    {
+      "case": "A14",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.08,
+      "external_network_attempt": false,
+      "source_sha256": "f1a1e7fa2b7dd0bb27f08f273da097a3e460fff0bf9710a6b69276ddfc8dfc2d",
+      "tested_at": "2026-10-20 15:49:29"
+    },
+    {
+      "case": "A14",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 7.61,
+      "external_network_attempt": false,
+      "source_sha256": "f159293964c2abb404039ceff020c476e4c83dbb09becaa62c4ae2b3e467b2cc",
+      "tested_at": "2026-10-20 15:49:37"
+    },
+    {
+      "case": "A15",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 11.66,
+      "external_network_attempt": false,
+      "source_sha256": "5e66ebe609fd5290e6db6fcaab62f601167e8f904aff44127dfe6f25b0e82374",
+      "tested_at": "2026-10-20 15:49:48"
+    },
+    {
+      "case": "A15",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 9.98,
+      "external_network_attempt": false,
+      "source_sha256": "4b672c53b895edd3f6382415f0eb50bfe8296960a7d10df342921d13722b6741",
+      "tested_at": "2026-10-20 15:49:58"
+    },
+    {
+      "case": "A15",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 6.95,
+      "external_network_attempt": false,
+      "source_sha256": "10ab706ed0c8afc36e73bd3f98f43625faaae9860ade2638e172f757ec60bb32",
+      "tested_at": "2026-10-20 15:50:05"
+    },
+    {
+      "case": "A15",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 9.31,
+      "external_network_attempt": false,
+      "source_sha256": "5698d0a2242b39a945b17c67e37865268a72db7f584a8fc5460adc3c44f1c675",
+      "tested_at": "2026-10-20 15:50:15"
+    },
+    {
+      "case": "B06",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 2.09,
+      "external_network_attempt": false,
+      "source_sha256": "2e6633aecc2cc6095334667bce416e22acec5d30b7e4e6e1a6d76c59c1706b36",
+      "tested_at": "2026-10-20 15:50:29"
+    },
+    {
+      "case": "B06",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 6.02,
+      "external_network_attempt": false,
+      "source_sha256": "eda5e16cb787f7d7820f44171b6b70e8b32eca20d25667282634eec23694ce46",
+      "tested_at": "2026-10-20 15:50:35"
+    },
+    {
+      "case": "B06",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 6.48,
+      "external_network_attempt": false,
+      "source_sha256": "b5d516fefc22e7aff56488f1cc436203592b121bdfab46ca8204ff166c3352f8",
+      "tested_at": "2026-10-20 15:50:41"
+    },
+    {
+      "case": "B06",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.49,
+      "external_network_attempt": false,
+      "source_sha256": "fac31969bb8bf63677cfe59690e97367f9866a04f458713cab9d5afcd231e3b1",
+      "tested_at": "2026-10-20 15:50:46"
+    },
+    {
+      "case": "A11",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 2.53,
+      "external_network_attempt": false,
+      "source_sha256": "f3bc814845ccfe2e8d85f772107828f389e78a582e2a76e8001c88b449c3e33e",
+      "tested_at": "2026-10-20 15:50:49"
+    },
+    {
+      "case": "A11",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 5.8,
+      "external_network_attempt": false,
+      "source_sha256": "e1aa1e146e560e9a1e37b8eb8ecfd6cb6dc302296c4553441612e11a7ef39559",
+      "tested_at": "2026-10-20 15:50:54"
+    },
+    {
+      "case": "A11",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 9.23,
+      "external_network_attempt": false,
+      "source_sha256": "10e25f5d1c32663a0e7909279ec79e454ea2e453b3875d0d2d8f301463e7443d",
+      "tested_at": "2026-10-20 15:51:04"
+    },
+    {
+      "case": "A11",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.33,
+      "external_network_attempt": false,
+      "source_sha256": "5068badbff4b66657bd782ea4944303f10474ecf8f4b5962241b38e5518ed8b1",
+      "tested_at": "2026-10-20 15:51:08"
+    },
+    {
+      "case": "A13",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.02,
+      "external_network_attempt": false,
+      "source_sha256": "fb2ad91cc3b6241ca99692ec8f298365984b7cf540abccf45e8decffb0576d67",
+      "tested_at": "2026-10-20 15:51:09"
+    },
+    {
+      "case": "A13",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.7,
+      "external_network_attempt": false,
+      "source_sha256": "279ceef3a3495d2d19a5d9af63c3df86bbe1b80262443e33bbe9eb487fdb44a9",
+      "tested_at": "2026-10-20 15:51:13"
+    },
+    {
+      "case": "A13",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.17,
+      "external_network_attempt": false,
+      "source_sha256": "c074effafcb08c3ba8a1f01d349527bab9a71f4f539d13f2c184c32310b7ba22",
+      "tested_at": "2026-10-20 15:51:16"
+    },
+    {
+      "case": "A13",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.81,
+      "external_network_attempt": false,
+      "source_sha256": "387bbd2784c116923ff575df6a63781bedd95028a8d53158d720581dedd32177",
+      "tested_at": "2026-10-20 15:51:20"
+    },
+    {
+      "case": "B16",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 4.69,
+      "external_network_attempt": false,
+      "source_sha256": "a6a4e4621546e4dc205859a18475970cb5ca5d50d827c338519da83e748f4963",
+      "tested_at": "2026-10-20 15:44:15"
+    },
+    {
+      "case": "B16",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 9.16,
+      "external_network_attempt": false,
+      "source_sha256": "7d7464662cdeead218ac508c6cb460321c0348daf5c4aed1f1ad26391c3bf712",
+      "tested_at": "2026-10-20 15:44:24"
+    },
+    {
+      "case": "B16",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 9.61,
+      "external_network_attempt": false,
+      "source_sha256": "77c3c9e6371b892a31b28dc97bfdd36c6d7051c16dd035260727a8a7ea0b3b27",
+      "tested_at": "2026-10-20 15:44:34"
+    },
+    {
+      "case": "B16",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 9.69,
+      "external_network_attempt": false,
+      "source_sha256": "66575990237b4d0fc3f41d0016a2fe2d9e422f4ff578bd17b231079efacf085d",
+      "tested_at": "2026-10-20 15:44:43"
+    },
+    {
+      "case": "B17",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 13.88,
+      "external_network_attempt": false,
+      "source_sha256": "2582beccd21cfe0c6e835d387175f06bf394ef1f9aec3cc2d851293e632ae735",
+      "tested_at": "2026-10-20 15:44:57"
+    },
+    {
+      "case": "B17",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 14.09,
+      "external_network_attempt": false,
+      "source_sha256": "aa131743e02c4578f0ad04a2f5575a3b9a67c15b4e2cfbbe2afc839e39b9dc86",
+      "tested_at": "2026-10-20 15:45:11"
+    },
+    {
+      "case": "B17",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 12.28,
+      "external_network_attempt": false,
+      "source_sha256": "068be14b89ed8d95810f1fdbc1d43d9accd464d41bc551cea69ae5cf6b488ef5",
+      "tested_at": "2026-10-20 15:45:24"
+    },
+    {
+      "case": "B17",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 11.89,
+      "external_network_attempt": false,
+      "source_sha256": "dc7d4a81fc34a24bd02c4065814c11d22d441b67594ef57266de0aae1448ef62",
+      "tested_at": "2026-10-20 15:45:35"
+    },
+    {
+      "case": "B21",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 18.59,
+      "external_network_attempt": false,
+      "source_sha256": "f864861b7f69c4da151f2b0d587caef10527c2fed3b3de953a0edceaa25a2186",
+      "tested_at": "2026-10-20 15:48:33"
+    },
+    {
+      "case": "B21",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 17.64,
+      "external_network_attempt": false,
+      "source_sha256": "87789581e1bede0059b7e7ae7888ec1b16e8270f2c1a2b36dae8f01ca1b3737b",
+      "tested_at": "2026-10-20 15:48:50"
+    },
+    {
+      "case": "B21",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 13.22,
+      "external_network_attempt": false,
+      "source_sha256": "9a396fd69e18941e038f1261a01d3f34e1eb514dfe4adec8b49c6843215acb87",
+      "tested_at": "2026-10-20 15:49:03"
+    },
+    {
+      "case": "B21",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 13.89,
+      "external_network_attempt": false,
+      "source_sha256": "e69a2966ccc0a0120b40fb7d79930f8e1c956f4f0377a64b953e697e48fde55e",
+      "tested_at": "2026-10-20 15:49:17"
+    },
+    {
+      "case": "B23",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 15.78,
+      "external_network_attempt": false,
+      "source_sha256": "c4703dcf823ef06c5dcd28fac69e30a5f2a5c6a3959dbf78ba9fe2a407448507",
+      "tested_at": "2026-10-20 15:49:53"
+    },
+    {
+      "case": "B23",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 14.72,
+      "external_network_attempt": false,
+      "source_sha256": "1021f4bf770919b82e3b6498d1322756556e062fed48875525e89ecfaae8ca00",
+      "tested_at": "2026-10-20 15:50:07"
+    },
+    {
+      "case": "B23",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 15.27,
+      "external_network_attempt": false,
+      "source_sha256": "2c4d5dd99e3992c8a5686698aee7d61fab3d20733af15c3bfde67ba31d8ae0e3",
+      "tested_at": "2026-10-20 15:50:23"
+    },
+    {
+      "case": "B23",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 18.06,
+      "external_network_attempt": false,
+      "source_sha256": "cfca3a592814b1d7d7e3bd1588f9b0f5164c0b9e9a05457e83f9c32c3315c1af",
+      "tested_at": "2026-10-20 15:50:41"
+    },
+    {
+      "case": "B24",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 20.31,
+      "external_network_attempt": false,
+      "source_sha256": "4938a3144357d46c818986dd7191aab5f25418efe8bebfd4ba8788252c0f9265",
+      "tested_at": "2026-10-20 15:51:01"
+    },
+    {
+      "case": "B24",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 22.94,
+      "external_network_attempt": false,
+      "source_sha256": "3ce92dd3b0ce077ad31a91b88a96431bd8907350bf3e305030694cf7d8c7d497",
+      "tested_at": "2026-10-20 15:51:24"
+    },
+    {
+      "case": "B24",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 16.47,
+      "external_network_attempt": false,
+      "source_sha256": "cf1f27b9c3e43d6d5f967e51c02ebc7dfdcad21cce5ce60dbdcac3a39895de3d",
+      "tested_at": "2026-10-20 15:51:40"
+    },
+    {
+      "case": "B24",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 24.2,
+      "external_network_attempt": false,
+      "source_sha256": "3bc201fdf21a52c06cf5b9150dcd05a3eafaa735e990c06e130a2fc288111e1e",
+      "tested_at": "2026-10-20 15:52:05"
+    },
+    {
+      "case": "B25",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 0.78,
+      "external_network_attempt": false,
+      "source_sha256": "5f018e03e8c9d0ac84b15e8f233836b0b98054cc2c71b650a6697394edcb7ab0",
+      "tested_at": "2026-10-20 15:52:05"
+    },
+    {
+      "case": "B25",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 5.72,
+      "external_network_attempt": false,
+      "source_sha256": "bd354ccf63b94f642f8b5ce14cf4e45f2f91111456871609651048be4c7cf235",
+      "tested_at": "2026-10-20 15:52:11"
+    },
+    {
+      "case": "B25",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 5.39,
+      "external_network_attempt": false,
+      "source_sha256": "fb2bf1be8ea4c97e838dc04057891bc3287ccc0639a26696ee0816e5e5ce6554",
+      "tested_at": "2026-10-20 15:52:17"
+    },
+    {
+      "case": "B25",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 2.56,
+      "external_network_attempt": false,
+      "source_sha256": "333cce3661b6f45159d0414a7585d536f401b99e395b11c23efb0ec448b0019a",
+      "tested_at": "2026-10-20 15:52:19"
+    },
+    {
+      "case": "B26",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 0.7,
+      "external_network_attempt": false,
+      "source_sha256": "e339ef33fd4cf103a3d06fc11216695252e92c12847540d1e0dbcf1c0249add5",
+      "tested_at": "2026-10-20 15:52:20"
+    },
+    {
+      "case": "B26",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 5.31,
+      "external_network_attempt": false,
+      "source_sha256": "7c617fe072bd36617bf8c75091cef57944c4f7ddf42d7b03df0f291bd6ad3db4",
+      "tested_at": "2026-10-20 15:52:25"
+    },
+    {
+      "case": "B26",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 2.89,
+      "external_network_attempt": false,
+      "source_sha256": "8817c1bef9ca581410f6a4175633d7663671a4701f9804894c735eb6b9810d7a",
+      "tested_at": "2026-10-20 15:52:28"
+    },
+    {
+      "case": "B26",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 2.84,
+      "external_network_attempt": false,
+      "source_sha256": "99b795e5b20137fdfadfa155793ca4dbaa7d83d44def7d2d4b5347cb6a91b916",
+      "tested_at": "2026-10-20 15:52:31"
+    },
+    {
+      "case": "B27",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 2.73,
+      "external_network_attempt": false,
+      "source_sha256": "5823eb709e7a541bd344df9d45ce3b6ca92082be3334ceb9aca43c59466fcdcb",
+      "tested_at": "2026-10-20 15:52:34"
+    },
+    {
+      "case": "B27",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.36,
+      "external_network_attempt": false,
+      "source_sha256": "7efa447c9659db4da8505a1442b86ce59dbb1f7355a5ed700cab5734137ee110",
+      "tested_at": "2026-10-20 15:52:38"
+    },
+    {
+      "case": "B27",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 7.52,
+      "external_network_attempt": false,
+      "source_sha256": "ea5813eef9cfe3d07b041ff55fecf1575e646d11f2da45694c292ee5857dcefa",
+      "tested_at": "2026-10-20 15:52:46"
+    },
+    {
+      "case": "B27",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.98,
+      "external_network_attempt": false,
+      "source_sha256": "4ede14f3b3bb599176351a469bb3f0cc3050e2f04e1381aa9a492c9309ec4f05",
+      "tested_at": "2026-10-20 15:52:50"
+    },
+    {
+      "case": "B28",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 2.38,
+      "external_network_attempt": false,
+      "source_sha256": "6fd44c6569027d977e6644c0243c2084851620b875047881433770903de6a427",
+      "tested_at": "2026-10-20 15:52:52"
+    },
+    {
+      "case": "B28",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.98,
+      "external_network_attempt": false,
+      "source_sha256": "46fd160ac9ae07509f6f46ca68e4b85f7b26ed18142c67e132903c85d2b82ae4",
+      "tested_at": "2026-10-20 15:52:56"
+    },
+    {
+      "case": "B28",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.03,
+      "external_network_attempt": false,
+      "source_sha256": "ccd15db1ba215ab688f349d38168fddc09da9c951dfdd50449dfb82878b7be45",
+      "tested_at": "2026-10-20 15:53:00"
+    },
+    {
+      "case": "B28",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 6.31,
+      "external_network_attempt": false,
+      "source_sha256": "a064061d1ecddf79966b58adaa58bf0a3155ac5dfe2f2f814c80c1120994657a",
+      "tested_at": "2026-10-20 15:53:06"
+    },
+    {
+      "case": "B29",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.53,
+      "external_network_attempt": false,
+      "source_sha256": "ffdfbbcec3eb82743b321aa360f9ff67f6e0c973506abdf648b5f778328962fa",
+      "tested_at": "2026-10-20 15:53:08"
+    },
+    {
+      "case": "B29",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.58,
+      "external_network_attempt": false,
+      "source_sha256": "d118ada007ee880fe294d869b0658cee5f2978cf40f2325ad7b8ad0f86048b1b",
+      "tested_at": "2026-10-20 15:53:11"
+    },
+    {
+      "case": "B29",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.39,
+      "external_network_attempt": false,
+      "source_sha256": "84f5e9cf983621b5aabd1395fbfd9ca0f09ac5299aa898e935e10fa5f1e54ea6",
+      "tested_at": "2026-10-20 15:53:15"
+    },
+    {
+      "case": "B29",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.42,
+      "external_network_attempt": false,
+      "source_sha256": "5d57a9ffcfbb67b6f8fe7cad9ed6e4be46c6317f887b8348dfcceb54cbbf281c",
+      "tested_at": "2026-10-20 15:53:18"
+    },
+    {
+      "case": "B30",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 2.16,
+      "external_network_attempt": false,
+      "source_sha256": "0f46ce04f75250450442444f6ddc1bca9b7f0297b88a62b8a307ee31a43b8b6d",
+      "tested_at": "2026-10-20 15:53:20"
+    },
+    {
+      "case": "B30",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.11,
+      "external_network_attempt": false,
+      "source_sha256": "15a039b80c29e2699a72719e17f5f211b53964fb6480dc08c50c96dacc57870a",
+      "tested_at": "2026-10-20 15:53:25"
+    },
+    {
+      "case": "B30",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.12,
+      "external_network_attempt": false,
+      "source_sha256": "d97c4e85a418ac8056aeb61e66619105a08e3cf90ad7919a39ad57e5e32b1f1b",
+      "tested_at": "2026-10-20 15:53:29"
+    },
+    {
+      "case": "B30",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 7.42,
+      "external_network_attempt": false,
+      "source_sha256": "e62c4f395f09bb64c488c1e2d7f99da26814246088b350e95ea1ada3ef143169",
+      "tested_at": "2026-10-20 15:53:36"
+    },
+    {
+      "case": "B18",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 7.26,
+      "external_network_attempt": false,
+      "source_sha256": "97518f429e8b87c7fe6e1d6ec390bbf3b6ceafe43593dd89af1f75dca8e347eb",
+      "tested_at": "2026-10-20 15:53:56"
+    },
+    {
+      "case": "B18",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 8.28,
+      "external_network_attempt": false,
+      "source_sha256": "4aeed50fa3da286731163da4b3cb20e7ed0539412968c16a092d5bab331df97c",
+      "tested_at": "2026-10-20 15:54:04"
+    },
+    {
+      "case": "B18",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 7.84,
+      "external_network_attempt": false,
+      "source_sha256": "339b72bf9fa9bc3ccc3e29b3246f19e1bc7bd3baf2f2db729e83d3baaa4b3c26",
+      "tested_at": "2026-10-20 15:54:12"
+    },
+    {
+      "case": "B18",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 8.59,
+      "external_network_attempt": false,
+      "source_sha256": "94fde4358ce2383b5df7566195dbff58820ffb1f4225445dd2e18dbabc914f09",
+      "tested_at": "2026-10-20 15:54:21"
+    },
+    {
+      "case": "B19",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 8.41,
+      "external_network_attempt": false,
+      "source_sha256": "73f4d3837fcdafb28a4049cbc063555c7e744e4f367af28111713059ee2445a9",
+      "tested_at": "2026-10-20 15:54:29"
+    },
+    {
+      "case": "B19",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 9.86,
+      "external_network_attempt": false,
+      "source_sha256": "b894266b8ae811e45fce3dc4f0089bbd26d170c1f945b6d83fd3fcc2eb9315ce",
+      "tested_at": "2026-10-20 15:54:39"
+    },
+    {
+      "case": "B19",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 9.72,
+      "external_network_attempt": false,
+      "source_sha256": "5f2f4bd45be5b1cc43779f742d46d200dbe5cd32ec4026569ef691bc3487a486",
+      "tested_at": "2026-10-20 15:54:49"
+    },
+    {
+      "case": "B19",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 9.66,
+      "external_network_attempt": false,
+      "source_sha256": "bcef2a8208d21f46fec9c78a8e1d3c674809eae63af91e18370e6397f6f4d94e",
+      "tested_at": "2026-10-20 15:54:58"
+    },
+    {
+      "case": "B20",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 6.33,
+      "external_network_attempt": false,
+      "source_sha256": "e04fff08fd4dfffd52e28c984a442582722c4e028e5580ec49b5827b9dec6ee0",
+      "tested_at": "2026-10-20 15:55:05"
+    },
+    {
+      "case": "B20",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 12.2,
+      "external_network_attempt": false,
+      "source_sha256": "8ceaa891b4f922575003fc69e1bc667d1f4a6e29fd4a4e122194856b2e74ca57",
+      "tested_at": "2026-10-20 15:55:17"
+    },
+    {
+      "case": "B20",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 7.62,
+      "external_network_attempt": false,
+      "source_sha256": "1254fbc20a57da383715bcf0b11e58e2324597232c7814736929aa29cf6c4887",
+      "tested_at": "2026-10-20 15:55:25"
+    },
+    {
+      "case": "B20",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 7.48,
+      "external_network_attempt": false,
+      "source_sha256": "b98435667ff8e56c176386b4008b08fad86b8e7e6292497e2fbcd2b7d0607340",
+      "tested_at": "2026-10-20 15:55:32"
+    },
+    {
+      "case": "B22",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.34,
+      "external_network_attempt": false,
+      "source_sha256": "0bdead91cc6e14fac0256d5ca48715c125f6c9b8290dd95677e4bb955f0a623e",
+      "tested_at": "2026-10-20 15:55:33"
+    },
+    {
+      "case": "B22",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.53,
+      "external_network_attempt": false,
+      "source_sha256": "c08895cd7f8d1979f23f32a3e2630f1145b050bf9171c761fcaf6d03af8fa2c8",
+      "tested_at": "2026-10-20 15:55:37"
+    },
+    {
+      "case": "B22",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.45,
+      "external_network_attempt": false,
+      "source_sha256": "8449e290dd7f31f39d2667c13e054d80e8879aa0e73c16067887cbc8a87294f1",
+      "tested_at": "2026-10-20 15:55:40"
+    },
+    {
+      "case": "B22",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.34,
+      "external_network_attempt": false,
+      "source_sha256": "e65933f554c34dbd4e808a2af2185eac61e56c593c86b440a90d6392b30ad57f",
+      "tested_at": "2026-10-20 15:55:44"
+    },
+    {
+      "case": "A01",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 3.62,
+      "external_network_attempt": false,
+      "source_sha256": "5f4bc344bc5a8d52a9ac8dd2193e6352fdaca29c64ac2d2a0df434d7947edb06",
+      "tested_at": "2026-10-20 15:44:08"
+    },
+    {
+      "case": "A01",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.95,
+      "external_network_attempt": false,
+      "source_sha256": "b1a1a5b4e0ae5c047f5023569b06e5f5721ca7bb272894b323f6320b1b3c98b8",
+      "tested_at": "2026-10-20 15:44:13"
+    },
+    {
+      "case": "A01",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.38,
+      "external_network_attempt": false,
+      "source_sha256": "dc39d101a39a7c16f0bc8f22cd045a6262024f0008b35b85d923466cc70b96b2",
+      "tested_at": "2026-10-20 15:44:17"
+    },
+    {
+      "case": "A01",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 6.64,
+      "external_network_attempt": false,
+      "source_sha256": "b64e761d592d3454d9c31915bf9313e4d8679c59930378831e43ea3061cc92db",
+      "tested_at": "2026-10-20 15:44:23"
+    },
+    {
+      "case": "A02",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.53,
+      "external_network_attempt": false,
+      "source_sha256": "0789c8924073af2c9317388bd8c5d85707e31c914ea4bdf0f6aed86a57581a69",
+      "tested_at": "2026-10-20 15:44:25"
+    },
+    {
+      "case": "A02",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.0,
+      "external_network_attempt": false,
+      "source_sha256": "d54d4b2bda33d9509df6f607e5fc5198c47e39a5b194b004ac8bfb4007e7beec",
+      "tested_at": "2026-10-20 15:44:29"
+    },
+    {
+      "case": "A02",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.5,
+      "external_network_attempt": false,
+      "source_sha256": "7829b051ce0098aa0ddb375ff1c496e535d41054019f643bb32b6976c898a271",
+      "tested_at": "2026-10-20 15:44:33"
+    },
+    {
+      "case": "A02",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.03,
+      "external_network_attempt": false,
+      "source_sha256": "e4b8db19ee487dd4c05009e1b3c8de6cabc41a7c9f7404d5e7407fa2028e5678",
+      "tested_at": "2026-10-20 15:44:38"
+    },
+    {
+      "case": "A03",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 3.11,
+      "external_network_attempt": false,
+      "source_sha256": "c6f0d4c02d1307fccaaed28e8e20dcbaae0a14f8e65f19dcc80aa4c26a9f19a9",
+      "tested_at": "2026-10-20 15:44:41"
+    },
+    {
+      "case": "A03",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.95,
+      "external_network_attempt": false,
+      "source_sha256": "9151106be6ec36a2cda3a2a28699c56e35a377c3495cac77a59579aadf142e4e",
+      "tested_at": "2026-10-20 15:44:45"
+    },
+    {
+      "case": "A03",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.86,
+      "external_network_attempt": false,
+      "source_sha256": "c7cfe4930190b1c059b28a6c090fe06e716ee121b4685e021faa1f3c13d8f17a",
+      "tested_at": "2026-10-20 15:44:48"
+    },
+    {
+      "case": "A03",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.83,
+      "external_network_attempt": false,
+      "source_sha256": "7aabcd7897dbde403755037730c2010d3370116dc1a77d74f5f1afdb77e8cdcf",
+      "tested_at": "2026-10-20 15:44:52"
+    },
+    {
+      "case": "A05",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.19,
+      "external_network_attempt": false,
+      "source_sha256": "12e5a0ab90e65b03e41afb7e95036c55c3248027f52d1c011ab62cf875515d0a",
+      "tested_at": "2026-10-20 15:45:15"
+    },
+    {
+      "case": "A05",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.08,
+      "external_network_attempt": false,
+      "source_sha256": "d35f521ec0135222d1a5c2e878d392f75823e74780fdb01dc0acda19c2dd060c",
+      "tested_at": "2026-10-20 15:45:19"
+    },
+    {
+      "case": "A05",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.39,
+      "external_network_attempt": false,
+      "source_sha256": "c0f7905b320f387d56d0e117175172b1fc50c997c0c356050dace3f6a71f2b80",
+      "tested_at": "2026-10-20 15:45:23"
+    },
+    {
+      "case": "A05",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.69,
+      "external_network_attempt": false,
+      "source_sha256": "4bf6012cef5fe13ae8e02ba838ebf881bf39d5d2c09feba0f328fb12bddbfb8f",
+      "tested_at": "2026-10-20 15:45:28"
+    },
+    {
+      "case": "A06",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.53,
+      "external_network_attempt": false,
+      "source_sha256": "a6b1d1ec44b94a6e26790079202f03b7d32cf12b829a2c532c991e3f0323efec",
+      "tested_at": "2026-10-20 15:45:30"
+    },
+    {
+      "case": "A06",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 6.55,
+      "external_network_attempt": false,
+      "source_sha256": "331a18211b120028d3c49713c28f045d6484ce8fcd3aaf0015b2cd824885c8f5",
+      "tested_at": "2026-10-20 15:45:36"
+    },
+    {
+      "case": "A06",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.7,
+      "external_network_attempt": false,
+      "source_sha256": "b05380fd841c6c1550413fe356170a7d03aa7418bfe243ef54795c942f7a3a1d",
+      "tested_at": "2026-10-20 15:45:40"
+    },
+    {
+      "case": "A06",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.53,
+      "external_network_attempt": false,
+      "source_sha256": "d0095b61c9321cf60a58ad970512b7f387f7449557a8f89bc461a49bb281a920",
+      "tested_at": "2026-10-20 15:45:43"
+    },
+    {
+      "case": "A08",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.23,
+      "external_network_attempt": false,
+      "source_sha256": "ae8111e6276d807a7c68577cfd9c75253127f4cd2297d537eed99d55c1fa8fb5",
+      "tested_at": "2026-10-20 15:45:58"
+    },
+    {
+      "case": "A08",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.2,
+      "external_network_attempt": false,
+      "source_sha256": "c811d65bd9b09cde2c0c5d7be522802b38636ac2875aa0e6e8662a78c16bc72a",
+      "tested_at": "2026-10-20 15:46:02"
+    },
+    {
+      "case": "A08",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.3,
+      "external_network_attempt": false,
+      "source_sha256": "3e619817fcd5092e005284f6788adf282f24e6db7916c471808f073700c76ed1",
+      "tested_at": "2026-10-20 15:46:06"
+    },
+    {
+      "case": "A08",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 6.64,
+      "external_network_attempt": false,
+      "source_sha256": "d920c704b207fb898395444f7005ae7322b280b7b1c7a235a4a9ce554ea678d1",
+      "tested_at": "2026-10-20 15:46:13"
+    },
+    {
+      "case": "A09",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 0.98,
+      "external_network_attempt": false,
+      "source_sha256": "edb3909571e5cdfd37739096bf9248b2c7c322370577e5862728db409618c1c0",
+      "tested_at": "2026-10-20 15:46:14"
+    },
+    {
+      "case": "A09",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.08,
+      "external_network_attempt": false,
+      "source_sha256": "9c129bb96de699ef1a8b5842645ff357491b83d80bd2e35cb95b5b8501da0bdf",
+      "tested_at": "2026-10-20 15:46:18"
+    },
+    {
+      "case": "A09",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.3,
+      "external_network_attempt": false,
+      "source_sha256": "5aec6b0c3c2948beff0e319c67b817563730f3101e0030e61fa3a76f55778cb3",
+      "tested_at": "2026-10-20 15:46:22"
+    },
+    {
+      "case": "A09",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.81,
+      "external_network_attempt": false,
+      "source_sha256": "75ee71e8916d73add641ba7a8e57468788dd338358b861f2af0442b17d1bbc56",
+      "tested_at": "2026-10-20 15:46:26"
+    },
+    {
+      "case": "A10",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.42,
+      "external_network_attempt": false,
+      "source_sha256": "b8e7cfa7713dc24f8632536dd26a006c113c8775679090e539caa47cd3f4f828",
+      "tested_at": "2026-10-20 15:46:27"
+    },
+    {
+      "case": "A10",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.89,
+      "external_network_attempt": false,
+      "source_sha256": "3ffc06ad4f8a819d4acc155189925afc2900efc70320173704f9e8ec4ce0cc4f",
+      "tested_at": "2026-10-20 15:46:32"
+    },
+    {
+      "case": "A10",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.94,
+      "external_network_attempt": false,
+      "source_sha256": "558ad11aa85db7799824b4fc4c4c218e28a5bd38c9497a3b00d60f90a4c2ed5a",
+      "tested_at": "2026-10-20 15:46:37"
+    },
+    {
+      "case": "A10",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 7.0,
+      "external_network_attempt": false,
+      "source_sha256": "71bae526c30583b9a63bd97e4b770b68c1ae770a9d52bd41c668aaae0fc2f4f0",
+      "tested_at": "2026-10-20 15:46:44"
+    },
+    {
+      "case": "A21",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 2.52,
+      "external_network_attempt": false,
+      "source_sha256": "98646e9f171898f6b4fb813aba2d1ea66f4a7339b38351dea2b604d126eaa35b",
+      "tested_at": "2026-10-20 15:46:47"
+    },
+    {
+      "case": "A21",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 5.52,
+      "external_network_attempt": false,
+      "source_sha256": "094cfd31c28f222f0961a4540499bac5b3d75867a581eef45f176b376f1c6e5c",
+      "tested_at": "2026-10-20 15:46:52"
+    },
+    {
+      "case": "A21",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.72,
+      "external_network_attempt": false,
+      "source_sha256": "f88d0be455dff8d18dc320162fdd4034069703694fa4716754cb31b679731bbf",
+      "tested_at": "2026-10-20 15:46:57"
+    },
+    {
+      "case": "A21",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.55,
+      "external_network_attempt": false,
+      "source_sha256": "9b7f5cd8ee0e7bb2a214799692b4a85672c3a4ef4bf11d720709dbd55cd3e8ed",
+      "tested_at": "2026-10-20 15:47:02"
+    },
+    {
+      "case": "A22",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.27,
+      "external_network_attempt": false,
+      "source_sha256": "f74c8a89c0ae6758a8e07361b233d3db76fc58aba35575eda3997bc8c865587c",
+      "tested_at": "2026-10-20 15:47:03"
+    },
+    {
+      "case": "A22",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.22,
+      "external_network_attempt": false,
+      "source_sha256": "4a2dc153dae6649b71b864f22262f08b87209bf0264aadc13ec37c1a03fc554d",
+      "tested_at": "2026-10-20 15:47:07"
+    },
+    {
+      "case": "A22",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.33,
+      "external_network_attempt": false,
+      "source_sha256": "6408046a180c1925bac59943f97c1f5a2be732cd6ecd7e925ff2b1a0967d9953",
+      "tested_at": "2026-10-20 15:47:11"
+    },
+    {
+      "case": "A22",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.34,
+      "external_network_attempt": false,
+      "source_sha256": "90561226e526b04d34300648d733bd4253e8b2b031d52a2fedd3a2ba610a2b3d",
+      "tested_at": "2026-10-20 15:47:16"
+    },
+    {
+      "case": "A23",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.33,
+      "external_network_attempt": false,
+      "source_sha256": "358cc42c7c87b40aa59ca7a6f9ff823c1013ecf97dc2889ef60e6679fdbb81cf",
+      "tested_at": "2026-10-20 15:47:17"
+    },
+    {
+      "case": "A23",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.38,
+      "external_network_attempt": false,
+      "source_sha256": "88b5bb71df5d02828d7bb1f14a53cd81cd570c4b846b36ae9f2116b45da80d52",
+      "tested_at": "2026-10-20 15:47:21"
+    },
+    {
+      "case": "A23",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.98,
+      "external_network_attempt": false,
+      "source_sha256": "f21711945e4258c5eb04abbcbfafa54b1ef3841c759609b60fbc1fadcd65d7c3",
+      "tested_at": "2026-10-20 15:47:25"
+    },
+    {
+      "case": "A23",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.83,
+      "external_network_attempt": false,
+      "source_sha256": "30051c6adc164df43f658b5b5c3c5b052d4b7eb8020564cdfc1a6903993347d5",
+      "tested_at": "2026-10-20 15:47:29"
+    },
+    {
+      "case": "A24",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.19,
+      "external_network_attempt": false,
+      "source_sha256": "8191ac04a86c5354bf981e85547b1ecb7d91ca679d8c2df4c84b62de504cfdca",
+      "tested_at": "2026-10-20 15:47:30"
+    },
+    {
+      "case": "A24",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.67,
+      "external_network_attempt": false,
+      "source_sha256": "aad33cb6c0a6d375d11db1450e81b58c81c32867455cf964bc87e28c50d8d1d6",
+      "tested_at": "2026-10-20 15:47:35"
+    },
+    {
+      "case": "A24",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.55,
+      "external_network_attempt": false,
+      "source_sha256": "14eb8ec1a64f968bd3f7eab5452ed20001193f7712051883b9c07848da734616",
+      "tested_at": "2026-10-20 15:47:39"
+    },
+    {
+      "case": "A24",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.72,
+      "external_network_attempt": false,
+      "source_sha256": "f58a0e3f048d5ea3cde54609d2c2100111702172413e89d0cff2726bb039f0c1",
+      "tested_at": "2026-10-20 15:47:42"
+    },
+    {
+      "case": "A25",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.19,
+      "external_network_attempt": false,
+      "source_sha256": "49d65d7e297cd3e2f7ed8d4f84666038d37c1d9b4f86383653d2e683ae6d2385",
+      "tested_at": "2026-10-20 15:47:44"
+    },
+    {
+      "case": "A25",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.05,
+      "external_network_attempt": false,
+      "source_sha256": "5e1e5a29e3a0636be3f5c16e0ae2a46a5c7700326d6353b264488e8d8c3028d9",
+      "tested_at": "2026-10-20 15:47:48"
+    },
+    {
+      "case": "A25",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.59,
+      "external_network_attempt": false,
+      "source_sha256": "c3255d39fc53b5b6efd07ec0caf9338e37d47c02d09ca2b8f51f8851590729a8",
+      "tested_at": "2026-10-20 15:47:51"
+    },
+    {
+      "case": "A25",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.53,
+      "external_network_attempt": false,
+      "source_sha256": "b355ec100bda1a51b020de176a95cb8d6ae831e66323428ac26245bc6b0ccf70",
+      "tested_at": "2026-10-20 15:47:55"
+    },
+    {
+      "case": "A04",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.26,
+      "external_network_attempt": false,
+      "source_sha256": "700c4058041147279c795d4811cc74cfa73374a6ebbe736f08353aeaa6ba0459",
+      "tested_at": "2026-10-20 15:48:07"
+    },
+    {
+      "case": "A04",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.34,
+      "external_network_attempt": false,
+      "source_sha256": "c5316eac7ad6204016336f0496d106a2ee95f6e0ff191edf567be6af900b1fe7",
+      "tested_at": "2026-10-20 15:48:11"
+    },
+    {
+      "case": "A04",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 6.72,
+      "external_network_attempt": false,
+      "source_sha256": "78bf36bba457f4346ed3bb5805be13cf3c5d1428f024f9671f27535b3c235593",
+      "tested_at": "2026-10-20 15:48:18"
+    },
+    {
+      "case": "A04",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.14,
+      "external_network_attempt": false,
+      "source_sha256": "0b488db6117be3d774f1d91c6b1b5ef97881da636b334cd2f68ff7449739a413",
+      "tested_at": "2026-10-20 15:48:22"
+    },
+    {
+      "case": "A07",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.56,
+      "external_network_attempt": false,
+      "source_sha256": "95b30aabe678f297d0ebffb6a93517da4ae2bc05743a9de470d0b7a0171dc07c",
+      "tested_at": "2026-10-20 15:48:24"
+    },
+    {
+      "case": "A07",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.33,
+      "external_network_attempt": false,
+      "source_sha256": "7cfc5a31e008982421112393f87d03c418fec5a6d832aacbc5b3af8a5ef25bbf",
+      "tested_at": "2026-10-20 15:48:28"
+    },
+    {
+      "case": "A07",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 6.7,
+      "external_network_attempt": false,
+      "source_sha256": "bb1a68037e12c93ea87e044fdd2a97de9c286b30e633d93845666f6a7f2d4997",
+      "tested_at": "2026-10-20 15:48:35"
+    },
+    {
+      "case": "A07",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.86,
+      "external_network_attempt": false,
+      "source_sha256": "c85633cc604f9d403791a074355e20d9fd458a1864b7d3863f01acc31c3e7118",
+      "tested_at": "2026-10-20 15:48:40"
+    },
+    {
+      "case": "A16",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.19,
+      "external_network_attempt": false,
+      "source_sha256": "d849e39b4bace8d1bf670b38240ee478963e56489e68387a77e195db863939fb",
+      "tested_at": "2026-10-20 15:44:10"
+    },
+    {
+      "case": "A16",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.7,
+      "external_network_attempt": false,
+      "source_sha256": "28b8daba415b68603e489b8edd70b4a40bfdef623c942596aa5424e0f28ff5bf",
+      "tested_at": "2026-10-20 15:44:14"
+    },
+    {
+      "case": "A16",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.45,
+      "external_network_attempt": false,
+      "source_sha256": "999f17a7af18e8c59ad0770bf4940e479d6cd493e8d7d3c6960346780f9278df",
+      "tested_at": "2026-10-20 15:44:18"
+    },
+    {
+      "case": "A16",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.31,
+      "external_network_attempt": false,
+      "source_sha256": "4af17e059e2bb27381d6bf17085e97bd65f1e8696b2f32828285eded4b17498c",
+      "tested_at": "2026-10-20 15:44:22"
+    },
+    {
+      "case": "A17",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.12,
+      "external_network_attempt": false,
+      "source_sha256": "60fd5738d28815d5ceb16887a4a851a5ff2b4b13040fca1ac23370886d06ffcc",
+      "tested_at": "2026-10-20 15:44:23"
+    },
+    {
+      "case": "A17",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.81,
+      "external_network_attempt": false,
+      "source_sha256": "f73a5f2d9d136a9c0397e52cd911110316db8b005cfd8b4d1e090f3ba1270b41",
+      "tested_at": "2026-10-20 15:44:27"
+    },
+    {
+      "case": "A17",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.05,
+      "external_network_attempt": false,
+      "source_sha256": "9b02a218cd3f40263d7d296d258a9a3424b641a059e9bbb73d0c231160262b9c",
+      "tested_at": "2026-10-20 15:44:31"
+    },
+    {
+      "case": "A17",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.45,
+      "external_network_attempt": false,
+      "source_sha256": "c64dccb1abf0c1399fab44107341b84114a24430132ff7809743332499d29fb8",
+      "tested_at": "2026-10-20 15:44:35"
+    },
+    {
+      "case": "A18",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 27.33,
+      "external_network_attempt": false,
+      "source_sha256": "ba95a0788ffb1c6928190fdc109da88d1327671671c5406c58b6f4a3702e8ab6",
+      "tested_at": "2026-10-20 15:45:03"
+    },
+    {
+      "case": "A18",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 18.34,
+      "external_network_attempt": false,
+      "source_sha256": "ef43849ca7bc67d9f40cba9b4993f7bfa1f4f5367256cfcc222d9eb48c1ed088",
+      "tested_at": "2026-10-20 15:45:21"
+    },
+    {
+      "case": "A18",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 13.36,
+      "external_network_attempt": false,
+      "source_sha256": "f0646165262e9f21710e2cbf5d8a17f730a665d3fc3d119712c55e69e26fa451",
+      "tested_at": "2026-10-20 15:45:34"
+    },
+    {
+      "case": "A18",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 11.81,
+      "external_network_attempt": false,
+      "source_sha256": "5fde7ee812b77359c5d70c3a96a1f2fe0da59b6fcdde851e8ee76d3357e2d381",
+      "tested_at": "2026-10-20 15:45:46"
+    },
+    {
+      "case": "A19",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.38,
+      "external_network_attempt": false,
+      "source_sha256": "6b0a33cd4c5994b87d6032dbfe548666f77182047a8f0632afb7020e73a0719e",
+      "tested_at": "2026-10-20 15:45:48"
+    },
+    {
+      "case": "A19",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.81,
+      "external_network_attempt": false,
+      "source_sha256": "deb077c6aa245136a39f86af9fe2fbe459d1e5d2b6eb5d71f228441625ae5544",
+      "tested_at": "2026-10-20 15:45:51"
+    },
+    {
+      "case": "A19",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.62,
+      "external_network_attempt": false,
+      "source_sha256": "9092dcf60791dcf17d071c7f3e892d70a6084f19f4889a1c86b3f2632c940506",
+      "tested_at": "2026-10-20 15:45:55"
+    },
+    {
+      "case": "A19",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 6.69,
+      "external_network_attempt": false,
+      "source_sha256": "ec721c51ea2157f300922f89b6756f80d5c55da8d0415423ed84430001fa7aa0",
+      "tested_at": "2026-10-20 15:46:02"
+    },
+    {
+      "case": "A27",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.25,
+      "external_network_attempt": false,
+      "source_sha256": "10504e41add76bd6a0cb59444705ec3c9119d7fdbdddbc03bbfd848b3c68a925",
+      "tested_at": "2026-10-20 15:46:33"
+    },
+    {
+      "case": "A27",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 5.19,
+      "external_network_attempt": false,
+      "source_sha256": "e8e567fade6cc05b765cfaed44d9eca230dae4654ae23292f5c45cbea5f9dc29",
+      "tested_at": "2026-10-20 15:46:38"
+    },
+    {
+      "case": "A27",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.08,
+      "external_network_attempt": false,
+      "source_sha256": "0f208fe13aabccc7d788eb78e779e94351bd45a58a0fa435c82ed22417907676",
+      "tested_at": "2026-10-20 15:46:42"
+    },
+    {
+      "case": "A27",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.52,
+      "external_network_attempt": false,
+      "source_sha256": "51e23aaa056dff39b6e1fe688ec90862f754d331d42d637014f6011423e174e3",
+      "tested_at": "2026-10-20 15:46:46"
+    },
+    {
+      "case": "A28",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 5.09,
+      "external_network_attempt": false,
+      "source_sha256": "22941013bd061db2431b832ca00081bf0af2c44504785eb5b8c3ee6ac0feba2a",
+      "tested_at": "2026-10-20 15:46:52"
+    },
+    {
+      "case": "A28",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 7.62,
+      "external_network_attempt": false,
+      "source_sha256": "82a2a442dd706729605f18bc1474b3efdcbaaee665f0a14ebd22d12334a60be4",
+      "tested_at": "2026-10-20 15:46:59"
+    },
+    {
+      "case": "A28",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 7.91,
+      "external_network_attempt": false,
+      "source_sha256": "be5cf52100db69be1af1d8619385c688ce0ee13b2efbf54dafb35c6024fb3b8f",
+      "tested_at": "2026-10-20 15:47:07"
+    },
+    {
+      "case": "A28",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 7.55,
+      "external_network_attempt": false,
+      "source_sha256": "d3a781b0bdaebdbf8de7f0cf19cc218d4630bc0cf8e310c163c141f2117f540b",
+      "tested_at": "2026-10-20 15:47:15"
+    },
+    {
+      "case": "A29",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.36,
+      "external_network_attempt": false,
+      "source_sha256": "d6cbae53b4620784156d9f6b95e2cc4f431be36754392422cab0167475d67479",
+      "tested_at": "2026-10-20 15:47:16"
+    },
+    {
+      "case": "A29",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.41,
+      "external_network_attempt": false,
+      "source_sha256": "f6c89f26113c8f429f15028898322f7a8c7e4a85d53991621da848229508b11d",
+      "tested_at": "2026-10-20 15:47:20"
+    },
+    {
+      "case": "A29",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.95,
+      "external_network_attempt": false,
+      "source_sha256": "750a2c0fe46fd4fe074642af92f9ddda3d661fa11e7a5217a8f64cfca835190c",
+      "tested_at": "2026-10-20 15:47:24"
+    },
+    {
+      "case": "A29",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.69,
+      "external_network_attempt": false,
+      "source_sha256": "fd25b6057ae33f8816bfb4c85825e9063190f9862288199d6de3e97c99869226",
+      "tested_at": "2026-10-20 15:47:28"
+    },
+    {
+      "case": "A26",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.27,
+      "external_network_attempt": false,
+      "source_sha256": "47cc6b4d528bfd6f26d215eeee8a32722718e6a9f12384b57c610d546a9d4b40",
+      "tested_at": "2026-10-20 15:49:23"
+    },
+    {
+      "case": "A26",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.22,
+      "external_network_attempt": false,
+      "source_sha256": "f4fafac1a46490d5bda3dafafd5434a62b199a5799a298c6dee859435a0519bd",
+      "tested_at": "2026-10-20 15:49:27"
+    },
+    {
+      "case": "A26",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.38,
+      "external_network_attempt": false,
+      "source_sha256": "68e9cd313ee2fc22bb543d205d189dd3f0970e8ea20570c5daf5b883a37e660e",
+      "tested_at": "2026-10-20 15:49:30"
+    },
+    {
+      "case": "A26",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.81,
+      "external_network_attempt": false,
+      "source_sha256": "f06fcc6ec12b30a1d6c7be19708442ff9f739e642df77970772068c98939f8f7",
+      "tested_at": "2026-10-20 15:49:34"
+    },
+    {
+      "case": "A20",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.09,
+      "external_network_attempt": false,
+      "source_sha256": "b46a6629ca09039b2e115f275cf5e74a05141daad9aeceb8c05e5886279d75b6",
+      "tested_at": "2026-10-20 15:52:26"
+    },
+    {
+      "case": "A20",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.02,
+      "external_network_attempt": false,
+      "source_sha256": "c663f7931c95f90b96a9d9cd980cf70837dbb4ed8b4190e833f4af6880f371c4",
+      "tested_at": "2026-10-20 15:52:29"
+    },
+    {
+      "case": "A20",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.19,
+      "external_network_attempt": false,
+      "source_sha256": "94ea7bcdf8961e454af0d89101789402e39b6e370f7929d81cdb3f0263c8e85d",
+      "tested_at": "2026-10-20 15:52:33"
+    },
+    {
+      "case": "A20",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.19,
+      "external_network_attempt": false,
+      "source_sha256": "a35c93dcd2c73a90b90aa65993fa90b46a540706f186b828d8e6aff2c8c82365",
+      "tested_at": "2026-10-20 15:52:36"
+    },
+    {
+      "case": "A30",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 2.14,
+      "external_network_attempt": false,
+      "source_sha256": "b210acfa598dcc84253d07f5c63d5690a04c05fd47cc035927c71908507f8eec",
+      "tested_at": "2026-10-20 15:52:38"
+    },
+    {
+      "case": "A30",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.33,
+      "external_network_attempt": false,
+      "source_sha256": "86e31c9b62a37b5154a35b446b33dc61929683c6aecb7224d4b5ac068b2f0e0d",
+      "tested_at": "2026-10-20 15:52:42"
+    },
+    {
+      "case": "A30",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 6.39,
+      "external_network_attempt": false,
+      "source_sha256": "41d2c15ed109692334bce78fc8629c8a5c754dcbdbc8ad5f365bfb8da444660b",
+      "tested_at": "2026-10-20 15:52:49"
+    },
+    {
+      "case": "A30",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 4.0,
+      "external_network_attempt": false,
+      "source_sha256": "1aec0c50f27546c4648428d9fc55827e25b7f98dc08a62f39f986be4fa68345f",
+      "tested_at": "2026-10-20 15:52:53"
+    }
+  ]
+}

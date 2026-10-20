@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>B09 故障很少时，怎样避免模型只预测正常？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>在模拟设备数据上区分模型评分、概率校准与行动阈值。校准只用训练数据的交叉验证，阈值只用验证集，以错误成本选型后锁定测试。</p>
+<h2>先修与运行</h2>
+<p>B08；混淆矩阵、概率、阈值与验证集。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 制造有少数故障的可检查数据</h2>
+<p>随机生成 8 个传感器特征，故障约占 8%。真实设备可能存在时间与设备分组，此处是假设独立样本的教学实验。用分层划分保证各段都有故障。</p>
+<h2>2. 训练与概率校准分开理解</h2>
+<p>带类别权重的模型更关注少数类，但原始概率不应直接当真实故障率。用训练折内 sigmoid 校准得到候选概率，测试集始终不参与拟合。Brier 分数评价概率误差。</p>
+<h2>3. 阈值对应明确代价</h2>
+<p>漏检一次成本假定 20，误报一次成本假定 1。扫描验证阈值，输出误报、漏报与总成本。阈值小通常更积极报警，但最终应看当前成本和容量条件。</p>
+<h2>4. 在测试集报告代价与可靠性</h2>
+<p>校准曲线每组的横轴是平均预测概率，纵轴是真实故障率；样本少时曲线会抖动。不能以准确率单独评判故障模型，也不能保证校准在分布变化后仍有效。</p>
+<h2>常见错误与边界</h2>
+<p>模拟故障机制与成本均为教学假设。校准和阈值选择不共享测试集；现实中同设备多次记录必须分组或按时间切分。</p>
+<h2>数据</h2>
+<p>教学模拟数据；生成机制、参数和随机种子见本案例代码。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

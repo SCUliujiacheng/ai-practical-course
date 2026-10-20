@@ -1,0 +1,7 @@
+{
+  "n_features": 13,
+  "retained_components": 5,
+  "training_variance_retained": 0.802957184592555,
+  "test_reconstruction_mse": 0.24244722632633586,
+  "mean_baseline_mse": 1.1407206931576077
+}

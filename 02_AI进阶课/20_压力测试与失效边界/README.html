@@ -1,0 +1,33 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>A20 在常规模拟中最好的方案，遇到变化还可靠吗？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>比较固定资源与带备用的策略。正常、需求抬升、厚尾、相关故障分别构成测试情景，输出成本、尾部风险和服务目标的全部通过率。</p>
+<h2>先修与运行</h2>
+<p>基础课 Python、NumPy、实验评价</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h3>1. 写出可手算的策略评价函数</h3>
+<p>政策事前决定常备和备用人数。假设每时段服务开始前已观察该批待处理需求和故障，然后从已预约备用池中启用人员；这不是提前知道未来到达。先检查零需求和容量上限。服务目标是本次事件所有时段都满足容量。</p>
+<h3>2. 留出多类机制变化</h3>
+<p>每个情景有100个活动日，每日8个时段。相关故障中，一次事件影响同一天的所有时段。用共享场景比较策略，但不给策略在这些最终情景上调参。</p>
+<h3>3. 成对差值区间与情景遗憾</h3>
+<p>先按天聚合，再对天重采样，避免把同一天相关的时段当作独立样本。这里区间估计的是该仿真机制下的平均成本差，不是现实效果保证。</p>
+<h3>4. 说明风险偏好与边界</h3>
+<p>平均成本、尾部风险、全部通过率可能冲突。不要把满足95%时段写成95%的活动全部可行。本例是固定候选的压力测试，尚未对未观测极端情景提供保证。</p>
+<h3>保存可核验的证据</h3>
+<p>把指标写入 JSON，并用本次输出形成有条件的建议。json.dumps 把字典变成文本；不会替你判断方案是否适合现实。</p>
+<h2>常见错误与边界</h2>
+<p>没有真实记录时只能做条件推演。测试情景不能覆盖未知的一切。图中95%分位是成本分布的分位数，与均值估计区间不是一回事。</p>
+<h2>数据</h2>
+<p>教学模拟数据；生成机制、参数和随机种子见本案例代码。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

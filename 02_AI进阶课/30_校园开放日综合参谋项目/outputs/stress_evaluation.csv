@@ -1,0 +1,5 @@
+scenario,reserve,mean_final_backlog,all_slots_zero_backlog_rate,mean_reserve_shifts,mean_reserve_cost,reserve_constraints_pass
+normal,False,0.0,1.0,0.0,0.0,True
+normal,True,0.0,1.0,0.0,120.0,True
+demand_plus20,False,35.5,0.0,0.0,0.0,True
+demand_plus20,True,5.5,0.0,3.3333333333333335,170.0,True

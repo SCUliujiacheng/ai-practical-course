@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>B18 怎样用卷积网络改善图像识别？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>任务：比较全连接网络与卷积网络，学习卷积共享局部特征的方式，也允许结果显示小数据上简单模型更好。</p>
+<h2>先修与运行</h2>
+<p>B16—B17；补充四维张量、卷积和验证集。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 保留空间结构与验证集</h2>
+<p>卷积输入是 N×C×H×W，本例为 N×1×8×8；全连接输入才展平。先划出测试集，再从训练部分划验证集，验证集用于选择训练轮次。</p>
+<h2>2. 写出卷积、池化和分类头</h2>
+<p>3×3 卷积加 padding=1 保持 8×8；池化降到 4×4；第二卷积输出 16×4×4，因此 Linear 输入 256。逐层检查形状能快速定位维度错误。</p>
+<h2>3. 只对训练图像增强</h2>
+<p>用零填充的小平移模拟轻微位置变化，不用会把边缘绕回来的 roll。两个模型使用相同划分与 10 轮训练预算；验证损失最低的权重被保留。增强并不必然有益。分类标签显式指定 torch.long，因为交叉熵需要整数类别编号，不能依赖不同系统的 NumPy 默认整数位宽。</p>
+<h2>4. 最后比较独立测试结果</h2>
+<p>比较准确率和验证曲线，不能因为叫 CNN 就宣布更好。记录参数量帮助理解复杂度；真实场景还要检查分布变化和图像采集条件。</p>
+<h2>常见错误与边界</h2>
+<p>增强只能作用于训练样本；本例模型不同，比较的是完整方案，并非单独隔离卷积的因果作用。</p>
+<h2>数据</h2>
+<p>使用 sklearn 自带真实 digits 数据。模型结构与零填充平移为原创教学改编，未下载 CIFAR-10。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

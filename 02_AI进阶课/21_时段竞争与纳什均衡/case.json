@@ -1,0 +1,17 @@
+{
+  "id": "A21",
+  "title": "两个团队为什么都挤在黄金时段？",
+  "track": "A",
+  "number": 21,
+  "sources": [
+    [
+      "Nashpy 教程：Two player games",
+      "https://nashpy.readthedocs.io/en/stable/tutorial/index.html"
+    ],
+    [
+      "Nashpy Support enumeration",
+      "https://nashpy.readthedocs.io/en/stable/how-to/solve-with-support-enumeration.html"
+    ]
+  ],
+  "prereqs": "已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。"
+}

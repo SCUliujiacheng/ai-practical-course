@@ -1,0 +1,9 @@
+{
+  "baseline_accuracy": 0.8333333333333334,
+  "transformer_accuracy": 1.0,
+  "format_valid_rate": 1.0,
+  "generation_seconds": 0.359,
+  "examples": 6,
+  "model": "google/flan-t5-small",
+  "elapsed_seconds": 9.846
+}

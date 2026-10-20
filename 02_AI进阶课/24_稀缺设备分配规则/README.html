@@ -1,0 +1,31 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>README</title><style>body{max-width:1100px;margin:35px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#203445}table{border-collapse:collapse;font-size:15px}td,th{border:1px solid #ccd5dc;padding:8px}pre{background:#eef3f6;white-space:pre-wrap;padding:18px;overflow-wrap:anywhere}a{color:#076d7c}h1,h2,h3{line-height:1.4}blockquote{border-left:4px solid #238080;margin-left:0;padding-left:18px}</style><body><h1>A24 一台设备该先到先得、抽签，还是拍卖？</h1>
+<blockquote>
+<p><strong>核心案例：离线可学。</strong> 首次先按<a href="../../%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97.md">安装指南</a>配置环境、下载所需模型。准备完成后，输入均从本课程目录读取。外部参考链接不影响本地运行。需要联网的延伸活动见<a href="../../%E8%81%94%E7%BD%91%E6%8B%93%E5%B1%95%E6%B8%85%E5%8D%95.md">联网拓展清单</a>，可延后学习。</p>
+</blockquote>
+<p>四个团队竞争一个不可分割设备时段。价值为私人假设值，比较资源配置效率、机会、支付及个体收益，并检查第二价格拍卖的激励条件。</p>
+<h2>先修与运行</h2>
+<p>已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。</p>
+<p>在课程根目录双击「开始学习.cmd」，进入本文件夹并打开教学讲解。也可以双击本目录「运行案例.cmd」。</p>
+<h2>学习顺序</h2>
+<ol>
+<li>阅读任务，写下输入、输出和你预计的结果。</li>
+<li>打开教学讲解，逐格运行，观察变量和图表。</li>
+<li>对照 solution.py 临摹关键步骤。</li>
+<li>完成动手练习的补全、修改与迁移，再看参考答案。</li>
+<li>检查 outputs，解释方案的适用范围。</li>
+</ol>
+<h2>方法与检查</h2>
+<h2>1. 把价值、出价和到达顺序分开</h2>
+<p>价值是获得设备的收益；出价是消息；支付是机制输出，三者不能混同。效用=获胜价值-支付，未获胜且未支付者效用0。</p>
+<h2>2. 实现三个可检查机制</h2>
+<p>先到先得直接用arrival[0]；公平抽签给予等概率；第二价格拍卖把设备给最高出价者，收取第二高出价。同价按编号固定打破平局。</p>
+<h2>3. 单方改变报价的反例检查</h2>
+<p>固定他人报价，遍历自己的报价，检查真实报价不会更差。这个有限枚举是本实例检查，不代替一般性定理；私人价值、准线性效用、无预算限制等条件必须明确。</p>
+<h2>4. 同时报告效率与分配机会</h2>
+<p>拍卖在本条件下配置给价值最高者，但支付能力与机会公平是另外的问题。均匀抽签的期望可精确计算，随机模拟只用来展示频率波动。</p>
+<h2>常见错误与边界</h2>
+<p>单物品、私人价值、准线性效用、无预算或外部性约束是本例条件；共同价值、合谋、多时段互补需求会改变结论。实验证明只是有限样例核对。</p>
+<h2>数据</h2>
+<p>原创教学模拟场景，规模与全部参数直接列在 solution.py；运行同时保存输入或结果 CSV。无真实个人记录，不需要下载数据。</p>
+<p>来源及改编说明见同目录「来源与延伸阅读.md」。完整代码、讲解与答案均在本地。</p>
+</body></html>

@@ -1,0 +1,101 @@
+[
+  {
+    "name": "光学组",
+    "duration": 2,
+    "rooms": [
+      0
+    ],
+    "starts": [
+      0,
+      1,
+      2
+    ],
+    "members": [
+      "Wu",
+      "Li"
+    ]
+  },
+  {
+    "name": "编程组",
+    "duration": 1,
+    "rooms": [
+      0,
+      1
+    ],
+    "starts": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "members": [
+      "Sun"
+    ]
+  },
+  {
+    "name": "测试组",
+    "duration": 2,
+    "rooms": [
+      0,
+      1
+    ],
+    "starts": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "members": [
+      "Li"
+    ]
+  },
+  {
+    "name": "阅读组",
+    "duration": 1,
+    "rooms": [
+      1
+    ],
+    "starts": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "members": [
+      "Qian"
+    ]
+  },
+  {
+    "name": "装配组",
+    "duration": 2,
+    "rooms": [
+      0,
+      1
+    ],
+    "starts": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "members": [
+      "Zhou"
+    ]
+  },
+  {
+    "name": "演示组",
+    "duration": 1,
+    "rooms": [
+      0
+    ],
+    "starts": [
+      3,
+      4,
+      5
+    ],
+    "members": [
+      "Sun"
+    ]
+  }
+]

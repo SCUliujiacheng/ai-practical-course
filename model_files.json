@@ -1,0 +1,187 @@
+[
+  {
+    "path": "assets/models/chronos-bolt-tiny/config.json",
+    "bytes": 1120,
+    "sha256": "278f0086733031635fb1c861cb01c1bad6477420c7fcb19381a2993e335785e0"
+  },
+  {
+    "path": "assets/models/chronos-bolt-tiny/model.safetensors",
+    "bytes": 34622352,
+    "sha256": "75068728d376d2bec670379eeef4bfb4d24c0cfe24d957451f8d19b447030a32"
+  },
+  {
+    "path": "assets/models/chronos-bolt-tiny/README.md",
+    "bytes": 8659,
+    "sha256": "cc7f60bc7290b5e6146589dae9842a3c9b59d254e9d1d65fc2ef127f3c2498cd"
+  },
+  {
+    "path": "assets/models/chronos-bolt-tiny/SOURCE.json",
+    "bytes": 252,
+    "sha256": "30e86cdfe92e7506368893dba89df16338a01b529eadab9f1a121fb88f8ee8b1"
+  },
+  {
+    "path": "assets/models/flan-t5-small/config.json",
+    "bytes": 1401,
+    "sha256": "439aa0fecf5a5546a1def68b1fc45e538e2c94528ce805378daf091e2bf6e4de"
+  },
+  {
+    "path": "assets/models/flan-t5-small/generation_config.json",
+    "bytes": 147,
+    "sha256": "f5a1c7e2be8092018d8835128987edf0111637dd98e90599cc80310fef75d95a"
+  },
+  {
+    "path": "assets/models/flan-t5-small/model.safetensors",
+    "bytes": 307867048,
+    "sha256": "495fa51e204676f1a857a9fc13c4c89f3f5ba9f480b898cebca02add25e6d749"
+  },
+  {
+    "path": "assets/models/flan-t5-small/README.md",
+    "bytes": 10820,
+    "sha256": "6cc6dc3d056aaeda9549dc685ca51600d600ab5b87c73c12e7165d8eff6b0c51"
+  },
+  {
+    "path": "assets/models/flan-t5-small/SOURCE.json",
+    "bytes": 385,
+    "sha256": "ac0b1aa9addfa280314c2ad77eab5254b99a23245de68f05260075dce1401a82"
+  },
+  {
+    "path": "assets/models/flan-t5-small/special_tokens_map.json",
+    "bytes": 2201,
+    "sha256": "5c87151ef0f72a99d1f766a4c418bd2a1f90aaa30a8e22fe5eca9641daebb64f"
+  },
+  {
+    "path": "assets/models/flan-t5-small/spiece.model",
+    "bytes": 791656,
+    "sha256": "d60acb128cf7b7f2536e8f38a5b18a05535c9e14c7a355904270e15b0945ea86"
+  },
+  {
+    "path": "assets/models/flan-t5-small/tokenizer.json",
+    "bytes": 2424064,
+    "sha256": "fe2ebbbbde2985be723e0ce18217853e4020c5e9d35bd07be2c27ab9d3ead57a"
+  },
+  {
+    "path": "assets/models/flan-t5-small/tokenizer_config.json",
+    "bytes": 2539,
+    "sha256": "fcde0f79bffda3688119c94330866a8fbf8de20ae65a8c492c9bd47c704655a0"
+  },
+  {
+    "path": "assets/models/minilm/1_Pooling/config.json",
+    "bytes": 190,
+    "sha256": "4be450dde3b0273bb9787637cfbd28fe04a7ba6ab9d36ac48e92b11e350ffc23"
+  },
+  {
+    "path": "assets/models/minilm/config.json",
+    "bytes": 612,
+    "sha256": "953f9c0d463486b10a6871cc2fd59f223b2c70184f49815e7efbcab5d8908b41"
+  },
+  {
+    "path": "assets/models/minilm/config_sentence_transformers.json",
+    "bytes": 116,
+    "sha256": "061ca9d39661d6c6d6de5ba27f79a1cd5770ea247f8d46412a68a498dc5ac9f3"
+  },
+  {
+    "path": "assets/models/minilm/data_config.json",
+    "bytes": 39265,
+    "sha256": "32edcb108fc2516b920734a862ae0692bcae1c5d45d5f8d972cb0d53434a4c54"
+  },
+  {
+    "path": "assets/models/minilm/model.safetensors",
+    "bytes": 90868376,
+    "sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db"
+  },
+  {
+    "path": "assets/models/minilm/modules.json",
+    "bytes": 349,
+    "sha256": "84e40c8e006c9b1d6c122e02cba9b02458120b5fb0c87b746c41e0207cf642cf"
+  },
+  {
+    "path": "assets/models/minilm/README.md",
+    "bytes": 10502,
+    "sha256": "dcd602d2fd35c203a247304a06fec6654a12f7941b739f9221a064fe8dc3b7f0"
+  },
+  {
+    "path": "assets/models/minilm/sentence_bert_config.json",
+    "bytes": 53,
+    "sha256": "fc1993fde0a95c24ec6c022539d41cf6e2f7c9721e5415d6fb6897472a9cd4b7"
+  },
+  {
+    "path": "assets/models/minilm/SOURCE.json",
+    "bytes": 521,
+    "sha256": "903b954429bb4ce3f1a8c87b193dc38ac8d4fd4bef9082e9ca4fcff5c2eca60d"
+  },
+  {
+    "path": "assets/models/minilm/special_tokens_map.json",
+    "bytes": 112,
+    "sha256": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3"
+  },
+  {
+    "path": "assets/models/minilm/tokenizer.json",
+    "bytes": 466247,
+    "sha256": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037"
+  },
+  {
+    "path": "assets/models/minilm/tokenizer_config.json",
+    "bytes": 350,
+    "sha256": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b"
+  },
+  {
+    "path": "assets/models/minilm/vocab.txt",
+    "bytes": 231508,
+    "sha256": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+  },
+  {
+    "path": "assets/models/qwen3-0.6b/config.json",
+    "bytes": 726,
+    "sha256": "660db3b73d788119c04535e48cf9be5f55bc3100841a718637ae695b442f27dd"
+  },
+  {
+    "path": "assets/models/qwen3-0.6b/generation_config.json",
+    "bytes": 239,
+    "sha256": "2325da0f15bb848e018c5ae071b7943332e9f871d6b60e2ed22ca97d4cb993d2"
+  },
+  {
+    "path": "assets/models/qwen3-0.6b/LICENSE",
+    "bytes": 11343,
+    "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e"
+  },
+  {
+    "path": "assets/models/qwen3-0.6b/merges.txt",
+    "bytes": 1671853,
+    "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+  },
+  {
+    "path": "assets/models/qwen3-0.6b/model.safetensors",
+    "bytes": 1503300328,
+    "sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b"
+  },
+  {
+    "path": "assets/models/qwen3-0.6b/README.md",
+    "bytes": 13965,
+    "sha256": "1ab64a26fcb3b461423b89a433a8c858f1bf8d4086f979cbb3ff878d47cf20e9"
+  },
+  {
+    "path": "assets/models/qwen3-0.6b/SOURCE.json",
+    "bytes": 381,
+    "sha256": "29e048ef4c99859baa244dd2e5578affdecb100338db72aa2fa6cdd04acf9f4b"
+  },
+  {
+    "path": "assets/models/qwen3-0.6b/tokenizer.json",
+    "bytes": 11422654,
+    "sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4"
+  },
+  {
+    "path": "assets/models/qwen3-0.6b/tokenizer_config.json",
+    "bytes": 9732,
+    "sha256": "d5d09f07b48c3086c508b30d1c9114bd1189145b74e982a265350c923acd8101"
+  },
+  {
+    "path": "assets/models/qwen3-0.6b/vocab.json",
+    "bytes": 2776833,
+    "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  },
+  {
+    "path": "assets/models/resnet18.pth",
+    "bytes": 46830571,
+    "sha256": "f37072fd47e89c5e827621c5baffa7500819f7896bbacec160b1a16c560e07ec"
+  }
+]

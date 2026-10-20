@@ -1,0 +1,4 @@
+policy,quantity,test_cost,stockout_rate,leftovers
+mean,100,151.648,0.458,8.83
+critical_quantile,111,130.656,0.28,15.768
+validation_search,115,129.92,0.234,18.722

@@ -1,0 +1,21 @@
+{
+  "id": "A09",
+  "title": "怎样自动决定拿钥匙、开门与送货的顺序？",
+  "track": "A",
+  "number": 9,
+  "sources": [
+    [
+      "Unified Planning 基础教程",
+      "https://unified-planning.readthedocs.io/en/latest/notebooks/01-basic-example.html"
+    ],
+    [
+      "LLMFP 形式化规划与失败分析",
+      "https://arxiv.org/html/2410.12112"
+    ],
+    [
+      "LLM-Modulo 外部检查器框架",
+      "https://arxiv.org/html/2411.14484v1"
+    ]
+  ],
+  "prereqs": "已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。"
+}

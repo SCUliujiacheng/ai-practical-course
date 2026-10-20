@@ -1,0 +1,48 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>27_未知拥堵下学习配送策略 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>拥堵概率未知，怎样通过交互学习策略？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">单段理论期望：慢路2，快路 1.7241379310344829
+</pre><pre class="output">{&#x27;safe_time&#x27;: 10.0, &#x27;oracle_time&#x27;: 8.915, &#x27;q_mean_time&#x27;: 9.593124999999999, &#x27;training_mean_95_t_interval&#x27;: [9.347622085141616, 9.838627914858382], &#x27;mean_interactions&#x27;: 2325.25}
+</pre><h2>1. 补全：终点</h2>
+<p>终止状态不应产生奖励或继续移动。</p>
+<pre class="code"># 本题：终止状态不应产生奖励或继续移动。
+# 输入与函数来自上面的本例初始化；先在纸上写预期值。
+your_result = None  # TODO：替换为你的计算
+
+# 完成后把finished改为True，并补充自己的结果检查。
+finished = False
+if finished:
+    assert step(0,1,np.random.default_rng(0))==(0,0.,True)
+else:
+    print(&quot;本题尚未完成，补全变量后启用检查。&quot;)</pre><pre class="output">本题尚未完成，补全变量后启用检查。
+</pre><h2>2. 修改：减少样本</h2>
+<p>将训练降到30回合，与350回合在相同测试情景比较；不要求小样本每次都差。</p>
+<pre class="code"># 本题：将训练降到30回合，与350回合在相同测试情景比较；不要求小样本每次都差。
+# 输入与函数来自上面的本例初始化；先在纸上写预期值。
+p_small = None  # TODO：替换为你的计算
+n_small = None  # TODO：替换为你的计算
+_ = None  # TODO：替换为你的计算
+p_large = None  # TODO：替换为你的计算
+n_large = None  # TODO：替换为你的计算
+
+# 完成后把finished改为True，并补充自己的结果检查。
+finished = False
+if finished:
+    assert n_small&lt;n_large
+else:
+    print(&quot;本题尚未完成，补全变量后启用检查。&quot;)</pre><pre class="output">本题尚未完成，补全变量后启用检查。
+</pre><h2>3. 迁移：计算临界成功率</h2>
+<p>快路每次成本变为1.4，慢路仍2。求临界成功概率并在0.6/0.8判断选路。</p>
+<pre class="code"># 本题：快路每次成本变为1.4，慢路仍2。求临界成功概率并在0.6/0.8判断选路。
+# 输入与函数来自上面的本例初始化；先在纸上写预期值。
+threshold = None  # TODO：替换为你的计算
+
+# 完成后把finished改为True，并补充自己的结果检查。
+finished = False
+if finished:
+    assert threshold==.7
+else:
+    print(&quot;本题尚未完成，补全变量后启用检查。&quot;)</pre><pre class="output">本题尚未完成，补全变量后启用检查。
+</pre></body></html>

@@ -1,0 +1,257 @@
+{
+  "date": "2026-10-20",
+  "platform": "Windows x64 CPU",
+  "python": "3.12.13",
+  "passed": true,
+  "scope": "New public-working-copy venv installed from a pre-existing verified local wheelhouse; public preparation scripts tested. Network download paths were unit-tested with fixtures, not used to redownload all packages or all weights. No physical network disconnection was performed.",
+  "fresh_environment": {
+    "passed": true,
+    "requirements": 190,
+    "seconds": 202.98,
+    "pip_check": true,
+    "kernel_configured": true,
+    "offline": true
+  },
+  "offline_preparation": {
+    "passed": true,
+    "working_venv_untouched": true,
+    "wheel_count": 190,
+    "runtime_files": 2367,
+    "manifest": "runtime/offline_manifest.json",
+    "seconds": 18.75
+  },
+  "recovery_manifest_dry_run": {
+    "passed": true,
+    "environment_rebuilt_again": false
+  },
+  "models": {
+    "files_verified": 37,
+    "all_existing_files_sha256_verified": true,
+    "downloaded_in_this_check": 0
+  },
+  "self_check": {
+    "time": "2026-10-20 16:20:42",
+    "passed": true,
+    "imports": [
+      {
+        "module": "numpy",
+        "ok": true
+      },
+      {
+        "module": "pandas",
+        "ok": true
+      },
+      {
+        "module": "scipy",
+        "ok": true
+      },
+      {
+        "module": "sklearn",
+        "ok": true
+      },
+      {
+        "module": "matplotlib",
+        "ok": true
+      },
+      {
+        "module": "torch",
+        "ok": true
+      },
+      {
+        "module": "torchvision",
+        "ok": true
+      },
+      {
+        "module": "transformers",
+        "ok": true
+      },
+      {
+        "module": "sentence_transformers",
+        "ok": true
+      },
+      {
+        "module": "jupyterlab",
+        "ok": true
+      },
+      {
+        "module": "nbformat",
+        "ok": true
+      },
+      {
+        "module": "nbclient",
+        "ok": true
+      },
+      {
+        "module": "ortools",
+        "ok": true
+      },
+      {
+        "module": "networkx",
+        "ok": true
+      },
+      {
+        "module": "simpy",
+        "ok": true
+      },
+      {
+        "module": "nashpy",
+        "ok": true
+      },
+      {
+        "module": "dowhy",
+        "ok": true
+      },
+      {
+        "module": "mapie",
+        "ok": true
+      },
+      {
+        "module": "ax",
+        "ok": true
+      },
+      {
+        "module": "gymnasium",
+        "ok": true
+      },
+      {
+        "module": "stable_baselines3",
+        "ok": true
+      },
+      {
+        "module": "chronos",
+        "ok": true
+      },
+      {
+        "module": "fastapi",
+        "ok": true
+      },
+      {
+        "module": "httpx",
+        "ok": true
+      }
+    ],
+    "failures": [],
+    "core": false,
+    "full_hash": true,
+    "assets_only": false,
+    "models_checked": true
+  },
+  "installer_unit_tests": {
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "command": "python -m unittest discover -s tests -v"
+  },
+  "results": [
+    {
+      "case": "B01",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 7.11,
+      "external_network_attempt": false,
+      "source_sha256": "50f5f3963ae30733871c923364cc952eea95998cee77934a536adeb1839e294f",
+      "tested_at": "2026-10-20 16:19:29"
+    },
+    {
+      "case": "B06",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 8.03,
+      "external_network_attempt": false,
+      "source_sha256": "2e6633aecc2cc6095334667bce416e22acec5d30b7e4e6e1a6d76c59c1706b36",
+      "tested_at": "2026-10-20 16:19:37"
+    },
+    {
+      "case": "B18",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 14.58,
+      "external_network_attempt": false,
+      "source_sha256": "97518f429e8b87c7fe6e1d6ec390bbf3b6ceafe43593dd89af1f75dca8e347eb",
+      "tested_at": "2026-10-20 16:19:51"
+    },
+    {
+      "case": "B24",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 39.23,
+      "external_network_attempt": false,
+      "source_sha256": "4938a3144357d46c818986dd7191aab5f25418efe8bebfd4ba8788252c0f9265",
+      "tested_at": "2026-10-20 16:20:30"
+    },
+    {
+      "case": "A07",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 1.47,
+      "external_network_attempt": false,
+      "source_sha256": "95b30aabe678f297d0ebffb6a93517da4ae2bc05743a9de470d0b7a0171dc07c",
+      "tested_at": "2026-10-20 16:20:32"
+    },
+    {
+      "case": "A15",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 4.53,
+      "external_network_attempt": false,
+      "source_sha256": "5e66ebe609fd5290e6db6fcaab62f601167e8f904aff44127dfe6f25b0e82374",
+      "tested_at": "2026-10-20 16:20:36"
+    },
+    {
+      "case": "A18",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 7.09,
+      "external_network_attempt": false,
+      "source_sha256": "ba95a0788ffb1c6928190fdc109da88d1327671671c5406c58b6f4a3702e8ab6",
+      "tested_at": "2026-10-20 16:20:44"
+    },
+    {
+      "case": "A30",
+      "file": "solution.py",
+      "passed": true,
+      "error": null,
+      "seconds": 2.0,
+      "external_network_attempt": false,
+      "source_sha256": "b210acfa598dcc84253d07f5c63d5690a04c05fd47cc035927c71908507f8eec",
+      "tested_at": "2026-10-20 16:20:46"
+    },
+    {
+      "case": "B01",
+      "file": "教学讲解.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 7.09,
+      "external_network_attempt": false,
+      "source_sha256": "e8caabb8b95c6bef59249ef34525ccb3442b052a480effcb7a3ceb310d70fda1",
+      "tested_at": "2026-10-20 16:19:45"
+    },
+    {
+      "case": "B01",
+      "file": "参考答案.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.08,
+      "external_network_attempt": false,
+      "source_sha256": "369e0b9ecdd0f8b543bdbb6ecad15660081a2585a318257a6c99056a9bccd890",
+      "tested_at": "2026-10-20 16:19:48"
+    },
+    {
+      "case": "B01",
+      "file": "动手练习.ipynb",
+      "passed": true,
+      "error": null,
+      "seconds": 3.5,
+      "external_network_attempt": false,
+      "source_sha256": "0f875790411c64d3a49f202a904a70d60e197db8e427ddd78e6efbb9dd90edca",
+      "tested_at": "2026-10-20 16:19:51"
+    }
+  ]
+}

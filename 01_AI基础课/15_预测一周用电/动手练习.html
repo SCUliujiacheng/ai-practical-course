@@ -1,0 +1,32 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>15_预测一周用电 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>怎样预测未来一周用电量并滚动评价？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{&#x27;forecast_windows&#x27;: 8, &#x27;forest_mae&#x27;: 6.138293515018776, &#x27;seasonal_mae&#x27;: 6.8722398243423095, &#x27;empirical_coverage&#x27;: 0.9642857142857143, &#x27;interval_width&#x27;: 30.10406630928395, &#x27;nominal_target&#x27;: 0.9, &#x27;iid_guarantee_claimed&#x27;: False}
+</pre><h2>1. 补全：分预测距离 MAE</h2>
+<p>计算各 horizon 的 MAE，并核对 7 个距离都有 8 个预测。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    by_horizon=...
+    assert len(by_horizon)==7 and by_horizon[&#x27;count&#x27;].eq(8).all()
+    print(by_horizon)</pre><h2>2. 修改：只改校准目标</h2>
+<p>用原校准误差的 95% 分位数构造区间，核对宽度不缩小；这是预设目标对照，不按测试选宽度。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    wide=float(np.quantile(calibration_errors,0.95,method=&#x27;higher&#x27;))
+    assert wide&gt;=width
+    new_coverage=...
+    print({&#x27;区间宽度&#x27;:2*wide,&#x27;测试经验覆盖&#x27;:float(new_coverage)})</pre><h2>3. 迁移：第 731 天的新预测起点</h2>
+<p>在 origin=730 生成未来 7 天，核对模型输出和基线形状，并计算这段已知真值的误差。</p>
+<pre class="code"># 先独立思考；需要提示时使用下面的本题脚手架。
+# 补全 ...（或 assert False 占位条件）后，将 RUN_EXERCISE 改为 True。
+RUN_EXERCISE = False
+if RUN_EXERCISE:
+    pred,base,actual=...
+    assert pred.shape==base.shape==actual.shape==(7,)
+    print({&#x27;模型MAE&#x27;:float(np.mean(abs(pred-actual))),&#x27;基线MAE&#x27;:float(np.mean(abs(base-actual)))})</pre></body></html>

@@ -1,0 +1,54 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>01_多目标选择团队计划 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>三份团队计划，应该选哪一份？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">  plan  days  cost  max_hours
+0   快速     7  1200         36
+1   均衡     9   900         27
+2   节省    11   700         24
+  plan  pareto
+0   快速    True
+1   均衡    True
+2   节省    True
+{
+  &quot;chosen&quot;: &quot;均衡&quot;,
+  &quot;score&quot;: 0.42,
+  &quot;feasible_count&quot;: 3,
+  &quot;pareto_count&quot;: 3
+}
+在工期/成本/负担权重为0.5/0.3/0.2时，推荐均衡方案，工期9天、成本900、最大负担27小时。当前有3个非支配方案；权重或预算变化时重新比较。
+</pre><h2>1. 补全：谁被支配？</h2>
+<p>计算四个二维候选的 Pareto 标记，并解释相同候选为什么不会互相严格支配。</p>
+<pre class="code">trial_values = [[2,3],[3,4],[1,5],[2,3]]
+# TODO：用 pareto_mask 返回布尔数组
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert attempt.tolist() == [True,False,True,True]
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>2. 修改：预算突然减少</h2>
+<p>预算变为950，其他硬限制不变。不要仅在原始总分里加罚分；先重新筛选可行方案。</p>
+<pre class="code">trial_limits = dict(limits, cost=950)
+# TODO：先用 feasible_mask 筛选，再返回保留的 plan 名称列表
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert attempt == [&quot;均衡&quot;,&quot;节省&quot;]
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>3. 迁移：选电脑</h2>
+<p>三台电脑价格、重量都越小越好：[[5000,1.4],[6500,1.2],[7000,1.8]]。找出非支配候选，提出尚缺哪些性能信息。</p>
+<pre class="code">trial_computers = np.array([[5000,1.4],[6500,1.2],[7000,1.8]])
+# TODO：返回这三台电脑的 Pareto 标记数组
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert attempt.tolist() == [True,True,False]
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre></body></html>

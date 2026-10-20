@@ -1,0 +1,13 @@
+{
+  "id": "A22",
+  "title": "共享人手怎样避免总有人等待别人贡献？",
+  "track": "A",
+  "number": 22,
+  "sources": [
+    [
+      "Fischbacher等：Are people conditionally cooperative?（公共品实验原研究）",
+      "https://www.sciencedirect.com/science/article/pii/S0165176501003949"
+    ]
+  ],
+  "prereqs": "已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。"
+}

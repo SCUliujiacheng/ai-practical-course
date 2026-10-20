@@ -1,0 +1,13 @@
+{
+  "id": "A02",
+  "title": "时间与预算有限，应完成哪些任务？",
+  "track": "A",
+  "number": 2,
+  "sources": [
+    [
+      "CP-SAT Solver 官方示例",
+      "https://developers.google.com/optimization/cp/cp_solver"
+    ]
+  ],
+  "prereqs": "已完成 AI 基础课；会使用列表、字典、函数和 NumPy。涉及的新结构在本例分步解释。"
+}

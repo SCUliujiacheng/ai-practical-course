@@ -1,0 +1,69 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>23_拥堵博弈与系统规划 动手练习</title><style>body{max-width:1000px;margin:32px auto;padding:0 24px;font:17px/1.8 "Microsoft YaHei",sans-serif;color:#233044;background:#fafbfe}h1,h2,h3{line-height:1.4}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.6 Consolas,monospace;border-radius:8px;padding:16px}.code{background:#eaf0f8}.output{background:#fff;border-left:4px solid #278477}img{max-width:100%;height:auto}table{border-collapse:collapse;font-size:14px}td,th{border:1px solid #ccd4dd;padding:6px 10px}a{color:#176792}</style><body><p>离线阅读版：代码与图表来自实际执行。可编辑版本为同目录 Notebook。</p><h1>大家各选最快路，为什么总耗时还偏高？：动手练习</h1>
+<p>每道题先写预期结果再运行。练习中的 TODO 需要自行完成；能顺序运行不代表已完成练习。</p>
+<pre class="code">from pathlib import Path
+CASE_DIR = Path.cwd()
+# 载入本例的可修改函数和数据，所有算法都在同目录 solution.py。
+exec(compile((CASE_DIR / &quot;solution.py&quot;).read_text(encoding=&quot;utf-8&quot;), str(CASE_DIR / &quot;solution.py&quot;), &quot;exec&quot;))</pre><pre class="output">{
+  &quot;equilibrium_profile&quot;: [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  &quot;equilibrium_total&quot;: 30.0,
+  &quot;optimal_profile&quot;: [
+    0,
+    0,
+    0,
+    1,
+    1,
+    1
+  ],
+  &quot;optimal_total&quot;: 24.0,
+  &quot;equilibrium_count&quot;: 21,
+  &quot;worst_equilibrium_ratio&quot;: 1.25,
+  &quot;potential_trace&quot;: [
+    21.0,
+    20.0
+  ]
+}
+系统安排总耗时24，当前自发稳定配置为30；需要协调的路线分配为[0, 0, 0, 1, 1, 1]。相对该初始稳定配置变慢的参与者编号[]，应解释或处理个体取舍。
+</pre><h2>1. 补全：检查单方偏离</h2>
+<p>检查全走捷径不是均衡，并找出至少一次可改善的偏离。</p>
+<pre class="code">trial_full=[0]*players
+trial_switched=trial_full.copy();trial_switched[0]=1
+# TODO：返回 (全走短路是否均衡, 玩家0换路是否降低个人代价)
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert attempt == (False,True)
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>2. 修改：从全绕行开始</h2>
+<p>改变初始策略，观察得到的均衡与势函数下降，不要求人物编号完全相同。</p>
+<pre class="code">trial_initial=[1]*players
+# TODO：调用 best_response，返回 (状态,最终路线列表,改进历史)
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    trial_state,trial_plan,trial_history=attempt
+    assert trial_state == &quot;EQUILIBRIUM&quot; and equilibrium(trial_plan)
+    assert all(b[&quot;potential&quot;] &lt; a[&quot;potential&quot;] for a,b in zip(trial_history,trial_history[1:]))
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre><h2>3. 迁移：同步跟随建议会怎样</h2>
+<p>所有人同步切到当前看起来更快的另一条路：从全捷径到全绕行，再回来。验证这不是逐个严格改进算法。</p>
+<pre class="code">trial_short=[0]*6;trial_long=[1]*6
+# TODO：返回两个极端路线方案的社会总耗时，并解释全员同时改道的循环
+attempt = None
+if attempt is None:
+    print(&quot;尚未完成：请替换 attempt=None，再运行检查。&quot;)
+else:
+    assert attempt == (36,30)
+    print(&quot;本题自动检查通过；继续用自己的话解释结果。&quot;)
+</pre><pre class="output">尚未完成：请替换 attempt=None，再运行检查。
+</pre></body></html>

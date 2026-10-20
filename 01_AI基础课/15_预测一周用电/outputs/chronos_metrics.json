@@ -1,0 +1,16 @@
+{
+  "model": "amazon/chronos-bolt-tiny",
+  "test_windows": 8,
+  "evaluation_points": 56,
+  "chronos_mae": 7.14062606821735,
+  "forest_mae": 6.138293515018778,
+  "seasonal_mae": 6.8722398243423095,
+  "q10_q90_empirical_coverage": 0.6964285714285714,
+  "q10_q90_mean_width": 19.49331215449742,
+  "model_load_seconds": 0.076,
+  "batch_inference_seconds": 0.158,
+  "data": "author-generated synthetic series; same test origins as core case",
+  "coverage_guarantee_claimed": false,
+  "new_domain_zero_shot_claimed": false,
+  "comparison_boundary": "univariate Chronos vs calendar-plus-lags forest; complete pipeline comparison, not isolated architecture effect"
+}

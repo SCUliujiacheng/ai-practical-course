@@ -1,0 +1,13 @@
+{
+  "id": "B25",
+  "title": "怎样让程序在有障碍的地图上找到路线？",
+  "track": "B",
+  "number": 25,
+  "sources": [
+    [
+      "NetworkX A* 算法文档",
+      "https://networkx.org/documentation/stable/reference/algorithms/generated/networkx.algorithms.shortest_paths.astar.astar_path.html"
+    ]
+  ],
+  "prereqs": "B05、B13；元组、字典、生成器与 heapq。"
+}
